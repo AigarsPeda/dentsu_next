@@ -57,6 +57,25 @@ export async function generateMetadata({
   };
 }
 
+export type StrapiLocaleType = {
+  id: number;
+  name: string;
+  code: string;
+  createdAt: string;
+  updatedAt: string;
+  isDefault: boolean;
+};
+
+const getAvailableLocales = () => {
+  const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+  const options = { headers: { Authorization: `Bearer ${token}` } };
+
+  if (!token)
+    throw new Error("The Strapi API Token environment variable is not set.");
+
+  return fetchAPI("/i18n/locales", options) as Promise<StrapiLocaleType[]>;
+};
+
 export default async function RootLayout({
   children,
   params,
@@ -65,9 +84,13 @@ export default async function RootLayout({
   readonly params: { lang: string };
 }) {
   // const global = await getGlobal(params.lang);
-  const global = await getGlobal("en");
+  const global = await getGlobal(params.lang);
+  const availableLocales = await getAvailableLocales();
+
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
+
+  console.log("availableLocales", availableLocales);
 
   const { notificationBanner, navbar, footer } = global.data.attributes;
 
@@ -96,11 +119,11 @@ export default async function RootLayout({
 
         <Footer
           logoUrl={footerLogoUrl}
-          logoText={footer.footerLogo.logoText}
           menuLinks={footer.menuLinks}
-          categoryLinks={footer.categories.data}
           legalLinks={footer.legalLinks}
           socialLinks={footer.socialLinks}
+          logoText={footer.footerLogo.logoText}
+          categoryLinks={footer.categories.data}
         />
       </body>
     </html>

@@ -31,13 +31,15 @@ function Testimonial({ text, authorName, picture }: Readonly<Testimonial>) {
     <div className="flex flex-col items-center mx-12 lg:mx-0">
       <div className="flex items-center">
         <div className="my-6">
-          <Image
-            src={imageUrl ?? ""}
-            alt={picture.data?.attributes.alternativeText || "none provided"}
-            className="inline-block h-32 w-32 rounded-full"
-            width={200}
-            height={200}
-          />
+          {imageUrl && (
+            <Image
+              width={200}
+              height={200}
+              src={imageUrl}
+              className="inline-block w-32 h-32 rounded-full"
+              alt={picture.data?.attributes.alternativeText ?? "none provided"}
+            />
+          )}
         </div>
       </div>
       <div className="relative text-center">
@@ -69,14 +71,14 @@ function Testimonial({ text, authorName, picture }: Readonly<Testimonial>) {
 
 export default function Testimonials({ data }: TestimonialsProps) {
   return (
-    <section className="dark:bg-black dark:text-gray-100  m:py-12 lg:py-24">
-      <div className="container mx-auto py-4 space-y-2 text-center">
+    <section className="dark:bg-black dark:text-gray-100 m:py-12 lg:py-24">
+      <div className="container py-4 mx-auto space-y-2 text-center">
         <h1 className="text-4xl font-semibold leading-none text-center">
           {data.title}
         </h1>
         <p className="mt-4 text-lg text-center">{data.description}</p>
       </div>
-      <div className="container mx-auto grid grid-cols-1 gap-8 lg:gap-20 md:px-10 md:pb-10 lg:grid-cols-2">
+      <div className="container grid grid-cols-1 gap-8 mx-auto lg:gap-20 md:px-10 md:pb-10 lg:grid-cols-2">
         {data.testimonials.map((testimonial: Testimonial, index: number) => (
           <Testimonial key={index} {...testimonial} />
         ))}
