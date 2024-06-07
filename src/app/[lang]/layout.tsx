@@ -1,13 +1,14 @@
+import { FALLBACK_SEO } from "@/app/[lang]/utils/constants";
 import type { Metadata } from "next";
-import "./globals.css";
-import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
-import { fetchAPI } from "./utils/fetch-api";
-
 import { i18n } from "../../../i18n-config";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { FALLBACK_SEO } from "@/app/[lang]/utils/constants";
+import "./globals.css";
+import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
+import { fetchAPI } from "./utils/fetch-api";
+import Latvia from "../../../public/Latvia.svg";
+import { StaticImageData } from "next/image";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -24,12 +25,16 @@ async function getGlobal(lang: string): Promise<any> {
       "favicon",
       "notificationBanner.link",
       "navbar.links",
+      "navbar.locales",
+      "navbar.locales.img",
       "navbar.navbarLogo.logoImg",
       "footer.footerLogo.logoImg",
       "footer.menuLinks",
       "footer.legalLinks",
       "footer.socialLinks",
       "footer.categories",
+      "footer.localesFlags",
+      "socialLinks",
     ],
     locale: lang,
   };
@@ -61,9 +66,15 @@ export type StrapiLocaleType = {
   id: number;
   name: string;
   code: string;
-  createdAt: string;
-  updatedAt: string;
-  isDefault: boolean;
+  flag: StaticImageData | undefined;
+  img: {
+    data: {
+      id: number;
+      attributes: {
+        url: string;
+      };
+    };
+  };
 };
 
 const getAvailableLocales = () => {
@@ -83,14 +94,13 @@ export default async function RootLayout({
   readonly children: React.ReactNode;
   readonly params: { lang: string };
 }) {
-  // const global = await getGlobal(params.lang);
   const global = await getGlobal(params.lang);
   const availableLocales = await getAvailableLocales();
 
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
 
-  console.log("availableLocales", availableLocales);
+  console.log("global", global);
 
   const { notificationBanner, navbar, footer } = global.data.attributes;
 
@@ -108,6 +118,7 @@ export default async function RootLayout({
         <Navbar
           links={navbar.links}
           logoUrl={navbarLogoUrl}
+          availableLocales={navbar.locales}
           logoText={navbar.navbarLogo.logoText}
         />
 

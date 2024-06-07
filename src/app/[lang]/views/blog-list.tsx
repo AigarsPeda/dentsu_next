@@ -73,21 +73,21 @@ export default function PostList({
             >
               {imageUrl && (
                 <Image
-                  alt="presentation"
                   width="240"
                   height="240"
-                  className="object-cover w-full h-44 "
                   src={imageUrl}
+                  alt="presentation"
+                  className="object-cover w-full h-44 "
                 />
               )}
-              <div className="p-6 space-y-2 relative">
+              <div className="relative p-6 space-y-2">
                 {avatarUrl && (
                   <Image
-                    alt="avatar"
                     width="80"
                     height="80"
+                    alt="avatar"
                     src={avatarUrl}
-                    className="rounded-full h-16 w-16 object-cover absolute -top-8 right-4"
+                    className="absolute object-cover w-16 h-16 rounded-full -top-8 right-4"
                   />
                 )}
 
@@ -95,7 +95,7 @@ export default function PostList({
                   {article.attributes.title}
                 </h3>
 
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <span className="text-xs dark:text-gray-400">
                     {formatDate(article.attributes.publishedAt)}
                   </span>
