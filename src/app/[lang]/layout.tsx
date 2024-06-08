@@ -105,7 +105,7 @@ export default async function RootLayout({
   );
 
   const footerLogoUrl = getStrapiMedia(
-    footer.footerLogo.logoImg.data?.attributes.url
+    footer.footerLogo?.logoImg?.data?.attributes.url
   );
 
   const localesWithUrls = navbar.locales.map((locale: StrapiLocaleType) => {
@@ -138,15 +138,7 @@ export default async function RootLayout({
         <main className="min-h-screen text-gray-800">{children}</main>
 
         <Banner data={notificationBanner} />
-
-        <Footer
-          logoUrl={footerLogoUrl}
-          menuLinks={footer.menuLinks}
-          legalLinks={footer.legalLinks}
-          socialLinks={footer.socialLinks}
-          logoText={footer.footerLogo.logoText}
-          categoryLinks={footer.categories.data}
-        />
+        <Footer socialLinks={footer.socialLinks} />
       </body>
     </html>
   );

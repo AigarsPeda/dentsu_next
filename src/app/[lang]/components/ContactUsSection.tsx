@@ -52,7 +52,7 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
                     height={600}
                     src={imgSrc}
                     alt="our client logo"
-                    className="object-contain h-[430px]"
+                    className="object-contain max-h-[430px] min-h-[330px]"
                     style={{
                       width: "100%",
                     }}
