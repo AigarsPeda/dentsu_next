@@ -34,7 +34,6 @@ async function getGlobal(lang: string): Promise<any> {
       "footer.socialLinks",
       "footer.categories",
       "footer.localesFlags",
-      "socialLinks",
     ],
     locale: lang,
   };

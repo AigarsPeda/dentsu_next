@@ -1,4 +1,5 @@
-import { getStrapiMedia } from "../utils/api-helpers";
+import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import Image from "next/image";
 
 interface MediaTypes {
   id: number;
@@ -25,29 +26,32 @@ interface ClientSectionsProps {
 }
 
 export default function ClientSections({ data }: ClientSectionsProps) {
-  // console.log("ClientSections >>>>>>>>>>", data);
   return (
-    <div className="container px-10 py-20 pb-20 mx-auto lg:px-60">
-      <h2 className="pb-16 text-4xl font-normal text-center">{data.title}</h2>
-      {/* loop over feature 6 cliens if fits */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-        {data.feature.map((item: FeaturesType) => {
-          const imgSrc = getStrapiMedia(item.media.data.attributes.url);
-          return (
-            <div key={item.id} className="flex items-center justify-center">
-              {imgSrc && <img alt={""} src={imgSrc} className="w-20 h-20" />}
-            </div>
-          );
-        })}
-        {/* {data.feature.map((item: FeaturesType) => (
-          <div key={item.id} className="flex items-center justify-center">
-            <img
-              src={item.media.attributes.url}
-              alt={item.media.attributes.alternativeText || ""}
-              className="w-20 h-20"
-            />
-          </div>
-        ))} */}
+    <div className="bg-[#e5e5e9]">
+      <div className="container px-10 py-20 pb-20 mx-auto lg:px-60 ">
+        <h2 className="pb-16 text-5xl font-normal text-center">{data.title}</h2>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+          {data.feature.map((item: FeaturesType) => {
+            const imgSrc = getStrapiMedia(item.media.data.attributes.url);
+            return (
+              <div key={item.id} className="flex items-center justify-center">
+                {imgSrc && (
+                  <Image
+                    width={600}
+                    height={600}
+                    src={imgSrc}
+                    alt="our client logo"
+                    className="object-contain max-w-[170px] h-16"
+                    style={{
+                      width: "100%",
+                    }}
+                  />
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
