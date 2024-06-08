@@ -1,4 +1,5 @@
 import ClientSections from "@/app/[lang]/components/ClientSections";
+import ContactUsSection from "@/app/[lang]/components/ContactUsSection";
 import Email from "@/app/[lang]/components/Email";
 import Features from "@/app/[lang]/components/Features";
 import Hero from "@/app/[lang]/components/Hero";
@@ -22,6 +23,8 @@ export function sectionRenderer(section: any, index: number) {
       return <ClientSections key={index} data={section} />;
     case "sections.logos-section":
       return <LogosSection key={index} data={section} />;
+    case "sections.contact-us":
+      return <ContactUsSection key={index} data={section} />;
     case "sections.hero":
       return <Hero key={index} data={section} />;
     case "sections.features":
