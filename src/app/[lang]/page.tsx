@@ -1,6 +1,6 @@
-import LangRedirect from "./components/LangRedirect";
-import { sectionRenderer } from "./utils/section-renderer";
+import LangRedirect from "@/app/[lang]/components/LangRedirect";
 import { getPageBySlug } from "@/app/[lang]/utils/get-page-by-slug";
+import { sectionRenderer } from "@/app/[lang]/utils/section-renderer";
 
 export default async function RootRoute({
   params,
@@ -18,6 +18,7 @@ export default async function RootRoute({
 
     if (page.data.length === 0) return null;
     const contentSections = page.data[0].attributes.contentSections;
+
     return contentSections.map((section: any, index: number) =>
       sectionRenderer(section, index)
     );

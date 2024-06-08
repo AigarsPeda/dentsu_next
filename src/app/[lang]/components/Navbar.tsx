@@ -41,8 +41,8 @@ export default function Navbar({
   };
 
   return (
-    <div className="p-4 dark:bg-black dark:text-gray-100">
-      <div className="container flex items-center justify-between h-16 px-0 mx-auto sm:px-6">
+    <div className="p-4 bg-dentsu-primary">
+      <div className="container flex items-center justify-between px-0 mx-auto h-14 sm:px-6">
         <Logo src={logoUrl}>
           {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
         </Logo>
