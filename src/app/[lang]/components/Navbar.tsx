@@ -1,14 +1,13 @@
 "use client";
 import Logo from "@/app/[lang]/components/Logo";
 import type { StrapiLocaleType } from "@/app/[lang]/layout";
+import { getStrapiURL } from "@/app/[lang]/utils/api-helpers";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import Latvian from "/public/Latvian1.png";
-import English from "/public/UnitedKingdom.png";
 
 export default function Navbar({
   links,
@@ -29,7 +28,8 @@ export default function Navbar({
   };
 
   const switchLocale = (newLocale: string) => {
-    const currentLocale = ["lv", "en"].reduce((acc, locale) => {
+    const availableLocalesCodes = availableLocales.map((locale) => locale.code);
+    const currentLocale = availableLocalesCodes.reduce((acc, locale) => {
       if (path.includes(locale)) {
         return locale;
       }
@@ -39,19 +39,6 @@ export default function Navbar({
     const newPath = path.replace(currentLocale, newLocale);
     router.push(newPath);
   };
-
-  const localesWithFlags = availableLocales.map((locale) => {
-    if (locale.code === "lv") {
-      locale.flag = Latvian;
-    }
-    if (locale.code === "en") {
-      locale.flag = English;
-    }
-    return {
-      ...locale,
-      flag: undefined,
-    };
-  }) as Array<StrapiLocaleType>;
 
   return (
     <div className="p-4 dark:bg-black dark:text-gray-100">
@@ -66,38 +53,36 @@ export default function Navbar({
               <NavLink key={item.id} {...item} />
             ))}
           </ul>
-          <div className="flex items-center justify-center space-x-4">
-            {localesWithFlags.map((locale) => (
+          <div className="flex items-center justify-center ml-3 space-x-3">
+            {availableLocales.map((locale) => (
               <button
                 type="button"
                 key={locale.id}
                 title={locale.name}
                 onClick={() => switchLocale(locale.code)}
               >
-                {locale.flag && (
-                  <div
-                    style={{
-                      width: 27,
-                      height: 17,
-                      overflow: "hidden",
-                    }}
-                  >
-                    {locale.flag ? (
-                      <Image
-                        width="0"
-                        height="0"
-                        src={locale.flag}
-                        className="w-full h-full"
-                        alt={locale.name}
-                        style={{
-                          width: "100%",
-                        }}
-                      />
-                    ) : (
-                      locale.name
-                    )}
-                  </div>
-                )}
+                <div
+                  style={{
+                    width: 27,
+                    height: 17,
+                    overflow: "hidden",
+                  }}
+                >
+                  {locale.img.data?.attributes.url ? (
+                    <Image
+                      width="0"
+                      height="0"
+                      src={locale.img.data.attributes.url}
+                      className="w-full h-full"
+                      alt={locale.name}
+                      style={{
+                        width: "100%",
+                      }}
+                    />
+                  ) : (
+                    locale.name
+                  )}
+                </div>
               </button>
             ))}
           </div>

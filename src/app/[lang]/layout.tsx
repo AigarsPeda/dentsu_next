@@ -66,7 +66,6 @@ export type StrapiLocaleType = {
   id: number;
   name: string;
   code: string;
-  flag: StaticImageData | undefined;
   img: {
     data: {
       id: number;
@@ -95,12 +94,10 @@ export default async function RootLayout({
   readonly params: { lang: string };
 }) {
   const global = await getGlobal(params.lang);
-  const availableLocales = await getAvailableLocales();
+  // const availableLocales = await getAvailableLocales();
 
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
-
-  console.log("global", global);
 
   const { notificationBanner, navbar, footer } = global.data.attributes;
 
@@ -112,13 +109,30 @@ export default async function RootLayout({
     footer.footerLogo.logoImg.data?.attributes.url
   );
 
+  const localesWithUrls = navbar.locales.map((locale: StrapiLocaleType) => {
+    const localeUrl = locale.img.data?.attributes.url;
+    return {
+      ...locale,
+      img: {
+        ...locale.img,
+        data: {
+          ...locale.img.data,
+          attributes: {
+            ...locale.img.data.attributes,
+            url: localeUrl ? getStrapiMedia(localeUrl) : null,
+          },
+        },
+      },
+    };
+  });
+
   return (
     <html lang={params.lang}>
       <body>
         <Navbar
           links={navbar.links}
           logoUrl={navbarLogoUrl}
-          availableLocales={navbar.locales}
+          availableLocales={localesWithUrls}
           logoText={navbar.navbarLogo.logoText}
         />
 
