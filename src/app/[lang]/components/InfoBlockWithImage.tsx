@@ -1,4 +1,5 @@
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import classNames from "classnames";
 import Image from "next/image";
 
 type PictureType = {
@@ -19,6 +20,7 @@ type PictureDataType = {
 interface InfoBlockWithImageProps {
   data: {
     description: string;
+    pictureOnRight: boolean;
     picture: PictureDataType;
   };
 }
@@ -28,13 +30,18 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
 
   return (
     <div className="relative overflow-hidden h-[1150px] w-screen">
-      <div className="w-full absolute h-[1000px] right-[40%] pb-10">
+      <div
+        className={classNames(
+          data.pictureOnRight ? "left-[40%]" : "right-[40%]",
+          "w-full absolute h-[1000px] pb-10"
+        )}
+      >
         {imgUrl && (
           <Image
             src={imgUrl}
             width={2000}
             height={2000}
-            className="w-full h-full"
+            className="object-cover w-full h-full"
             alt={"none provided"}
             style={{
               width: "100%",
@@ -42,8 +49,13 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
           />
         )}
       </div>
-      <div className="absolute bottom-0 right-0 p-24 bg-gray-950 w-[1080px] h-[480px]">
-        <p className="max-w-xl text-5xl font-normal leading-tight text-white">
+      <div
+        className={classNames(
+          data.pictureOnRight ? "left-0 pl-52 p-24" : "right-0 p-24",
+          "absolute bottom-0 bg-gray-950 w-[1080px]"
+        )}
+      >
+        <p className="max-w-xl text-5xl font-normal text-white">
           {data.description}
         </p>
       </div>

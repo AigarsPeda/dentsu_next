@@ -1,3 +1,4 @@
+import ClientSections from "@/app/[lang]/components/ClientSections";
 import Email from "@/app/[lang]/components/Email";
 import Features from "@/app/[lang]/components/Features";
 import Hero from "@/app/[lang]/components/Hero";
@@ -16,6 +17,8 @@ export function sectionRenderer(section: any, index: number) {
       return <InfoBlock key={index} data={section} />;
     case "sections.info-block-with-image":
       return <InfoBlockWithImage key={index} data={section} />;
+    case "sections.client":
+      return <ClientSections key={index} data={section} />;
     case "sections.hero":
       return <Hero key={index} data={section} />;
     case "sections.features":
