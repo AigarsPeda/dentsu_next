@@ -37,35 +37,40 @@ interface ContactUsSectionProps {
 
 export default function ContactUsSection({ data }: ContactUsSectionProps) {
   return (
-    <div className="container pt-24 pb-2 mx-auto">
-      <h2 className="text-6xl text-center">{data.title}</h2>
-      <p className="mt-4 text-2xl text-center">{data.description}</p>
-      <div className="grid grid-cols-2 gap-8 py-12 mx-auto md:grid-cols-4">
+    <div className="container pt-5 pb-2 mx-auto lg:pt-24">
+      <h2 className="text-center lg:pb-0 pb-0 text-[2.2rem] lg:text-8xl">
+        {data.title}
+      </h2>
+      <p className="px-10 text-center lg:mt-4 lg:text-2xl">
+        {data.description}
+      </p>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(150px,0.34fr))] pt-10">
         {data.feature.map((item) => {
           const imgSrc = getStrapiMedia(item.media.data?.attributes.url);
           return (
-            <div key={item.id} className="flex items-center justify-center">
+            <div
+              key={item.id}
+              className="flex items-center justify-center px-10 pb-10"
+            >
               <div>
-                {imgSrc ? (
-                  <Image
-                    width={600}
-                    height={600}
-                    src={imgSrc}
-                    alt="our client logo"
-                    className="object-contain max-h-[430px] min-h-[330px]"
-                    style={{
-                      width: "100%",
-                    }}
-                  />
-                ) : (
-                  <div className="flex items-center justify-center w-24 h-24 bg-gray-200">
-                    No Image Available
-                  </div>
-                )}
+                <div className="lg:min-h-[300px]">
+                  {imgSrc && (
+                    <Image
+                      width={600}
+                      height={600}
+                      src={imgSrc}
+                      alt="our client logo"
+                      className="object-contain w-full h-full"
+                      style={{
+                        width: "100%",
+                      }}
+                    />
+                  )}
+                </div>
                 <div className="mt-3 text-center">
-                  <h3 className="text-2xl">{item.name}</h3>
-                  <p>{item.email}</p>
-                  <p>{item.position}</p>
+                  <h3 className="text-xl lg:text-2xl">{item.name}</h3>
+                  <p className="text-sm lg:text-base">{item.email}</p>
+                  <p className="text-sm lg:text-base">{item.position}</p>
                 </div>
               </div>
             </div>

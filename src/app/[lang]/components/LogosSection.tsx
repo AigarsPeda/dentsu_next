@@ -23,7 +23,7 @@ interface LogosSectionProps {
 
 export default function LogosSection({ data }: LogosSectionProps) {
   return (
-    <div className="container grid grid-cols-2 gap-3 py-12 mx-auto md:grid-cols-4">
+    <div className="container grid grid-cols-1 gap-6 px-6 mx-auto lg:gap-3 py-9 lg:py-12 lg:grid-cols-4">
       {data.feature.map((item: FeaturesType) => {
         const imgSrc = getStrapiMedia(item.media.data.attributes.url);
         return (
@@ -34,7 +34,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
                 height={600}
                 src={imgSrc}
                 alt="our client logo"
-                className="object-contain h-9"
+                className="object-contain h-4 lg:h-9"
                 style={{
                   width: "100%",
                 }}

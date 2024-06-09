@@ -28,10 +28,11 @@ interface ClientSectionsProps {
 export default function ClientSections({ data }: ClientSectionsProps) {
   return (
     <div className="bg-[#e5e5e9]">
-      <div className="container px-10 py-20 pb-20 mx-auto lg:px-60 ">
-        <h2 className="pb-16 text-5xl font-normal text-center">{data.title}</h2>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+      <div className="container px-10 mx-auto lg:pb-20 py-9 lg:px-60 ">
+        <h2 className="pb-8 text-xl font-normal text-center lg:pb-16 lg:text-5xl">
+          {data.title}
+        </h2>
+        <div className="grid w-full grid-cols-6 gap-4 overflow-x-auto">
           {data.feature.map((item: FeaturesType) => {
             const imgSrc = getStrapiMedia(item.media.data.attributes.url);
             return (
@@ -42,7 +43,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
                     height={600}
                     src={imgSrc}
                     alt="our client logo"
-                    className="object-contain max-w-[170px] h-16"
+                    className="object-contain max-w-[170px] lg:h-16 h-10"
                     style={{
                       width: "100%",
                     }}

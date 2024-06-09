@@ -29,11 +29,11 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
   const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
 
   return (
-    <div className="relative overflow-hidden h-[1150px] w-screen">
+    <div className="relative overflow-hidden lg:h-[1150px] lg:w-screen">
       <div
         className={classNames(
-          data.pictureOnRight ? "left-[40%]" : "right-[40%]",
-          "w-full absolute h-[1000px] pb-10"
+          data.pictureOnRight ? "lg:left-[40%]" : "lg:ght-[40%]",
+          "w-full lg:absolute lg:h-[1000px] h-[400px] lg:pb-10"
         )}
       >
         {imgUrl && (
@@ -41,7 +41,7 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
             src={imgUrl}
             width={2000}
             height={2000}
-            className="object-cover w-full h-full"
+            className="object-cover h-full lg:w-full"
             alt={"none provided"}
             style={{
               width: "100%",
@@ -51,11 +51,13 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
       </div>
       <div
         className={classNames(
-          data.pictureOnRight ? "left-0 pl-52 p-24" : "right-0 p-24",
-          "absolute bottom-0 bg-gray-950 w-[1080px]"
+          data.pictureOnRight
+            ? "lg:left-0 lg:pl-52 lg:p-24 px-10 py-9"
+            : "lg:right-0 lg:p-24 px-10 py-9",
+          "lg:absolute bottom-0 bg-gray-950 lg:w-[1080px]"
         )}
       >
-        <p className="max-w-xl text-5xl font-normal text-white">
+        <p className="max-w-xl text-base font-normal text-white lg:text-5xl">
           {data.description}
         </p>
       </div>
