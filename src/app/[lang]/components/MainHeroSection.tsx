@@ -32,13 +32,13 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
       className="relative flex items-center justify-center w-full h-[92vh] bg-cover bg-center"
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
-      <div className="absolute inset-0 bg-black opacity-50" />
-      <div className="container z-10 text-center">
+      {/* <div className="absolute inset-0 bg-black opacity-50" /> */}
+      <div className="container px-10 py-20 pb-20 mx-auto lg:px-60">
         <h1 className="text-4xl font-bold text-white lg:text-9xl">
           {data.title}
         </h1>
         {data.description && (
-          <p className="max-w-2xl mx-auto mt-4 text-lg text-white lg:text-2xl">
+          <p className="max-w-2xl mt-4 text-lg text-white lg:text-2xl">
             {data.description}
           </p>
         )}

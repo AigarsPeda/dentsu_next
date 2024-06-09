@@ -30,12 +30,11 @@ interface Footer {
 }
 
 export default function Footer({ footer }: { footer: Footer }) {
-  console.log("footer", footer);
   return (
     <footer className="py-6 bg-dentsu-primary text-gray-50">
       <div className="container grid grid-cols-1 gap-4 mx-auto lg:grid-cols-3">
         <div className="w-full">
-          <div className="w-32 h-20 text-xl">
+          <div className="w-40 h-20 text-xl">
             {footer.legalLinks.map((link: FooterLink) => {
               return <FooterLink key={link.id} {...link} />;
             })}

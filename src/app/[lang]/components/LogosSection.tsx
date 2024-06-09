@@ -34,7 +34,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
                 height={600}
                 src={imgSrc}
                 alt="our client logo"
-                className="object-none h-9"
+                className="object-contain h-9"
                 style={{
                   width: "100%",
                 }}
