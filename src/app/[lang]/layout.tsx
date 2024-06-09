@@ -138,7 +138,7 @@ export default async function RootLayout({
         <main className="min-h-screen text-gray-800">{children}</main>
 
         <Banner data={notificationBanner} />
-        <Footer socialLinks={footer.socialLinks} />
+        <Footer footer={footer} />
       </body>
     </html>
   );

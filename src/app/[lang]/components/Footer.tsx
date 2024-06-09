@@ -1,33 +1,86 @@
 "use client";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Logo from "./Logo";
+import { usePathname } from "next/navigation";
+import { AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
 import { CgWebsite } from "react-icons/cg";
 import { FaDiscord } from "react-icons/fa";
-import { AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
+import { PiGlobeThin } from "react-icons/pi";
+
+import {
+  RiFacebookCircleFill,
+  RiInstagramLine,
+  RiLinkedinBoxFill,
+} from "react-icons/ri";
 
 interface FooterLink {
   id: number;
   url: string;
-  newTab: boolean;
   text: string;
+  newTab: boolean;
   social?: string;
 }
 
-interface CategoryLink {
-  id: string;
-  attributes: {
-    name: string;
-    slug: string;
-  };
+interface Footer {
+  id: number;
+  title: string;
+  copyright: string;
+  menuLinks: FooterLink[];
+  legalLinks: FooterLink[];
+  socialLinks: FooterLink[];
 }
 
-function FooterLink({ url, text }: FooterLink) {
+export default function Footer({ footer }: { footer: Footer }) {
+  console.log("footer", footer);
+  return (
+    <footer className="py-6 bg-dentsu-primary text-gray-50">
+      <div className="container grid grid-cols-1 gap-4 mx-auto lg:grid-cols-3">
+        <div className="w-full">
+          <div className="w-32 h-20 text-xl">
+            {footer.legalLinks.map((link: FooterLink) => {
+              return <FooterLink key={link.id} {...link} />;
+            })}
+          </div>
+        </div>
+        <div className="w-full">
+          <p className="pb-5 text-xl text-center">{footer.title}</p>
+          <div className="flex justify-center pt-4 pb-12 space-x-5 lg:pt-0 lg:col-end-13">
+            {footer.socialLinks.map((link: FooterLink) => {
+              return (
+                <a
+                  key={link.id}
+                  href={link.url}
+                  title={link.text}
+                  rel="noopener noreferrer"
+                  target={link.newTab ? "_blank" : "_self"}
+                  className="flex items-center justify-center rounded-full text-gray-50"
+                >
+                  <RenderSocialIcon social={link.social} />
+                </a>
+              );
+            })}
+          </div>
+          <p className="text-sm text-center">{footer.copyright}</p>
+        </div>
+        <div className="flex justify-end w-full h-20">
+          <div className="h-20 text-xl w-28">
+            {footer.menuLinks.map((link: FooterLink) => {
+              return <FooterLink key={link.id} {...link} />;
+            })}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function FooterLink({ url, text, newTab }: FooterLink) {
   const path = usePathname();
+
   return (
     <li className="flex">
       <Link
         href={url}
+        target={newTab ? "_blank" : "_self"}
         className={`hover:dark:text-violet-400 ${
           path === url && "dark:text-violet-400 dark:border-violet-400"
         }}`}
@@ -38,61 +91,23 @@ function FooterLink({ url, text }: FooterLink) {
   );
 }
 
-function CategoryLink({ attributes }: CategoryLink) {
-  return (
-    <li className="flex">
-      <Link
-        href={`/blog/${attributes.slug}`}
-        className="hover:dark:text-violet-400"
-      >
-        {attributes.name}
-      </Link>
-    </li>
-  );
-}
-
 function RenderSocialIcon({ social }: { social: string | undefined }) {
   switch (social) {
     case "WEBSITE":
-      return <CgWebsite />;
+      return <CgWebsite className="w-10 h-10 " />;
     case "TWITTER":
-      return <AiFillTwitterCircle />;
+      return <AiFillTwitterCircle className="w-10 h-10 " />;
     case "YOUTUBE":
-      return <AiFillYoutube />;
+      return <AiFillYoutube className="w-10 h-10 " />;
     case "DISCORD":
-      return <FaDiscord />;
+      return <FaDiscord className="w-10 h-10 " />;
+    case "FACEBOOK":
+      return <RiFacebookCircleFill className="w-10 h-10 " />;
+    case "INSTAGRAM":
+      return <RiInstagramLine className="w-10 h-10 " />;
+    case "LINKEDIN":
+      return <RiLinkedinBoxFill className="w-10 h-10 " />;
     default:
-      return null;
+      return <PiGlobeThin className="w-10 h-10 " />;
   }
-}
-
-export default function Footer({
-  socialLinks,
-}: {
-  socialLinks: Array<FooterLink>;
-}) {
-  return (
-    <footer className="py-6 dark:bg-black dark:text-gray-50">
-      <div className="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
-        <div className="grid justify-center lg:justify-between">
-          <div className="flex justify-center pt-4 space-x-4 lg:pt-0 lg:col-end-13">
-            {socialLinks.map((link: FooterLink) => {
-              return (
-                <a
-                  key={link.id}
-                  rel="noopener noreferrer"
-                  href={link.url}
-                  title={link.text}
-                  target={link.newTab ? "_blank" : "_self"}
-                  className="flex items-center justify-center w-10 h-10 rounded-full dark:bg-violet-400 dark:text-gray-900"
-                >
-                  <RenderSocialIcon social={link.social} />
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
 }
