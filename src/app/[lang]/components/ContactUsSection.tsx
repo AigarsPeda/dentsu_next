@@ -44,29 +44,27 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
       <p className="px-10 text-center lg:mt-4 lg:text-2xl">
         {data.description}
       </p>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(150px,0.34fr))] pt-10">
+      <div className="mx-auto grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] md:gap-10 md:grid-cols-[repeat(auto-fit,minmax(150px,0.34fr))] pt-10">
         {data.feature.map((item) => {
           const imgSrc = getStrapiMedia(item.media.data?.attributes.url);
           return (
             <div
               key={item.id}
-              className="flex items-center justify-center px-10 pb-10"
+              className="flex items-center justify-center pb-10"
             >
-              <div>
-                <div className="lg:min-h-[300px]">
-                  {imgSrc && (
-                    <Image
-                      width={600}
-                      height={600}
-                      src={imgSrc}
-                      alt="our client logo"
-                      className="object-contain w-full h-full"
-                      style={{
-                        width: "100%",
-                      }}
-                    />
-                  )}
-                </div>
+              <div className="flex flex-col items-center">
+                {imgSrc && (
+                  <Image
+                    width={600}
+                    height={600}
+                    src={imgSrc}
+                    alt="our client logo"
+                    className="object-contain w-full h-full max-w-[200px]"
+                    style={{
+                      width: "100%",
+                    }}
+                  />
+                )}
                 <div className="mt-3 text-center">
                   <h3 className="text-xl lg:text-2xl">{item.name}</h3>
                   <p className="text-sm lg:text-base">{item.email}</p>

@@ -33,16 +33,16 @@ export default function Footer({ footer }: { footer: Footer }) {
   return (
     <footer className="py-6 bg-dentsu-primary text-gray-50">
       <div className="container grid grid-cols-1 gap-4 mx-auto lg:grid-cols-3">
-        <div className="w-full">
-          <div className="w-40 h-20 text-xl">
+        <div className="flex w-full">
+          <div className="mx-auto text-xl md:w-40 lg:mx-0">
             {footer.legalLinks.map((link: FooterLink) => {
               return <FooterLink key={link.id} {...link} />;
             })}
           </div>
         </div>
         <div className="w-full">
-          <p className="pb-5 text-xl text-center">{footer.title}</p>
-          <div className="flex justify-center pt-4 pb-12 space-x-5 lg:pt-0 lg:col-end-13">
+          <p className="text-xl text-center lg:pb-5">{footer.title}</p>
+          <div className="flex justify-center pt-4 space-x-2 lg:space-x-5 lg:pb-12 lg:pt-0 lg:col-end-13">
             {footer.socialLinks.map((link: FooterLink) => {
               return (
                 <a
@@ -58,15 +58,20 @@ export default function Footer({ footer }: { footer: Footer }) {
               );
             })}
           </div>
-          <p className="text-sm text-center">{footer.copyright}</p>
+          <p className="hidden text-sm text-center lg:block">
+            {footer.copyright}
+          </p>
         </div>
-        <div className="flex justify-end w-full h-20">
-          <div className="h-20 text-xl w-28">
+        <div className="flex justify-center w-full lg:justify-end">
+          <div className="flex flex-col items-center text-xl lg:w-28 lg:block">
             {footer.menuLinks.map((link: FooterLink) => {
               return <FooterLink key={link.id} {...link} />;
             })}
           </div>
         </div>
+        <p className="block text-sm text-center md:hidden">
+          {footer.copyright}
+        </p>
       </div>
     </footer>
   );
