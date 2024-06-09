@@ -5,7 +5,7 @@
  * classNames("foo", "bar") // "foo bar"
  * classNames("foo", undefined, "bar") // "foo bar"
  * */
-const classNames = (...classes: (string | boolean | undefined)[]) => {
+const classNames = (...classes: (string | boolean | undefined | null)[]) => {
   if (!classes) return undefined;
 
   return classes.filter(Boolean).join(" ");

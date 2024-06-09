@@ -28,12 +28,12 @@ interface ClientSectionsProps {
 export default function ClientSections({ data }: ClientSectionsProps) {
   return (
     <div className="bg-[#e5e5e9]">
-      <div className="container px-5 mx-auto lg:pb-20 py-9 lg:px-60 ">
-        <h2 className="pb-8 text-xl font-normal text-center lg:pb-16 lg:text-5xl">
+      <div className="container px-5 mx-auto lg:pb-20 py-9 lg:px-60">
+        <h2 className="pb-8 text-xl font-normal text-center lg:pb-14 lg:text-4xl">
           {data.title}
         </h2>
         <div className="pb-3 overflow-x-auto">
-          <div className="grid grid-cols-6 gap-4 min-w-[1080px]">
+          <div className="grid grid-cols-6 gap-4 lg:gap-8 min-w-[1080px]">
             {data.feature.map((item) => {
               const imgSrc = getStrapiMedia(item.media.data.attributes.url);
               return (

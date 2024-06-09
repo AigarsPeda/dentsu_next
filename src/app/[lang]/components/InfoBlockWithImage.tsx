@@ -29,11 +29,11 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
   const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
 
   return (
-    <div className="relative overflow-hidden lg:h-[1150px] lg:w-screen">
+    <div className="relative overflow-hidden lg:h-[1080px] lg:w-screen">
       <div
         className={classNames(
-          data.pictureOnRight ? "lg:left-[40%]" : "lg:ght-[40%]",
-          "w-full lg:absolute lg:h-[1000px] h-[400px] lg:pb-10"
+          data.pictureOnRight ? "lg:left-[40%]" : "lg:right-[40%]",
+          "w-full lg:absolute lg:h-[900px] h-[400px] lg:pb-10"
         )}
       >
         {imgUrl && (
@@ -52,12 +52,12 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
       <div
         className={classNames(
           data.pictureOnRight
-            ? "lg:left-0 lg:pl-52 lg:p-24 px-10 py-9"
+            ? "lg:left-0 lg:pl-[19.5rem] lg:p-24 px-10 py-9"
             : "lg:right-0 lg:p-24 px-10 py-9",
-          "lg:absolute bottom-0 bg-gray-950 lg:w-[1080px]"
+          "lg:absolute bottom-0 bg-gray-950 lg:w-[1000px]"
         )}
       >
-        <p className="max-w-xl text-base font-normal text-white lg:text-5xl">
+        <p className="max-w-xl text-base font-normal text-white lg:text-4xl">
           {data.description}
         </p>
       </div>
