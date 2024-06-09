@@ -33,7 +33,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
       {/* <div className="absolute inset-0 bg-black opacity-50" /> */}
-      <div className="container px-10 py-20 pb-20 mx-auto lg:px-60">
+      <div className="container px-10 py-20 pb-20 mx-auto lg:px-24">
         <h1 className="font-medium text-white text-8xl lg:text-9xl">
           {data.title}
         </h1>

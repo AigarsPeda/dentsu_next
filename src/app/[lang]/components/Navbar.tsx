@@ -42,18 +42,18 @@ export default function Navbar({
 
   return (
     <div className="p-4 bg-dentsu-primary">
-      <div className="container flex items-center justify-between px-0 mx-auto h-14 sm:px-6">
+      <div className="container flex items-center justify-between px-6 mx-auto lg:px-[5.3rem] h-14">
         <Logo src={logoUrl}>
           {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
         </Logo>
 
         <div className="items-center flex-shrink-0 hidden lg:flex">
-          <ul className="items-stretch hidden space-x-3 lg:flex">
+          <ul className="items-stretch space-x-6 lg:flex">
             {links.map((item: NavLink) => (
               <NavLink key={item.id} {...item} />
             ))}
           </ul>
-          <div className="flex items-center justify-center ml-3 space-x-3">
+          <div className="flex items-center justify-center ml-6 space-x-3">
             {availableLocales.map((locale) => (
               <button
                 type="button"
@@ -155,7 +155,7 @@ function NavLink({ url, text }: NavLink) {
     <li className="flex">
       <Link
         href={url}
-        className={`flex items-center mx-4 -mb-1 border-b-2 dark:border-transparent ${
+        className={`flex items-center -mb-1 border-b-2 dark:border-transparent ${
           path === url && "dark:text-violet-400 dark:border-violet-400"
         }}`}
       >

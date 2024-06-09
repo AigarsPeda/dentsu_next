@@ -11,8 +11,8 @@ interface InfoBlockProps {
 
 export default function InfoBlock({ data }: InfoBlockProps) {
   return (
-    <div className="container px-10 mx-auto lg:pb-20 py-9 lg:pt-20 lg:px-60">
-      <h2 className="lg:pb-16 pb-4 text-[2.4rem] font-medium lg:text-8xl">
+    <div className="container mx-auto lg:pb-20 py-9 lg:pt-20 lg:px-24">
+      <h2 className="lg:pb-16 pb-4 text-[2.4rem] font-medium lg:text-7xl">
         {data.title}
       </h2>
       <div className="max-w-4xl text-[0.85em] md:text-2xl">
