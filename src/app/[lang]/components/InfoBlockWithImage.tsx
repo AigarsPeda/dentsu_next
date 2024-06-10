@@ -52,9 +52,9 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
       <div
         className={classNames(
           data.pictureOnRight
-            ? "lg:left-0 lg:pl-[5rem] lg:p-24 px-8 lg:px-0 py-9"
-            : "lg:right-0 lg:p-24 px-8 lg:px-0 py-9",
-          "lg:absolute bottom-0 bg-gray-950 lg:w-[1000px]"
+            ? "lg:left-0 lg:pl-[8.5rem] lg:p-24 px-9 py-9"
+            : "lg:right-0 lg:p-24 lg:pl-32 px-9 py-9",
+          "lg:absolute bottom-0 bg-gray-950 lg:w-[900px]"
         )}
       >
         <p className="max-w-xl text-base font-normal text-white lg:text-4xl">

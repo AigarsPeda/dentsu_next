@@ -32,7 +32,7 @@ interface PostSectionProps {
 
 export default function PostSection({ data }: PostSectionProps) {
   return (
-    <div className="container px-8 mx-auto mb-10 lg:px-0">
+    <div className="container mx-auto mb-10">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12 place-content-center">
         {data.feature.map((item) => {
           const imgUrl = getStrapiMedia(item.media.data[0].attributes.url);
@@ -44,14 +44,14 @@ export default function PostSection({ data }: PostSectionProps) {
                   height={600}
                   src={imgUrl}
                   alt={"none provided"}
-                  className="object-cover h-[300px] md:h-[500px]"
+                  className="object-cover h-[300px] lg:h-[400px] lg:max-h-[500px] max-h-[250px]"
                   style={{
                     width: "100%",
                   }}
                 />
               )}
               <div className="p-6 bg-gray-950 text-gray-50">
-                <div className="mb-5 overflow-hidden custom-clamp-2">
+                <div className="h-auto mb-5 overflow-hidden custom-clamp-2">
                   <h2 title={item.title} className="text-2xl">
                     {item.title}
                   </h2>

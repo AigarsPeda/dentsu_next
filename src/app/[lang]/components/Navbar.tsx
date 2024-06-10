@@ -41,7 +41,7 @@ export default function Navbar({
   };
 
   return (
-    <div className="p-4 py-4 bg-dentsu-primary">
+    <div className="py-4 bg-dentsu-primary">
       <div className="container flex items-center justify-between mx-auto h-14">
         <Logo src={logoUrl}>
           {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
