@@ -41,8 +41,8 @@ export default function Navbar({
   };
 
   return (
-    <div className="p-4 bg-dentsu-primary">
-      <div className="container flex items-center justify-between px-6 mx-auto lg:px-[5.3rem] h-14">
+    <div className="p-4 py-4 bg-dentsu-primary">
+      <div className="container flex items-center justify-between mx-auto h-14">
         <Logo src={logoUrl}>
           {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
         </Logo>
@@ -127,7 +127,7 @@ export default function Navbar({
           </Dialog.Panel>
         </Dialog>
         <button
-          className="p-4 lg:hidden"
+          className="p-0 lg:hidden"
           onClick={() => setMobileMenuOpen(true)}
         >
           <Bars3Icon className="text-gray-100 h-7 w-7" aria-hidden="true" />

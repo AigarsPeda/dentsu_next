@@ -7,12 +7,18 @@ import InfoBlock from "@/app/[lang]/components/InfoBlock";
 import InfoBlockWithImage from "@/app/[lang]/components/InfoBlockWithImage";
 import LogosSection from "@/app/[lang]/components/LogosSection";
 import MainHeroSection from "@/app/[lang]/components/MainHeroSection";
+import PageTitle from "@/app/[lang]/components/PageTitle";
+import PostSection from "@/app/[lang]/components/PostSection";
 import Pricing from "@/app/[lang]/components/Pricing";
 import Testimonials from "@/app/[lang]/components/Testimonials";
 
 export function sectionRenderer(section: any, index: number) {
   // console.log("section ???????", section);
   switch (section.__component) {
+    case "sections.post-section":
+      return <PostSection key={index} data={section} />;
+    case "sections.page-title":
+      return <PageTitle key={index} data={section} />;
     case "sections.hero-large-section":
       return <MainHeroSection key={index} data={section} />;
     case "sections.info-block":

@@ -1,10 +1,9 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
-import { fetchAPI } from "../utils/fetch-api";
-
-import Loader from "../components/Loader";
-import Blog from "../views/blog-list";
-import PageHeader from "../components/PageHeader";
+import Loader from "@/app/[lang]/components/Loader";
+import PageHeader from "@/app/[lang]/components/PageHeader";
+import { fetchAPI } from "@/app/[lang]/utils/fetch-api";
+import Blog from "@/app/[lang]/views/blog-list";
+import { useCallback, useEffect, useState } from "react";
 
 interface Meta {
   pagination: {
@@ -15,9 +14,9 @@ interface Meta {
 }
 
 export default function Profile() {
-  const [meta, setMeta] = useState<Meta | undefined>();
   const [data, setData] = useState<any>([]);
   const [isLoading, setLoading] = useState(true);
+  const [meta, setMeta] = useState<Meta | undefined>();
 
   const fetchData = useCallback(async (start: number, limit: number) => {
     setLoading(true);
@@ -44,7 +43,7 @@ export default function Profile() {
       if (start === 0) {
         setData(responseData.data);
       } else {
-        setData((prevData: any[] ) => [...prevData, ...responseData.data]);
+        setData((prevData: any[]) => [...prevData, ...responseData.data]);
       }
 
       setMeta(responseData.meta);

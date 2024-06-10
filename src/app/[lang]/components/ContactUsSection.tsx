@@ -46,7 +46,7 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
           {data.description}
         </p>
       </div>
-      <div className="mx-auto grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] md:gap-10 md:grid-cols-[repeat(auto-fit,minmax(150px,0.34fr))] pt-10">
+      <div className="mx-auto grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] md:gap-10 md:grid-cols-[repeat(auto-fit,minmax(150px,0.44fr))] pt-10">
         {data.feature.map((item) => {
           const imgSrc = getStrapiMedia(item.media.data?.attributes.url);
           return (

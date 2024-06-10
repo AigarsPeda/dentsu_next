@@ -23,7 +23,7 @@ interface LogosSectionProps {
 
 export default function LogosSection({ data }: LogosSectionProps) {
   return (
-    <div className="container grid grid-cols-1 gap-6 px-6 mx-auto lg:gap-3 py-9 lg:py-12 lg:grid-cols-4">
+    <div className="container flex-wrap items-center justify-between block mx-auto space-y-6 md:space-y-0 md:flex py-9 lg:py-12">
       {data.feature.map((item: FeaturesType) => {
         const imgSrc = getStrapiMedia(item.media.data.attributes.url);
         return (

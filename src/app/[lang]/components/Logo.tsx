@@ -10,7 +10,7 @@ export default function Logo({
   children?: React.ReactNode;
 }) {
   return (
-    <Link href="/" aria-label="Back to homepage" className="flex items-end p-2">
+    <Link href="/" aria-label="Back to homepage" className="flex items-end">
       {src && (
         <Image
           src={src}
