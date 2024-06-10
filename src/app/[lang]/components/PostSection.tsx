@@ -1,6 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { getStrapiMedia } from "../utils/api-helpers";
 import Image from "next/image";
+import ArrowIcon from "./icons/ArrowIcon";
 
 interface MediaType {
   id: string;
@@ -50,19 +51,30 @@ export default function PostSection({ data }: PostSectionProps) {
                   }}
                 />
               )}
-              <div className="p-6 bg-gray-950 text-gray-50">
-                <div className="h-auto mb-5 overflow-hidden custom-clamp-2">
-                  <h2 title={item.title} className="text-2xl">
-                    {item.title}
-                  </h2>
+              <div className="flex items-end p-6 bg-gray-950 text-gray-50">
+                <div className="w-full">
+                  <div className="mb-5 overflow-hidden md:h-24 custom-clamp-2">
+                    <h2 title={item.title} className="text-2xl">
+                      {item.title}
+                    </h2>
+                  </div>
+                  <div className="h-24 overflow-hidden custom-clamp-4">
+                    <p
+                      title={item.description}
+                      className="text-base font-normal text-gray-300"
+                    >
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="h-24 overflow-hidden custom-clamp-4">
-                  <p
-                    title={item.description}
-                    className="text-base font-normal text-gray-300"
+                <div className="p-0.5 md:ml-9 ml-4">
+                  <a
+                    href={item.postUrl}
+                    target={item.isNewTab ? "_blank" : "_self"}
+                    className="flex items-center justify-center text-center text-white transform -rotate-90 rounded-md"
                   >
-                    {item.description}
-                  </p>
+                    <ArrowIcon className="w-9 h-9" />
+                  </a>
                 </div>
               </div>
             </div>
