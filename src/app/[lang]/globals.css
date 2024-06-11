@@ -148,3 +148,11 @@
     -webkit-box-orient: vertical;
   }
 }
+
+@layer utilities {
+  .custom-clamp-10 {
+    display: -webkit-box;
+    -webkit-line-clamp: 12;
+    -webkit-box-orient: vertical;
+  }
+}

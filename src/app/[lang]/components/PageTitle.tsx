@@ -6,8 +6,8 @@ interface PageTitleProps {
 
 export default function PageTitle({ data }: PageTitleProps) {
   return (
-    <div className="container pt-12 mx-auto">
-      <p className="text-5xl text-center">{data.title}</p>
+    <div className="container pt-6 pb-6 mx-auto md:pt-12">
+      <p className="text-3xl text-center md:text-5xl">{data.title}</p>
     </div>
   );
 }

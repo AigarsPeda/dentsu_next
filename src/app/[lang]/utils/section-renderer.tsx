@@ -5,16 +5,22 @@ import Features from "@/app/[lang]/components/Features";
 import Hero from "@/app/[lang]/components/Hero";
 import InfoBlock from "@/app/[lang]/components/InfoBlock";
 import InfoBlockWithImage from "@/app/[lang]/components/InfoBlockWithImage";
+import LargeInfoSection from "@/app/[lang]/components/LargeInfoSection";
 import LogosSection from "@/app/[lang]/components/LogosSection";
 import MainHeroSection from "@/app/[lang]/components/MainHeroSection";
 import PageTitle from "@/app/[lang]/components/PageTitle";
 import PostSection from "@/app/[lang]/components/PostSection";
 import Pricing from "@/app/[lang]/components/Pricing";
 import Testimonials from "@/app/[lang]/components/Testimonials";
+import CustomerFeedback from "../components/CustomerFeedback";
 
 export function sectionRenderer(section: any, index: number) {
   // console.log("section ???????", section);
   switch (section.__component) {
+    case "sections.customer-feedback":
+      return <CustomerFeedback key={index} data={section} />;
+    case "sections.large-info-section":
+      return <LargeInfoSection key={index} data={section} />;
     case "sections.post-section":
       return <PostSection key={index} data={section} />;
     case "sections.page-title":
