@@ -34,11 +34,11 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
     >
       {/* <div className="absolute inset-0 bg-black opacity-50" /> */}
       <div className="container pb-20">
-        <h1 className="font-medium text-white text-8xl lg:text-9xl">
+        <h1 className="p-0 font-medium text-white text-8xl lg:text-9xl">
           {data.title}
         </h1>
         {data.description && (
-          <p className="max-w-2xl mt-4 text-3xl font-normal text-white lg:text-2xl">
+          <p className="max-w-2xl pl-2.5 mt-4 text-3xl font-normal text-white  lg:text-2xl">
             {data.description}
           </p>
         )}

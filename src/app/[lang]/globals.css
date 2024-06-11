@@ -3,9 +3,9 @@
 @tailwind utilities;
 @import "react-slideshow-image/dist/styles.css";
 
-/* body {
-  @apply dark:bg-black;
-} */
+body {
+  @apply font-halcom;
+}
 
 /******************************************* 
   Rich Text Styles
@@ -152,7 +152,17 @@
 @layer utilities {
   .custom-clamp-10 {
     display: -webkit-box;
-    -webkit-line-clamp: 12;
+    -webkit-line-clamp: 10;
     -webkit-box-orient: vertical;
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: "Halcom";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/Halcom-Regular.otf) format("otf");
   }
 }

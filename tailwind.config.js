@@ -6,6 +6,10 @@ module.exports = {
       colors: {
         "dentsu-primary": "#05051e",
       },
+      // add new font family
+      fontFamily: {
+        halcom: ["Halcom", "Roboto", "sans-serif"],
+      },
       container: {
         padding: {
           DEFAULT: "2.25rem", // 16px padding on small screens

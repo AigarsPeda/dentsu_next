@@ -8,6 +8,8 @@ import type { Metadata } from "next";
 import { i18n } from "../../../i18n-config";
 import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
 
+// import HalcomRegular from "./fonts/Halcom-Regular.otf";
+
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
