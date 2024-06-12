@@ -20,7 +20,6 @@ interface MainHeroSectionProps {
   data: {
     title: string;
     picture: PictureDataType;
-    description: string | null;
   };
 }
 
@@ -33,13 +32,10 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
       {/* <div className="absolute inset-0 bg-black opacity-50" /> */}
-      <div className="container pb-20">
-        <h1 className="p-0 font-medium text-center text-white">{data.title}</h1>
-        {data.description && (
-          <p className="max-w-2xl mx-auto text-center pl-2.5 mt-4 text-3xl font-normal text-white lg:text-2xl">
-            {data.description}
-          </p>
-        )}
+      <div className="container absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        <h1 className="p-0 font-medium text-white md:text-center">
+          {data.title}
+        </h1>
       </div>
       <div className="absolute transform bottom-10 animate-bounce">
         <ArrowIcon className="w-14 h-14" />

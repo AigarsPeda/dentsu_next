@@ -53,10 +53,8 @@ export default function PostSection({ data }: PostSectionProps) {
               )}
               <div className="flex items-end p-6 bg-gray-950 text-gray-50">
                 <div className="w-full">
-                  <div className="mb-5 overflow-hidden md:h-24 custom-clamp-2">
-                    <h2 title={item.title} className="text-2xl">
-                      {item.title}
-                    </h2>
+                  <div className="mb-5 overflow-hidden md:h-20 custom-clamp-2">
+                    <h6 title={item.title}>{item.title}</h6>
                   </div>
                   <div className="h-24 overflow-hidden custom-clamp-4">
                     <p

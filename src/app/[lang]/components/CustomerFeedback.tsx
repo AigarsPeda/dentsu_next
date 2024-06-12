@@ -14,7 +14,7 @@ interface CustomerFeedbackProps {
 
 export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
   return (
-    <div className="container mx-auto my-10 md:mb-20">
+    <div className="container mx-auto mt-4 mb-10 md:mb-20">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-12 place-content-center">
         {data.feature.map((item) => {
           return (
@@ -22,12 +22,12 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
               <DoubleArrows className="w-12 h-12 mb-4" />
               <div className="w-full">
                 <div className="mb-8 overflow-hidden md:h-64 custom-clamp-10">
-                  <h2 title={item.feedback} className="text-base">
+                  <p title={item.feedback} className="text-base">
                     {item.feedback}
-                  </h2>
+                  </p>
                 </div>
                 <div className="text-right">
-                  <p title={item.name} className="text-sm">
+                  <p title={item.name} className="text-base font-bold">
                     {item.name}
                   </p>
                   <p title={item.position} className="text-sm">

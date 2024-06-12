@@ -1,7 +1,6 @@
 "use client";
 import Logo from "@/app/[lang]/components/Logo";
 import type { StrapiLocaleType } from "@/app/[lang]/layout";
-import { getStrapiURL } from "@/app/[lang]/utils/api-helpers";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -94,9 +93,9 @@ export default function Navbar({
           open={mobileMenuOpen}
           onClose={setMobileMenuOpen}
         >
-          <div className="fixed inset-0 z-40 bg-gray-600 bg-opacity-75" />{" "}
+          <div className="fixed inset-0 z-40 bg-dentsu-primary" />{" "}
           {/* Overlay */}
-          <Dialog.Panel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto bg-gray-800 rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
+          <Dialog.Panel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto bg-dentsu-primary rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Strapi</span>

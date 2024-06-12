@@ -11,9 +11,8 @@ body {
   Rich Text Styles
 *******************************************/
 
-/* Headers */
 h1 {
-  @apply font-bold text-9xl;
+  @apply font-bold text-7xl md:text-9xl;
 }
 
 h2 {
@@ -21,19 +20,23 @@ h2 {
 }
 
 h3 {
-  @apply text-4xl font-bold;
+  @apply text-2xl font-bold md:text-4xl;
 }
 
 h4 {
+  @apply text-xl md:text-2xl;
+}
+
+h5 {
+  @apply text-3xl font-bold md:text-5xl;
+}
+
+h6 {
+  @apply text-xl font-normal;
+}
+
+p {
   @apply text-2xl;
-}
-
-.rich-text h5 {
-  @apply text-lg font-bold text-violet-400;
-}
-
-.rich-text h6 {
-  @apply text-base font-bold text-violet-200;
 }
 
 /* Horizontal rules */
@@ -46,9 +49,6 @@ h4 {
 }
 
 /* Typographic replacements */
-p {
-  @apply text-xl;
-}
 
 /* Emphasis */
 .rich-text strong {
