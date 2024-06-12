@@ -12,10 +12,8 @@ interface InfoBlockProps {
 export default function InfoBlock({ data }: InfoBlockProps) {
   return (
     <div className="container mx-auto lg:pb-20 py-9 lg:pt-20">
-      <h2 className="lg:pb-16 pb-4 text-[2.4rem] font-bold lg:text-7xl">
-        {data.title}
-      </h2>
-      <div className="max-w-4xl text-[0.85em] md:text-2xl">
+      <h2 className="pb-4 font-bold lg:pb-16">{data.title}</h2>
+      <div className="max-w-4xl text-xl md:text-2xl">
         <p className="pb-5 lg:pb-8">{data.description}</p>
         {data.description_2 && (
           <p className={classNames(data.description_3 && "pb-5 lg:pb-8")}>

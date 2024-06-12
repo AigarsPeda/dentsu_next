@@ -57,9 +57,7 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
           "lg:absolute bottom-0 bg-gray-950 lg:w-[900px]"
         )}
       >
-        <p className="max-w-xl text-base font-normal text-white lg:text-4xl">
-          {data.description}
-        </p>
+        <h3 className="max-w-xl text-white">{data.description}</h3>
       </div>
     </div>
   );

@@ -39,12 +39,8 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
   return (
     <div className="container pt-5 pb-2 mx-auto lg:pt-16">
       <div className="lg:pb-4">
-        <h2 className="text-center lg:pb-0 pb-0 text-[2.2rem] lg:text-7xl">
-          {data.title}
-        </h2>
-        <p className="px-10 text-center lg:mt-4 lg:text-2xl">
-          {data.description}
-        </p>
+        <h3 className="text-center">{data.title}</h3>
+        <h4 className="px-10 text-center lg:mt-4">{data.description}</h4>
       </div>
       <div className="mx-auto grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] md:gap-10 md:grid-cols-[repeat(auto-fit,minmax(150px,0.44fr))] pt-10">
         {data.feature.map((item) => {

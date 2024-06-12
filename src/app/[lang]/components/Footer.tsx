@@ -11,6 +11,7 @@ import {
   RiInstagramLine,
   RiLinkedinBoxFill,
 } from "react-icons/ri";
+import classNames from "../utils/classNames";
 
 interface FooterLink {
   id: number;
@@ -85,9 +86,10 @@ function FooterLink({ url, text, newTab }: FooterLink) {
       <Link
         href={url}
         target={newTab ? "_blank" : "_self"}
-        className={`hover:dark:text-violet-400 ${
-          path === url && "dark:text-violet-400 dark:border-violet-400"
-        }}`}
+        className={classNames(
+          path === url && "text-gray-100 hover:text-gray-100",
+          "text-[20px] leading-7 text-gray-50 hover:text-gray-200 transition-all"
+        )}
       >
         {text}
       </Link>
