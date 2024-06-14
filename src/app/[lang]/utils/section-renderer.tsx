@@ -15,6 +15,7 @@ import PostSectionWithImage from "@/app/[lang]/components/PostSectionWithImage";
 import Pricing from "@/app/[lang]/components/Pricing";
 import Testimonials from "@/app/[lang]/components/Testimonials";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
+import PostStatisticWithImage from "@/app/[lang]/components/PostStatisticWithImage";
 
 export function sectionRenderer(section: any, index: number) {
   // console.log("section ???????", section);
@@ -53,6 +54,8 @@ export function sectionRenderer(section: any, index: number) {
       return <PostSectionWithImage key={index} data={section} />;
     case "sections.work-headline-with-image":
       return <WorkHeadlineWithImage key={index} data={section} />;
+    case "sections.post-statistic-with-image":
+      return <PostStatisticWithImage key={index} data={section} />;
     default:
       console.error("Section not found", section.__component);
       return null;

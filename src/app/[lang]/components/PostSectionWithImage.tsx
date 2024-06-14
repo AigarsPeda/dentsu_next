@@ -35,7 +35,7 @@ export default function PostSectionWithImage({
   return (
     <>
       {data.feature.pictureOnRight ? (
-        <div className="grid w-full grid-cols-2 overflow-hidden">
+        <div className="grid w-full grid-cols-1 overflow-hidden md:grid-cols-2">
           <div className="w-full h-full bg-center bg-cover">
             {imgUrl && (
               <Image
@@ -59,7 +59,7 @@ export default function PostSectionWithImage({
           </div>
         </div>
       ) : (
-        <div className="grid w-full grid-cols-2">
+        <div className="grid w-full grid-cols-1 md:grid-cols-2">
           <div className="pt-16 pb-5 bg-gray-950">
             <TitleInCircleWithLine
               title={data.feature.title}
