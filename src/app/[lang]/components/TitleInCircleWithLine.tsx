@@ -25,7 +25,7 @@ const TitleInCircleWithLine: FC<TitleInCircleWithLineProps> = ({
           )}
         >
           <div className="flex flex-col justify-start ">
-            <div className="flex items-center w-full pt-10 pb-10 pr-10 md:pt-0 md:pb-0 md:pr-0">
+            <div className="flex items-center w-full pt-10 pb-10 pr-10 md:pt-0">
               <hr className="w-full h-0.5 my-8 border-0 bg-gray-50"></hr>
               <div className="flex items-center justify-center w-56 h-40 border rounded-full border-gray-50">
                 <h6 className="text-base font-bold text-white">{title}</h6>
@@ -44,7 +44,7 @@ const TitleInCircleWithLine: FC<TitleInCircleWithLineProps> = ({
           )}
         >
           <div className="flex flex-col justify-end">
-            <div className="flex items-center w-full pt-10 pb-10 pl-10 md:pt-0 md:pb-0 md:pl-0">
+            <div className="flex items-center w-full pt-10 pb-10 pl-10 md:pt-0">
               <div className="flex items-center justify-center w-56 h-40 border rounded-full border-gray-50">
                 <h6 className="text-base font-bold text-white">{title}</h6>
               </div>
