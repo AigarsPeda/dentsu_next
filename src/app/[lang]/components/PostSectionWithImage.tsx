@@ -35,7 +35,7 @@ export default function PostSectionWithImage({
   return (
     <>
       {data.feature.pictureOnRight ? (
-        <div className="grid w-full grid-cols-2">
+        <div className="grid w-full grid-cols-2 overflow-hidden">
           <div className="w-full h-full bg-center bg-cover">
             {imgUrl && (
               <Image

@@ -1,20 +1,28 @@
+import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import type { FC } from "react";
 
 interface TitleInCircleWithLineProps {
   title: string;
   description: string;
+  backgroundImg?: string;
   pictureOnRight?: boolean;
 }
 
 const TitleInCircleWithLine: FC<TitleInCircleWithLineProps> = ({
   title,
   description,
+  backgroundImg,
   pictureOnRight,
 }) => {
+  const imgUrl = getStrapiMedia(backgroundImg || "");
+
   return (
     <>
       {pictureOnRight ? (
-        <div className="flex items-center justify-start w-full h-full bg-gray-950">
+        <section
+          className="flex items-center justify-start w-full h-full bg-center bg-cover bg-gray-950"
+          style={{ backgroundImage: `url(${imgUrl})` }}
+        >
           <div className="flex flex-col justify-start">
             <div className="flex items-center w-full">
               <hr className="w-full h-0.5 my-8 border-0 bg-gray-50"></hr>
@@ -26,9 +34,12 @@ const TitleInCircleWithLine: FC<TitleInCircleWithLineProps> = ({
               {description}
             </p>
           </div>
-        </div>
+        </section>
       ) : (
-        <div className="flex items-center justify-end w-full h-full bg-gray-950">
+        <section
+          className="flex items-center justify-end w-full h-full bg-center bg-cover bg-gray-950"
+          style={{ backgroundImage: `url(${imgUrl})` }}
+        >
           <div className="flex flex-col justify-end">
             <div className="flex items-center w-full">
               <div className="flex items-center justify-center w-56 h-40 border rounded-full border-gray-50">
@@ -40,7 +51,7 @@ const TitleInCircleWithLine: FC<TitleInCircleWithLineProps> = ({
               {description}
             </p>
           </div>
-        </div>
+        </section>
       )}
     </>
   );
