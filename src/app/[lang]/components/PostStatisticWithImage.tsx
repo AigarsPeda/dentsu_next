@@ -40,8 +40,6 @@ export default function PostStatisticWithImage({
 }: PostStatisticWithImageProps) {
   const imgUrl = getStrapiMedia(data.feature.media.data[0]?.attributes.url);
 
-  console.log("data.feature.statisticOnRight", data.feature.statisticOnRight);
-
   return (
     <section
       className={classNames(

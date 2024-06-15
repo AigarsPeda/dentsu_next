@@ -1,5 +1,5 @@
+import { getStrapiURL } from "@/app/[lang]/utils/api-helpers";
 import qs from "qs";
-import { getStrapiURL } from "./api-helpers";
 
 export async function fetchAPI(
   path: string,

@@ -8,12 +8,12 @@ import InfoBlockWithImage from "@/app/[lang]/components/InfoBlockWithImage";
 import LargeInfoSection from "@/app/[lang]/components/LargeInfoSection";
 import LogosSection from "@/app/[lang]/components/LogosSection";
 import MainHeroSection from "@/app/[lang]/components/MainHeroSection";
+import MediaCarousel from "@/app/[lang]/components/MediaCarousel";
 import PageTitle from "@/app/[lang]/components/PageTitle";
 import PostSection from "@/app/[lang]/components/PostSection";
 import PostSectionWithImage from "@/app/[lang]/components/PostSectionWithImage";
 import PostStatisticWithImage from "@/app/[lang]/components/PostStatisticWithImage";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
-import Carousel from "../components/Carousel";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
@@ -22,7 +22,7 @@ export function sectionRenderer(section: any, index: number) {
     case "sections.lead-form":
       return <Email key={index} data={section} />;
     case "sections.image-carousel":
-      return <Carousel key={index} data={section} />;
+      return <MediaCarousel key={index} data={section} />;
     case "sections.info-block":
       return <InfoBlock key={index} data={section} />;
     case "sections.page-title":

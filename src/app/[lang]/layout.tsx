@@ -2,13 +2,11 @@ import Banner from "@/app/[lang]/components/Banner";
 import Footer from "@/app/[lang]/components/Footer";
 import Navbar from "@/app/[lang]/components/Navbar";
 import "@/app/[lang]/globals.css";
+import { getStrapiMedia, getStrapiURL } from "@/app/[lang]/utils/api-helpers";
 import { FALLBACK_SEO } from "@/app/[lang]/utils/constants";
 import { fetchAPI } from "@/app/[lang]/utils/fetch-api";
 import type { Metadata } from "next";
 import { i18n } from "../../../i18n-config";
-import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
-
-// import HalcomRegular from "./fonts/Halcom-Regular.otf";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
