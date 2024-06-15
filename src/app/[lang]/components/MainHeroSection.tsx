@@ -38,7 +38,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
         </h1>
       </div>
       <div className="absolute transform bottom-10 animate-bounce">
-        <ArrowIcon className="w-14 h-14" />
+        <ArrowIcon className="w-14 h-14 fill-gray-50" />
       </div>
     </section>
   );

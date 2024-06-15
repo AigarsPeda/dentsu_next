@@ -13,6 +13,7 @@ import PageTitle from "@/app/[lang]/components/PageTitle";
 import PostSection from "@/app/[lang]/components/PostSection";
 import PostSectionWithImage from "@/app/[lang]/components/PostSectionWithImage";
 import PostStatisticWithImage from "@/app/[lang]/components/PostStatisticWithImage";
+import ServicesHeadlineWithImage from "@/app/[lang]/components/ServicesHeadlineWithImage";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
 
 export function sectionRenderer(section: any, index: number) {
@@ -21,8 +22,6 @@ export function sectionRenderer(section: any, index: number) {
       return <Hero key={index} data={section} />;
     case "sections.lead-form":
       return <Email key={index} data={section} />;
-    case "sections.image-carousel":
-      return <MediaCarousel key={index} data={section} />;
     case "sections.info-block":
       return <InfoBlock key={index} data={section} />;
     case "sections.page-title":
@@ -31,6 +30,8 @@ export function sectionRenderer(section: any, index: number) {
       return <PostSection key={index} data={section} />;
     case "sections.logos-section":
       return <LogosSection key={index} data={section} />;
+    case "sections.image-carousel":
+      return <MediaCarousel key={index} data={section} />;
     case "sections.client-section":
       return <ClientSections key={index} data={section} />;
     case "sections.hero-large-section":
@@ -49,6 +50,8 @@ export function sectionRenderer(section: any, index: number) {
       return <WorkHeadlineWithImage key={index} data={section} />;
     case "sections.post-statistic-with-image":
       return <PostStatisticWithImage key={index} data={section} />;
+    case "sections.services-headline-with-image":
+      return <ServicesHeadlineWithImage key={index} data={section} />;
     default:
       console.error("Section not found", section);
       return null;
