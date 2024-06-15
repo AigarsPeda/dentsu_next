@@ -2,7 +2,6 @@ import ClientSections from "@/app/[lang]/components/ClientSections";
 import ContactUsSection from "@/app/[lang]/components/ContactUsSection";
 import CustomerFeedback from "@/app/[lang]/components/CustomerFeedback";
 import Email from "@/app/[lang]/components/Email";
-import Features from "@/app/[lang]/components/Features";
 import Hero from "@/app/[lang]/components/Hero";
 import InfoBlock from "@/app/[lang]/components/InfoBlock";
 import InfoBlockWithImage from "@/app/[lang]/components/InfoBlockWithImage";
@@ -12,22 +11,18 @@ import MainHeroSection from "@/app/[lang]/components/MainHeroSection";
 import PageTitle from "@/app/[lang]/components/PageTitle";
 import PostSection from "@/app/[lang]/components/PostSection";
 import PostSectionWithImage from "@/app/[lang]/components/PostSectionWithImage";
-import Pricing from "@/app/[lang]/components/Pricing";
-import Testimonials from "@/app/[lang]/components/Testimonials";
-import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
 import PostStatisticWithImage from "@/app/[lang]/components/PostStatisticWithImage";
+import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
+import Carousel from "../components/Carousel";
 
 export function sectionRenderer(section: any, index: number) {
-  // console.log("section ???????", section);
   switch (section.__component) {
     case "sections.hero":
       return <Hero key={index} data={section} />;
     case "sections.lead-form":
       return <Email key={index} data={section} />;
-    case "sections.pricing":
-      return <Pricing key={index} data={section} />;
-    case "sections.features":
-      return <Features key={index} data={section} />;
+    case "sections.image-carousel":
+      return <Carousel key={index} data={section} />;
     case "sections.info-block":
       return <InfoBlock key={index} data={section} />;
     case "sections.page-title":
@@ -36,8 +31,6 @@ export function sectionRenderer(section: any, index: number) {
       return <PostSection key={index} data={section} />;
     case "sections.logos-section":
       return <LogosSection key={index} data={section} />;
-    case "sections.testimonials-group":
-      return <Testimonials key={index} data={section} />;
     case "sections.client-section":
       return <ClientSections key={index} data={section} />;
     case "sections.hero-large-section":
@@ -57,7 +50,7 @@ export function sectionRenderer(section: any, index: number) {
     case "sections.post-statistic-with-image":
       return <PostStatisticWithImage key={index} data={section} />;
     default:
-      console.error("Section not found", section.__component);
+      console.error("Section not found", section);
       return null;
   }
 }
