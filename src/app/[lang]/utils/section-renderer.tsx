@@ -13,6 +13,7 @@ import PageTitle from "@/app/[lang]/components/PageTitle";
 import PostSection from "@/app/[lang]/components/PostSection";
 import PostSectionWithImage from "@/app/[lang]/components/PostSectionWithImage";
 import PostStatisticWithImage from "@/app/[lang]/components/PostStatisticWithImage";
+import Services from "@/app/[lang]/components/Services";
 import ServicesHeadlineWithImage from "@/app/[lang]/components/ServicesHeadlineWithImage";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
 
@@ -22,6 +23,8 @@ export function sectionRenderer(section: any, index: number) {
       return <Hero key={index} data={section} />;
     case "sections.lead-form":
       return <Email key={index} data={section} />;
+    case "sections.services":
+      return <Services key={index} data={section} />;
     case "sections.info-block":
       return <InfoBlock key={index} data={section} />;
     case "sections.page-title":

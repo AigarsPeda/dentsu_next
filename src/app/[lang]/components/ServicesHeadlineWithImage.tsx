@@ -34,15 +34,15 @@ export default function ServicesHeadlineWithImage({
         backgroundImage: `url(${imgUrl})`,
       }}
     >
-      <div className="container mx-auto mb-10">
-        <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
-          <div className="absolute bottom-0 flex items-center justify-center max-w-xl px-10 pt-10 pb-5 bg-white right-20">
-            <div>
+      <div className="container mx-auto">
+        <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">
+          <div className="absolute bottom-0 grid items-center justify-center w-full grid-cols-1 mx-auto min-h-56 md:grid-cols-2">
+            <div></div>
+            <div className="h-full max-w-xl p-12 bg-white">
               <div className="text-left">
                 <h3 className="font-normal text-gray-950">{data.title}</h3>
               </div>
-              {/* animate-bounce */}
-              <div className="flex items-center justify-center w-full mt-10">
+              <div className="flex items-center justify-center w-full mt-20">
                 <ArrowIcon className="w-8 h-8 fill-gray-950" />
               </div>
             </div>
