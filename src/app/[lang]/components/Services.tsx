@@ -43,7 +43,8 @@ export default function Services({ data }: ServicesProps) {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const height = 300 + data.services.length * 110;
+  const height = 300 + data.services.length * 120;
+  const topPadding = height / 2 - 212;
 
   return (
     <div
@@ -58,7 +59,10 @@ export default function Services({ data }: ServicesProps) {
           backgroundImage: `url(${imgUrl})`,
         }}
       ></div>
-      <div className="flex flex-col justify-center pr-24">
+      <div
+        style={{ paddingTop: `${topPadding}px` }}
+        className="flex flex-col pr-24"
+      >
         {data.services.map((service, index) => {
           return (
             <Disclosure
@@ -73,7 +77,7 @@ export default function Services({ data }: ServicesProps) {
                     onClick={() => togglePanel(index)}
                     className="flex items-center justify-between w-full border-b group border-gray-950 hover:border-gray-950 focus:border-gray-950 focus:outline-none"
                   >
-                    <h3 className="flex items-center gap-4 text-lg font-bold text-gray-950">
+                    <h3 className="flex items-center gap-4 text-lg font-bold text-gray-950 ">
                       <IoMdAdd
                         className={classNames(
                           openIndex === index && "rotate-45",
@@ -87,14 +91,14 @@ export default function Services({ data }: ServicesProps) {
                     show={openIndex === index}
                     enter="transition-all duration-300"
                     enterFrom="transform opacity-0 max-h-0"
-                    enterTo="transform opacity-100 max-h-52"
+                    enterTo="transform opacity-100 md:max-h-[11rem]"
                     leave="transition-all duration-300"
-                    leaveFrom="transform opacity-100 max-h-52"
+                    leaveFrom="transform opacity-100 md:max-h-[11rem]"
                     leaveTo="transform opacity-0 max-h-0"
                   >
-                    <DisclosurePanel className="mt-2 text-sm text-black/50">
-                      <div key={service.id} className="p-6">
-                        <p className="mt-2 text-base font-normal text-gray-950">
+                    <DisclosurePanel className="text-sm">
+                      <div className="p-6">
+                        <p className="text-base font-normal text-gray-950">
                           {service.description}
                         </p>
                       </div>
