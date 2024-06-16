@@ -1,5 +1,6 @@
 import { getStrapiMedia } from "../utils/api-helpers";
 import ArrowIcon from "./icons/ArrowIcon";
+import Image from "next/image";
 
 interface ServicesHeadlineWithImageProps {
   data: {
@@ -26,26 +27,19 @@ export default function ServicesHeadlineWithImage({
   const imgUrl = getStrapiMedia(data.media.data[0].attributes.url) ?? "";
 
   return (
-    <div
-      className="bg-center bg-cover"
-      style={{
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundImage: `url(${imgUrl})`,
-      }}
-    >
-      <div className="container mx-auto">
-        <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">
-          <div className="absolute bottom-0 grid items-center justify-center w-full grid-cols-1 mx-auto min-h-56 md:grid-cols-2">
-            <div></div>
-            <div className="h-full max-w-xl p-12 bg-white">
-              <div className="text-left">
-                <h3 className="font-normal text-gray-950">{data.title}</h3>
-              </div>
-              <div className="flex items-center justify-center w-full mt-20">
-                <ArrowIcon className="w-8 h-8 fill-gray-950" />
-              </div>
-            </div>
+    <div className="relative w-full h-full">
+      <Image
+        width={1000}
+        height={1000}
+        src={imgUrl}
+        alt="our client logo"
+        className="object-cover w-full h-[62vh] md:h-full"
+      />
+      <div className="md:absolute mx-auto bottom-0 right-0 md:max-w-[50%] md:pr-24">
+        <div className="p-12 bg-white">
+          <h3 className="font-normal text-gray-950">{data.title}</h3>
+          <div className="items-center justify-center hidden w-full md:flex md:mt-20 ">
+            <ArrowIcon className="w-8 h-8 fill-gray-950 " />
           </div>
         </div>
       </div>
