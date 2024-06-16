@@ -97,8 +97,10 @@ function FooterLink({ url, text, newTab }: FooterLink) {
   );
 }
 
-function RenderSocialIcon({ social }: { social: string | undefined }) {
-  switch (social) {
+export function RenderSocialIcon({ social }: { social: string | undefined }) {
+  const s = social?.toUpperCase();
+
+  switch (s) {
     case "WEBSITE":
       return <CgWebsite className="w-10 h-10 " />;
     case "TWITTER":

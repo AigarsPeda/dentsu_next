@@ -3,31 +3,6 @@
 @tailwind utilities;
 @import "react-slideshow-image/dist/styles.css";
 
-/* import fonts from public folder */
-/* @font-face {
-  font-family: "Halcom";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(/fonts/HalcomRegular.otf) format("otf");
-}
-
-@font-face {
-  font-family: "Halcom";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(/fonts/HalcomBold.otf) format("otf");
-}
-
-@font-face {
-  font-family: "Halcom";
-  font-style: normal;
-  font-weight: 200;
-  font-display: swap;
-  src: url(/fonts/HalcomLight.otf) format("otf");
-} */
-
 @layer base {
   @font-face {
     font-family: "Halcom";
@@ -58,10 +33,6 @@ body {
   @apply font-halcom;
 }
 
-/******************************************* 
-  Rich Text Styles
-*******************************************/
-
 h1 {
   @apply font-bold text-7xl md:text-9xl;
 }
@@ -90,99 +61,18 @@ p {
   @apply text-2xl;
 }
 
-/* Horizontal rules */
-/* .rich-text hr {
-  @apply my-8 border-gray-300;
+/* Table styles */
+table {
+  @apply w-full border-collapse;
 }
 
-.rich-text a {
-  @apply underline text-violet-400;
+th {
+  @apply p-2 text-base font-bold border border-gray-300;
 }
 
-/* Typographic replacements */
-
-/* Emphasis */
-/* .rich-text strong {
-  @apply font-bold;
-} */
-
-/* .rich-text em {
-  @apply italic;
-} */
-
-/* .rich-text del {
-  @apply line-through;
-} */
-
-/* Blockquotes */
-/* .rich-text blockquote {
-  @apply py-2 pl-4 mb-4 border-l-4 border-gray-400;
-} */
-
-/* Lists */
-/* .rich-text ul {
-  @apply pl-4 mb-4 list-disc;
-} */
-
-/* .rich-text ol {
-  @apply pl-4 mb-4 list-decimal;
-} */
-
-/* .rich-text li {
-  @apply mb-2;
-} */
-
-/* .rich-text li > ul {
-  @apply pl-4 mb-2 list-disc;
-} */
-
-/* .rich-text li > ol {
-  @apply pl-4 mb-2 list-decimal;
-} */
-
-/* Code blocks */
-/* .rich-text pre {
-  @apply p-4 my-6 font-mono text-gray-100 bg-gray-900 rounded;
-} */
-
-/* .rich-text code {
-  @apply px-2 py-1 font-mono text-gray-100 bg-gray-900 rounded;
-} */
-
-/* Tables */
-/* .rich-text table {
-  @apply w-full my-6 border-collapse border-gray-300;
-} */
-
-/* .rich-text th {
-  @apply px-4 py-2 font-semibold text-left bg-gray-900 border-b border-gray-300;
-} */
-
-/* .rich-text td {
-  @apply px-4 py-2 border-b border-gray-300;
-} */
-
-/* Images */
-/* .rich-text img {
-  @apply object-cover w-full my-6 rounded-xl;
-} */
-
-/* Custom containers */
-/* .rich-text .warning {
-  @apply px-4 py-2 mb-4 text-yellow-700 bg-yellow-100 border-yellow-500 rounded-lg;
-} */
-
-/******************************************* 
-  React Slideshow Styles
-*******************************************/
-
-/* .react-slideshow-container [aria-label="Previous Slide"] {
-  margin-left: 1rem;
+td {
+  @apply p-2 text-base text-center border border-gray-300;
 }
-
-.react-slideshow-container [aria-label="Next Slide"] {
-  margin-right: 1rem;
-} */
 
 @layer utilities {
   .custom-clamp-2 {
@@ -204,6 +94,14 @@ p {
   .custom-clamp-5 {
     display: -webkit-box;
     -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+}
+
+@layer utilities {
+  .custom-clamp-8 {
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
   }
 }
