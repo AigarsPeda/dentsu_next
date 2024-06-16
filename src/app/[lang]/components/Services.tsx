@@ -54,7 +54,6 @@ interface ServicesProps {
 }
 
 export default function Services({ data }: ServicesProps) {
-  console.log("data", data);
   const [isMobile, setIsMobile] = useState(false);
   const logoUrl = getStrapiMedia(data.logo.data.attributes.url) ?? "";
   const imgUrl = getStrapiMedia(data.media.data[0].attributes.url) ?? "";
