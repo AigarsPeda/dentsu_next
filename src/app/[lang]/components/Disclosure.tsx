@@ -29,7 +29,9 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
 
   return (
     <div
-      className={classNames("flex flex-col justify-center h-full pl-10 pr-28")}
+      className={classNames(
+        "flex flex-col md:justify-center h-full md:pl-10 md:pr-28 px-10 py-5"
+      )}
     >
       <div
         style={{
@@ -47,8 +49,8 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                 fontColor &&
                   fontColor === "dark" &&
                   "text-gray-950 border-gray-950",
-                "p-6 border-b group",
-                !fontColor && "text-gray-950 border-gray-950"
+                !fontColor && "text-gray-950 border-gray-950",
+                "md:p-6 px-2 py-3 border-b group"
               )}
               key={service.id}
               defaultOpen={false}
@@ -57,15 +59,15 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                 <span key={service.id + index}>
                   <DisclosureButton
                     onClick={() => togglePanel(index)}
-                    className="flex items-center justify-between w-full hover:border-gray-950 focus:border-gray-950 focus:outline-none"
+                    className="flex justify-between w-full hover:border-gray-950 focus:border-gray-950 focus:outline-none"
                   >
-                    <h3 className="flex items-center gap-4 text-xl font-bold">
+                    <h3 className="flex gap-4 text-base font-bold truncate md:items-center md:text-xl">
                       <IoMdAdd
                         className={classNames(
                           openIndex === index && "rotate-45",
                           "w-7 h-7 transform transition-transform"
                         )}
-                      />{" "}
+                      />
                       {service.title}
                     </h3>
                   </DisclosureButton>
@@ -73,14 +75,14 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                     show={openIndex === index}
                     enter="transition-all duration-300"
                     enterFrom="transform opacity-0 max-h-0"
-                    enterTo="transform opacity-100 md:max-h-[12rem]"
+                    enterTo="transform opacity-100 max-h-56"
                     leave="transition-all duration-300"
-                    leaveFrom="transform opacity-100 md:max-h-[12rem]"
+                    leaveFrom="transform opacity-100 max-h-56"
                     leaveTo="transform opacity-0 max-h-0"
                   >
                     <DisclosurePanel className="text-sm">
-                      <div className="p-6 pt-3">
-                        <p className="text-base font-medium">
+                      <div className="pt-3 md:pt-6">
+                        <p className="text-sm font-medium md:text-base">
                           {service.description}
                         </p>
                       </div>

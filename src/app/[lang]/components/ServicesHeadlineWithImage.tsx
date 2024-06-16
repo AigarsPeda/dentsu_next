@@ -36,7 +36,7 @@ export default function ServicesHeadlineWithImage({
         className="object-cover w-full h-[62vh] md:h-full"
       />
       <div className="md:absolute mx-auto bottom-0 right-0 md:max-w-[50%] md:pr-24">
-        <div className="p-12 bg-white">
+        <div className="p-10 bg-white md:p-12">
           <h3 className="font-normal text-gray-950">{data.title}</h3>
           <div className="items-center justify-center hidden w-full md:flex md:mt-20 ">
             <ArrowIcon className="w-8 h-8 fill-gray-950 " />

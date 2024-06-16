@@ -2,6 +2,7 @@
 import ServiceDisclosure from "@/app/[lang]/components/Disclosure";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import Image from "next/image";
+import { use, useEffect, useState } from "react";
 
 interface ServicesProps {
   data: {
@@ -36,28 +37,63 @@ interface ServicesProps {
         };
       };
     };
+    mobLogo: {
+      data: {
+        id: number;
+        attributes: {
+          url: string;
+          width: number;
+          height: number;
+          caption: string | null;
+          alternativeText: string | null;
+        };
+      } | null;
+    };
     fontColor: { id: number; fontColor: "light" | "dark" } | null;
   };
 }
 
 export default function Services({ data }: ServicesProps) {
   console.log("data", data);
-
+  const [isMobile, setIsMobile] = useState(false);
   const logoUrl = getStrapiMedia(data.logo.data.attributes.url) ?? "";
   const imgUrl = getStrapiMedia(data.media.data[0].attributes.url) ?? "";
+  const mobLogoUrl = data.mobLogo.data
+    ? getStrapiMedia(data.mobLogo.data.attributes.url)
+    : undefined;
 
-  const height = 300 + data.services.length * 135;
+  const height = 300 + data.services.length * 130;
+  const mobHeight = 300 + data.services.length * 60;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    setIsMobile(window.innerWidth < 768);
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div
-      style={{ height: `${height}px` }}
       className="grid grid-cols-1 mx-auto md:grid-cols-2"
+      style={{ height: `${isMobile ? mobHeight : height}px` }}
     >
       <DivWithImage
         imgUrl={imgUrl}
         logoUrl={logoUrl}
         pictureOnRight={data.pictureOnRight}
       >
+        <div className="block pt-10 pb-3 md:hidden">
+          <DisplayLogo logoUrl={mobLogoUrl ?? logoUrl} />
+        </div>
         <ServiceDisclosure
           data={data.services}
           fontColor={data.fontColor?.fontColor}
@@ -81,7 +117,7 @@ export const DivWithImage = ({
   return (
     <>
       <div
-        className="relative flex items-center justify-center bg-center bg-cover"
+        className="relative items-center justify-center hidden bg-center bg-cover md:flex"
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -108,5 +144,19 @@ export const DivWithImage = ({
         {children}
       </div>
     </>
+  );
+};
+
+const DisplayLogo = ({ logoUrl }: { logoUrl: string }) => {
+  return (
+    <div className="flex items-center justify-center">
+      <Image
+        width={600}
+        height={600}
+        src={logoUrl}
+        alt="our client logo"
+        className="object-contain max-w-[130px] h-10"
+      />
+    </div>
   );
 };
