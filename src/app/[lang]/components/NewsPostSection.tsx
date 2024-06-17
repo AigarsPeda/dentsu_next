@@ -56,7 +56,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
 
   return (
     <>
-      <section className="container grid grid-cols-1 gap-4 py-10 mx-auto md:grid-cols-3 md:px-32">
+      <section className="container grid grid-cols-1 gap-4 pb-10 mx-auto md:grid-cols-3 md:px-16">
         {currentData.map((newsPost) => {
           const thumbnail = newsPost.thumbnail.data?.[0]?.attributes;
           const src = thumbnail ? getStrapiMedia(thumbnail.url) : null;
@@ -91,21 +91,23 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
           );
         })}
       </section>
-      <div className="flex justify-center pt-6 pb-16">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`px-3 py-1 mx-1 ${
-              index + 1 === currentPage
-                ? "bg-gray-950 text-gray-50"
-                : "bg-gray-200"
-            }`}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+      {totalPages > 1 && (
+        <div className="flex justify-center pt-6 pb-16">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              className={`px-3 py-1 mx-1 ${
+                index + 1 === currentPage
+                  ? "bg-gray-950 text-gray-50"
+                  : "bg-gray-200"
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </>
   );
 }

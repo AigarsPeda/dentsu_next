@@ -1,5 +1,6 @@
 import ClientSections from "@/app/[lang]/components/ClientSections";
 import ContactUsSection from "@/app/[lang]/components/ContactUsSection";
+import Contacts from "@/app/[lang]/components/Contacts";
 import CustomerFeedback from "@/app/[lang]/components/CustomerFeedback";
 import Email from "@/app/[lang]/components/Email";
 import Hero from "@/app/[lang]/components/Hero";
@@ -19,9 +20,9 @@ import PostStatisticWithImage from "@/app/[lang]/components/PostStatisticWithIma
 import RichTextPost from "@/app/[lang]/components/RichTextPost";
 import Services from "@/app/[lang]/components/Services";
 import ServicesHeadlineWithImage from "@/app/[lang]/components/ServicesHeadlineWithImage";
+import SocialShare from "@/app/[lang]/components/SocialShare";
 import Table from "@/app/[lang]/components/Table";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
-import SocialShare from "@/app/[lang]/components/SocialShare";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
@@ -31,6 +32,8 @@ export function sectionRenderer(section: any, index: number) {
       return <Table key={index} data={section} />;
     case "sections.lead-form":
       return <Email key={index} data={section} />;
+    case "sections.contacts":
+      return <Contacts key={index} data={section} />;
     case "sections.services":
       return <Services key={index} data={section} />;
     case "sections.post-image":
