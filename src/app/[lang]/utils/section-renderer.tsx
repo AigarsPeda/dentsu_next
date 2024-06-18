@@ -23,6 +23,8 @@ import ServicesHeadlineWithImage from "@/app/[lang]/components/ServicesHeadlineW
 import SocialShare from "@/app/[lang]/components/SocialShare";
 import Table from "@/app/[lang]/components/Table";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
+import FullWidthImage from "@/app/[lang]/components/FullWidthImage";
+import VacanciesHeadline from "../components/VacanciesHeadline";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
@@ -54,6 +56,8 @@ export function sectionRenderer(section: any, index: number) {
       return <NewsPostTitle key={index} data={section} />;
     case "sections.image-carousel":
       return <MediaCarousel key={index} data={section} />;
+    case "sections.full-width-image":
+      return <FullWidthImage key={index} data={section} />;
     case "sections.client-section":
       return <ClientSections key={index} data={section} />;
     case "sections.hero-large-section":
@@ -66,6 +70,8 @@ export function sectionRenderer(section: any, index: number) {
       return <ContactUsSection key={index} data={section} />;
     case "sections.customer-feedback":
       return <CustomerFeedback key={index} data={section} />;
+    case "sections.vacancies-headline":
+      return <VacanciesHeadline key={index} data={section} />;
     case "sections.info-block-with-image":
       return <InfoBlockWithImage key={index} data={section} />;
     case "sections.post-section-with-image":
