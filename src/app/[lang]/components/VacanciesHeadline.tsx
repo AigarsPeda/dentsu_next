@@ -10,9 +10,9 @@ interface VacanciesHeadlineProps {
 export default function VacanciesHeadline({ data }: VacanciesHeadlineProps) {
   return (
     <div className="relative">
-      <div className="md:absolute py-10 bg-gray-950 text-gray-50 max-w-[50rem] lg:w-[50rem] right-[54%] transform bottom-[50%]">
+      <div className="md:absolute py-10 bg-gray-950 text-gray-50 max-w-[50rem] lg:w-[52rem] right-[54%] transform bottom-[45%]">
         <div className="container flex px-10 md:justify-end">
-          <div className="max-w-[24rem]">
+          <div className="max-w-[23.5rem]">
             <h1 className="text-2xl font-bold text-left md:text-3xl">
               {data.mainHeadline}
             </h1>
