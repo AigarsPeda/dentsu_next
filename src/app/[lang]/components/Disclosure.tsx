@@ -50,7 +50,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                   fontColor === "dark" &&
                   "text-gray-950 border-gray-950",
                 !fontColor && "text-gray-950 border-gray-950",
-                "md:p-6 px-2 py-3 border-b group"
+                "md:p-4 px-2 py-3 border-b group"
               )}
               key={service.id}
               defaultOpen={false}
@@ -59,15 +59,15 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                 <span key={service.id + index}>
                   <DisclosureButton
                     onClick={() => togglePanel(index)}
-                    className="flex justify-between w-full hover:border-gray-950 focus:border-gray-950 focus:outline-none"
+                    className="flex w-full gap-3 hover:border-gray-950 focus:border-gray-950 focus:outline-none"
                   >
+                    <IoMdAdd
+                      className={classNames(
+                        openIndex === index && "rotate-45",
+                        "w-7 h-7 transform transition-transform"
+                      )}
+                    />
                     <h3 className="flex gap-4 text-base font-bold truncate md:items-center md:text-xl">
-                      <IoMdAdd
-                        className={classNames(
-                          openIndex === index && "rotate-45",
-                          "w-7 h-7 transform transition-transform"
-                        )}
-                      />
                       {service.title}
                     </h3>
                   </DisclosureButton>
