@@ -26,7 +26,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
   // };
 
   const togglePanel = (index: number) => {
-    if (!openIndex) {
+    if (openIndex === null) {
       setOpenIndex(index);
       return;
     }
@@ -92,7 +92,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                   </DisclosureButton>
                   <Transition
                     show={openIndex === index}
-                    enter="transition-all duration-300"
+                    enter="transition-all duration-500"
                     enterFrom="transform opacity-0 max-h-0"
                     enterTo="transform opacity-100 max-h-screen"
                     leave="transition-all duration-300"
