@@ -3,6 +3,7 @@ import ContactUsSection from "@/app/[lang]/components/ContactUsSection";
 import Contacts from "@/app/[lang]/components/Contacts";
 import CustomerFeedback from "@/app/[lang]/components/CustomerFeedback";
 import Email from "@/app/[lang]/components/Email";
+import FullWidthImage from "@/app/[lang]/components/FullWidthImage";
 import Hero from "@/app/[lang]/components/Hero";
 import InfoBlock from "@/app/[lang]/components/InfoBlock";
 import InfoBlockWithImage from "@/app/[lang]/components/InfoBlockWithImage";
@@ -22,9 +23,9 @@ import Services from "@/app/[lang]/components/Services";
 import ServicesHeadlineWithImage from "@/app/[lang]/components/ServicesHeadlineWithImage";
 import SocialShare from "@/app/[lang]/components/SocialShare";
 import Table from "@/app/[lang]/components/Table";
+import Vacancies from "@/app/[lang]/components/Vacancies";
+import VacanciesHeadline from "@/app/[lang]/components/VacanciesHeadline";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
-import FullWidthImage from "@/app/[lang]/components/FullWidthImage";
-import VacanciesHeadline from "../components/VacanciesHeadline";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
@@ -44,6 +45,8 @@ export function sectionRenderer(section: any, index: number) {
       return <InfoBlock key={index} data={section} />;
     case "sections.page-title":
       return <PageTitle key={index} data={section} />;
+    case "sections.vacancies":
+      return <Vacancies key={index} data={section} />;
     case "sections.social-share":
       return <SocialShare key={index} data={section} />;
     case "sections.post-section":
