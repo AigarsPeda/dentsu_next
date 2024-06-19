@@ -113,15 +113,3 @@ td {
     -webkit-box-orient: vertical;
   }
 }
-
-.fade-out {
-  transition: opacity 300ms;
-}
-
-.collapse {
-  transition: max-height 300ms 300ms; /* This sets a 300ms delay */
-}
-
-.expand {
-  transition: max-height 300ms;
-}
