@@ -8,6 +8,13 @@ import {
 import classNames from "classnames";
 import { FC, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from "react-accessible-accordion";
 
 interface ServiceDisclosureProps {
   data: {
@@ -75,10 +82,17 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                     show={openIndex === index}
                     enter="transition-all duration-300"
                     enterFrom="transform opacity-0 max-h-0"
-                    enterTo="transform opacity-100 max-h-56"
+                    enterTo="transform opacity-100 max-h-screen"
                     leave="transition-all duration-300"
-                    leaveFrom="transform opacity-100 max-h-56"
-                    leaveTo="transform opacity-0 max-h-0"
+                    leaveFrom="transform opacity-100 max-h-72 overflow-hidden"
+                    leaveTo="transform opacity-0 max-h-0 overflow-hidden"
+                    // show={openIndex === index}
+                    // enter="transition-opacity duration-300 transition-max-height duration-300"
+                    // enterFrom="opacity-0 max-h-0"
+                    // enterTo="opacity-100 max-h-screen"
+                    // leave="transition-opacity duration-300"
+                    // leaveFrom="opacity-100 max-h-screen"
+                    // leaveTo="opacity-0 max-h-screen"
                   >
                     <DisclosurePanel className="text-sm">
                       <div className="pt-3 md:pt-6">
