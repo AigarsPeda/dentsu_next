@@ -21,8 +21,27 @@ interface ServiceDisclosureProps {
 const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  // const togglePanel = (index: number) => {
+  //   setOpenIndex(openIndex === index ? null : index);
+  // };
+
   const togglePanel = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    if (!openIndex) {
+      setOpenIndex(index);
+      return;
+    }
+
+    if (openIndex === index) {
+      setOpenIndex(null);
+      return;
+    }
+
+    if (openIndex !== index) {
+      setOpenIndex(null);
+      setTimeout(() => {
+        setOpenIndex(index);
+      }, 300);
+    }
   };
 
   const height = data.length * 80;
@@ -81,7 +100,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                     leaveTo="transform opacity-0 max-h-0 overflow-hidden"
                   >
                     <DisclosurePanel className="text-sm">
-                      <div className="pt-3 md:pt-6">
+                      <div className="pt-3">
                         <p className="text-sm font-medium md:text-base">
                           {service.description}
                         </p>
