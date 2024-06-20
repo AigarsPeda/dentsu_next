@@ -1,6 +1,5 @@
 import { getStrapiMedia } from "../utils/api-helpers";
 import ArrowIcon from "./icons/ArrowIcon";
-import Image from "next/image";
 
 interface ServicesHeadlineWithImageProps {
   data: {
@@ -28,9 +27,7 @@ export default function ServicesHeadlineWithImage({
 
   return (
     <div className="relative w-full h-full">
-      <Image
-        width={1000}
-        height={1000}
+      <img
         src={imgUrl}
         alt="our client logo"
         className="object-cover w-full h-[62vh] md:h-full"

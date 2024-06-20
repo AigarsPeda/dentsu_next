@@ -68,17 +68,12 @@ export default function Hero({ data }: HeroProps) {
         </div>
         <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
           {imgUrl && (
-            <Image
-              width={600}
-              height={600}
+            <img
               src={imgUrl}
-              className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
-              style={{
-                width: "100%",
-              }}
               alt={
                 data.picture.data.attributes.alternativeText ?? "none provided"
               }
+              className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
             />
           )}
         </div>

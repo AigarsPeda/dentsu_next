@@ -1,6 +1,5 @@
 import TitleInCircleWithLine from "@/app/[lang]/components/TitleInCircleWithLine";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
-import Image from "next/image";
 
 interface MediaType {
   id: number;
@@ -38,15 +37,13 @@ export default function PostSectionWithImage({
         <div className="grid w-full grid-cols-1 overflow-hidden md:grid-cols-2">
           <div className="w-full h-full bg-center bg-cover">
             {imgUrl && (
-              <Image
+              <img
                 src={imgUrl}
-                width={2000}
-                height={2000}
-                className="object-cover w-full h-full"
-                alt={"none provided"}
-                style={{
-                  width: "100%",
-                }}
+                alt={
+                  data.feature.media.data[0].attributes.alternativeText ??
+                  "none provided"
+                }
+                className="object-cover w-full h-full overflow-hidden rounded-lg"
               />
             )}
           </div>
@@ -68,15 +65,13 @@ export default function PostSectionWithImage({
           </div>
           <div className="w-full h-full bg-center bg-cover">
             {imgUrl && (
-              <Image
+              <img
                 src={imgUrl}
-                width={2000}
-                height={2000}
-                className="object-cover w-full h-full"
-                alt={"none provided"}
-                style={{
-                  width: "100%",
-                }}
+                alt={
+                  data.feature.media.data[0].attributes.alternativeText ??
+                  "none provided"
+                }
+                className="object-cover w-full h-full overflow-hidden rounded-lg"
               />
             )}
           </div>

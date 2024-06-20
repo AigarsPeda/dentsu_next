@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export const DivWithImage = ({
   imgUrl,
   logoUrl,
@@ -18,9 +16,7 @@ export const DivWithImage = ({
     >
       <div className="container relative flex items-center justify-center w-full h-full">
         <div className="flex items-center justify-center">
-          <Image
-            width={600}
-            height={600}
+          <img
             src={logoUrl}
             alt="our client logo"
             className="object-contain max-w-[170px] lg:h-16 h-12"

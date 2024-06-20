@@ -1,6 +1,5 @@
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import classNames from "classnames";
-import Image from "next/image";
 
 type PictureType = {
   id: string;
@@ -37,15 +36,10 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
         )}
       >
         {imgUrl && (
-          <Image
+          <img
             src={imgUrl}
-            width={2000}
-            height={2000}
+            alt="our client logo"
             className="object-cover h-full lg:w-full"
-            alt={"none provided"}
-            style={{
-              width: "100%",
-            }}
           />
         )}
       </div>

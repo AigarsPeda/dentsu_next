@@ -66,10 +66,8 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
           return (
             <div key={newsPost.id} className="flex flex-col mt-10">
               <div className="relative h-48 overflow-hidden">
-                <Image
+                <img
                   src={src}
-                  width={600}
-                  height={600}
                   alt={thumbnail.alternativeText || "news post image"}
                   className="object-cover w-full h-full"
                 />

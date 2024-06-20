@@ -40,15 +40,10 @@ export default function PostSection({ data }: PostSectionProps) {
           return (
             <div key={item.id}>
               {imgUrl && (
-                <Image
-                  width={600}
-                  height={600}
+                <img
                   src={imgUrl}
-                  alt={"none provided"}
+                  alt="our client logo"
                   className="object-cover h-[300px] lg:h-[400px] lg:max-h-[500px] max-h-[250px]"
-                  style={{
-                    width: "100%",
-                  }}
                 />
               )}
               <div className="flex items-end p-6 bg-gray-950 text-gray-50">

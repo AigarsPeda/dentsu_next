@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { renderButtonStyle } from "../utils/render-button-style";
 import HighlightedText from "./HighlightedText";
 
@@ -11,7 +10,7 @@ export default function LangRedirect() {
           <HighlightedText
             text="There is no content available in your language."
             tag="h1"
-            className="text-5xl font-bold leading-none sm:text-4xl mb-8"
+            className="mb-8 text-5xl font-bold leading-none sm:text-4xl"
             color="dark:text-violet-400"
           />
 
@@ -22,12 +21,10 @@ export default function LangRedirect() {
           </div>
         </div>
         <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
-          <Image
+          <img
             src="https://images.pexels.com/photos/409701/pexels-photo-409701.jpeg"
             alt="city view"
-            className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128 "
-            width={600}
-            height={600}
+            className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
           />
         </div>
       </div>

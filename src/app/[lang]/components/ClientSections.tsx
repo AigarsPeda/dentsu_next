@@ -1,5 +1,4 @@
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
-import Image from "next/image";
 
 interface MediaTypes {
   id: number;
@@ -39,9 +38,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
               return (
                 <div key={item.id} className="flex items-center justify-center">
                   {imgSrc && (
-                    <Image
-                      width={600}
-                      height={600}
+                    <img
                       src={imgSrc}
                       alt="our client logo"
                       className="object-contain max-w-[170px] lg:h-16 h-12"

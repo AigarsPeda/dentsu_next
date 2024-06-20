@@ -72,21 +72,17 @@ export default function PostList({
               className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900 lg:w-[300px] xl:min-w-[375px] rounded-2xl overflow-hidden shadow-lg"
             >
               {imageUrl && (
-                <Image
-                  width="240"
-                  height="240"
+                <img
                   src={imageUrl}
                   alt="presentation"
-                  className="object-cover w-full h-44 "
+                  className="object-cover w-full h-44"
                 />
               )}
               <div className="relative p-6 space-y-2">
                 {avatarUrl && (
-                  <Image
-                    width="80"
-                    height="80"
-                    alt="avatar"
+                  <img
                     src={avatarUrl}
+                    alt="avatar"
                     className="absolute object-cover w-16 h-16 rounded-full -top-8 right-4"
                   />
                 )}

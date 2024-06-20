@@ -52,15 +52,10 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
             >
               <div className="flex flex-col items-center">
                 {imgSrc && (
-                  <Image
-                    width={600}
-                    height={600}
+                  <img
                     src={imgSrc}
                     alt="our client logo"
                     className="object-contain w-full h-full max-w-[200px]"
-                    style={{
-                      width: "100%",
-                    }}
                   />
                 )}
                 <div className="mt-3 text-center">

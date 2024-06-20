@@ -68,15 +68,10 @@ export default function Navbar({
                   }}
                 >
                   {locale.img.data?.attributes.url ? (
-                    <Image
-                      width="0"
-                      height="0"
+                    <img
                       src={locale.img.data.attributes.url}
-                      className="w-full h-full"
                       alt={locale.name}
-                      style={{
-                        width: "100%",
-                      }}
+                      className="w-full h-full"
                     />
                   ) : (
                     locale.name

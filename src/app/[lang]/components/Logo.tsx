@@ -12,11 +12,9 @@ export default function Logo({
   return (
     <Link href="/" aria-label="Back to homepage" className="flex items-end">
       {src && (
-        <Image
+        <img
           src={src}
           alt="logo"
-          width={105}
-          height={22}
           className="object-contain w-[105px] h-[22px]"
         />
       )}

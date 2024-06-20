@@ -1,5 +1,4 @@
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
-import Image from "next/image";
 
 interface PostImageProps {
   data: {
@@ -22,13 +21,7 @@ export default function PostImage({ data }: PostImageProps) {
 
   return (
     <div className="container py-3 mx-auto h-96">
-      <Image
-        src={src}
-        alt={alt}
-        width={600}
-        height={600}
-        className="object-cover w-full h-full"
-      />
+      <img src={src} alt={alt} className="object-cover w-full h-full" />
     </div>
   );
 }

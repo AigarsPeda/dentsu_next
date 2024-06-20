@@ -29,15 +29,10 @@ export default function LogosSection({ data }: LogosSectionProps) {
         return (
           <div key={item.id} className="flex items-center justify-center">
             {imgSrc ? (
-              <Image
-                width={600}
-                height={600}
+              <img
                 src={imgSrc}
                 alt="our client logo"
                 className="object-contain h-4 lg:h-7"
-                style={{
-                  width: "100%",
-                }}
               />
             ) : (
               <div className="flex items-center justify-center w-24 h-24 bg-gray-200">

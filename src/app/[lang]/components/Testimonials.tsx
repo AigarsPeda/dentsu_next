@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getStrapiMedia } from "../utils/api-helpers";
 
 interface Testimonial {
@@ -32,9 +31,7 @@ function Testimonial({ text, authorName, picture }: Readonly<Testimonial>) {
       <div className="flex items-center">
         <div className="my-6">
           {imageUrl && (
-            <Image
-              width={200}
-              height={200}
+            <img
               src={imageUrl}
               className="inline-block w-32 h-32 rounded-full"
               alt={picture.data?.attributes.alternativeText ?? "none provided"}

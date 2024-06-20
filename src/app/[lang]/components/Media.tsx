@@ -19,9 +19,7 @@ export default function Media({ data }: { data: MediaProps }) {
   return (
     <div className="flex items-center justify-center mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
       {imgUrl && (
-        <Image
-          width={400}
-          height={400}
+        <img
           src={imgUrl}
           alt={data.file.data.attributes.alternativeText ?? "none provided"}
           className="object-cover w-full h-full overflow-hidden rounded-lg"
