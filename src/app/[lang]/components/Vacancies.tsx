@@ -35,7 +35,7 @@ export default function Vacancies({ data }: VacanciesProps) {
       return;
     }
 
-    if (openIndex === index) {
+    if (open) {
       setOpenIndex(null);
       return;
     }
@@ -49,7 +49,7 @@ export default function Vacancies({ data }: VacanciesProps) {
   };
 
   return (
-    <div className={classNames("container md:py-10 mx-auto")}>
+    <div className={classNames("container md:py-10 py-4 mx-auto")}>
       <div className="min-h-[25rem] md:space-y-6 space-y-4">
         {data.vacancies.map((vacancy, index) => {
           return (
@@ -63,22 +63,22 @@ export default function Vacancies({ data }: VacanciesProps) {
                     <h3 className="text-xl font-bold truncate md:items-center md:text-3xl">
                       {vacancy.vacancyName}
                     </h3>
-                    {openIndex === index ? (
+                    {open ? (
                       <IoCloseSharp className="w-7 h-7" />
                     ) : (
                       <IoIosArrowDown className="w-7 h-7" />
                     )}
                   </DisclosureButton>
                   <Transition
-                    show={openIndex === index}
+                    show={open}
                     enter="transition-all duration-500"
-                    enterFrom="transform opacity-0 max-h-0"
-                    enterTo="transform opacity-100"
+                    enterFrom="transform opacity-0 md:max-h-0"
+                    enterTo="transform opacity-100 py-2 md:max-h-screen"
                     leave="transition-all duration-300"
-                    leaveFrom="transform opacity-100 overflow-hidden"
-                    leaveTo="transform opacity-0 max-h-0 overflow-hidden"
+                    leaveFrom="transform opacity-100 py-2 md:max-h-screen overflow-hidden"
+                    leaveTo="transform opacity-0 md:max-h-0 overflow-hidden"
                   >
-                    <DisclosurePanel className="py-2 ">
+                    <DisclosurePanel>
                       <BlocksRenderer
                         key={vacancy.id}
                         content={vacancy.vacancyDescription}
