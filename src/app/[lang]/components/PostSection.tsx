@@ -43,7 +43,7 @@ export default function PostSection({ data }: PostSectionProps) {
                 <img
                   src={imgUrl}
                   alt="our client logo"
-                  className="object-cover h-[300px] lg:h-[400px] lg:max-h-[500px] max-h-[250px]"
+                  className="object-cover w-full lg:h-[400px] lg:max-h-[500px] max-h-[250px]"
                 />
               )}
               <div className="flex items-end p-6 bg-gray-950 text-gray-50">
