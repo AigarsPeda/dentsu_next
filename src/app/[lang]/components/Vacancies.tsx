@@ -50,24 +50,15 @@ export default function Vacancies({ data }: VacanciesProps) {
   // const height = data.length * 80;
 
   return (
-    <div
-      className={classNames(
-        "flex flex-col md:justify-center h-full md:pl-10 md:pr-28 px-10 py-5"
-      )}
-    >
-      <div
-        className="min-h-[20rem] px-10 py-5 "
-        // style={{
-        //   height: `${height}px`,
-        // }}
-      >
+    <div className={classNames("container py-10 mx-auto")}>
+      <div className="min-h-[25rem]">
         {data.vacancies.map((vacancy, index) => {
           return (
             <Disclosure
               as="div"
               className={classNames(
                 "text-gray-950 border-gray-950",
-                "md:p-4 px-2 py-3 border-b group"
+                "border-b"
               )}
               key={vacancy.id}
               defaultOpen={false}
@@ -94,10 +85,10 @@ export default function Vacancies({ data }: VacanciesProps) {
                     enterFrom="transform opacity-0 max-h-0"
                     enterTo="transform opacity-100 max-h-screen"
                     leave="transition-all duration-300"
-                    leaveFrom="transform opacity-100 max-h-72 overflow-hidden"
+                    leaveFrom="transform opacity-100 max-h-screen overflow-hidden"
                     leaveTo="transform opacity-0 max-h-0 overflow-hidden"
                   >
-                    <DisclosurePanel className="text-sm">
+                    <DisclosurePanel className="py-2 text-sm">
                       <BlocksRenderer
                         content={vacancy.vacancyDescription}
                         blocks={{
@@ -174,6 +165,9 @@ export default function Vacancies({ data }: VacanciesProps) {
                           ),
                         }}
                       />
+                      <button className="w-full px-4 py-2 mt-4 text-sm bg-gray-950 text-gray-50">
+                        {vacancy.buttonTitle}
+                      </button>
                     </DisclosurePanel>
                   </Transition>
                 </span>

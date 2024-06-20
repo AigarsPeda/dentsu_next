@@ -21,10 +21,6 @@ interface ServiceDisclosureProps {
 const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  // const togglePanel = (index: number) => {
-  //   setOpenIndex(openIndex === index ? null : index);
-  // };
-
   const togglePanel = (index: number) => {
     if (openIndex === null) {
       setOpenIndex(index);
@@ -96,7 +92,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                     enterFrom="transform opacity-0 max-h-0"
                     enterTo="transform opacity-100 max-h-screen"
                     leave="transition-all duration-300"
-                    leaveFrom="transform opacity-100 max-h-72 overflow-hidden"
+                    leaveFrom="transform opacity-100 max-h-screen overflow-hidden"
                     leaveTo="transform opacity-0 max-h-0 overflow-hidden"
                   >
                     <DisclosurePanel className="text-sm">
