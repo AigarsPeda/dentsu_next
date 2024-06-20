@@ -11,7 +11,7 @@ import {
 } from "@strapi/blocks-react-renderer";
 import classNames from "classnames";
 import { createElement, useState } from "react";
-import { IoMdAdd } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 
 interface VacanciesProps {
   data: {
@@ -47,37 +47,22 @@ export default function Vacancies({ data }: VacanciesProps) {
     }
   };
 
-  // const height = data.length * 80;
-
   return (
-    <div className={classNames("container py-10 mx-auto")}>
-      <div className="min-h-[25rem]">
+    <div className={classNames("container md:py-10 mx-auto")}>
+      <div className="min-h-[25rem] md:space-y-6 space-y-4">
         {data.vacancies.map((vacancy, index) => {
           return (
-            <Disclosure
-              as="div"
-              className={classNames(
-                "text-gray-950 border-gray-950",
-                "border-b"
-              )}
-              key={vacancy.id}
-              defaultOpen={false}
-            >
+            <Disclosure as="div" key={vacancy.id} defaultOpen={false}>
               {({ open }) => (
-                <span key={vacancy.id + index}>
+                <span key={vacancy.id + index} className="w-fulls">
                   <DisclosureButton
                     onClick={() => togglePanel(index)}
-                    className="flex w-full gap-3 hover:border-gray-950 focus:border-gray-950 focus:outline-none"
+                    className="flex items-center justify-between w-full gap-3 px-4 py-2 bg-gray-200 hover:border-gray-950 focus:border-gray-950 focus:outline-none"
                   >
-                    <IoMdAdd
-                      className={classNames(
-                        openIndex === index && "rotate-45",
-                        "w-7 h-7 transform transition-transform"
-                      )}
-                    />
-                    <h3 className="flex gap-4 text-base font-bold truncate md:items-center md:text-xl">
+                    <h3 className="text-xl font-bold truncate md:items-center md:text-3xl">
                       {vacancy.vacancyName}
                     </h3>
+                    <IoIosArrowDown className="w-7 h-7" />
                   </DisclosureButton>
                   <Transition
                     show={openIndex === index}
@@ -165,9 +150,12 @@ export default function Vacancies({ data }: VacanciesProps) {
                           ),
                         }}
                       />
-                      <button className="w-full px-4 py-2 mt-4 text-sm bg-gray-950 text-gray-50">
-                        {vacancy.buttonTitle}
-                      </button>
+                      <div>
+                        <button className="flex items-center w-full gap-4 px-4 py-2 mt-4 text-sm bg-gray-950 text-gray-50">
+                          {vacancy.buttonTitle}{" "}
+                          <IoIosArrowDown className="w-4 h-4 transform -rotate-90" />
+                        </button>
+                      </div>
                     </DisclosurePanel>
                   </Transition>
                 </span>
