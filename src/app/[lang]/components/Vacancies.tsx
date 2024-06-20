@@ -12,6 +12,7 @@ import {
 import classNames from "classnames";
 import { createElement, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import { IoCloseSharp } from "react-icons/io5";
 
 interface VacanciesProps {
   data: {
@@ -62,19 +63,24 @@ export default function Vacancies({ data }: VacanciesProps) {
                     <h3 className="text-xl font-bold truncate md:items-center md:text-3xl">
                       {vacancy.vacancyName}
                     </h3>
-                    <IoIosArrowDown className="w-7 h-7" />
+                    {openIndex === index ? (
+                      <IoCloseSharp className="w-7 h-7" />
+                    ) : (
+                      <IoIosArrowDown className="w-7 h-7" />
+                    )}
                   </DisclosureButton>
                   <Transition
                     show={openIndex === index}
                     enter="transition-all duration-500"
                     enterFrom="transform opacity-0 max-h-0"
-                    enterTo="transform opacity-100 max-h-screen"
+                    enterTo="transform opacity-100"
                     leave="transition-all duration-300"
-                    leaveFrom="transform opacity-100 max-h-screen overflow-hidden"
+                    leaveFrom="transform opacity-100 overflow-hidden"
                     leaveTo="transform opacity-0 max-h-0 overflow-hidden"
                   >
-                    <DisclosurePanel className="py-2 text-sm">
+                    <DisclosurePanel className="py-2 ">
                       <BlocksRenderer
+                        key={vacancy.id}
                         content={vacancy.vacancyDescription}
                         blocks={{
                           paragraph: ({ children }) => (
@@ -151,7 +157,7 @@ export default function Vacancies({ data }: VacanciesProps) {
                         }}
                       />
                       <div>
-                        <button className="flex items-center w-full gap-4 px-4 py-2 mt-4 text-sm bg-gray-950 text-gray-50">
+                        <button className="flex items-center gap-4 px-4 py-2 mt-4 text-sm bg-gray-950 text-gray-50">
                           {vacancy.buttonTitle}{" "}
                           <IoIosArrowDown className="w-4 h-4 transform -rotate-90" />
                         </button>
