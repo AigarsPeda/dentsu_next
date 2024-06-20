@@ -29,25 +29,6 @@ interface VacanciesProps {
 export default function Vacancies({ data }: VacanciesProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const togglePanel = (index: number) => {
-    if (openIndex === null) {
-      setOpenIndex(index);
-      return;
-    }
-
-    if (open) {
-      setOpenIndex(null);
-      return;
-    }
-
-    if (openIndex !== index) {
-      setOpenIndex(null);
-      setTimeout(() => {
-        setOpenIndex(index);
-      }, 300);
-    }
-  };
-
   return (
     <div className={classNames("container md:py-10 py-4 mx-auto")}>
       <div className="min-h-[25rem] md:space-y-6 space-y-4">
@@ -56,10 +37,7 @@ export default function Vacancies({ data }: VacanciesProps) {
             <Disclosure as="div" key={vacancy.id} defaultOpen={false}>
               {({ open }) => (
                 <span key={vacancy.id + index} className="w-fulls">
-                  <DisclosureButton
-                    onClick={() => togglePanel(index)}
-                    className="flex items-center justify-between w-full gap-3 px-4 py-2 bg-gray-200 hover:border-gray-950 focus:border-gray-950 focus:outline-none"
-                  >
+                  <DisclosureButton className="flex items-center justify-between w-full gap-3 px-4 py-2 bg-gray-200 md:px-10 hover:border-gray-950 focus:border-gray-950 focus:outline-none">
                     <h3 className="text-xl font-bold truncate md:items-center md:text-3xl">
                       {vacancy.vacancyName}
                     </h3>
@@ -72,11 +50,11 @@ export default function Vacancies({ data }: VacanciesProps) {
                   <Transition
                     show={open}
                     enter="transition-all duration-500"
-                    enterFrom="transform opacity-0 md:max-h-0"
-                    enterTo="transform opacity-100 py-2 md:max-h-screen"
+                    enterFrom="transform opacity-0 md:max-h-0 px-4 md:px-10"
+                    enterTo="transform opacity-100 py-2 md:py-6 md:max-h-screen px-4 md:px-10"
                     leave="transition-all duration-300"
-                    leaveFrom="transform opacity-100 py-2 md:max-h-screen overflow-hidden"
-                    leaveTo="transform opacity-0 md:max-h-0 overflow-hidden"
+                    leaveFrom="transform opacity-100 py-2 md:py-6 md:max-h-screen overflow-hidden px-4 md:px-10"
+                    leaveTo="transform opacity-0 md:max-h-0 overflow-hidden px-4 md:px-10"
                   >
                     <DisclosurePanel>
                       <BlocksRenderer
