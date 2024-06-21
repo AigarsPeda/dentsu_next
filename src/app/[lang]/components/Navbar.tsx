@@ -30,7 +30,7 @@ export default function Navbar({
     setMobileMenuOpen(false);
   };
 
-  const locale = path.split("/")[1] || "en";
+  const urlLocale = path.split("/")[1] || "en";
 
   const switchLocale = (newLocale: string) => {
     const availableLocalesCodes = availableLocales.map((locale) => locale.code);
@@ -45,17 +45,22 @@ export default function Navbar({
     router.push(newPath);
   };
 
+  const linksWithLocale = links.map((link) => ({
+    ...link,
+    locale: urlLocale,
+  }));
+
   return (
     <div className="py-4 bg-dentsu-primary">
       <div className="container flex items-center justify-between mx-auto h-14">
-        <Logo href={`/${locale}`} src={logoUrl}>
+        <Logo href={`/${urlLocale}`} src={logoUrl}>
           {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
         </Logo>
 
         <div className="items-center flex-shrink-0 hidden lg:flex">
           <ul className="items-stretch space-x-6 lg:flex">
-            {links.map((item: NavLink) => (
-              <NavLink locale={locale} key={item.id} {...item} />
+            {linksWithLocale.map((item: NavLink) => (
+              <NavLink key={item.id} {...item} />
             ))}
           </ul>
           <div className="flex items-center justify-center ml-6 space-x-3">
@@ -117,7 +122,7 @@ export default function Navbar({
             >
               <DialogPanel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto bg-dentsu-primary rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
                 <div className="flex items-center justify-between">
-                  <a href={`/${locale}`} className="-m-1.5 p-1.5">
+                  <a href={`/${urlLocale}`} className="-m-1.5 p-1.5">
                     <span className="sr-only">Dentsu</span>
                     {logoUrl && (
                       <img className="w-auto h-8" src={logoUrl} alt="" />
@@ -135,10 +140,9 @@ export default function Navbar({
                 <div className="flow-root mt-6">
                   <div className="-my-6 divide-y divide-gray-700">
                     <div className="py-6 space-y-2">
-                      {links.map((item) => (
+                      {linksWithLocale.map((item) => (
                         <MobileNavLink
                           key={item.id}
-                          locale={locale}
                           closeMenu={closeMenu}
                           {...item}
                         />
@@ -199,7 +203,6 @@ interface NavLink {
 }
 
 interface MobileNavLink extends NavLink {
-  locale: string;
   closeMenu: () => void;
 }
 
