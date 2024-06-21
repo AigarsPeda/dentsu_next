@@ -51,7 +51,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
 
   return (
     <div className="bg-gray-950">
-      <div className="container grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden md:grid-cols-3 md:px-32">
+      <div className="container grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden md:grid-cols-3">
         {data.imageCarousel?.slice(0, 3).map((image, index) => {
           const src =
             getStrapiMedia(image.media.data?.[0]?.attributes?.url) ??
@@ -66,7 +66,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
             <div
               key={index}
               role="button"
-              className="relative z-20 flex flex-col w-full h-full max-h-80"
+              className="relative z-20 flex flex-col w-full h-full max-h-72"
               onClick={() => {
                 setFirstImageSelected(index);
               }}

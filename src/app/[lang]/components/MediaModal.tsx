@@ -102,6 +102,8 @@ export default function MediaModal({
               >
                 {isAvailableVideo ? (
                   <iframe
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     src={item.url ?? ""}
                     className="absolute object-cover w-full h-full"
                   ></iframe>
