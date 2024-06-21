@@ -113,3 +113,29 @@ td {
     -webkit-box-orient: vertical;
   }
 }
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutToBottom {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.slide-in {
+  animation: slideInFromBottom 0.3s ease-out forwards;
+}
+
+.slide-out {
+  animation: slideOutToBottom 0.3s ease-out forwards;
+}

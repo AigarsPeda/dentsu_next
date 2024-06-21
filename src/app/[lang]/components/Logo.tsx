@@ -1,16 +1,17 @@
 import HomeIcon from "@/app/[lang]/components/icons/HomeIcon";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Logo({
   src,
+  href,
   children,
 }: {
+  href: string;
   src: string | null;
   children?: React.ReactNode;
 }) {
   return (
-    <Link href="/" aria-label="Back to homepage" className="flex items-end">
+    <Link href={href} aria-label="Back to homepage" className="flex items-end">
       {src && (
         <img
           src={src}
