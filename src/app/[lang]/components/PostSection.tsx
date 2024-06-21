@@ -66,7 +66,7 @@ export default function PostSection({ data }: PostSectionProps) {
                     target={item.isNewTab ? "_blank" : "_self"}
                     className="flex items-center justify-center text-center text-white transform -rotate-90 rounded-md"
                   >
-                    <ArrowIcon className="w-9 h-9" />
+                    <ArrowIcon className="fill-white w-9 h-9" />
                   </a>
                 </div>
               </div>
