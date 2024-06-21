@@ -1,6 +1,7 @@
 "use client";
 import { MapComponent } from "@/app/[lang]/components/Map";
 import MySelect from "@/app/[lang]/components/Select";
+import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { MapProvider } from "@/app/[lang]/utils/map-provider";
 import { sendEmail } from "@/app/[lang]/utils/send-email";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -15,6 +16,30 @@ interface ContactsProps {
     phoneNumber: string;
     leadFormEmail: string;
     companyToContact: { id: number; companyTitle: string }[];
+    googleIcon: {
+      data: {
+        id: number;
+        attributes: {
+          url: string;
+          width: number;
+          height: number;
+          caption: null | string;
+          alternativeText: null | string;
+        };
+      };
+    };
+    wazeIcon: {
+      data: {
+        id: number;
+        attributes: {
+          url: string;
+          width: number;
+          height: number;
+          caption: null | string;
+          alternativeText: null | string;
+        };
+      };
+    };
   };
 }
 
@@ -28,10 +53,13 @@ export interface IFormInput {
 }
 
 export default function Contacts({ data }: ContactsProps) {
-  console.log("Contacts", data);
-
   const { register, handleSubmit, setValue } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => sendEmail(data);
+
+  const wazeIconsSrc = getStrapiMedia(data.wazeIcon.data.attributes.url);
+  const googleMapsIconsSrc = getStrapiMedia(
+    data.googleIcon.data.attributes.url
+  );
 
   return (
     <div className="container grid grid-cols-1 gap-10 py-10 mx-auto md:grid-cols-2">
@@ -42,6 +70,30 @@ export default function Contacts({ data }: ContactsProps) {
           <MapProvider>
             <MapComponent address={data.address} />
           </MapProvider>
+        </div>
+        <div className="flex gap-2 mt-4">
+          <a
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center px-3 py-1 space-x-2 bg-gray-200"
+            href={`https://www.google.com/maps/search/?api=1&query=${data.address}`}
+          >
+            <img
+              alt="Google Maps"
+              className="w-auto h-5"
+              src={googleMapsIconsSrc ?? ""}
+            />
+            <span>Google Maps</span>
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={`https://waze.com/ul?q=${data.address}`}
+            className="flex items-center px-3 py-1 space-x-2 bg-gray-200"
+          >
+            <img alt="Waze" className="w-auto h-5" src={wazeIconsSrc ?? ""} />
+            <span>Waze</span>
+          </a>
         </div>
         <div className="mt-4">
           <p className="text-sm text-left">{data.address}</p>

@@ -149,7 +149,7 @@ const DisplayLogo = ({ logoUrl }: { logoUrl: string }) => {
       <img
         src={logoUrl}
         alt="our client logo"
-        className="object-contain max-w-[130px] h-10"
+        className="object-contain max-h-5"
       />
     </div>
   );

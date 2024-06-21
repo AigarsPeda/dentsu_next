@@ -229,16 +229,14 @@ function MobileNavLink({ url, text, locale, closeMenu }: MobileNavLink) {
   };
 
   return (
-    <a className="flex">
-      <Link
-        onClick={handleClick}
-        href={`/${locale}${url}`}
-        className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-100 hover:bg-gray-900 ${
-          path === url && ""
-        }}`}
-      >
-        {text}
-      </Link>
-    </a>
+    <Link
+      onClick={handleClick}
+      href={`/${locale}${url}`}
+      className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-100 hover:bg-gray-900 ${
+        path === url && ""
+      }}`}
+    >
+      {text}
+    </Link>
   );
 }
