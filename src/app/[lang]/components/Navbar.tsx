@@ -1,7 +1,7 @@
 "use client";
 import Logo from "@/app/[lang]/components/Logo";
 import type { StrapiLocaleType } from "@/app/[lang]/layout";
-import { Dialog } from "@headlessui/react";
+import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
@@ -90,7 +90,7 @@ export default function Navbar({
         >
           <div className="fixed inset-0 z-40 bg-dentsu-primary" />{" "}
           {/* Overlay */}
-          <Dialog.Panel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto bg-dentsu-primary rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
+          <DialogPanel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto bg-dentsu-primary rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Strapi</span>
@@ -118,7 +118,35 @@ export default function Navbar({
                 </div>
               </div>
             </div>
-          </Dialog.Panel>
+            <div className="flex flex-col gap-6 mt-6">
+              {availableLocales.map((locale) => (
+                <button
+                  type="button"
+                  key={locale.id}
+                  title={locale.name}
+                  onClick={() => switchLocale(locale.code)}
+                >
+                  <div
+                    style={{
+                      width: 37,
+                      height: 27,
+                      overflow: "hidden",
+                    }}
+                  >
+                    {locale.img.data?.attributes.url ? (
+                      <img
+                        src={locale.img.data.attributes.url}
+                        alt={locale.name}
+                        className="w-full h-full"
+                      />
+                    ) : (
+                      locale.name
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </DialogPanel>
         </Dialog>
         <button
           className="p-0 lg:hidden"
