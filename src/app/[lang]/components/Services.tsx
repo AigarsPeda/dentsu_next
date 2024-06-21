@@ -127,7 +127,7 @@ export const DivWithImage = ({
             <img
               src={logoUrl}
               alt="our client logo"
-              className="object-contain max-w-[170px] lg:h-16 h-12"
+              className="object-contain h-12 max-h-6 lg:h-16"
             />
           </div>
         </div>
