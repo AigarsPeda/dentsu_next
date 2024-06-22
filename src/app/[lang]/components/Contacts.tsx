@@ -57,7 +57,7 @@ export default function Contacts({ data }: ContactsProps) {
   const onSubmit: SubmitHandler<IFormInput> = (data) => sendEmail(data);
 
   return (
-    <div className="container grid grid-cols-1 gap-10 py-10 mx-auto md:grid-cols-2">
+    <div className="container grid grid-cols-1 gap-10 px-10 mx-auto md:grid-cols-2">
       <div>
         <div>
           <p className="pb-10 text-sm text-left">{data.title}</p>
