@@ -85,7 +85,7 @@ export default function Contacts({ data }: ContactsProps) {
   const { formFields } = data;
 
   return (
-    <div className="container grid grid-cols-1 gap-10 px-10 mx-auto md:grid-cols-2">
+    <div className="container flex flex-col-reverse grid-cols-1 gap-10 px-10 mx-auto md:grid md:grid-cols-2">
       <div>
         <div>
           <p className="pb-10 text-sm text-left">{data.title}</p>
@@ -101,7 +101,7 @@ export default function Contacts({ data }: ContactsProps) {
           </MapProvider>
         </div>
 
-        <div className="mt-4">
+        <div className="pb-10 mt-4">
           <p className="text-sm text-left">{data.address}</p>
           <p className="text-sm text-left">{data.phoneNumber}</p>
           <p className="text-sm text-left">{data.email}</p>

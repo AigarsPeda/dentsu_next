@@ -28,7 +28,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
 
   return (
     <section
-      className="relative flex items-center justify-center w-full h-[92vh] bg-cover bg-center"
+      className="relative flex items-center justify-center w-full md:h-[90vh] h-[80vh] bg-cover bg-center"
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
       {/* <div className="absolute inset-0 bg-black opacity-50" /> */}
