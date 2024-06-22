@@ -56,11 +56,6 @@ export default function Contacts({ data }: ContactsProps) {
   const { register, handleSubmit, setValue } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => sendEmail(data);
 
-  const wazeIconsSrc = getStrapiMedia(data.wazeIcon.data.attributes.url);
-  const googleMapsIconsSrc = getStrapiMedia(
-    data.googleIcon.data.attributes.url
-  );
-
   return (
     <div className="container grid grid-cols-1 gap-10 py-10 mx-auto md:grid-cols-2">
       <div>
@@ -68,33 +63,16 @@ export default function Contacts({ data }: ContactsProps) {
           <p className="pb-10 text-sm text-left">{data.title}</p>
 
           <MapProvider>
-            <MapComponent address={data.address} />
+            <MapComponent
+              address={data.address}
+              wazeIcon={getStrapiMedia(data.wazeIcon.data.attributes.url) ?? ""}
+              googleIcon={
+                getStrapiMedia(data.googleIcon.data.attributes.url) ?? ""
+              }
+            />
           </MapProvider>
         </div>
-        <div className="flex gap-2 mt-4">
-          <a
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center px-3 py-1 space-x-2 bg-gray-200"
-            href={`https://www.google.com/maps/search/?api=1&query=${data.address}`}
-          >
-            <img
-              alt="Google Maps"
-              className="w-auto h-5"
-              src={googleMapsIconsSrc ?? ""}
-            />
-            <span>Google Maps</span>
-          </a>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`https://waze.com/ul?q=${data.address}`}
-            className="flex items-center px-3 py-1 space-x-2 bg-gray-200"
-          >
-            <img alt="Waze" className="w-auto h-5" src={wazeIconsSrc ?? ""} />
-            <span>Waze</span>
-          </a>
-        </div>
+
         <div className="mt-4">
           <p className="text-sm text-left">{data.address}</p>
           <p className="text-sm text-left">{data.phoneNumber}</p>

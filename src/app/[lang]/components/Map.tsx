@@ -1,9 +1,10 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 
 interface GoogleMapProps {
   address: string;
+  wazeIcon: string;
+  googleIcon: string;
 }
 
 // Map's styling
@@ -27,7 +28,7 @@ const defaultMapOptions = {
   mapId: "b4341bc58b07a93d",
 };
 
-const MapComponent = ({ address }: GoogleMapProps) => {
+const MapComponent = ({ address, googleIcon, wazeIcon }: GoogleMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
@@ -102,7 +103,29 @@ const MapComponent = ({ address }: GoogleMapProps) => {
   }
 
   return (
-    <div className="w-full" ref={mapRef} style={defaultMapContainerStyle} />
+    <>
+      <div className="w-full" ref={mapRef} style={defaultMapContainerStyle} />
+      <div className="flex gap-2 mt-4">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center px-3 py-1 space-x-2 bg-gray-200"
+          href={`https://www.google.com/maps/search/?api=1&query=${address}`}
+        >
+          <img alt="Google Maps" className="w-auto h-5" src={googleIcon} />
+          <span>Google Maps</span>
+        </a>
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href={`https://waze.com/ul?ll=${mapCenter.lat},${mapCenter.lng}&navigate=yes`}
+          className="flex items-center px-3 py-1 space-x-2 bg-gray-200"
+        >
+          <img alt="Waze" className="w-auto h-5" src={wazeIcon} />
+          <span>Waze</span>
+        </a>
+      </div>
+    </>
   );
 };
 
