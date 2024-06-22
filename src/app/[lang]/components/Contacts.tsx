@@ -4,7 +4,11 @@ import MySelect from "@/app/[lang]/components/Select";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { MapProvider } from "@/app/[lang]/utils/map-provider";
 import { sendEmail } from "@/app/[lang]/utils/send-email";
+import { usePathname } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { IoIosArrowForward } from "react-icons/io";
+
+type FieldTypeType = "text" | "email" | "textArea" | "select";
 
 interface ContactsProps {
   data: {
@@ -12,10 +16,14 @@ interface ContactsProps {
     title: string;
     email: string;
     address: string;
+    buttonTitle: string;
     workingTime: string;
     phoneNumber: string;
     leadFormEmail: string;
+    privacyCookiesPolicy: string;
+    agreementToReceiveInfo: string;
     companyToContact: { id: number; companyTitle: string }[];
+    formFields: { id: number; fieldType: FieldTypeType; fieldName: string }[];
     googleIcon: {
       data: {
         id: number;
@@ -44,17 +52,37 @@ interface ContactsProps {
 }
 
 export interface IFormInput {
-  email: string;
-  message: string;
-  lastName: string;
-  firstName: string;
-  companyName: string;
-  companyToContact: string;
+  [key: string]: string;
 }
 
 export default function Contacts({ data }: ContactsProps) {
-  const { register, handleSubmit, setValue } = useForm<IFormInput>();
+  const path = usePathname();
+  const urlLocale = path.split("/")[1] || "en";
+  const { register, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => sendEmail(data);
+
+  const createLinks = (text: string) => {
+    const splitText = text.split(/{{(.*?)}}/);
+
+    if (splitText.length > 1) {
+      return (
+        <>
+          {splitText[0]}
+          <a
+            className="underline underline-offset-4"
+            href={`/${urlLocale}/privacycookiepolicy`}
+          >
+            {splitText[1]}
+          </a>
+          {splitText[2]}
+        </>
+      );
+    }
+
+    return <p>{text}</p>;
+  };
+
+  const { formFields } = data;
 
   return (
     <div className="container grid grid-cols-1 gap-10 px-10 mx-auto md:grid-cols-2">
@@ -82,60 +110,86 @@ export default function Contacts({ data }: ContactsProps) {
       </div>
       <div>
         <form
-          className="flex flex-col space-y-3"
+          className="flex flex-col p-4 space-y-4 border border-gray-950"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <label htmlFor="firstName" className="flex flex-col text-sm">
-            Vardas *
-            <input
-              className="h-10 bg-gray-200 py-1.5 px-3"
-              {...register("firstName")}
-            />
-          </label>
-          <label htmlFor="lastName" className="flex flex-col text-sm">
-            Uzvārds *
-            <input
-              className="h-10 bg-gray-200 py-1.5 px-3"
-              {...register("lastName")}
-            />
-          </label>
-          <label htmlFor="companyName" className="flex flex-col text-sm">
-            Uzņēmuma nosaukums *
-            <input
-              className="h-10 bg-gray-200 py-1.5 px-3"
-              {...register("companyName")}
-            />
-          </label>
+          {formFields.map((field) => {
+            if (field.fieldType === "select") {
+              return (
+                <label
+                  key={field.id}
+                  htmlFor={field.fieldName}
+                  className="flex flex-col text-sm"
+                >
+                  {field.fieldName} *
+                  <MySelect
+                    options={data.companyToContact.map((company) => ({
+                      label: company.companyTitle,
+                      value: company.id,
+                    }))}
+                    {...register("companyToContact")}
+                  />
+                </label>
+              );
+            }
 
-          <label htmlFor="email" className="flex flex-col text-sm">
-            Epasts *
+            if (field.fieldType === "textArea") {
+              return (
+                <label
+                  key={field.id}
+                  htmlFor={field.fieldName}
+                  className="flex flex-col text-sm"
+                >
+                  {field.fieldName} *
+                  <textarea
+                    className="h-40 bg-gray-200"
+                    {...register(field.fieldName)}
+                  />
+                </label>
+              );
+            }
+
+            return (
+              <label
+                key={field.id}
+                htmlFor={field.fieldName}
+                className="flex flex-col text-sm"
+              >
+                {field.fieldName} *
+                <input
+                  className="h-10 bg-gray-200 py-1.5 px-3"
+                  {...register(field.fieldName)}
+                />
+              </label>
+            );
+          })}
+
+          <div className="flex items-center text-sm">
             <input
-              className="h-10 bg-gray-200 py-1.5 px-3"
-              {...register("email")}
+              type="checkbox"
+              {...register("privacyCookiesPolicy")}
+              className="mr-2"
             />
-          </label>
+            <span>{createLinks(data.privacyCookiesPolicy)}</span>
+          </div>
 
-          <label htmlFor="companyToContact" className="flex flex-col text-sm">
-            Izvēlies zīmolu, ar kuru vēlies sazināties *
-            {/* <input
-              className="h-10 bg-gray-200 py-1.5 px-3"
-              {...register("companyToContact")}
-            /> */}
-            <MySelect
-              options={data.companyToContact.map((company) => ({
-                label: company.companyTitle,
-                value: company.id,
-              }))}
-              {...register("companyToContact")}
+          <div className="flex items-center text-sm">
+            <input
+              type="checkbox"
+              {...register("agreementToReceiveInfo")}
+              className="mr-2"
             />
-          </label>
+            <span>{data.agreementToReceiveInfo}</span>
+          </div>
 
-          <label htmlFor="message" className="flex flex-col text-sm">
-            Jūsu ziņa *
-            <textarea className="h-40 bg-gray-200" {...register("message")} />
-          </label>
-
-          <button type="submit">Submit</button>
+          <div className="md:mt-4">
+            <button
+              className="inline-flex items-center justify-center w-auto gap-3 px-5 py-2 text-sm bg-gray-950 text-gray-50"
+              type="submit"
+            >
+              {data.buttonTitle} <IoIosArrowForward />
+            </button>
+          </div>
         </form>
       </div>
     </div>

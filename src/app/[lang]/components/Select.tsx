@@ -19,7 +19,7 @@ const MySelect = forwardRef<HTMLSelectElement, MySelectProps>(
               {...rest}
               ref={ref}
               className={clsx(
-                "block w-full appearance-none rounded-lg border-none bg-gray-200 py-1.5 px-3 text-sm",
+                "block w-full appearance-none border-none bg-gray-200 py-1.5 px-3 text-sm",
                 "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25",
                 // Make the text of each option black on Windows
                 "*:text-black"
