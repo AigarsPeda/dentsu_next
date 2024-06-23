@@ -1,7 +1,7 @@
 "use client";
 import MediaModal, { isImageUrl } from "@/app/[lang]/components/MediaModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { PiPlayCircleThin } from "react-icons/pi";
 
 interface MediaType {
@@ -32,7 +32,7 @@ interface CarouselProps {
 
 export default function MediaCarousel({ data }: CarouselProps) {
   const [firstImageSelected, setFirstImageSelected] = useState<number | null>(
-    null
+    3
   );
 
   const prev = () => {
@@ -48,6 +48,32 @@ export default function MediaCarousel({ data }: CarouselProps) {
       return curr === data.imageCarousel.length - 1 ? 0 : curr + 1;
     });
   };
+
+  const createModalContent = useMemo(() => {
+    return data.imageCarousel?.map((item, index) => {
+      const isAvailableVideo = item.url && !isImageUrl(item.url);
+      return (
+        <div key={index} className="relative w-full h-full">
+          {isAvailableVideo && item.url ? (
+            <iframe
+              src={item.url}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
+          ) : (
+            <img
+              alt={`Carousel image ${index + 1}`}
+              className="absolute object-cover w-full h-full"
+              src={getStrapiMedia(item.media.data?.[0]?.attributes?.url) ?? ""}
+            />
+          )}
+        </div>
+      );
+    });
+  }, [data.imageCarousel]);
 
   return (
     <div className="bg-gray-950">
@@ -86,7 +112,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
         })}
       </div>
       <MediaModal
-        data={data}
+        createModalContent={createModalContent}
         handlePrev={prev}
         handleNext={next}
         firstImageSelected={firstImageSelected}

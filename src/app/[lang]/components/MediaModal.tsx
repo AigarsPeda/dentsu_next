@@ -16,29 +16,31 @@ interface MediaModalProps {
   handleNext: () => void;
   handleModalClose: () => void;
   firstImageSelected: number | null;
-  data: {
-    id: number;
-    imageCarousel: {
-      id: number;
-      url: null | string;
-      media: {
-        data: {
-          id: number;
-          attributes: {
-            url: string;
-            width: number;
-            height: number;
-            caption: null | string;
-            alternativeText: null | string;
-          };
-        }[];
-      };
-    }[];
-  };
+  createModalContent: JSX.Element[];
+  // data: {
+  //   id: number;
+  //   imageCarousel: {
+  //     id: number;
+  //     url: null | string;
+  //     media: {
+  //       data: {
+  //         id: number;
+  //         attributes: {
+  //           url: string;
+  //           width: number;
+  //           height: number;
+  //           caption: null | string;
+  //           alternativeText: null | string;
+  //         };
+  //       }[];
+  //     };
+  //   }[];
+  // };
 }
 
 export default function MediaModal({
-  data,
+  // data,
+  createModalContent,
   handlePrev,
   handleNext,
   handleModalClose,
@@ -87,11 +89,7 @@ export default function MediaModal({
           <IoCloseSharp className="w-7 h-7" />
         </button>
         <section className="relative w-full h-full overflow-hidden text-center rounded-sm">
-          {data.imageCarousel.map((item, index) => {
-            const isAvailableVideo = item.url && !isImageUrl(item.url);
-
-            console.log("item.url", item.url);
-
+          {createModalContent.map((item, index) => {
             return (
               <Transition
                 key={index}
@@ -103,29 +101,11 @@ export default function MediaModal({
                 enterFrom={transitionClasses.enterFrom}
                 leaveFrom={transitionClasses.leaveFrom}
               >
-                {isAvailableVideo && item.url ? (
-                  <iframe
-                    src={item.url}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    className="w-full h-full"
-                  ></iframe>
-                ) : (
-                  <img
-                    alt={`Carousel image ${index + 1}`}
-                    className="absolute object-cover w-full h-full"
-                    src={
-                      getStrapiMedia(item.media.data?.[0]?.attributes?.url) ??
-                      ""
-                    }
-                  />
-                )}
+                {item}
               </Transition>
             );
           })}
-          <div className="absolute flex items-center justify-between w-full h-full">
+          <div className="absolute z-20 flex items-center justify-between w-full h-full">
             <button
               className="m-4 rounded-full"
               onClick={() => {
