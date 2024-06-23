@@ -89,28 +89,21 @@ export default function MediaModal({
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
 
-            const iframe = `<iframe src="${item.url}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen class="w-full h-full"></iframe>`;
-
             return (
               <div
                 key={index}
                 className="relative w-full h-full overflow-hidden text-center rounded-sm"
               >
                 {isAvailableVideo && item.url ? (
-                  // <iframe
-                  //   src={`${item.url}`}
-                  //   title="YouTube video player"
-                  //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  //   referrerPolicy="strict-origin-when-cross-origin"
-                  //   allowFullScreen
-                  //   className="w-full h-full"
-                  // ></iframe>
-
-                  // dangerouslySetInnerHTML iframe
-                  <div
-                    dangerouslySetInnerHTML={{ __html: iframe }}
+                  <embed
+                    src={`${item.url}`}
+                    title="YouTube video player"
+                    // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    // referrerPolicy="strict-origin-when-cross-origin"
+                    // allowFullScreen
                     className="w-full h-full"
-                  ></div>
+                    // loading="eager"
+                  ></embed>
                 ) : (
                   <img
                     alt={`Carousel image ${index + 1}`}
