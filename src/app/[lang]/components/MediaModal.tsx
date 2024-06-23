@@ -3,7 +3,7 @@ import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Transition } from "@headlessui/react";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 
@@ -50,7 +50,7 @@ export default function MediaModal({
     handleModalClose();
   });
 
-  const getTransitionClasses = () => {
+  const getTransitionClasses = useCallback(() => {
     if (direction === "right") {
       return {
         enterTo: "transform translate-x-0",
@@ -70,7 +70,7 @@ export default function MediaModal({
         enter: "transition-transform duration-500",
       };
     }
-  };
+  }, [direction]);
 
   const transitionClasses = getTransitionClasses();
 
@@ -90,6 +90,8 @@ export default function MediaModal({
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
 
+            console.log("item.url", item.url);
+
             return (
               <Transition
                 key={index}
@@ -101,10 +103,9 @@ export default function MediaModal({
                 enterFrom={transitionClasses.enterFrom}
                 leaveFrom={transitionClasses.leaveFrom}
               >
-                {/* {console.log("item.url", item.url)} */}
-                {isAvailableVideo ? (
+                {isAvailableVideo && item.url ? (
                   <iframe
-                    src={item.url ?? ""}
+                    src={item.url}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
