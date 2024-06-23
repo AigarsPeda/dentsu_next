@@ -100,6 +100,7 @@ export default function MediaModal({
                 enterFrom={transitionClasses.enterFrom}
                 leaveFrom={transitionClasses.leaveFrom}
               >
+                {/* {console.log("item.url", item.url)} */}
                 {isAvailableVideo ? (
                   // <iframe
                   //   referrerPolicy="strict-origin-when-cross-origin"
@@ -110,7 +111,7 @@ export default function MediaModal({
                   <iframe
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/fv7Q3-ZwM44?si=3SNivegczeXLIZHW"
+                    src={item.url ?? ""}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
