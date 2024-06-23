@@ -11,12 +11,12 @@ interface InfoBlockProps {
 
 export default function InfoBlock({ data }: InfoBlockProps) {
   return (
-    <div className="container mx-auto lg:pb-20 py-9 lg:pt-20">
-      <h2 className="pb-4 font-bold lg:pb-16">{data.title}</h2>
+    <div className="container mx-auto lg:pb-20 py-9 lg:pt-14">
+      <h2 className="pb-6 font-bold lg:pb-10">{data.title}</h2>
       <div className="max-w-4xl text-xl md:text-2xl">
-        <p className="pb-5 lg:pb-8">{data.description}</p>
+        <p className="pb-5 lg:pb-6">{data.description}</p>
         {data.description_2 && (
-          <p className={classNames(data.description_3 && "pb-5 lg:pb-8")}>
+          <p className={classNames(data.description_3 && "pb-5 lg:pb-6")}>
             {data.description_2}
           </p>
         )}

@@ -3,9 +3,10 @@ import { MapComponent } from "@/app/[lang]/components/Map";
 import MySelect from "@/app/[lang]/components/Select";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { MapProvider } from "@/app/[lang]/utils/map-provider";
-import { sendEmail } from "@/app/[lang]/utils/send-email";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { FaCheck } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 
 type FieldTypeType = "text" | "email" | "textArea" | "select";
@@ -19,6 +20,7 @@ interface ContactsProps {
     buttonTitle: string;
     workingTime: string;
     phoneNumber: string;
+    contactEmail: string;
     leadFormEmail: string;
     privacyCookiesPolicy: string;
     agreementToReceiveInfo: string;
@@ -55,15 +57,41 @@ export interface IFormInput {
   [key: string]: string;
 }
 
+type FormSubmitSateType = "idle" | "loading" | "success" | "error";
+
+type EmailResponseTypes = {
+  message: string;
+  success: "true" | "false";
+};
+
 export default function Contacts({ data }: ContactsProps) {
   const path = usePathname();
   const urlLocale = path.split("/")[1] || "en";
-  const { register, handleSubmit, formState } = useForm<IFormInput>();
-  // const onSubmit: SubmitHandler<IFormInput> = (data) => sendEmail(data);
+  const { reset, register, handleSubmit, formState } = useForm<IFormInput>();
+  const [formSubmitStatus, setFormSubmitStatus] =
+    useState<FormSubmitSateType>("idle");
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-    sendEmail(data);
+  const onSubmit: SubmitHandler<IFormInput> = (formData) => {
+    setFormSubmitStatus("loading");
+
+    fetch(`https://formsubmit.co/ajax/${data.contactEmail}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((res: EmailResponseTypes) => {
+        if (res.success === "true") {
+          setFormSubmitStatus("success");
+          reset();
+        } else {
+          setFormSubmitStatus("error");
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   const createLinks = (text: string) => {
@@ -87,7 +115,62 @@ export default function Contacts({ data }: ContactsProps) {
     return <p>{text}</p>;
   };
 
+  const getButtonTitle = () => {
+    if (formSubmitStatus === "error") {
+      return (
+        <button
+          className="inline-flex items-center justify-center w-auto gap-3 px-5 py-2 text-sm bg-red-500 text-gray-50"
+          type="submit"
+          onClick={() => {
+            reset();
+            setFormSubmitStatus("idle");
+          }}
+        >
+          Error!
+        </button>
+      );
+    }
+
+    if (formSubmitStatus === "success") {
+      return (
+        <div className="inline-flex items-center justify-center w-auto gap-3 px-5 py-2 text-sm bg-green-500 text-gray-50">
+          <span>Success!</span>
+          <FaCheck />
+        </div>
+      );
+    }
+
+    if (formSubmitStatus === "loading") {
+      return (
+        <button className="flex items-center justify-center w-auto py-3 space-x-2 bg-white px-7 dark:invert">
+          <span className="sr-only">Loading...</span>
+          <div className="h-2.5 w-2.5 bg-black rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+          <div className="h-2.5 w-2.5 bg-black rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+          <div className="w-2.5 h-2.5 bg-black rounded-full animate-bounce"></div>
+        </button>
+      );
+    }
+
+    return (
+      <button
+        className="inline-flex items-center justify-center w-auto gap-3 px-5 py-2 text-sm bg-gray-950 text-gray-50"
+        type="submit"
+      >
+        {data.buttonTitle} <IoIosArrowForward />
+      </button>
+    );
+  };
+
   const { formFields } = data;
+
+  useEffect(() => {
+    if (formSubmitStatus === "success") {
+      setTimeout(() => {
+        reset();
+        setFormSubmitStatus("idle");
+      }, 5000);
+    }
+  }, [formSubmitStatus]);
 
   return (
     <div className="container flex flex-col-reverse grid-cols-1 gap-10 px-10 mx-auto md:grid md:grid-cols-2">
@@ -116,7 +199,10 @@ export default function Contacts({ data }: ContactsProps) {
       <div>
         <form
           className="flex flex-col p-4 space-y-6 border border-gray-950"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(onSubmit)();
+          }}
         >
           {formFields.map((field) => {
             if (field.fieldType === "select") {
@@ -129,8 +215,8 @@ export default function Contacts({ data }: ContactsProps) {
                   {field.fieldName} *
                   <MySelect
                     options={data.companyToContact.map((company) => ({
-                      label: company.companyTitle,
                       value: company.id,
+                      label: company.companyTitle,
                     }))}
                     {...register("companyToContact", {
                       required: "This field is required",
@@ -138,8 +224,8 @@ export default function Contacts({ data }: ContactsProps) {
                   />
                   <div className="h-2">
                     {formState.errors[field.fieldName] && (
-                      <span className="text-xs text-red-500 ">
-                        {formState.errors[field.fieldName].message}
+                      <span className="text-xs text-red-500">
+                        {formState.errors[field.fieldName]?.message}
                       </span>
                     )}
                   </div>
@@ -156,7 +242,7 @@ export default function Contacts({ data }: ContactsProps) {
                 >
                   {field.fieldName} *
                   <textarea
-                    className="h-40 bg-gray-200"
+                    className="h-40 bg-gray-200 py-1.5 px-3"
                     {...register(field.fieldName, {
                       required: "This field is required",
                     })}
@@ -164,7 +250,7 @@ export default function Contacts({ data }: ContactsProps) {
                   <div className="h-2">
                     {formState.errors[field.fieldName] && (
                       <span className="text-xs text-red-500">
-                        {formState.errors[field.fieldName].message}
+                        {formState.errors[field.fieldName]?.message}
                       </span>
                     )}
                   </div>
@@ -188,7 +274,7 @@ export default function Contacts({ data }: ContactsProps) {
                 <div className="h-2">
                   {formState.errors[field.fieldName] && (
                     <span className="text-xs text-red-500">
-                      {formState.errors[field.fieldName].message}
+                      {formState.errors[field.fieldName]?.message}
                     </span>
                   )}
                 </div>
@@ -226,14 +312,7 @@ export default function Contacts({ data }: ContactsProps) {
               <span>{data.agreementToReceiveInfo}</span>
             </div>
           </div>
-          <div className="md:mt-4">
-            <button
-              className="inline-flex items-center justify-center w-auto gap-3 px-5 py-2 text-sm bg-gray-950 text-gray-50"
-              type="submit"
-            >
-              {data.buttonTitle} <IoIosArrowForward />
-            </button>
-          </div>
+          <div className="md:mt-4">{getButtonTitle()}</div>
         </form>
       </div>
     </div>

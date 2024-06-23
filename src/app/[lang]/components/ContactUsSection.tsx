@@ -59,9 +59,9 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
                   />
                 )}
                 <div className="mt-3 text-center">
-                  <h3 className="text-xl lg:text-2xl">{item.name}</h3>
-                  <p className="text-sm lg:text-base">{item.email}</p>
-                  <p className="text-sm lg:text-base">{item.position}</p>
+                  <h3 className="text-base">{item.name}</h3>
+                  <p className="text-sm">{item.email}</p>
+                  <p className="text-sm">{item.position}</p>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
         <div className="flex justify-center">
           <a
             href={`mailto:${data.contactEmail}`}
-            className="flex items-center justify-center gap-3 py-4 text-xl text-white rounded px-14 bg-gray-950"
+            className="flex items-center justify-center gap-3 px-6 py-2 text-base text-white rounded bg-gray-950"
           >
             <EnvelopeIcon className="w-6 h-6" />
             {data.buttonTitle}

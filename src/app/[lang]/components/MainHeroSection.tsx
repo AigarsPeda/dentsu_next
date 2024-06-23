@@ -37,7 +37,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           {data.title}
         </h1>
       </div>
-      <div className="absolute transform bottom-10 animate-bounce">
+      <div className="absolute hidden transform bottom-10 animate-bounce md:block">
         <ArrowIcon className="w-14 h-14 fill-gray-50" />
       </div>
     </section>

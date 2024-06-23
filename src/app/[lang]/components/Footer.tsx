@@ -35,15 +35,15 @@ export default function Footer({ footer }: { footer: Footer }) {
     <footer className="py-6 bg-dentsu-primary text-gray-50">
       <div className="container grid grid-cols-1 gap-4 mx-auto lg:grid-cols-3">
         <div className="flex w-full">
-          <div className="mx-auto text-xl text-center md:w-40 lg:mx-0 lg:text-left">
+          <div className="mx-auto text-center md:w-40 lg:mx-0 lg:text-left">
             {footer.legalLinks.map((link: FooterLink) => {
               return <FooterLink key={link.id} {...link} />;
             })}
           </div>
         </div>
         <div className="w-full">
-          <p className="text-xl text-center lg:pb-5">{footer.title}</p>
-          <div className="flex justify-center pt-4 space-x-2 lg:space-x-5 lg:pb-12 lg:pt-0 lg:col-end-13">
+          <p className="text-base text-center lg:pb-5">{footer.title}</p>
+          <div className="flex justify-center pt-4 space-x-2 lg:space-x-5 lg:pb-6 lg:pt-0 lg:col-end-13">
             {footer.socialLinks.map((link: FooterLink) => {
               return (
                 <a
@@ -88,7 +88,7 @@ function FooterLink({ url, text, newTab }: FooterLink) {
         target={newTab ? "_blank" : "_self"}
         className={classNames(
           path === url && "text-gray-100 hover:text-gray-100",
-          "text-[20px] leading-7 text-gray-50 hover:text-gray-200 transition-all"
+          "text-base leading-7 text-gray-50 hover:text-gray-200 transition-all"
         )}
       >
         {text}

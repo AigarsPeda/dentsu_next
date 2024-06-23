@@ -32,7 +32,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
               <img
                 src={imgSrc}
                 alt="our client logo"
-                className="object-contain h-4 lg:h-7"
+                className="object-contain w-full h-full lg:max-h-6 max-h-4"
               />
             ) : (
               <div className="flex items-center justify-center w-24 h-24 bg-gray-200">

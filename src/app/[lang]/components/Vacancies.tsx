@@ -10,7 +10,7 @@ import {
   type BlocksContent,
 } from "@strapi/blocks-react-renderer";
 import classNames from "classnames";
-import { createElement, useState } from "react";
+import { MouseEvent, createElement } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 
@@ -21,13 +21,29 @@ interface VacanciesProps {
       id: number;
       vacancyName: string;
       buttonTitle: string;
+      contactEmail: string;
       vacancyDescription: BlocksContent;
     }[];
   };
 }
 
 export default function Vacancies({ data }: VacanciesProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const handleClick = (
+    e: MouseEvent,
+    contactEmail: string,
+    subject: string,
+    body?: string
+  ) => {
+    e.preventDefault();
+
+    // Construct the mailto URL with subject and body
+    const mailtoURL = `mailto:${contactEmail}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body || "")}`;
+
+    // Redirect to the mail client with the constructed URL
+    window.location.href = mailtoURL;
+  };
 
   return (
     <div className={classNames("container md:py-10 py-4 mx-auto")}>
@@ -135,7 +151,16 @@ export default function Vacancies({ data }: VacanciesProps) {
                         }}
                       />
                       <div>
-                        <button className="flex items-center gap-4 px-4 py-2 mt-4 text-sm bg-gray-950 text-gray-50">
+                        <button
+                          onClick={(e) => {
+                            handleClick(
+                              e,
+                              vacancy.contactEmail,
+                              `Application for ${vacancy.vacancyName}`
+                            );
+                          }}
+                          className="flex items-center gap-4 px-4 py-2 mt-4 text-sm bg-gray-950 text-gray-50"
+                        >
                           {vacancy.buttonTitle}{" "}
                           <IoIosArrowDown className="w-4 h-4 transform -rotate-90" />
                         </button>
