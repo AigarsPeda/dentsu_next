@@ -2,12 +2,9 @@
 import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
-import { Transition } from "@headlessui/react";
 import { Carousel } from "flowbite-react";
 import { useCallback, useRef, useState } from "react";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
-import ReactPlayer from "react-player/youtube";
 
 export const isImageUrl = (url: string): boolean => {
   return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/.test(url);
@@ -98,7 +95,14 @@ export default function MediaModal({
                 className="relative w-full h-full overflow-hidden text-center rounded-sm"
               >
                 {isAvailableVideo && item.url ? (
-                  <ReactPlayer url={item.url} />
+                  <iframe
+                    src={`${item.url}&enablejsapi=1`}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
                 ) : (
                   <img
                     alt={`Carousel image ${index + 1}`}
@@ -113,67 +117,6 @@ export default function MediaModal({
             );
           })}
         </Carousel>
-        {/* <section className="relative w-full h-full overflow-hidden text-center rounded-sm">
-          {data.imageCarousel.map((item, index) => {
-            const isAvailableVideo = item.url && !isImageUrl(item.url);
-
-            console.log("item.url", item.url);
-
-            return (
-              <Transition
-                key={index}
-                enter={transitionClasses.enter}
-                leave={transitionClasses.leave}
-                show={firstImageSelected === index}
-                enterTo={transitionClasses.enterTo}
-                leaveTo={transitionClasses.leaveTo}
-                enterFrom={transitionClasses.enterFrom}
-                leaveFrom={transitionClasses.leaveFrom}
-              >
-                {isAvailableVideo && item.url ? (
-                  <ReactPlayer url={item.url} />
-                ) : (
-                  // <iframe
-                  //   src={item.url}
-                  //   title="YouTube video player"
-                  //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  //   referrerPolicy="strict-origin-when-cross-origin"
-                  //   allowFullScreen
-                  //   className="w-full h-full"
-                  // ></iframe>
-                  <img
-                    alt={`Carousel image ${index + 1}`}
-                    className="absolute object-cover w-full h-full"
-                    src={
-                      getStrapiMedia(item.media.data?.[0]?.attributes?.url) ??
-                      ""
-                    }
-                  />
-                )}
-              </Transition>
-            );
-          })}
-          <div className="absolute flex items-center justify-between w-full h-full">
-            <button
-              className="m-4 rounded-full"
-              onClick={() => {
-                setDirection("left");
-                handlePrev();
-              }}
-            >
-              <IoIosArrowBack className="w-10 h-10" />
-            </button>
-            <button
-              className="m-4 rounded-full"
-              onClick={() => {
-                setDirection("right");
-                handleNext();
-              }}
-            >
-              <IoIosArrowForward className="w-10 h-10" />
-            </button>
-          </div>
-        </section> */}
       </div>
     </MyModal>
   );
