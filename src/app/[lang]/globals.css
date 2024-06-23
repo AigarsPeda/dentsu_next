@@ -50,7 +50,7 @@ h4 {
 }
 
 h5 {
-  @apply text-3xl font-bold md:text-5xl;
+  @apply text-3xl font-bold;
 }
 
 h6 {
@@ -94,6 +94,14 @@ td {
   .custom-clamp-5 {
     display: -webkit-box;
     -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+}
+
+@layer utilities {
+  .custom-clamp-6 {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
   }
 }

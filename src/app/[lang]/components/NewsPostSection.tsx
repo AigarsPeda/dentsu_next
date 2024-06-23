@@ -73,12 +73,12 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
               </div>
               <div>
                 <h3 className="mt-4 text-lg font-bold">{newsPost.title}</h3>
-                <p className="h-40 mt-2 overflow-hidden text-sm md:mb-4 custom-clamp-8">
+                <p className="h-[7.8rem] mt-2 overflow-hidden text-sm custom-clamp-6">
                   {newsPost.description}
                 </p>
                 <a
                   href={newsPost.url}
-                  className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm md:mt-4 bg-gray-950 text-gray-50"
+                  className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm md:mt-2 bg-gray-950 text-gray-50"
                 >
                   {newsPost.buttonTitle}
                   <IoIosArrowForward />

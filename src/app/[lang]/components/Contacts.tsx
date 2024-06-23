@@ -198,7 +198,7 @@ export default function Contacts({ data }: ContactsProps) {
       </div>
       <div>
         <form
-          className="flex flex-col p-4 space-y-6 border border-gray-950"
+          className="flex flex-col p-4 space-y-3 border border-gray-950"
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit(onSubmit)();

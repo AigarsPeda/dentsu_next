@@ -21,7 +21,7 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
             <div key={item.id} className="p-6 bg-gray-950 text-gray-50">
               <DoubleArrows className="w-12 h-12 mb-4" />
               <div className="w-full">
-                <div className="mb-8 overflow-hidden md:h-64 custom-clamp-10">
+                <div className="mb-8 overflow-hidden md:h-60 md:custom-clamp-10">
                   <p title={item.feedback} className="text-base">
                     {item.feedback}
                   </p>
