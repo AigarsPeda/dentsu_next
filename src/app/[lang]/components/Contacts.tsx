@@ -58,8 +58,13 @@ export interface IFormInput {
 export default function Contacts({ data }: ContactsProps) {
   const path = usePathname();
   const urlLocale = path.split("/")[1] || "en";
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => sendEmail(data);
+  const { register, handleSubmit, formState } = useForm<IFormInput>();
+  // const onSubmit: SubmitHandler<IFormInput> = (data) => sendEmail(data);
+
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(data);
+    sendEmail(data);
+  };
 
   const createLinks = (text: string) => {
     const splitText = text.split(/{{(.*?)}}/);
@@ -110,7 +115,7 @@ export default function Contacts({ data }: ContactsProps) {
       </div>
       <div>
         <form
-          className="flex flex-col p-4 space-y-4 border border-gray-950"
+          className="flex flex-col p-4 space-y-6 border border-gray-950"
           onSubmit={handleSubmit(onSubmit)}
         >
           {formFields.map((field) => {
@@ -127,8 +132,17 @@ export default function Contacts({ data }: ContactsProps) {
                       label: company.companyTitle,
                       value: company.id,
                     }))}
-                    {...register("companyToContact")}
+                    {...register("companyToContact", {
+                      required: "This field is required",
+                    })}
                   />
+                  <div className="h-2">
+                    {formState.errors[field.fieldName] && (
+                      <span className="text-xs text-red-500 ">
+                        {formState.errors[field.fieldName].message}
+                      </span>
+                    )}
+                  </div>
                 </label>
               );
             }
@@ -143,8 +157,17 @@ export default function Contacts({ data }: ContactsProps) {
                   {field.fieldName} *
                   <textarea
                     className="h-40 bg-gray-200"
-                    {...register(field.fieldName)}
+                    {...register(field.fieldName, {
+                      required: "This field is required",
+                    })}
                   />
+                  <div className="h-2">
+                    {formState.errors[field.fieldName] && (
+                      <span className="text-xs text-red-500">
+                        {formState.errors[field.fieldName].message}
+                      </span>
+                    )}
+                  </div>
                 </label>
               );
             }
@@ -157,31 +180,52 @@ export default function Contacts({ data }: ContactsProps) {
               >
                 {field.fieldName} *
                 <input
-                  className="h-10 bg-gray-200 py-1.5 px-3"
-                  {...register(field.fieldName)}
+                  className="h-10 bg-gray-200 py-1.5 px-3 outline-gray-950"
+                  {...register(field.fieldName, {
+                    required: "This field is required",
+                  })}
                 />
+                <div className="h-2">
+                  {formState.errors[field.fieldName] && (
+                    <span className="text-xs text-red-500">
+                      {formState.errors[field.fieldName].message}
+                    </span>
+                  )}
+                </div>
               </label>
             );
           })}
 
-          <div className="flex items-center text-sm">
-            <input
-              type="checkbox"
-              {...register("privacyCookiesPolicy")}
-              className="mr-2"
-            />
-            <span>{createLinks(data.privacyCookiesPolicy)}</span>
+          <div>
+            <div className="flex items-center text-sm">
+              <input
+                type="checkbox"
+                {...register("privacyCookiesPolicy", {
+                  required: "This field is required",
+                })}
+                className="mr-2"
+              />
+              <span>{createLinks(data.privacyCookiesPolicy)}</span>
+            </div>
+            <div className="h-2">
+              {formState.errors.privacyCookiesPolicy && (
+                <span className="text-xs text-red-500">
+                  {formState.errors.privacyCookiesPolicy.message}
+                </span>
+              )}
+            </div>
           </div>
 
-          <div className="flex items-center text-sm">
-            <input
-              type="checkbox"
-              {...register("agreementToReceiveInfo")}
-              className="mr-2"
-            />
-            <span>{data.agreementToReceiveInfo}</span>
+          <div>
+            <div className="flex items-center text-sm">
+              <input
+                type="checkbox"
+                {...register("agreementToReceiveInfo")}
+                className="mr-2"
+              />
+              <span>{data.agreementToReceiveInfo}</span>
+            </div>
           </div>
-
           <div className="md:mt-4">
             <button
               className="inline-flex items-center justify-center w-auto gap-3 px-5 py-2 text-sm bg-gray-950 text-gray-50"
