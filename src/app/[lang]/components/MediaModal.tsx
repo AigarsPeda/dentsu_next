@@ -101,11 +101,20 @@ export default function MediaModal({
                 leaveFrom={transitionClasses.leaveFrom}
               >
                 {isAvailableVideo ? (
+                  // <iframe
+                  //   referrerPolicy="strict-origin-when-cross-origin"
+                  //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  //   src={item.url ?? ""}
+                  //   className="absolute object-cover w-full h-full"
+                  // ></iframe>
                   <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/fv7Q3-ZwM44?si=3SNivegczeXLIZHW"
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    src={item.url ?? ""}
-                    className="absolute object-cover w-full h-full"
+                    allowFullScreen
                   ></iframe>
                 ) : (
                   <img
