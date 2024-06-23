@@ -3,9 +3,11 @@ import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Transition } from "@headlessui/react";
+import { Carousel } from "flowbite-react";
 import { useCallback, useRef, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
+import ReactPlayer from "react-player/youtube";
 
 export const isImageUrl = (url: string): boolean => {
   return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/.test(url);
@@ -16,31 +18,29 @@ interface MediaModalProps {
   handleNext: () => void;
   handleModalClose: () => void;
   firstImageSelected: number | null;
-  createModalContent: JSX.Element[];
-  // data: {
-  //   id: number;
-  //   imageCarousel: {
-  //     id: number;
-  //     url: null | string;
-  //     media: {
-  //       data: {
-  //         id: number;
-  //         attributes: {
-  //           url: string;
-  //           width: number;
-  //           height: number;
-  //           caption: null | string;
-  //           alternativeText: null | string;
-  //         };
-  //       }[];
-  //     };
-  //   }[];
-  // };
+  data: {
+    id: number;
+    imageCarousel: {
+      id: number;
+      url: null | string;
+      media: {
+        data: {
+          id: number;
+          attributes: {
+            url: string;
+            width: number;
+            height: number;
+            caption: null | string;
+            alternativeText: null | string;
+          };
+        }[];
+      };
+    }[];
+  };
 }
 
 export default function MediaModal({
-  // data,
-  createModalContent,
+  data,
   handlePrev,
   handleNext,
   handleModalClose,
@@ -88,8 +88,37 @@ export default function MediaModal({
         >
           <IoCloseSharp className="w-7 h-7" />
         </button>
-        <section className="relative w-full h-full overflow-hidden text-center rounded-sm">
-          {createModalContent.map((item, index) => {
+        <Carousel>
+          {data.imageCarousel.map((item, index) => {
+            const isAvailableVideo = item.url && !isImageUrl(item.url);
+
+            return (
+              <div
+                key={index}
+                className="relative w-full h-full overflow-hidden text-center rounded-sm"
+              >
+                {isAvailableVideo && item.url ? (
+                  <ReactPlayer url={item.url} />
+                ) : (
+                  <img
+                    alt={`Carousel image ${index + 1}`}
+                    className="absolute object-cover w-full h-full"
+                    src={
+                      getStrapiMedia(item.media.data?.[0]?.attributes?.url) ??
+                      ""
+                    }
+                  />
+                )}
+              </div>
+            );
+          })}
+        </Carousel>
+        {/* <section className="relative w-full h-full overflow-hidden text-center rounded-sm">
+          {data.imageCarousel.map((item, index) => {
+            const isAvailableVideo = item.url && !isImageUrl(item.url);
+
+            console.log("item.url", item.url);
+
             return (
               <Transition
                 key={index}
@@ -101,11 +130,30 @@ export default function MediaModal({
                 enterFrom={transitionClasses.enterFrom}
                 leaveFrom={transitionClasses.leaveFrom}
               >
-                {item}
+                {isAvailableVideo && item.url ? (
+                  <ReactPlayer url={item.url} />
+                ) : (
+                  // <iframe
+                  //   src={item.url}
+                  //   title="YouTube video player"
+                  //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  //   referrerPolicy="strict-origin-when-cross-origin"
+                  //   allowFullScreen
+                  //   className="w-full h-full"
+                  // ></iframe>
+                  <img
+                    alt={`Carousel image ${index + 1}`}
+                    className="absolute object-cover w-full h-full"
+                    src={
+                      getStrapiMedia(item.media.data?.[0]?.attributes?.url) ??
+                      ""
+                    }
+                  />
+                )}
               </Transition>
             );
           })}
-          <div className="absolute z-20 flex items-center justify-between w-full h-full">
+          <div className="absolute flex items-center justify-between w-full h-full">
             <button
               className="m-4 rounded-full"
               onClick={() => {
@@ -125,7 +173,7 @@ export default function MediaModal({
               <IoIosArrowForward className="w-10 h-10" />
             </button>
           </div>
-        </section>
+        </section> */}
       </div>
     </MyModal>
   );
