@@ -82,7 +82,7 @@ export default function MediaModal({
                   <ReactPlayer
                     // pip={true}
                     // light={true}
-                    url={item.url}
+                    url={`${item.url}&enablejsapi=1&origin=http://localhost:3000`}
                     width={"100%"}
                     height={"100%"}
                   />
