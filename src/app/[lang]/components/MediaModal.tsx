@@ -52,7 +52,7 @@ export default function MediaModal({
     }
   }, []);
 
-  if (!isWindow) return null;
+  if (!isWindow || !firstImageSelected) return null;
 
   // if (window === undefined) return null;
 
