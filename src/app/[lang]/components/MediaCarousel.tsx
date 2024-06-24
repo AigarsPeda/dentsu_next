@@ -50,62 +50,29 @@ export default function MediaCarousel({ data }: CarouselProps) {
     });
   };
 
-  // const widArray = [
-  //   "https://www.youtube.com/embed/qVBuJfVUxxQ?si=bV8yOtCAZnNvQvVQ",
-  //   "https://www.youtube.com/embed/GRqNudYADvA?si=vMCJiVCTGvxDV3r-",
-  //   "https://www.youtube.com/embed/MMhJuotvR80?si=tSOjhtXJp9z3MVYB",
-  // ];
+  // const { videoLinks, imageLinks } = useMemo(() => {
+  //   const videoLinks: string[] = [];
+  //   const imageLinks: string[] = [];
 
-  // const createLinks = useMemo(() => {
-  //   return data.imageCarousel?.map((image, index) => {
+  //   data.imageCarousel?.forEach((image, index) => {
   //     const isAvailableVideo = image.url && !isImageUrl(image.url);
 
-  //     if (isAvailableVideo) return image.url;
+  //     if (isAvailableVideo && image.url) {
+  //       videoLinks.push(image.url);
+  //     } else {
+  //       const src =
+  //         getStrapiMedia(image.media.data?.[0]?.attributes?.url) ??
+  //         image.url ??
+  //         "";
 
-  //     const src =
-  //       getStrapiMedia(image.media.data?.[0]?.attributes?.url) ??
-  //       image.url ??
-  //       "";
+  //       if (src === "") return null;
 
-  //     // const src =
-  //     //   getStrapiMedia(image.media.data?.[0]?.attributes?.url) ??
-  //     //   image.url ??
-  //     //   "";
-
-  //     if (src === "") return null;
-
-  //     return src;
+  //       imageLinks.push(src);
+  //     }
   //   });
+
+  //   return { videoLinks, imageLinks };
   // }, [data.imageCarousel]);
-
-  // console.log("createLinks", createLinks);
-
-  const { videoLinks, imageLinks } = useMemo(() => {
-    const videoLinks: string[] = [];
-    const imageLinks: string[] = [];
-
-    data.imageCarousel?.forEach((image, index) => {
-      const isAvailableVideo = image.url && !isImageUrl(image.url);
-
-      if (isAvailableVideo && image.url) {
-        videoLinks.push(image.url);
-      } else {
-        const src =
-          getStrapiMedia(image.media.data?.[0]?.attributes?.url) ??
-          image.url ??
-          "";
-
-        if (src === "") return null;
-
-        imageLinks.push(src);
-      }
-    });
-
-    return { videoLinks, imageLinks };
-  }, [data.imageCarousel]);
-
-  console.log("videoLinks", videoLinks);
-  console.log("imageLinks", imageLinks);
 
   return (
     <div className="bg-gray-950">
@@ -143,41 +110,6 @@ export default function MediaCarousel({ data }: CarouselProps) {
           );
         })}
       </div>
-
-      {videoLinks.map((wid, index) => {
-        return (
-          <div
-            key={index}
-            role="button"
-            className="relative z-20 flex flex-col w-full h-full max-h-72"
-            onClick={() => {
-              setFirstImageSelected(index);
-            }}
-          >
-            <iframe
-              src={wid}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              width={640}
-              height={360}
-              className="w-full h-full"
-            ></iframe>
-          </div>
-        );
-      })}
-
-      <iframe
-        src="https://www.youtube.com/embed/22tVWwmTie8?si=t4SLeM967SRpzkJc"
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-        width={640}
-        height={360}
-        className="w-full h-full"
-      ></iframe>
 
       <MediaModal
         data={data}
