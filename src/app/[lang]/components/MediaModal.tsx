@@ -112,7 +112,7 @@ export default function MediaModal({
                 {isAvailableVideo && item.url ? (
                   <iframe
                     // src={item.url ?? videoUrl}
-                    src={videoUrl}
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=q99ZTV6toRy7JGSA"
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
