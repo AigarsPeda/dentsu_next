@@ -1,9 +1,8 @@
-"use client";
 import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Transition } from "@headlessui/react";
-import { use, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 
@@ -49,12 +48,7 @@ export default function MediaModal({
   useOnClickOutside<HTMLDivElement>(dropdownRef, () => {
     handleModalClose();
   });
-
-  const [videoUrl, setVideoUrl] = useState(
-    "https://www.youtube.com/embed/dQw4w9WgXcQ?si=q99ZTV6toRy7JGSA"
-  );
-
-  useEffect(() => {}, [firstImageSelected]);
+  const divRef = useRef<HTMLDivElement>(null);
 
   const getTransitionClasses = useCallback(() => {
     if (direction === "right") {
@@ -80,6 +74,22 @@ export default function MediaModal({
 
   const transitionClasses = getTransitionClasses();
 
+  // create iframe for video in ref div with delay first create iframe and then add video
+  const createIframe = (src: string) => {
+    const iframe = document.createElement("iframe");
+    iframe.src = src;
+    iframe.title = "YouTube video player";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.allowFullscreen = true;
+    iframe.className = "w-full h-full";
+
+    if (divRef.current) {
+      divRef.current.appendChild(iframe);
+    }
+  };
+
   return (
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
       <div
@@ -96,7 +106,11 @@ export default function MediaModal({
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
 
-            console.log("item.url", item.url);
+            if (firstImageSelected === index && isAvailableVideo) {
+              setTimeout(() => {
+                createIframe(item.url);
+              }, 500);
+            }
 
             return (
               <Transition
@@ -110,18 +124,16 @@ export default function MediaModal({
                 leaveFrom={transitionClasses.leaveFrom}
               >
                 {isAvailableVideo && item.url ? (
-                  <iframe
-                    // src={item.url ?? videoUrl}
-                    src="https://www.youtube.com/embed/22tVWwmTie8?si=t4SLeM967SRpzkJc"
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    width={640}
-                    height={360}
-                    className="w-full h-full"
-                  ></iframe>
+                  <div ref={divRef}></div>
                 ) : (
+                  // <iframe
+                  //   src={item.url}
+                  //   title="YouTube video player"
+                  //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  //   referrerPolicy="strict-origin-when-cross-origin"
+                  //   allowFullScreen
+                  //   className="w-full h-full"
+                  // ></iframe>
                   <img
                     alt={`Carousel image ${index + 1}`}
                     className="absolute object-cover w-full h-full"
