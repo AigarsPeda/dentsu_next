@@ -83,7 +83,9 @@ export default function MediaModal({
       "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
     iframe.allowFullscreen = true;
-    iframe.className = "w-full h-full";
+    // iframe.className = "w-full h-full";
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
 
     if (divRef.current) {
       divRef.current.appendChild(iframe);
@@ -106,9 +108,9 @@ export default function MediaModal({
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
 
-            if (firstImageSelected === index && isAvailableVideo) {
+            if (firstImageSelected === index && isAvailableVideo && item.url) {
               setTimeout(() => {
-                createIframe(item.url);
+                createIframe(item.url ?? "");
               }, 500);
             }
 
