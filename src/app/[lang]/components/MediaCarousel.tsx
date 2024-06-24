@@ -168,6 +168,17 @@ export default function MediaCarousel({ data }: CarouselProps) {
         );
       })}
 
+      <iframe
+        src={"https://www.youtube.com/embed/22tVWwmTie8?si=t4SLeM967SRpzkJc"}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+        width={640}
+        height={360}
+        className="w-full h-full"
+      ></iframe>
+
       <MediaModal
         data={data}
         handlePrev={prev}
