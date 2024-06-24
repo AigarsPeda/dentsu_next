@@ -98,7 +98,8 @@ export default function MediaModal({
         >
           <IoCloseSharp className="w-7 h-7" />
         </button>
-        <section className="relative w-full h-full overflow-hidden text-center rounded-sm">
+
+        <div className="relative w-full h-full overflow-hidden text-center rounded-sm">
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
 
@@ -157,7 +158,7 @@ export default function MediaModal({
               <IoIosArrowForward className="w-10 h-10" />
             </button>
           </div>
-        </section>
+        </div>
       </div>
     </MyModal>
   );
