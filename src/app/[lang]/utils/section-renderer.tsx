@@ -26,9 +26,12 @@ import Table from "@/app/[lang]/components/Table";
 import Vacancies from "@/app/[lang]/components/Vacancies";
 import VacanciesHeadline from "@/app/[lang]/components/VacanciesHeadline";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
+import VideoEmbed from "../components/VideoEmbed";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
+    case "shared.video-embed":
+      return <VideoEmbed key={index} data={section} />;
     case "sections.hero":
       return <Hero key={index} data={section} />;
     case "sections.table":
