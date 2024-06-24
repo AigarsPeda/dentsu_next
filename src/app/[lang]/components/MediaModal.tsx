@@ -44,34 +44,9 @@ export default function MediaModal({
   firstImageSelected,
 }: MediaModalProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [direction, setDirection] = useState("right");
   useOnClickOutside<HTMLDivElement>(dropdownRef, () => {
     handleModalClose();
   });
-
-  const getTransitionClasses = useCallback(() => {
-    if (direction === "right") {
-      return {
-        enterTo: "transform translate-x-0",
-        leaveFrom: "transform translate-x-0",
-        leaveTo: "transform -translate-x-full",
-        enterFrom: "transform translate-x-full",
-        leave: "transition-transform duration-500",
-        enter: "transition-transform duration-500",
-      };
-    } else {
-      return {
-        enterTo: "transform translate-x-0",
-        leaveFrom: "transform translate-x-0",
-        leaveTo: "transform translate-x-full",
-        enterFrom: "transform -translate-x-full",
-        leave: "transition-transform duration-500",
-        enter: "transition-transform duration-500",
-      };
-    }
-  }, [direction]);
-
-  const transitionClasses = getTransitionClasses();
 
   return (
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
@@ -88,7 +63,7 @@ export default function MediaModal({
         <Carousel>
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
-
+            console.log("item", item);
             return (
               <div
                 key={index}
@@ -96,7 +71,7 @@ export default function MediaModal({
               >
                 {isAvailableVideo && item.url ? (
                   <embed
-                    src={`${item.url}`}
+                    src={`${item.url}rel=0&enablejsapi=1`}
                     title="YouTube video player"
                     // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     // referrerPolicy="strict-origin-when-cross-origin"
