@@ -3,7 +3,7 @@ import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Carousel } from "flowbite-react";
-import { useRef } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import ReactPlayer from "react-player";
 
@@ -40,25 +40,22 @@ export default function MediaModal({
   handleModalClose,
   firstImageSelected,
 }: MediaModalProps) {
+  const [isWindow, setIsWindow] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   useOnClickOutside<HTMLDivElement>(dropdownRef, () => {
     handleModalClose();
   });
 
-  const getEmbedUrl = (videoUrl: string): string => {
-    const youtubeRegex =
-      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|watch\?v%3D)([\w-]{11}).*/;
-    const youtubeMatch = videoUrl.match(youtubeRegex);
-
-    if (youtubeMatch && youtubeMatch[2].length === 11) {
-      return `https://www.youtube.com/embed/${youtubeMatch[2]}`;
+  useEffect(() => {
+    // setIsWindow(true);
+    if (typeof window !== "undefined") {
+      setIsWindow(true);
     }
+  }, []);
 
-    // Add support for other video platforms here
+  if (!isWindow) return null;
 
-    // return null;
-    return videoUrl;
-  };
+  // if (window === undefined) return null;
 
   return (
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
@@ -75,6 +72,7 @@ export default function MediaModal({
         <Carousel slide={false}>
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
+            console.log("item", item);
             return (
               <div
                 key={index}
@@ -82,9 +80,9 @@ export default function MediaModal({
               >
                 {isAvailableVideo && item.url ? (
                   <ReactPlayer
-                    pip={true}
-                    light={true}
-                    url={getEmbedUrl(item.url)}
+                    // pip={true}
+                    // light={true}
+                    url={item.url}
                     width={"100%"}
                     height={"100%"}
                   />
