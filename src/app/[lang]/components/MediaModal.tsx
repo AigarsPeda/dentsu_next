@@ -86,6 +86,17 @@ export default function MediaModal({
 
   console.log("window.location", window.location.origin);
 
+  const validateUrl = (url: string | null) => {
+    if (!url) return "";
+    try {
+      const urlObj = new URL(url);
+      return urlObj.href;
+    } catch (error) {
+      console.error("Invalid URL:", url);
+      return "";
+    }
+  };
+
   return (
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
       <div
@@ -116,7 +127,9 @@ export default function MediaModal({
               >
                 {isAvailableVideo && item.url ? (
                   <iframe
-                    src={`${item.url}&origin=&${window.location.origin}`}
+                    src={validateUrl(
+                      `${item.url}&origin=&${window.location.origin}`
+                    )}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"

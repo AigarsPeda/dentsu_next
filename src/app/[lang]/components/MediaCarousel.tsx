@@ -50,30 +50,6 @@ export default function MediaCarousel({ data }: CarouselProps) {
     });
   };
 
-  // const { videoLinks, imageLinks } = useMemo(() => {
-  //   const videoLinks: string[] = [];
-  //   const imageLinks: string[] = [];
-
-  //   data.imageCarousel?.forEach((image, index) => {
-  //     const isAvailableVideo = image.url && !isImageUrl(image.url);
-
-  //     if (isAvailableVideo && image.url) {
-  //       videoLinks.push(image.url);
-  //     } else {
-  //       const src =
-  //         getStrapiMedia(image.media.data?.[0]?.attributes?.url) ??
-  //         image.url ??
-  //         "";
-
-  //       if (src === "") return null;
-
-  //       imageLinks.push(src);
-  //     }
-  //   });
-
-  //   return { videoLinks, imageLinks };
-  // }, [data.imageCarousel]);
-
   return (
     <div className="bg-gray-950">
       <div className="container grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden md:grid-cols-3">
