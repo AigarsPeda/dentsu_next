@@ -90,7 +90,11 @@ export default function MediaModal({
     if (!url) return "";
     try {
       const urlObj = new URL(url);
-      return urlObj.href;
+      console.log("urlObj", urlObj);
+      // https://www.youtube.com/embed/22tVWwmTie8?si=t4SLeM967SRpzkJc
+      const result = `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}?${urlObj.search}`;
+      console.log("result", result);
+      return result;
     } catch (error) {
       console.error("Invalid URL:", url);
       return "";
