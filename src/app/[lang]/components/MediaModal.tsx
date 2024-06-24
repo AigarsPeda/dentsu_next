@@ -3,7 +3,7 @@ import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Transition } from "@headlessui/react";
-import { useCallback, useRef, useState } from "react";
+import { use, useCallback, useEffect, useRef, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 
@@ -49,6 +49,14 @@ export default function MediaModal({
   useOnClickOutside<HTMLDivElement>(dropdownRef, () => {
     handleModalClose();
   });
+
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+
+  const [videoUrl, setVideoUrl] = useState(
+    "https://www.youtube.com/embed/dQw4w9WgXcQ?si=q99ZTV6toRy7JGSA"
+  );
+
+  // useEffect(() => {}, [firstImageSelected]);
 
   const getTransitionClasses = useCallback(() => {
     if (direction === "right") {
@@ -105,12 +113,16 @@ export default function MediaModal({
               >
                 {isAvailableVideo && item.url ? (
                   <iframe
-                    src={item.url}
+                    // src={item.url}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                     className="w-full h-full"
+                    onLoad={(e) => {
+                      console.log("iframe loaded");
+                      e.currentTarget.src = item.url ?? "";
+                    }}
                   ></iframe>
                 ) : (
                   <img
