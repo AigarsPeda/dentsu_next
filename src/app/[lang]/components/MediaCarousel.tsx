@@ -50,6 +50,12 @@ export default function MediaCarousel({ data }: CarouselProps) {
     });
   };
 
+  const widArray = [
+    "https://www.youtube.com/embed/qVBuJfVUxxQ?si=bV8yOtCAZnNvQvVQ",
+    "https://www.youtube.com/embed/GRqNudYADvA?si=vMCJiVCTGvxDV3r-",
+    "https://www.youtube.com/embed/MMhJuotvR80?si=tSOjhtXJp9z3MVYB",
+  ];
+
   return (
     <div className="bg-gray-950">
       <div className="container grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden md:grid-cols-3">
@@ -86,6 +92,30 @@ export default function MediaCarousel({ data }: CarouselProps) {
           );
         })}
       </div>
+
+      {widArray.map((wid, index) => {
+        return (
+          <div
+            key={index}
+            role="button"
+            className="relative z-20 flex flex-col w-full h-full max-h-72"
+            onClick={() => {
+              setFirstImageSelected(index);
+            }}
+          >
+            <iframe
+              src={wid}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              width={640}
+              height={360}
+              className="w-full h-full"
+            ></iframe>
+          </div>
+        );
+      })}
 
       <MediaModal
         data={data}
