@@ -3,7 +3,7 @@ import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Carousel } from "flowbite-react";
-import { use, useEffect, useRef, useState } from "react";
+import { Suspense, use, useEffect, useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import ReactPlayer from "react-player";
 
@@ -79,13 +79,24 @@ export default function MediaModal({
                 className="relative w-full h-full overflow-hidden text-center rounded-sm"
               >
                 {isAvailableVideo && item.url ? (
-                  <ReactPlayer
-                    // pip={true}
-                    // light={true}
-                    url={`${item.url}&enablejsapi=1&origin=http://localhost:3000`}
-                    width={"100%"}
-                    height={"100%"}
-                  />
+                  // <ReactPlayer
+                  //   url={`${item.url}&enablejsapi=1&origin=http://localhost:3000`}
+                  //   width={"100%"}
+                  //   height={"100%"}
+                  // />
+                  <Suspense
+                    fallback={
+                      <div className="w-full h-full text-white bg-slate-950">
+                        Loading...
+                      </div>
+                    }
+                  >
+                    <ReactPlayer
+                      url={`${item.url}&enablejsapi=1&origin=http://localhost:3000`}
+                      width={"100%"}
+                      height={"100%"}
+                    />
+                  </Suspense>
                 ) : (
                   <img
                     alt={`Carousel image ${index + 1}`}
