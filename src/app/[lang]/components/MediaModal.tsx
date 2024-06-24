@@ -3,7 +3,7 @@ import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Carousel } from "flowbite-react";
-import { useCallback, useRef, useState } from "react";
+import { useRef } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import ReactPlayer from "react-player";
 
@@ -12,8 +12,6 @@ export const isImageUrl = (url: string): boolean => {
 };
 
 interface MediaModalProps {
-  handlePrev: () => void;
-  handleNext: () => void;
   handleModalClose: () => void;
   firstImageSelected: number | null;
   data: {
@@ -39,8 +37,6 @@ interface MediaModalProps {
 
 export default function MediaModal({
   data,
-  handlePrev,
-  handleNext,
   handleModalClose,
   firstImageSelected,
 }: MediaModalProps) {
@@ -48,6 +44,21 @@ export default function MediaModal({
   useOnClickOutside<HTMLDivElement>(dropdownRef, () => {
     handleModalClose();
   });
+
+  const getEmbedUrl = (videoUrl: string): string => {
+    const youtubeRegex =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|watch\?v%3D)([\w-]{11}).*/;
+    const youtubeMatch = videoUrl.match(youtubeRegex);
+
+    if (youtubeMatch && youtubeMatch[2].length === 11) {
+      return `https://www.youtube.com/embed/${youtubeMatch[2]}`;
+    }
+
+    // Add support for other video platforms here
+
+    // return null;
+    return videoUrl;
+  };
 
   return (
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
@@ -64,7 +75,6 @@ export default function MediaModal({
         <Carousel slide={false}>
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
-            console.log("item", item);
             return (
               <div
                 key={index}
@@ -72,22 +82,13 @@ export default function MediaModal({
               >
                 {isAvailableVideo && item.url ? (
                   <ReactPlayer
-                    url={item.url}
                     pip={true}
                     light={true}
+                    url={getEmbedUrl(item.url)}
                     width={"100%"}
                     height={"100%"}
                   />
                 ) : (
-                  // <embed
-                  //   src={`${item.url}rel=0&enablejsapi=1`}
-                  //   title="YouTube video player"
-                  //   // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  //   // referrerPolicy="strict-origin-when-cross-origin"
-                  //   // allowFullScreen
-                  //   className="w-full h-full"
-                  //   // loading="eager"
-                  // ></embed>
                   <img
                     alt={`Carousel image ${index + 1}`}
                     className="absolute object-cover w-full h-full"

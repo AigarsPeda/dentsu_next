@@ -35,20 +35,6 @@ export default function MediaCarousel({ data }: CarouselProps) {
     null
   );
 
-  const prev = () => {
-    setFirstImageSelected((curr) => {
-      if (curr === null) return null;
-      return curr === 0 ? data.imageCarousel.length - 1 : curr - 1;
-    });
-  };
-
-  const next = () => {
-    setFirstImageSelected((curr) => {
-      if (curr === null) return null;
-      return curr === data.imageCarousel.length - 1 ? 0 : curr + 1;
-    });
-  };
-
   return (
     <div className="bg-gray-950">
       <div className="container grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden md:grid-cols-3">
@@ -87,8 +73,6 @@ export default function MediaCarousel({ data }: CarouselProps) {
       </div>
       <MediaModal
         data={data}
-        handlePrev={prev}
-        handleNext={next}
         firstImageSelected={firstImageSelected}
         handleModalClose={() => setFirstImageSelected(null)}
       />
