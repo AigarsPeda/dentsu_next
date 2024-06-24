@@ -3,9 +3,8 @@ import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Carousel } from "flowbite-react";
-import { Suspense, use, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import ReactPlayer from "react-player";
 
 export const isImageUrl = (url: string): boolean => {
   return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/.test(url);
@@ -79,11 +78,6 @@ export default function MediaModal({
                 className="relative w-full h-full overflow-hidden text-center rounded-sm"
               >
                 {isAvailableVideo && item.url ? (
-                  // <ReactPlayer
-                  //   url={`${item.url}&enablejsapi=1&origin=http://localhost:3000`}
-                  //   width={"100%"}
-                  //   height={"100%"}
-                  // />
                   <Suspense
                     fallback={
                       <div className="w-full h-full text-white bg-slate-950">
@@ -91,11 +85,13 @@ export default function MediaModal({
                       </div>
                     }
                   >
-                    <ReactPlayer
-                      url={`${item.url}&enablejsapi=1&origin=http://localhost:3000`}
-                      width={"100%"}
-                      height={"100%"}
-                    />
+                    <iframe
+                      src={item.url}
+                      width="100%"
+                      height="100%"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
                   </Suspense>
                 ) : (
                   <img
