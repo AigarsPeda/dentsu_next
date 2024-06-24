@@ -5,6 +5,7 @@ import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Carousel } from "flowbite-react";
 import { useCallback, useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
+import VideoEmbed from "./VideoEmbed";
 
 export const isImageUrl = (url: string): boolean => {
   return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/.test(url);
@@ -70,16 +71,24 @@ export default function MediaModal({
                 className="relative w-full h-full overflow-hidden text-center rounded-sm"
               >
                 {isAvailableVideo && item.url ? (
-                  <embed
-                    src={`${item.url}rel=0&enablejsapi=1`}
-                    title="YouTube video player"
-                    // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    // referrerPolicy="strict-origin-when-cross-origin"
-                    // allowFullScreen
-                    className="w-full h-full"
-                    // loading="eager"
-                  ></embed>
+                  <VideoEmbed
+                    data={{
+                      id: item.id,
+                      url: item.url,
+                      width: 1920,
+                      height: 1080,
+                    }}
+                  />
                 ) : (
+                  // <embed
+                  //   src={`${item.url}rel=0&enablejsapi=1`}
+                  //   title="YouTube video player"
+                  //   // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  //   // referrerPolicy="strict-origin-when-cross-origin"
+                  //   // allowFullScreen
+                  //   className="w-full h-full"
+                  //   // loading="eager"
+                  // ></embed>
                   <img
                     alt={`Carousel image ${index + 1}`}
                     className="absolute object-cover w-full h-full"

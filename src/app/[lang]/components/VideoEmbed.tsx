@@ -1,8 +1,8 @@
 interface VideoEmbedProps {
   id: number;
   url: string;
-  width?: string;
-  height?: string;
+  width?: string | number;
+  height?: string | number;
 }
 
 const getEmbedUrl = (videoUrl: string): string | null => {
