@@ -1,4 +1,5 @@
 "use client";
+
 import MediaModal, { isImageUrl } from "@/app/[lang]/components/MediaModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { useState } from "react";
@@ -85,16 +86,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
           );
         })}
       </div>
-      <iframe
-        src={`${data.imageCarousel[0].url}`}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-        width={640}
-        height={360}
-        className="w-full h-full"
-      ></iframe>
+
       <MediaModal
         data={data}
         handlePrev={prev}
