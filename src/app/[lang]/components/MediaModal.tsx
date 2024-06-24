@@ -2,7 +2,7 @@ import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Transition } from "@headlessui/react";
-import { useCallback, useRef, useState } from "react";
+import { use, useCallback, useEffect, useRef, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 
@@ -43,12 +43,12 @@ export default function MediaModal({
   handleModalClose,
   firstImageSelected,
 }: MediaModalProps) {
+  const [isWindowObject, setIsWindowObject] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [direction, setDirection] = useState("right");
   useOnClickOutside<HTMLDivElement>(dropdownRef, () => {
     handleModalClose();
   });
-  const divRef = useRef<HTMLDivElement>(null);
 
   const getTransitionClasses = useCallback(() => {
     if (direction === "right") {
@@ -72,25 +72,19 @@ export default function MediaModal({
     }
   }, [direction]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsWindowObject(true);
+    }
+  }, []);
+
+  if (!isWindowObject) {
+    return null;
+  }
+
   const transitionClasses = getTransitionClasses();
 
-  // create iframe for video in ref div with delay first create iframe and then add video
-  const createIframe = (src: string) => {
-    const iframe = document.createElement("iframe");
-    iframe.src = src;
-    iframe.title = "YouTube video player";
-    iframe.allow =
-      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-    iframe.referrerPolicy = "strict-origin-when-cross-origin";
-    iframe.allowFullscreen = true;
-    // iframe.className = "w-full h-full";
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-
-    if (divRef.current) {
-      divRef.current.appendChild(iframe);
-    }
-  };
+  console.log("window.location", window.location.origin);
 
   return (
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
@@ -108,12 +102,6 @@ export default function MediaModal({
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
 
-            if (firstImageSelected === index && isAvailableVideo && item.url) {
-              setTimeout(() => {
-                createIframe(item.url ?? "");
-              }, 500);
-            }
-
             return (
               <Transition
                 key={index}
@@ -126,16 +114,17 @@ export default function MediaModal({
                 leaveFrom={transitionClasses.leaveFrom}
               >
                 {isAvailableVideo && item.url ? (
-                  <div ref={divRef}></div>
+                  <iframe
+                    src={`${item.url}&origin=&${window.location.origin}`}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    width={640}
+                    height={360}
+                    className="w-full h-full"
+                  ></iframe>
                 ) : (
-                  // <iframe
-                  //   src={item.url}
-                  //   title="YouTube video player"
-                  //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  //   referrerPolicy="strict-origin-when-cross-origin"
-                  //   allowFullScreen
-                  //   className="w-full h-full"
-                  // ></iframe>
                   <img
                     alt={`Carousel image ${index + 1}`}
                     className="absolute object-cover w-full h-full"
