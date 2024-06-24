@@ -35,10 +35,24 @@ export default function MediaCarousel({ data }: CarouselProps) {
     null
   );
 
+  const prev = () => {
+    setFirstImageSelected((curr) => {
+      if (curr === null) return null;
+      return curr === 0 ? data.imageCarousel.length - 1 : curr - 1;
+    });
+  };
+
+  const next = () => {
+    setFirstImageSelected((curr) => {
+      if (curr === null) return null;
+      return curr === data.imageCarousel.length - 1 ? 0 : curr + 1;
+    });
+  };
+
   return (
     <div className="bg-gray-950">
       <div className="container grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden md:grid-cols-3">
-        {data.imageCarousel?.slice(0, 3).map((image, index) => {
+        {/* {data.imageCarousel?.slice(0, 3).map((image, index) => {
           const src =
             getStrapiMedia(image.media.data?.[0]?.attributes?.url) ??
             image.url ??
@@ -69,13 +83,43 @@ export default function MediaCarousel({ data }: CarouselProps) {
               )}
             </div>
           );
+        })} */}
+        {data.imageCarousel.map((item, index) => {
+          const isAvailableVideo = item.url && !isImageUrl(item.url);
+
+          console.log("item.url", item.url);
+
+          return (
+            <div className="max-h-72">
+              {isAvailableVideo && item.url ? (
+                <iframe
+                  src={item.url}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="w-full h-full"
+                ></iframe>
+              ) : (
+                <img
+                  alt={`Carousel image ${index + 1}`}
+                  className="object-cover w-full h-full"
+                  src={
+                    getStrapiMedia(item.media.data?.[0]?.attributes?.url) ?? ""
+                  }
+                />
+              )}
+            </div>
+          );
         })}
       </div>
-      <MediaModal
+      {/* <MediaModal
         data={data}
+        handlePrev={prev}
+        handleNext={next}
         firstImageSelected={firstImageSelected}
         handleModalClose={() => setFirstImageSelected(null)}
-      />
+      /> */}
     </div>
   );
 }

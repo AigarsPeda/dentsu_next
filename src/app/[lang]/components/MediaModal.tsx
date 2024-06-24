@@ -2,8 +2,9 @@
 import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
-import { Carousel } from "flowbite-react";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Transition } from "@headlessui/react";
+import { useCallback, useRef, useState } from "react";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 
 export const isImageUrl = (url: string): boolean => {
@@ -11,6 +12,8 @@ export const isImageUrl = (url: string): boolean => {
 };
 
 interface MediaModalProps {
+  handlePrev: () => void;
+  handleNext: () => void;
   handleModalClose: () => void;
   firstImageSelected: number | null;
   data: {
@@ -36,25 +39,40 @@ interface MediaModalProps {
 
 export default function MediaModal({
   data,
+  handlePrev,
+  handleNext,
   handleModalClose,
   firstImageSelected,
 }: MediaModalProps) {
-  const [isWindow, setIsWindow] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [direction, setDirection] = useState("right");
   useOnClickOutside<HTMLDivElement>(dropdownRef, () => {
     handleModalClose();
   });
 
-  useEffect(() => {
-    // setIsWindow(true);
-    if (typeof window !== "undefined") {
-      setIsWindow(true);
+  const getTransitionClasses = useCallback(() => {
+    if (direction === "right") {
+      return {
+        enterTo: "transform translate-x-0",
+        leaveFrom: "transform translate-x-0",
+        leaveTo: "transform -translate-x-full",
+        enterFrom: "transform translate-x-full",
+        leave: "transition-transform duration-500",
+        enter: "transition-transform duration-500",
+      };
+    } else {
+      return {
+        enterTo: "transform translate-x-0",
+        leaveFrom: "transform translate-x-0",
+        leaveTo: "transform translate-x-full",
+        enterFrom: "transform -translate-x-full",
+        leave: "transition-transform duration-500",
+        enter: "transition-transform duration-500",
+      };
     }
-  }, []);
+  }, [direction]);
 
-  if (!isWindow || !firstImageSelected) return null;
-
-  // if (window === undefined) return null;
+  const transitionClasses = getTransitionClasses();
 
   return (
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
@@ -68,31 +86,32 @@ export default function MediaModal({
         >
           <IoCloseSharp className="w-7 h-7" />
         </button>
-        <Carousel slide={false}>
+        <section className="relative w-full h-full overflow-hidden text-center rounded-sm">
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
-            console.log("item", item);
+
+            console.log("item.url", item.url);
+
             return (
-              <div
+              <Transition
                 key={index}
-                className="relative w-full h-full overflow-hidden text-center rounded-sm"
+                enter={transitionClasses.enter}
+                leave={transitionClasses.leave}
+                show={firstImageSelected === index}
+                enterTo={transitionClasses.enterTo}
+                leaveTo={transitionClasses.leaveTo}
+                enterFrom={transitionClasses.enterFrom}
+                leaveFrom={transitionClasses.leaveFrom}
               >
                 {isAvailableVideo && item.url ? (
-                  <Suspense
-                    fallback={
-                      <div className="w-full h-full text-white bg-slate-950">
-                        Loading...
-                      </div>
-                    }
-                  >
-                    <iframe
-                      src={item.url}
-                      width="100%"
-                      height="100%"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  </Suspense>
+                  <iframe
+                    src={item.url}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
                 ) : (
                   <img
                     alt={`Carousel image ${index + 1}`}
@@ -103,10 +122,30 @@ export default function MediaModal({
                     }
                   />
                 )}
-              </div>
+              </Transition>
             );
           })}
-        </Carousel>
+          <div className="absolute z-50 flex items-center justify-between w-full h-full">
+            <button
+              className="m-4 rounded-full"
+              onClick={() => {
+                setDirection("left");
+                handlePrev();
+              }}
+            >
+              <IoIosArrowBack className="w-10 h-10" />
+            </button>
+            <button
+              className="m-4 rounded-full"
+              onClick={() => {
+                setDirection("right");
+                handleNext();
+              }}
+            >
+              <IoIosArrowForward className="w-10 h-10" />
+            </button>
+          </div>
+        </section>
       </div>
     </MyModal>
   );
