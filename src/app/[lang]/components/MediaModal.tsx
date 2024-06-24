@@ -50,13 +50,11 @@ export default function MediaModal({
     handleModalClose();
   });
 
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-
   const [videoUrl, setVideoUrl] = useState(
     "https://www.youtube.com/embed/dQw4w9WgXcQ?si=q99ZTV6toRy7JGSA"
   );
 
-  // useEffect(() => {}, [firstImageSelected]);
+  useEffect(() => {}, [firstImageSelected]);
 
   const getTransitionClasses = useCallback(() => {
     if (direction === "right") {
@@ -113,16 +111,13 @@ export default function MediaModal({
               >
                 {isAvailableVideo && item.url ? (
                   <iframe
-                    // src={item.url}
+                    // src={item.url ?? videoUrl}
+                    src={videoUrl}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                     className="w-full h-full"
-                    onLoad={(e) => {
-                      console.log("iframe loaded");
-                      e.currentTarget.src = item.url ?? "";
-                    }}
                   ></iframe>
                 ) : (
                   <img
