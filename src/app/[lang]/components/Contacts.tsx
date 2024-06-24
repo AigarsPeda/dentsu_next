@@ -1,4 +1,5 @@
 "use client";
+
 import { MapComponent } from "@/app/[lang]/components/Map";
 import MySelect from "@/app/[lang]/components/Select";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
@@ -91,7 +92,7 @@ export default function Contacts({ data }: ContactsProps) {
           setFormSubmitStatus("error");
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   };
 
   const createLinks = (text: string) => {

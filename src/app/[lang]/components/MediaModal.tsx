@@ -5,7 +5,7 @@ import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Carousel } from "flowbite-react";
 import { useCallback, useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import VideoEmbed from "./VideoEmbed";
+import ReactPlayer from "react-player";
 
 export const isImageUrl = (url: string): boolean => {
   return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/.test(url);
@@ -61,7 +61,7 @@ export default function MediaModal({
         >
           <IoCloseSharp className="w-7 h-7" />
         </button>
-        <Carousel>
+        <Carousel slide={false}>
           {data.imageCarousel.map((item, index) => {
             const isAvailableVideo = item.url && !isImageUrl(item.url);
             console.log("item", item);
@@ -71,13 +71,12 @@ export default function MediaModal({
                 className="relative w-full h-full overflow-hidden text-center rounded-sm"
               >
                 {isAvailableVideo && item.url ? (
-                  <VideoEmbed
-                    data={{
-                      id: item.id,
-                      url: item.url,
-                      width: 1920,
-                      height: 1080,
-                    }}
+                  <ReactPlayer
+                    url={item.url}
+                    pip={true}
+                    light={true}
+                    width={"100%"}
+                    height={"100%"}
                   />
                 ) : (
                   // <embed
