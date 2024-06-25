@@ -107,10 +107,10 @@ export default function MediaModal({
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
       <div
         ref={dropdownRef}
-        className="p-10 w-full max-w-6xl md:h-[54rem] h-[24rem] flex items-start justify-center relative"
+        className="md:p-10 p-1 w-full max-w-6xl md:h-[54rem] h-[26rem] flex items-start justify-center relative"
       >
         <button
-          className="absolute text-white top-2 right-2"
+          className="absolute z-20 text-white top-4 right-4"
           onClick={handleModalClose}
         >
           <IoCloseSharp className="w-7 h-7" />
@@ -140,7 +140,7 @@ export default function MediaModal({
                     allowFullScreen
                     width={640}
                     height={360}
-                    className="w-full h-full"
+                    className="absolute w-full h-full"
                   ></iframe>
                 ) : (
                   <img
