@@ -84,20 +84,20 @@ export default function MediaModal({
 
   const transitionClasses = getTransitionClasses();
 
-  const validateUrl = (url: string | null) => {
-    if (!url) return "";
-    try {
-      const urlObj = new URL(url);
-      // console.log("urlObj", urlObj);
-      // https://www.youtube.com/embed/22tVWwmTie8?si=t4SLeM967SRpzkJc
-      const result = `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}?${urlObj.search}`;
-      console.log("result", result);
-      return result;
-    } catch (error) {
-      console.error("Invalid URL:", url);
-      return "";
-    }
-  };
+  // const validateUrl = (url: string | null) => {
+  //   if (!url) return "";
+  //   try {
+  //     const urlObj = new URL(url);
+  //     // console.log("urlObj", urlObj);
+  //     // https://www.youtube.com/embed/22tVWwmTie8?si=t4SLeM967SRpzkJc
+  //     const result = `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}?${urlObj.search}`;
+  //     console.log("result", result);
+  //     return result;
+  //   } catch (error) {
+  //     console.error("Invalid URL:", url);
+  //     return "";
+  //   }
+  // };
 
   return (
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
@@ -129,7 +129,7 @@ export default function MediaModal({
               >
                 {isAvailableVideo && item.url ? (
                   <iframe
-                    src={validateUrl(`${item.url}`)}
+                    src={item.url}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
