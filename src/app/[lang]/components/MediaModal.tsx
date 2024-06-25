@@ -84,20 +84,24 @@ export default function MediaModal({
 
   const transitionClasses = getTransitionClasses();
 
-  // const validateUrl = (url: string | null) => {
-  //   if (!url) return "";
-  //   try {
-  //     const urlObj = new URL(url);
-  //     // console.log("urlObj", urlObj);
-  //     // https://www.youtube.com/embed/22tVWwmTie8?si=t4SLeM967SRpzkJc
-  //     const result = `${urlObj.protocol}//${urlObj.host}${urlObj.pathname}?${urlObj.search}`;
-  //     console.log("result", result);
-  //     return result;
-  //   } catch (error) {
-  //     console.error("Invalid URL:", url);
-  //     return "";
-  //   }
-  // };
+  const getEmbedUrl = (videoUrl: string): string => {
+    const youtubeRegex =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|watch\?v%3D)([\w-]{11}).*/;
+    const youtubeMatch = videoUrl.match(youtubeRegex);
+
+    if (youtubeMatch && youtubeMatch[2].length === 11) {
+      return `https://www.youtube.com/embed/${youtubeMatch[2]}`;
+    }
+
+    const vimeoRegex = /(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i;
+    const vimeoMatch = videoUrl.match(vimeoRegex);
+
+    if (vimeoMatch && vimeoMatch[1]) {
+      return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+    }
+
+    return videoUrl;
+  };
 
   return (
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
@@ -129,7 +133,7 @@ export default function MediaModal({
               >
                 {isAvailableVideo && item.url ? (
                   <iframe
-                    src={item.url}
+                    src={getEmbedUrl(item.url)}
                     title="YouTube video player"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
