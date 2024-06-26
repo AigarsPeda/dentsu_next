@@ -174,7 +174,7 @@ export default function Contacts({ data }: ContactsProps) {
   }, [formSubmitStatus]);
 
   return (
-    <div className="container flex flex-col-reverse grid-cols-1 gap-10 px-10 mx-auto md:grid md:grid-cols-2">
+    <div className="container flex flex-col-reverse grid-cols-1 gap-10 px-8 mx-auto md:grid md:grid-cols-2 md:pb-10">
       <div>
         <div>
           <p className="pb-10 text-sm text-left">{data.title}</p>

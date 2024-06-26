@@ -74,7 +74,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
             >
               <img
                 src={src}
-                className="w-auto h-full"
+                className="object-cover w-auto h-full"
                 alt={`Carousel image ${index + 1}`}
               />
               {isAvailableVideo && (
