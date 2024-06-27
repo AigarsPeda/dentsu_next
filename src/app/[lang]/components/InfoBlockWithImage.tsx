@@ -28,11 +28,11 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
   const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
 
   return (
-    <div className="relative overflow-hidden lg:h-[650px]">
+    <div className="relative overflow-hidden lg:h-[570px]">
       <div
         className={classNames(
           data.pictureOnRight ? "lg:left-[40%]" : "lg:right-[40%]",
-          "w-full lg:absolute lg:h-[550px] h-[400px] lg:pb-10"
+          "w-full lg:absolute lg:h-[470px] h-[400px] lg:pb-10"
         )}
       >
         {imgUrl && (

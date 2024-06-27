@@ -51,8 +51,8 @@ export default function Navbar({
   }));
 
   return (
-    <div className="py-4 bg-dentsu-primary">
-      <div className="container flex items-center justify-between mx-auto h-14">
+    <div className="sticky top-0 z-30 py-4 bg-dentsu-primary">
+      <div className="container flex items-center justify-between mx-auto h-9 md:h-14">
         <Logo href={`/${urlLocale}`} src={logoUrl}>
           {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
         </Logo>

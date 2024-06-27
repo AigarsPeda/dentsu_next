@@ -60,8 +60,8 @@ export default function Services({ data }: ServicesProps) {
     ? getStrapiMedia(data.mobLogo.data.attributes.url)
     : undefined;
 
-  const height = 300 + data.services.length * 130;
-  const mobHeight = 300 + data.services.length * 60;
+  const height = 300 + data.services.length * 60;
+  const mobHeight = 300 + data.services.length * 50;
 
   useEffect(() => {
     if (typeof window === "undefined") return;

@@ -40,7 +40,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
     }
   };
 
-  const height = data.length * 80;
+  const height = data.length * 10;
 
   return (
     <div
@@ -49,9 +49,9 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
       )}
     >
       <div
-        style={{
-          height: `${height}px`,
-        }}
+      // style={{
+      //   height: `${height}px`,
+      // }}
       >
         {data.map((service, index) => {
           return (
