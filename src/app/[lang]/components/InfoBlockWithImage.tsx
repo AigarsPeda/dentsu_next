@@ -38,11 +38,14 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
         {imgUrl && (
           <img
             src={imgUrl}
-            alt="our client logo"
-            className="object-cover w-full h-full"
+            alt={"Image"}
+            className={classNames(
+              "object-cover w-full h-full absolute top-0 left-0 bg-gray-300"
+            )}
           />
         )}
       </div>
+
       <div
         className={classNames(
           data.pictureOnRight

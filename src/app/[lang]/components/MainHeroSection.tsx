@@ -32,7 +32,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
       {/* <div className="absolute inset-0 bg-black opacity-50" /> */}
-      <div className="container absolute transform -translate-x-1/2 md:-translate-y-1/2 top-1/2 left-1/2">
+      <div className="container absolute transform -translate-x-1/2 md:-translate-y-1/2 md:top-1/2 left-1/2 bottom-[20%]">
         <h1 className="p-0 font-medium text-white md:text-center">
           {data.title}
         </h1>

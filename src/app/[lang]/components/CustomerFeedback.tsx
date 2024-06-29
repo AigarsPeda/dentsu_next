@@ -1,9 +1,9 @@
 "use client";
-import Slider, { Settings } from "react-slick";
+import DoubleArrows from "@/app/[lang]/components/icons/DoubleArrows";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import DoubleArrows from "./icons/DoubleArrows";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 interface FeaturesType {
   id: number;
@@ -18,15 +18,6 @@ interface CustomerFeedbackProps {
 }
 
 export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
-  // const settings: Settings = {
-  //   dots: false,
-  //   infinite: false,
-  //   slidesToShow: 3,
-  //   slidesToScroll: 1,
-  //   nextArrow: <SampleNextArrow />,
-  //   prevArrow: <SamplePrevArrow />,
-  // };
-
   return (
     <div className="container mx-auto mt-4 mb-10 md:mb-20">
       {/* @ts-ignore */}

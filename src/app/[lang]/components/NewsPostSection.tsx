@@ -68,7 +68,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
                 <img
                   src={src}
                   alt={thumbnail.alternativeText || "news post image"}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-full bg-gray-300"
                 />
               </div>
               <div>
