@@ -75,13 +75,21 @@ export default function Contacts({ data }: ContactsProps) {
   const onSubmit: SubmitHandler<IFormInput> = (formData) => {
     setFormSubmitStatus("loading");
 
+    // before submitting the form, we need to add change obj key to match from camelCase to regular case
+    const formDataToSend = Object.keys(formData).reduce((acc, key) => {
+      const newKey = key.replace(/([A-Z])/g, " $1").toLowerCase();
+      acc[newKey.trim()] = formData[key];
+      return acc;
+    }, {} as IFormInput);
+
     fetch(`https://formsubmit.co/ajax/${data.contactEmail}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify(formData),
+      // body: JSON.stringify(formData),
+      body: JSON.stringify(formDataToSend),
     })
       .then((response) => response.json())
       .then((res: EmailResponseTypes) => {

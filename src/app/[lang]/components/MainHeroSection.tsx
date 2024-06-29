@@ -28,7 +28,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
 
   return (
     <section
-      className="relative flex items-center justify-center w-full md:h-[90vh] h-[80vh] bg-cover bg-center"
+      className="relative flex items-center justify-center w-full md:h-[92vh] h-[80vh] bg-cover bg-center"
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
       {/* <div className="absolute inset-0 bg-black opacity-50" /> */}
@@ -38,7 +38,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
         </h1>
       </div>
       <div className="absolute hidden transform bottom-10 animate-bounce md:block">
-        <ArrowIcon className="w-14 h-14 fill-gray-50" />
+        <ArrowIcon className="w-12 h-12 fill-gray-50" />
       </div>
     </section>
   );
