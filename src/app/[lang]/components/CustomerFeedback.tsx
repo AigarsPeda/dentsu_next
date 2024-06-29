@@ -29,6 +29,7 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
 
   return (
     <div className="container mx-auto mt-4 mb-10 md:mb-20">
+      {/* @ts-ignore */}
       <Slider
         dots={false}
         infinite={false}
