@@ -23,7 +23,7 @@ interface ServicesHeadlineWithImageProps {
 export default function ServicesHeadlineWithImage({
   data,
 }: ServicesHeadlineWithImageProps) {
-  const imgUrl = getStrapiMedia(data.media.data[0].attributes.url) ?? "";
+  const imgUrl = getStrapiMedia(data.media.data[0]?.attributes.url) ?? "";
 
   return (
     <div className="relative w-full h-full">

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 interface ServicesProps {
   data: {
     id: number;
+    isDarkOverlay: boolean;
     pictureOnRight: boolean;
     media: {
       data: {
@@ -55,7 +56,7 @@ interface ServicesProps {
 export default function Services({ data }: ServicesProps) {
   const [isMobile, setIsMobile] = useState(false);
   const logoUrl = getStrapiMedia(data.logo.data.attributes.url) ?? "";
-  const imgUrl = getStrapiMedia(data.media.data[0].attributes.url) ?? "";
+  const imgUrl = getStrapiMedia(data.media.data[0]?.attributes.url) ?? "";
   const mobLogoUrl = data.mobLogo.data
     ? getStrapiMedia(data.mobLogo.data.attributes.url)
     : undefined;
@@ -87,6 +88,7 @@ export default function Services({ data }: ServicesProps) {
       <DivWithImage
         imgUrl={imgUrl}
         logoUrl={logoUrl}
+        isDarkOverlay={data.isDarkOverlay}
         pictureOnRight={data.pictureOnRight}
       >
         <div className="block pt-10 pb-3 md:hidden">
@@ -105,21 +107,39 @@ export const DivWithImage = ({
   imgUrl,
   logoUrl,
   children,
+  isDarkOverlay,
   pictureOnRight,
 }: {
   imgUrl: string;
   logoUrl: string;
+  isDarkOverlay: boolean;
   pictureOnRight: boolean;
   children?: React.ReactNode;
 }) => {
+  const createBackgroundImage = (url: string) => {
+    if (!isDarkOverlay) {
+      return {
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundImage: `url(${url})`,
+      };
+    }
+
+    return {
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`,
+    };
+  };
+
   return (
     <>
       <div
         className="relative items-center justify-center hidden bg-center bg-cover md:flex"
         style={{
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          ...(pictureOnRight && { backgroundImage: `url(${imgUrl})` }),
+          ...(pictureOnRight && {
+            ...createBackgroundImage(imgUrl),
+          }),
         }}
       >
         <div className="container relative flex items-center justify-center w-full h-full">
@@ -134,7 +154,9 @@ export const DivWithImage = ({
       </div>
       <div
         style={{
-          ...(!pictureOnRight && { backgroundImage: `url(${imgUrl})` }),
+          ...(!pictureOnRight && {
+            ...createBackgroundImage(imgUrl),
+          }),
         }}
       >
         {children}
