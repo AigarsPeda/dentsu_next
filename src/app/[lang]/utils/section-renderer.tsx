@@ -18,6 +18,7 @@ import PostImage from "@/app/[lang]/components/PostImage";
 import PostSection from "@/app/[lang]/components/PostSection";
 import PostSectionWithImage from "@/app/[lang]/components/PostSectionWithImage";
 import PostStatisticWithImage from "@/app/[lang]/components/PostStatisticWithImage";
+import PostTitle from "@/app/[lang]/components/PostTitle";
 import RichTextPost from "@/app/[lang]/components/RichTextPost";
 import Services from "@/app/[lang]/components/Services";
 import ServicesHeadlineWithImage from "@/app/[lang]/components/ServicesHeadlineWithImage";
@@ -25,11 +26,13 @@ import SocialShare from "@/app/[lang]/components/SocialShare";
 import Table from "@/app/[lang]/components/Table";
 import Vacancies from "@/app/[lang]/components/Vacancies";
 import VacanciesHeadline from "@/app/[lang]/components/VacanciesHeadline";
+import VideoEmbed from "@/app/[lang]/components/VideoEmbed";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
-import VideoEmbed from "../components/VideoEmbed";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
+    case "sections.post-title":
+      return <PostTitle key={index} data={section} />;
     case "shared.video-embed":
       return <VideoEmbed key={index} data={section} />;
     case "sections.hero":

@@ -46,7 +46,7 @@ export default function PostSection({ data }: PostSectionProps) {
     <div className="container mx-auto mb-10">
       <ul
         ref={parent}
-        className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12 place-content-center "
+        className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12 place-content-center"
       >
         {filteredData.map((item) => {
           const imgUrl = getStrapiMedia(item.media.data[0].attributes.url);
@@ -56,7 +56,7 @@ export default function PostSection({ data }: PostSectionProps) {
                 <img
                   src={imgUrl}
                   alt="our client logo"
-                  className="object-cover w-full lg:h-[400px] lg:max-h-[500px] max-h-[250px] bg-gray-300 h-full"
+                  className="object-cover w-full lg:h-[400px] lg:max-h-[500px] max-h-[250px] bg-gray-300"
                 />
               )}
               <div className="flex items-end p-6 bg-gray-950 text-gray-50">
