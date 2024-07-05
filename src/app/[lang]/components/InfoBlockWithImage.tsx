@@ -28,7 +28,7 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
   const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
 
   return (
-    <div className="relative overflow-hidden lg:h-[680px]">
+    <div className="relative overflow-hidden lg:h-[680px] h-[400px]">
       <div
         className={classNames(
           data.pictureOnRight ? "lg:left-[40%]" : "lg:right-[40%]",

@@ -1,7 +1,8 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { getStrapiMedia } from "../utils/api-helpers";
-import Image from "next/image";
-import ArrowIcon from "./icons/ArrowIcon";
+"use client";
+import ArrowIcon from "@/app/[lang]/components/icons/ArrowIcon";
+import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { useSearchParams } from "next/navigation";
 
 interface MediaType {
   id: string;
@@ -20,6 +21,7 @@ interface FeaturesType {
   postUrl: string;
   isNewTab: boolean;
   description: string;
+  company: string | null;
   media: {
     data: MediaType[];
   };
@@ -27,18 +29,29 @@ interface FeaturesType {
 
 interface PostSectionProps {
   data: {
-    feature: FeaturesType[];
+    post: FeaturesType[];
   };
 }
 
 export default function PostSection({ data }: PostSectionProps) {
+  const params = useSearchParams();
+  const [parent] = useAutoAnimate();
+  const search = params.get("search");
+
+  const filteredData = data.post.filter((item) => {
+    return item.company?.toLowerCase().includes(search?.toLowerCase() || "");
+  });
+
   return (
     <div className="container mx-auto mb-10">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12 place-content-center ">
-        {data.feature.map((item) => {
+      <ul
+        ref={parent}
+        className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12 place-content-center "
+      >
+        {filteredData.map((item) => {
           const imgUrl = getStrapiMedia(item.media.data[0].attributes.url);
           return (
-            <div key={item.id}>
+            <li key={item.id}>
               {imgUrl && (
                 <img
                   src={imgUrl}
@@ -70,10 +83,10 @@ export default function PostSection({ data }: PostSectionProps) {
                   </a>
                 </div>
               </div>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 }

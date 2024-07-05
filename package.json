@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",
+    "@formkit/auto-animate": "^0.8.2",
     "@headlessui/react": "^2.0.4",
     "@heroicons/react": "^2.1.1",
     "@react-google-maps/api": "^2.19.3",
