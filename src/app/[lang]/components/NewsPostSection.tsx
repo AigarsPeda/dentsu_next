@@ -78,7 +78,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
                 </p>
                 <a
                   href={newsPost.url}
-                  className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm md:mt-2 bg-gray-950 text-gray-50"
+                  className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm md:mt-2 bg-black text-gray-50"
                 >
                   {newsPost.buttonTitle}
                   <IoIosArrowForward />
@@ -96,7 +96,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
               onClick={() => handlePageChange(index + 1)}
               className={`px-3 py-1 mx-1 ${
                 index + 1 === currentPage
-                  ? "bg-gray-950 text-gray-50"
+                  ? "bg-black text-gray-50"
                   : "bg-gray-200"
               }`}
             >

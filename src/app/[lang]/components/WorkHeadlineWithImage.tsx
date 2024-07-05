@@ -30,7 +30,7 @@ export default function WorkHeadlineWithImage({
       className="relative flex items-center justify-center w-full h-[80vh] bg-cover bg-center"
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
-      <div className="container absolute bottom-12 md:bottom-40 md:right-0 right-5 bg-gray-950 md:w-[50%] w-[90%] p-10">
+      <div className="container absolute bottom-12 md:bottom-40 md:right-0 right-5 bg-black md:w-[50%] w-[90%] p-10">
         <div>
           <h3 className="max-w-sm pb-6 font-medium text-white">
             {data.headline}

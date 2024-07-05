@@ -187,7 +187,7 @@ export default function Navbar({
           className="p-0 lg:hidden"
           onClick={() => setMobileMenuOpen(true)}
         >
-          <Bars3Icon className="text-gray-100 h-7 w-7" aria-hidden="true" />
+          <Bars3Icon className="text-white h-7 w-7" aria-hidden="true" />
         </button>
       </div>
     </div>
@@ -232,7 +232,7 @@ function MobileNavLink({ url, text, locale, closeMenu }: MobileNavLink) {
     <Link
       onClick={handleClick}
       href={`/${locale}${url}`}
-      className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-100 hover:bg-gray-900 ${
+      className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-900 ${
         path === url && ""
       }}`}
     >

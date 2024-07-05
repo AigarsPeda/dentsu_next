@@ -52,12 +52,14 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
               className="flex items-center justify-center pb-10"
             >
               <div className="flex flex-col items-center">
-                {imgSrc && (
+                {imgSrc ? (
                   <img
                     src={imgSrc}
                     alt="our client logo"
-                    className="object-contain w-full h-full max-w-[200px]"
+                    className="object-contain w-full h-full max-w-[200px] rounded-full overflow-hidden"
                   />
+                ) : (
+                  <div className="object-contain w-full h-full max-w-[200px] rounded-full overflow-hidden" />
                 )}
                 <div className="mt-3 text-center">
                   <h3 className="text-base">{item.name}</h3>
@@ -73,7 +75,7 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
         <div className="flex justify-center">
           <a
             href={data.redirectUrl ?? `mailto:${data.contactEmail}` ?? ""}
-            className="flex items-center justify-center gap-3 px-6 py-2 text-base text-white rounded bg-gray-950"
+            className="flex items-center justify-center gap-3 px-6 py-2 text-base text-white bg-black rounded"
           >
             <EnvelopeIcon className="w-6 h-6" />
             {data.buttonTitle}

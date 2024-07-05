@@ -23,7 +23,6 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
       {/* @ts-ignore */}
       <Slider
         dots={false}
-        infinite={false}
         slidesToShow={3}
         slidesToScroll={1}
         nextArrow={<SampleNextArrow />}
@@ -48,7 +47,7 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
         {data.feature.map((item) => {
           return (
             <div key={item.id} className="pl-2 pr-2">
-              <div className="p-6 bg-gray-950 text-gray-50">
+              <div className="p-6 bg-black text-gray-50">
                 <DoubleArrows className="w-12 h-12 mb-4" />
                 <div className="w-full">
                   <div className="mb-8 overflow-hidden md:h-60 md:custom-clamp-10">
@@ -84,7 +83,7 @@ function SampleNextArrow(props: any) {
   };
   return (
     <div className={className} style={{ display: "block" }} onClick={onClick}>
-      <IoIosArrowForward className="w-8 h-8 text-gray-950" />
+      <IoIosArrowForward className="w-8 h-8 text-black" />
     </div>
   );
 }
@@ -96,7 +95,7 @@ function SamplePrevArrow(props: unknown) {
   };
   return (
     <div className={className} style={{ display: "block" }} onClick={onClick}>
-      <IoIosArrowBack className="w-8 h-8 text-gray-950" />
+      <IoIosArrowBack className="w-8 h-8 text-black" />
     </div>
   );
 }

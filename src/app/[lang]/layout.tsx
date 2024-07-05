@@ -125,7 +125,7 @@ export default async function RootLayout({
 
   return (
     <html lang={params.lang}>
-      <body className="text-gray-100">
+      <body className="text-white">
         <Navbar
           links={navbar.links}
           logoUrl={navbarLogoUrl}
@@ -133,7 +133,9 @@ export default async function RootLayout({
           logoText={navbar.navbarLogo.logoText}
         />
 
-        <main className="min-h-screen text-gray-800">{children}</main>
+        <main className="min-h-screen overflow-hidden text-black">
+          {children}
+        </main>
 
         <Banner data={notificationBanner} />
         <Footer footer={footer} />

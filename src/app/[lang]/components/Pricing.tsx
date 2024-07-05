@@ -27,7 +27,7 @@ interface PriceProps {
 
 export default function Pricing({ data }: PriceProps) {
   return (
-    <section className="py-20 dark:bg-black dark:text-gray-100 m:py-12 lg:py-24">
+    <section className="py-20 dark:bg-black dark:text-white m:py-12 lg:py-24">
       <div className="container px-4 mx-auto ">
         <div className="max-w-2xl mx-auto mb-16 text-center">
           <span className="font-bold tracking-wider uppercase dark:text-violet-400">

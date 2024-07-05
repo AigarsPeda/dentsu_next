@@ -59,7 +59,7 @@ export default function PostSection({ data }: PostSectionProps) {
                   className="object-cover w-full lg:h-[400px] lg:max-h-[500px] max-h-[250px] bg-gray-300"
                 />
               )}
-              <div className="flex items-end p-6 bg-gray-950 text-gray-50">
+              <div className="flex items-end p-6 bg-black text-gray-50">
                 <div className="w-full">
                   <div className="mb-3 overflow-hidden h-14 custom-clamp-2">
                     <h6 title={item.title}>{item.title}</h6>

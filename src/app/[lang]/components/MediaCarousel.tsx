@@ -51,7 +51,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
   };
 
   return (
-    <div className="bg-gray-950">
+    <div className="bg-black">
       <div className="container grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden md:grid-cols-3">
         {data?.imageCarousel?.slice(0, 3).map((image, index) => {
           const src =

@@ -53,7 +53,7 @@ export default function Vacancies({ data }: VacanciesProps) {
             <Disclosure as="div" key={vacancy.id} defaultOpen={false}>
               {({ open }) => (
                 <span key={vacancy.id + index} className="w-fulls">
-                  <DisclosureButton className="flex items-center justify-between w-full gap-3 px-4 py-2 bg-gray-200 md:px-10 hover:border-gray-950 focus:border-gray-950 focus:outline-none">
+                  <DisclosureButton className="flex items-center justify-between w-full gap-3 px-4 py-2 bg-gray-200 md:px-10 hover:border-black focus:border-black focus:outline-none">
                     <h3 className="text-xl font-bold truncate md:items-center md:text-3xl">
                       {vacancy.vacancyName}
                     </h3>
@@ -159,7 +159,7 @@ export default function Vacancies({ data }: VacanciesProps) {
                               `Application for ${vacancy.vacancyName}`
                             );
                           }}
-                          className="flex items-center gap-4 px-4 py-2 mt-4 text-sm bg-gray-950 text-gray-50"
+                          className="flex items-center gap-4 px-4 py-2 mt-4 text-sm bg-black text-gray-50"
                         >
                           {vacancy.buttonTitle}{" "}
                           <IoIosArrowDown className="w-4 h-4 transform -rotate-90" />

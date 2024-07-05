@@ -21,6 +21,7 @@ interface FeaturesType {
 
 interface LogosSectionProps {
   data: {
+    showInMobile: boolean;
     company: FeaturesType[];
   };
 }
@@ -30,6 +31,8 @@ export default function LogosSection({ data }: LogosSectionProps) {
   const params = useSearchParams();
   const search = params.get("search");
   const urlLocale = path.split("/")[1] || "en";
+
+  console.log("data", data);
 
   const isUrlMatchToSearch = (url: string | null) => {
     if (!search) {
@@ -65,7 +68,12 @@ export default function LogosSection({ data }: LogosSectionProps) {
   };
 
   return (
-    <div className="container flex-wrap items-center justify-between block mx-auto space-y-6 md:space-y-0 md:flex py-9 lg:py-12">
+    <div
+      className={classNames(
+        !data.showInMobile ? "hidden md:flex" : "md:flex",
+        "container flex-wrap items-center justify-between block mx-auto space-y-6 md:space-y-0 py-9 lg:py-12"
+      )}
+    >
       {data.company?.map((item: FeaturesType) => {
         const imgSrc = getStrapiMedia(item.media.data.attributes.url);
         return (

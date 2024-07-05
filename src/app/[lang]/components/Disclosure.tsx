@@ -48,11 +48,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
         "flex flex-col md:justify-center h-full md:pl-10 md:pr-28 px-10 py-5"
       )}
     >
-      <div
-      // style={{
-      //   height: `${height}px`,
-      // }}
-      >
+      <div>
         {data.map((service, index) => {
           return (
             <Disclosure
@@ -61,10 +57,8 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                 fontColor &&
                   fontColor === "light" &&
                   "text-gray-50 border-gray-50",
-                fontColor &&
-                  fontColor === "dark" &&
-                  "text-gray-950 border-gray-950",
-                !fontColor && "text-gray-950 border-gray-950",
+                fontColor && fontColor === "dark" && "text-black border-black",
+                !fontColor && "text-black border-black",
                 "md:p-4 px-2 py-3 border-b group"
               )}
               key={service.id}
@@ -74,7 +68,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
                 <span key={service.id + index}>
                   <DisclosureButton
                     onClick={() => togglePanel(index)}
-                    className="flex w-full gap-3 hover:border-gray-950 focus:border-gray-950 focus:outline-none"
+                    className="flex w-full gap-3 hover:border-black focus:border-black focus:outline-none"
                   >
                     <IoMdAdd
                       className={classNames(

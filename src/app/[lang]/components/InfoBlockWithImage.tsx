@@ -28,36 +28,41 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
   const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
 
   return (
-    <div className="relative overflow-hidden lg:h-[680px] h-[400px]">
-      <div
-        className={classNames(
-          data.pictureOnRight ? "lg:left-[40%]" : "lg:right-[40%]",
-          "w-full lg:absolute lg:h-[550px] h-[400px] lg:pb-10"
-        )}
-      >
-        {imgUrl && (
+    <div className="flex flex-col w-full md:flex-row md:pb-14">
+      {imgUrl && !data.pictureOnRight && (
+        <div className={classNames("md:w-[60%]")}>
           <img
             src={imgUrl}
             alt={"Image"}
             className={classNames(
-              "object-cover w-full h-full absolute top-0 left-0 bg-gray-300"
+              "object-cover w-full h-full top-0 left-0 bg-gray-300 max-h-[30rem]"
             )}
           />
-        )}
-      </div>
-
-      <div
-        className={classNames(
-          data.pictureOnRight
-            ? "lg:left-0 lg:pl-[8.4rem] lg:p-14 px-9 py-9"
-            : "lg:right-0 lg:p-14 lg:pl-14 px-9 py-9",
-          "lg:absolute bottom-20 bg-gray-950 lg:w-[800px]"
-        )}
-      >
-        <div className="sm:mx-auto sm:container">
-          <h3 className="max-w-xl text-white">{data.description}</h3>
+        </div>
+      )}
+      <div className="relative md:w-[40%]">
+        <div
+          className={classNames(
+            !data.pictureOnRight ? "-left-28" : "-right-28 justify-end",
+            "md:absolute p-10 mx-auto text-white bg-black container -bottom-10 md:w-[130%] flex"
+          )}
+        >
+          <div className="md:max-w-[36.5vw]">
+            <h3>{data.description}</h3>
+          </div>
         </div>
       </div>
+      {imgUrl && data.pictureOnRight && (
+        <div className="md:w-[60%]">
+          <img
+            src={imgUrl}
+            alt={"Image"}
+            className={classNames(
+              "object-cover w-full h-full top-0 left-0 bg-gray-300 max-h-[30rem]"
+            )}
+          />
+        </div>
+      )}
     </div>
   );
 }

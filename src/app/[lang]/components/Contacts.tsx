@@ -162,7 +162,7 @@ export default function Contacts({ data }: ContactsProps) {
 
     return (
       <button
-        className="inline-flex items-center justify-center w-auto gap-3 px-5 py-2 text-sm bg-gray-950 text-gray-50"
+        className="inline-flex items-center justify-center w-auto gap-3 px-5 py-2 text-sm bg-black text-gray-50"
         type="submit"
       >
         {data.buttonTitle} <IoIosArrowForward />
@@ -207,7 +207,7 @@ export default function Contacts({ data }: ContactsProps) {
       </div>
       <div>
         <form
-          className="flex flex-col p-4 space-y-3 border border-gray-950"
+          className="flex flex-col p-4 space-y-3 border border-black"
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit(onSubmit)();
@@ -275,7 +275,7 @@ export default function Contacts({ data }: ContactsProps) {
               >
                 {field.fieldName} *
                 <input
-                  className="h-10 bg-gray-200 py-1.5 px-3 outline-gray-950"
+                  className="h-10 bg-gray-200 py-1.5 px-3 outline-black"
                   {...register(field.fieldName, {
                     required: "This field is required",
                   })}

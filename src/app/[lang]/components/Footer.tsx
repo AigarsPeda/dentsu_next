@@ -64,7 +64,7 @@ export default function Footer({ footer }: { footer: Footer }) {
           </p>
         </div>
         <div className="flex justify-center w-full lg:justify-end">
-          <div className="flex flex-col items-center text-xl lg:w-28 lg:block">
+          <div className="flex flex-col items-center md:items-end">
             {footer.menuLinks.map((link: FooterLink) => {
               return <FooterLink key={link.id} {...link} />;
             })}

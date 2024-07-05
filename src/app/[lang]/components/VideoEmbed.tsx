@@ -25,7 +25,7 @@ export default function VideoEmbed({ data }: { data: VideoEmbedProps }) {
   if (!embedUrl) return <div>Invalid video URL</div>;
 
   return (
-    <div className="video-embed relative pb-56.25 h-72 lg:h-[450px] overflow-hidden my-8 bg-gray-950">
+    <div className="video-embed relative pb-56.25 h-72 lg:h-[450px] overflow-hidden my-8 bg-black">
       <iframe
         title="video"
         src={embedUrl || ""}

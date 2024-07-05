@@ -27,62 +27,63 @@
     font-display: swap;
     src: url(/fonts/HalcomLight.otf) format("otf");
   }
-}
 
-body {
-  @apply font-halcom;
-}
-
-h1 {
-  @apply font-bold;
-
-  font-size: 14vw;
-
-  @screen md {
-    font-size: 8vw;
+  body {
+    @apply font-halcom;
   }
-}
 
-h2 {
-  @apply text-5xl font-bold;
-}
+  h1 {
+    @apply font-bold;
 
-h3 {
-  @apply text-2xl font-bold md:text-2xl;
-}
+    font-size: 14vw;
 
-h4 {
-  @apply text-base;
-}
+    @screen md {
+      font-size: 8vw;
+    }
+  }
 
-h5 {
-  @apply text-3xl font-bold;
-}
+  h2 {
+    @apply text-5xl font-bold;
+  }
 
-h6 {
-  @apply text-xl font-normal;
-}
+  h3 {
+    @apply text-2xl font-bold md:text-2xl;
+  }
 
-p {
-  @apply text-xl;
-}
+  h4 {
+    @apply text-base;
+  }
 
-/* Table styles */
-table {
-  @apply w-full border-collapse;
-}
+  h5 {
+    @apply text-3xl font-bold;
+  }
 
-th {
-  @apply p-2 text-base font-bold border border-gray-300;
-}
+  h6 {
+    @apply text-xl font-normal;
+  }
 
-td {
-  @apply p-2 text-base text-center border border-gray-300;
+  p {
+    @apply text-xl;
+  }
+
+  /* Table styles */
+  table {
+    @apply w-full border-collapse;
+  }
+
+  th {
+    @apply p-2 text-base font-bold border border-gray-300;
+  }
+
+  td {
+    @apply p-2 text-base text-center border border-gray-300;
+  }
 }
 
 @layer utilities {
   .custom-clamp-2 {
     display: -webkit-box;
+    line-clamp: 2;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
@@ -91,6 +92,7 @@ td {
 @layer utilities {
   .custom-clamp-4 {
     display: -webkit-box;
+    line-clamp: 4;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   }
@@ -98,6 +100,7 @@ td {
 
 @layer utilities {
   .custom-clamp-5 {
+    line-clamp: 5;
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
@@ -106,6 +109,7 @@ td {
 
 @layer utilities {
   .custom-clamp-6 {
+    line-clamp: 6;
     display: -webkit-box;
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
@@ -114,6 +118,7 @@ td {
 
 @layer utilities {
   .custom-clamp-8 {
+    line-clamp: 8;
     display: -webkit-box;
     -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
@@ -122,6 +127,7 @@ td {
 
 @layer utilities {
   .custom-clamp-10 {
+    line-clamp: 10;
     display: -webkit-box;
     -webkit-line-clamp: 10;
     -webkit-box-orient: vertical;
