@@ -44,10 +44,10 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
         <div
           className={classNames(
             !data.pictureOnRight ? "-left-28" : "-right-28 justify-end",
-            "md:absolute p-10 mx-auto text-white bg-black container -bottom-10 md:w-[130%] flex"
+            "md:absolute p-10 mx-auto text-white bg-black container -bottom-10 md:w-[150%] flex"
           )}
         >
-          <div className="md:max-w-[36.5vw]">
+          <div className="max-w-[37.5rem]">
             <h3>{data.description}</h3>
           </div>
         </div>
