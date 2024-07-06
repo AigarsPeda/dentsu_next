@@ -47,7 +47,6 @@ const MapComponent = ({ address, googleIcon, wazeIcon }: GoogleMapProps) => {
         geocoder.geocode({ address }, (results, status) => {
           if (status === "OK" && results && results[0]) {
             const { lat, lng } = results[0].geometry.location;
-            console.log("Geocode was successful", lat(), lng());
             setMapCenter({ lat: lat(), lng: lng() });
           } else {
             console.error(

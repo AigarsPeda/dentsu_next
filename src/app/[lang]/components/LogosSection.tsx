@@ -32,8 +32,6 @@ export default function LogosSection({ data }: LogosSectionProps) {
   const search = params.get("search");
   const urlLocale = path.split("/")[1] || "en";
 
-  console.log("data", data);
-
   const isUrlMatchToSearch = (url: string | null) => {
     if (!search) {
       return false;

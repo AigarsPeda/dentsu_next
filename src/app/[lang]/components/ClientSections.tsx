@@ -27,7 +27,6 @@ interface ClientSectionsProps {
 }
 
 export default function ClientSections({ data }: ClientSectionsProps) {
-  console.log(data);
   return (
     <div className="bg-[#e5e5e9]">
       <div className="container px-5 mx-auto lg:pb-20 py-9 lg:px-12">
@@ -37,7 +36,6 @@ export default function ClientSections({ data }: ClientSectionsProps) {
         <div className="pb-3 overflow-x-auto md:overflow-auto">
           <ul className="grid grid-cols-6 gap-4 lg:gap-8 min-w-[1080px] md:min-w-full">
             {data.feature.map((item) => {
-              console.log(item);
               const imgSrc = getStrapiMedia(item.media.data.attributes.url);
               return (
                 <li key={item.id} className="flex items-center justify-center">
