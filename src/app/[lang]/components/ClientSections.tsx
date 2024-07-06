@@ -1,5 +1,7 @@
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 interface MediaTypes {
   id: number;

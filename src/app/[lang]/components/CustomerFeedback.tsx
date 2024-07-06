@@ -1,5 +1,6 @@
 "use client";
 import DoubleArrows from "@/app/[lang]/components/icons/DoubleArrows";
+import { useSearchParams } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,6 +12,7 @@ interface FeaturesType {
   company: string;
   feedback: string;
   position: string;
+  participatingCompany: string | null;
 }
 
 interface CustomerFeedbackProps {
@@ -18,6 +20,53 @@ interface CustomerFeedbackProps {
 }
 
 export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
+  const params = useSearchParams();
+  const search = params.get("search");
+
+  const filteredData = data.feature.filter((item) => {
+    return item.participatingCompany
+      ?.toLowerCase()
+      .includes(search?.toLowerCase() || "");
+  });
+
+  if (filteredData.length === 0) {
+    return null;
+  }
+
+  if (filteredData.length < 3) {
+    return (
+      <div className="container mx-auto mt-4 mb-10 md:mb-20">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-12">
+          {filteredData.map((item) => {
+            return (
+              <div key={item.id} className="p-6 bg-black text-gray-50">
+                <DoubleArrows className="w-12 h-12 mb-4" />
+                <div className="w-full">
+                  <div className="mb-8 overflow-hidden md:h-60 md:custom-clamp-10">
+                    <p title={item.feedback} className="text-base">
+                      {item.feedback}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p title={item.name} className="text-base font-bold">
+                      {item.name}
+                    </p>
+                    <p title={item.position} className="text-sm">
+                      {item.position}
+                    </p>
+                    <p title={item.company} className="text-sm">
+                      {item.company}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto mt-4 mb-10 md:mb-20">
       {/* @ts-ignore */}
@@ -44,7 +93,7 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
           },
         ]}
       >
-        {data.feature.map((item) => {
+        {filteredData.map((item) => {
           return (
             <div key={item.id} className="pl-2 pr-2">
               <div className="p-6 bg-black text-gray-50">
