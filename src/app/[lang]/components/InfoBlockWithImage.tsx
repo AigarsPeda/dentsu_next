@@ -28,7 +28,12 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
   const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
 
   return (
-    <div className="flex flex-col w-full md:flex-row md:pb-14">
+    <div
+      className={classNames(
+        data.pictureOnRight ? "justify-end" : "justify-start",
+        "relative flex flex-col w-full md:flex-row md:pb-14"
+      )}
+    >
       {imgUrl && !data.pictureOnRight && (
         <div className={classNames("md:w-[60%]")}>
           <img
@@ -40,15 +45,27 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
           />
         </div>
       )}
-      <div className="relative md:w-[40%]">
+
+      <div className={classNames("md:absolute bottom-0 w-full")}>
         <div
           className={classNames(
-            !data.pictureOnRight ? "-left-28" : "-right-28 justify-end",
-            "md:absolute p-10 mx-auto text-white bg-black container -bottom-10 md:w-[150%] flex"
+            !data.pictureOnRight ? "justify-end" : "",
+            "container flex mx-auto bg-black md:bg-transparent"
           )}
         >
-          <div className="max-w-[37.5rem]">
+          <div
+            className={classNames(
+              data.pictureOnRight ? "md:pl-0" : "",
+              "relative max-w-3xl py-3 text-white bg-black md:p-5 "
+            )}
+          >
             <h3>{data.description}</h3>
+            <div
+              className={classNames(
+                !data.pictureOnRight ? "left-full" : "right-full",
+                "absolute bottom-0 w-full h-full bg-black hidden md:block"
+              )}
+            ></div>
           </div>
         </div>
       </div>
