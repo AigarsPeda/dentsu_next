@@ -52,10 +52,12 @@ export default function Navbar({
 
   return (
     <div className="sticky top-0 z-30 py-4 bg-dentsu-primary">
-      <div className="container flex items-center justify-between mx-auto h-9 md:h-14">
-        <Logo href={`/${urlLocale}`} src={logoUrl}>
-          {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
-        </Logo>
+      <div className="container flex items-center justify-center mx-auto lg:justify-between h-9 md:h-14">
+        <div>
+          <Logo href={`/${urlLocale}`} src={logoUrl}>
+            {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
+          </Logo>
+        </div>
 
         <div className="items-center flex-shrink-0 hidden lg:flex">
           <ul className="items-stretch space-x-6 lg:flex">
@@ -92,101 +94,99 @@ export default function Navbar({
             ))}
           </div>
         </div>
-
-        <Transition show={mobileMenuOpen} as={Fragment}>
-          <Dialog
-            as="div"
-            className="lg:hidden"
-            open={mobileMenuOpen}
-            onClose={setMobileMenuOpen}
+      </div>
+      <Transition show={mobileMenuOpen} as={Fragment}>
+        <Dialog
+          as="div"
+          className="lg:hidden"
+          open={mobileMenuOpen}
+          onClose={setMobileMenuOpen}
+        >
+          <TransitionChild
+            as={Fragment}
+            enter="transition-all duration-500"
+            enterFrom="transform -translate-y-full md:-translate-x-full opacity-0"
+            enterTo="transform translate-y-0 md:translate-x-0 opacity-100"
+            leave="transition-all duration-300"
+            leaveFrom="transform translate-y-0 md:translate-x-0 opacity-100"
+            leaveTo="transform -translate-y-full md:-translate-x-full opacity-0"
           >
-            <TransitionChild
-              as={Fragment}
-              enter="transition-all duration-500"
-              enterFrom="transform -translate-y-full opacity-0"
-              enterTo="transform translate-y-0 opacity-100"
-              leave="transition-all duration-300"
-              leaveFrom="transform translate-y-0 opacity-100"
-              leaveTo="transform -translate-y-full opacity-0"
-            >
-              <div className="fixed inset-0 z-40 bg-dentsu-primary" />
-            </TransitionChild>
-            <TransitionChild
-              as={Fragment}
-              enter="transition-all duration-500"
-              enterFrom="transform -translate-y-full opacity-0"
-              enterTo="transform translate-y-0 opacity-100"
-              leave="transition-all duration-300"
-              leaveFrom="transform translate-y-0 opacity-100"
-              leaveTo="transform -translate-y-full opacity-0"
-            >
-              <DialogPanel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto bg-dentsu-primary rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
-                <div className="flex items-center justify-between">
-                  <a href={`/${urlLocale}`} className="-m-1.5 p-1.5">
-                    <span className="sr-only">Dentsu</span>
-                    {logoUrl && (
-                      <img className="w-auto h-8" src={logoUrl} alt="" />
-                    )}
-                  </a>
-                  <button
-                    type="button"
-                    className="-m-2.5 rounded-md p-2.5 text-white"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="sr-only">Close menu</span>
-                    <XMarkIcon className="w-6 h-6" aria-hidden="true" />
-                  </button>
-                </div>
-                <div className="flow-root mt-6">
-                  <div className="-my-6 divide-y divide-gray-700">
-                    <div className="py-6 space-y-2">
-                      {linksWithLocale.map((item) => (
-                        <MobileNavLink
-                          key={item.id}
-                          closeMenu={closeMenu}
-                          {...item}
-                        />
-                      ))}
-                    </div>
+            <div className="fixed inset-0 z-40 bg-dentsu-primary" />
+          </TransitionChild>
+          <TransitionChild
+            as={Fragment}
+            enter="transition-all duration-500"
+            enterFrom="transform -translate-y-full md:-translate-x-full opacity-0"
+            enterTo="transform translate-y-0 md:translate-x-0 opacity-100"
+            leave="transition-all duration-300"
+            leaveFrom="transform translate-y-0 md:translate-x-0 opacity-100"
+            leaveTo="transform -translate-y-full md:-translate-x-full opacity-0"
+          >
+            <DialogPanel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto bg-dentsu-primary rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
+              <div className="flex items-center justify-between">
+                <a href={`/${urlLocale}`} className="-m-1.5 p-1.5">
+                  <span className="sr-only">Dentsu</span>
+                  {logoUrl && (
+                    <img className="w-auto h-8" src={logoUrl} alt="" />
+                  )}
+                </a>
+                <button
+                  type="button"
+                  className="-m-2.5 rounded-md p-2.5 text-white"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="sr-only">Close menu</span>
+                  <XMarkIcon className="w-6 h-6" aria-hidden="true" />
+                </button>
+              </div>
+              <div className="flow-root mt-6">
+                <div className="-my-6 divide-y divide-gray-700">
+                  <div className="py-6 space-y-2">
+                    {linksWithLocale.map((item) => (
+                      <MobileNavLink
+                        key={item.id}
+                        closeMenu={closeMenu}
+                        {...item}
+                      />
+                    ))}
                   </div>
                 </div>
-                <div className="flex flex-col gap-6 mt-6">
-                  {availableLocales.map((locale) => (
-                    <button
-                      type="button"
-                      key={locale.id}
-                      title={locale.name}
-                      onClick={() => switchLocale(locale.code)}
+              </div>
+              <div className="flex flex-col gap-6 mt-6">
+                {availableLocales.map((locale) => (
+                  <button
+                    type="button"
+                    key={locale.id}
+                    title={locale.name}
+                    onClick={() => switchLocale(locale.code)}
+                  >
+                    <div
+                      style={{
+                        width: 37,
+                        height: 27,
+                        overflow: "hidden",
+                      }}
                     >
-                      <div
-                        style={{
-                          width: 37,
-                          height: 27,
-                          overflow: "hidden",
-                        }}
-                      >
-                        {locale.img.data?.attributes.url ? (
-                          <img
-                            src={locale.img.data.attributes.url}
-                            alt={locale.name}
-                            className="w-full h-full"
-                          />
-                        ) : (
-                          locale.name
-                        )}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </DialogPanel>
-            </TransitionChild>
-          </Dialog>
-        </Transition>
+                      {locale.img.data?.attributes.url ? (
+                        <img
+                          src={locale.img.data.attributes.url}
+                          alt={locale.name}
+                          className="w-full h-full"
+                        />
+                      ) : (
+                        locale.name
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </DialogPanel>
+          </TransitionChild>
+        </Dialog>
+      </Transition>
 
-        <button
-          className="p-0 lg:hidden"
-          onClick={() => setMobileMenuOpen(true)}
-        >
+      <div className="flex justify-center lg:hidden">
+        <button className="pt-1" onClick={() => setMobileMenuOpen(true)}>
           <Bars3Icon className="text-white h-7 w-7" aria-hidden="true" />
         </button>
       </div>
