@@ -53,13 +53,20 @@ export default function ServicesHeadlineWithImage({
     };
   }, [data.isParallax]);
 
+  // className="relative flex items-center justify-center bg-center bg-cover"
+  // style={{
+  //   backgroundSize: "cover",
+  //   backgroundPosition: "center",
+  //   backgroundImage: `url(${imgUrl})`,
+  // }}
+
   return (
     <div className="relative -z-10">
       <div
         ref={divRef}
         className={classNames(
           data.isParallax ? "bg-fixed" : "",
-          "object-cover w-full h-[62vh] bg-gray-300 bg-cover bg-center bg-no-repeat"
+          "object-cover w-full h-[62vh] bg-gray-300 bg-cover bg-center"
         )}
         style={{
           backgroundImage: `url(${imgUrl})`,
