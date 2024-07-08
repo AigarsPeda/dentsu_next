@@ -58,8 +58,8 @@ export default function ServicesHeadlineWithImage({
       <div
         ref={divRef}
         className={classNames(
-          data.isParallax ? "bg-fixed" : "bg-cover bg-center bg-no-repeat",
-          "object-cover w-full h-[62vh] bg-gray-300"
+          data.isParallax ? "bg-fixed" : "",
+          "w-full h-[62vh] bg-gray-300"
         )}
         style={{
           backgroundSize: "cover",
