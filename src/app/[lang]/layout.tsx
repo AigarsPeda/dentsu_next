@@ -7,6 +7,9 @@ import { FALLBACK_SEO } from "@/app/[lang]/utils/constants";
 import { fetchAPI } from "@/app/[lang]/utils/fetch-api";
 import type { Metadata } from "next";
 import { i18n } from "../../../i18n-config";
+import localFont from "next/font/local";
+// import HalcomRegular from "../../../public/fonts/Halcom-Regular.ttf";
+// import HalcomBold from "../../../public/fonts/Halcom-Bold.ttf";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -73,6 +76,21 @@ export type StrapiLocaleType = {
   };
 };
 
+const halcom = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/Halcom-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/Halcom-Bold.ttf",
+      weight: "700",
+      style: "bold",
+    },
+  ],
+});
+
 const getAvailableLocales = () => {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
   const options = { headers: { Authorization: `Bearer ${token}` } };
@@ -124,7 +142,7 @@ export default async function RootLayout({
   });
 
   return (
-    <html lang={params.lang}>
+    <html className={`${halcom.className}`} lang={params.lang}>
       <body className="text-white">
         <Navbar
           links={navbar.links}
@@ -133,7 +151,7 @@ export default async function RootLayout({
           logoText={navbar.navbarLogo.logoText}
         />
 
-        <main className="min-h-screen overflow-hidden text-black">
+        <main className="relative min-h-screen overflow-hidden text-black">
           {children}
         </main>
 

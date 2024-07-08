@@ -4,34 +4,6 @@
 @import "react-slideshow-image/dist/styles.css";
 
 @layer base {
-  @font-face {
-    font-family: "Halcom";
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(/fonts/HalcomRegular.otf) format("otf");
-  }
-
-  @font-face {
-    font-family: "Halcom";
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url(/fonts/HalcomBold.otf) format("otf");
-  }
-
-  @font-face {
-    font-family: "Halcom";
-    font-style: normal;
-    font-weight: 200;
-    font-display: swap;
-    src: url(/fonts/HalcomLight.otf) format("otf");
-  }
-
-  body {
-    @apply font-halcom;
-  }
-
   h1 {
     @apply font-bold;
 

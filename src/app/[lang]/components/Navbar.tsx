@@ -122,14 +122,22 @@ export default function Navbar({
             leaveFrom="transform translate-y-0 md:translate-x-0 opacity-100"
             leaveTo="transform -translate-y-full md:-translate-x-full opacity-0"
           >
-            <DialogPanel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto bg-dentsu-primary rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
-              <div className="flex items-center justify-between">
-                <a href={`/${urlLocale}`} className="-m-1.5 p-1.5">
-                  <span className="sr-only">Dentsu</span>
-                  {logoUrl && (
-                    <img className="w-auto h-8" src={logoUrl} alt="" />
+            <DialogPanel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto text-center bg-dentsu-primary rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
+              <button
+                type="button"
+                onClick={() => {
+                  router.push(`/${urlLocale}`);
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center justify-center w-full pb-10"
+              >
+                <Logo href={`/${urlLocale}`} src={logoUrl}>
+                  {logoText && (
+                    <h2 className="text-2xl font-bold">{logoText}</h2>
                   )}
-                </a>
+                </Logo>
+              </button>
+              <div className="flex items-center justify-center w-full">
                 <button
                   type="button"
                   className="-m-2.5 rounded-md p-2.5 text-white"
@@ -152,7 +160,7 @@ export default function Navbar({
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-6 mt-6">
+              <div className="flex flex-col items-center justify-center gap-6 mt-6">
                 {availableLocales.map((locale) => (
                   <button
                     type="button"
@@ -185,7 +193,7 @@ export default function Navbar({
         </Dialog>
       </Transition>
 
-      <div className="flex justify-center lg:hidden">
+      <div className="flex justify-center pt-3 lg:hidden">
         <button className="pt-1" onClick={() => setMobileMenuOpen(true)}>
           <Bars3Icon className="text-white h-7 w-7" aria-hidden="true" />
         </button>

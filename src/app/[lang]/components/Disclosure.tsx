@@ -40,8 +40,6 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
     }
   };
 
-  const height = data.length * 10;
-
   return (
     <div
       className={classNames(

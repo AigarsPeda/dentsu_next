@@ -56,7 +56,7 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
           <div
             className={classNames(
               data.pictureOnRight ? "md:pl-0" : "",
-              "relative max-w-3xl py-3 text-white bg-black md:p-5 "
+              "relative max-w-3xl text-white bg-black md:p-5 py-6"
             )}
           >
             <h3>{data.description}</h3>

@@ -10,7 +10,7 @@ module.exports = {
       },
       // add new font family
       fontFamily: {
-        halcom: ["Halcom", "Roboto", "sans-serif"],
+        halcom: ["halcom"],
       },
       container: {
         padding: {
