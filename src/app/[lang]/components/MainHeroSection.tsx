@@ -12,20 +12,22 @@ type PictureType = {
   };
 };
 
-type PictureDataType = {
-  data: PictureType[];
-};
-
 interface MainHeroSectionProps {
   data: {
     title: string;
     url: string | null;
-    picture: PictureDataType;
+    picture: {
+      data: PictureType[];
+    };
+    poster: {
+      data: PictureType;
+    };
   };
 }
 
 export default function MainHeroSection({ data }: MainHeroSectionProps) {
   const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
+  const posterUrl = getStrapiMedia(data.poster.data.attributes.url);
 
   // is video url if contains mp4 or ather video format
   const isVideoUrl = (url: string | null): boolean => {
@@ -102,10 +104,11 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
     return (
       <div className="relative flex items-center justify-center">
         <video
-          id="background-video"
-          autoPlay
           loop
           muted
+          autoPlay
+          id="background-video"
+          poster={posterUrl ?? ""}
           className="relative object-cover w-full md:h-[92vh] h-[80vh]"
         >
           <source
