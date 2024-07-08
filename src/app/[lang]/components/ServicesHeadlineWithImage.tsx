@@ -43,9 +43,9 @@ export default function ServicesHeadlineWithImage({
         contentRef.current.style.transform = `translateY(${scrollY * 0.5}px)`;
       }
 
-      // if (divRef.current) {
-      //   divRef.current.style.backgroundPositionY = `-${scrollY * 0.5}px`;
-      // }
+      if (divRef.current) {
+        divRef.current.style.backgroundPositionY = `-${scrollY * 0.02}px`;
+      }
     });
 
     return () => {
@@ -58,19 +58,11 @@ export default function ServicesHeadlineWithImage({
       <div
         ref={divRef}
         className={classNames(
-          // data.isParallax ? "md:bg-fixed" : "",
+          data.isParallax ? "md:bg-fixed" : "",
           "object-cover w-full h-[62vh] bg-gray-300 bg-cover bg-center"
         )}
         style={{
-          backgroundAttachment: "fixed",
           backgroundImage: `url(${imgUrl})`,
-          WebkitBackgroundSize: "cover",
-          MozBackgroundSize: "cover",
-          OBackgroundSize: "cover",
-          zIndex: -10,
-          // -moz-background-size: cover;
-          // -o-background-size: cover;
-          // background-size: cover;
         }}
       >
         <div
