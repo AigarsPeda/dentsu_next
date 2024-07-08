@@ -1,5 +1,6 @@
 import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import getEmbedUrl from "@/app/[lang]/utils/getEmbedUrl";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { Transition } from "@headlessui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -83,25 +84,6 @@ export default function MediaModal({
   }
 
   const transitionClasses = getTransitionClasses();
-
-  const getEmbedUrl = (videoUrl: string): string => {
-    const youtubeRegex =
-      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|watch\?v%3D)([\w-]{11}).*/;
-    const youtubeMatch = videoUrl.match(youtubeRegex);
-
-    if (youtubeMatch && youtubeMatch[2].length === 11) {
-      return `https://www.youtube.com/embed/${youtubeMatch[2]}`;
-    }
-
-    const vimeoRegex = /(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i;
-    const vimeoMatch = videoUrl.match(vimeoRegex);
-
-    if (vimeoMatch && vimeoMatch[1]) {
-      return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
-    }
-
-    return videoUrl;
-  };
 
   return (
     <MyModal isOpen={firstImageSelected !== null} closeModal={handleModalClose}>
