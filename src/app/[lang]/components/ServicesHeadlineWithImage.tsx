@@ -64,6 +64,13 @@ export default function ServicesHeadlineWithImage({
         style={{
           backgroundAttachment: "fixed",
           backgroundImage: `url(${imgUrl})`,
+          WebkitBackgroundSize: "cover",
+          MozBackgroundSize: "cover",
+          OBackgroundSize: "cover",
+          zIndex: -10,
+          // -moz-background-size: cover;
+          // -o-background-size: cover;
+          // background-size: cover;
         }}
       >
         <div
