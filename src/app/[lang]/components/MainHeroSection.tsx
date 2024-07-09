@@ -65,7 +65,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
     return /\.(mp4)$/.test(url) ? "video/mp4" : "";
   };
 
-  if (isVideoUrl(imgUrl)) {
+  if (isVideoUrl(imgUrl) && imgUrl) {
     return (
       <div className="relative flex items-center justify-center md:h-[92vh] h-[80vh]">
         <video
@@ -77,10 +77,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           poster={posterUrl ?? ""}
           className="absolute inset-0 z-0 object-cover w-full h-full"
         >
-          <source
-            src={imgUrl ?? ""}
-            // type={getVideoType(imgUrl)}
-          />
+          <source src={imgUrl} type={getVideoType(imgUrl)} />
         </video>
         <div className="container absolute z-10 transform -translate-x-1/2 md:-translate-y-1/2 md:top-1/2 left-1/2 bottom-[20%]">
           <h1 className="p-0 font-medium text-white md:text-center">
