@@ -1,5 +1,6 @@
 import ArrowIcon from "@/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import isVideoUrl from "@/app/[lang]/utils/isVideoUrl";
 
 type PictureType = {
   id: string;
@@ -28,41 +29,6 @@ interface MainHeroSectionProps {
 export default function MainHeroSection({ data }: MainHeroSectionProps) {
   const imgUrl = getStrapiMedia(data.picture.data?.[0]?.attributes.url);
   const posterUrl = getStrapiMedia(data.poster.data.attributes?.url);
-
-  // is video url if contains mp4 or ather video format
-  const isVideoUrl = (url: string | null): boolean => {
-    if (!url) return false;
-
-    if (url.includes(".mp4")) {
-      return true;
-    }
-
-    if (url.includes(".mpeg")) {
-      return true;
-    }
-
-    if (url.includes(".quicktime")) {
-      return true;
-    }
-
-    if (url.includes(".wmv")) {
-      return true;
-    }
-
-    if (url.includes(".avi")) {
-      return true;
-    }
-
-    if (url.includes(".flv")) {
-      return true;
-    }
-
-    if (url.includes(".mov")) {
-      return true;
-    }
-
-    return false;
-  };
 
   const getVideoType = (url: string | null): string => {
     if (!url) return "";
@@ -101,7 +67,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
 
   if (isVideoUrl(imgUrl)) {
     return (
-      <div className="relative flex items-center justify-center">
+      <div className="relative flex items-center justify-center md:h-[92vh] h-[80vh]">
         <video
           loop
           muted
@@ -109,14 +75,14 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           playsInline
           id="background-video"
           poster={posterUrl ?? ""}
-          className="relative object-cover w-full md:h-[92vh] h-[80vh]"
+          className="absolute inset-0 z-0 object-cover w-full h-full"
         >
           <source
             src={imgUrl ?? ""}
             // type={getVideoType(imgUrl)}
           />
         </video>
-        <div className="container absolute transform -translate-x-1/2 md:-translate-y-1/2 md:top-1/2 left-1/2 bottom-[20%]">
+        <div className="container absolute z-10 transform -translate-x-1/2 md:-translate-y-1/2 md:top-1/2 left-1/2 bottom-[20%]">
           <h1 className="p-0 font-medium text-white md:text-center">
             {data.title}
           </h1>
