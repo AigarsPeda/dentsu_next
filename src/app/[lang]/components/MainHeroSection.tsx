@@ -26,8 +26,9 @@ interface MainHeroSectionProps {
 }
 
 export default function MainHeroSection({ data }: MainHeroSectionProps) {
-  const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
-  const posterUrl = getStrapiMedia(data.poster.data.attributes.url);
+  console.log("data", data);
+  const imgUrl = getStrapiMedia(data.picture.data?.[0]?.attributes.url);
+  const posterUrl = getStrapiMedia(data.poster.data.attributes?.url);
 
   // is video url if contains mp4 or ather video format
   const isVideoUrl = (url: string | null): boolean => {
