@@ -106,6 +106,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           loop
           muted
           autoPlay
+          playsInline
           id="background-video"
           poster={posterUrl ?? ""}
           className="relative object-cover w-full md:h-[92vh] h-[80vh]"
