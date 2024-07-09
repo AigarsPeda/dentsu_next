@@ -26,7 +26,6 @@ interface MainHeroSectionProps {
 }
 
 export default function MainHeroSection({ data }: MainHeroSectionProps) {
-  console.log("data", data);
   const imgUrl = getStrapiMedia(data.picture.data?.[0]?.attributes.url);
   const posterUrl = getStrapiMedia(data.poster.data.attributes?.url);
 
@@ -101,7 +100,6 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
   };
 
   if (isVideoUrl(imgUrl)) {
-    console.log("is video url");
     return (
       <div className="relative flex items-center justify-center">
         <video
