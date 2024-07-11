@@ -1,7 +1,8 @@
+"use client";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 interface MediaTypes {
   id: number;
@@ -19,6 +20,7 @@ interface FeaturesType {
   newTab: boolean;
   isNewTab: boolean;
   url: string | null;
+  participatingCompany: string | null;
   media: {
     data: MediaTypes;
   };
@@ -29,6 +31,16 @@ interface ClientSectionsProps {
 }
 
 export default function ClientSections({ data }: ClientSectionsProps) {
+  const [parent] = useAutoAnimate();
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search");
+
+  const filteredData = data.feature.filter((item) => {
+    return item.participatingCompany
+      ?.toLowerCase()
+      .includes(search?.toLowerCase() || "");
+  });
+
   return (
     <div className="bg-[#e5e5e9]">
       <div className="container px-5 mx-auto lg:pb-20 py-9 lg:px-12">
@@ -36,8 +48,11 @@ export default function ClientSections({ data }: ClientSectionsProps) {
           {data.title}
         </h2>
         <div className="pb-3 overflow-x-auto md:overflow-auto">
-          <ul className="grid grid-cols-6 gap-4 lg:gap-8 min-w-[1080px] md:min-w-full">
-            {data.feature.map((item) => {
+          <ul
+            ref={parent}
+            className="grid grid-cols-6 gap-4 lg:gap-8 min-w-[1080px] md:min-w-full"
+          >
+            {filteredData.map((item) => {
               const imgSrc = getStrapiMedia(item.media.data.attributes.url);
               return (
                 <li key={item.id} className="flex items-center justify-center">

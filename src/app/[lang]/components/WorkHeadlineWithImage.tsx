@@ -32,7 +32,7 @@ export default function WorkHeadlineWithImage({
     >
       <div className="container absolute bottom-12 md:bottom-40 md:right-0 right-5 bg-black md:w-[50%] w-[90%] p-10">
         <div>
-          <h3 className="max-w-sm pb-6 font-medium text-white">
+          <h3 className="max-w-sm pb-6 font-bold text-white">
             {data.headline}
           </h3>
           <p className="max-w-md overflow-hidden text-xl font-bold text-white max-h-44 custom-clamp-5">

@@ -7,6 +7,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 interface FeaturesType {
   id: number;
   url: string | null;
+  redirectToOurWork: boolean;
   media: {
     data: {
       id: string;
@@ -53,13 +54,21 @@ export default function LogosSection({ data }: LogosSectionProps) {
     return true;
   };
 
-  const getUrl = (url: string | null) => {
-    if (isOurLink(url)) {
+  const getUrl = (url: string | null, redirectToOurWork: boolean) => {
+    if (isOurLink(url) && redirectToOurWork) {
       if (isUrlMatchToSearch(url)) {
         return `/${urlLocale}/ourwork`;
       }
 
       return `/${urlLocale}/ourwork?search=${url}`;
+    }
+
+    if (isOurLink(url) && !redirectToOurWork) {
+      if (isUrlMatchToSearch(url)) {
+        return `${path}`;
+      }
+
+      return `${path}?search=${url}`;
     }
 
     return url || "";
@@ -77,7 +86,8 @@ export default function LogosSection({ data }: LogosSectionProps) {
         return (
           <Link
             key={item.id}
-            href={getUrl(item.url)}
+            scroll={false}
+            href={getUrl(item.url, item.redirectToOurWork)}
             target={isOurLink(item.url) ? "_self" : "_blank"}
             className={classNames("flex items-center justify-center")}
           >

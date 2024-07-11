@@ -1,5 +1,4 @@
 "use client";
-
 import { MapComponent } from "@/app/[lang]/components/Map";
 import MySelect from "@/app/[lang]/components/Select";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
@@ -26,7 +25,12 @@ interface ContactsProps {
     privacyCookiesPolicy: string;
     agreementToReceiveInfo: string;
     companyToContact: { id: number; companyTitle: string }[];
-    formFields: { id: number; fieldType: FieldTypeType; fieldName: string }[];
+    formFields: {
+      id: number;
+      fieldName: string;
+      isRequired: boolean;
+      fieldType: FieldTypeType;
+    }[];
     googleIcon: {
       data: {
         id: number;
@@ -214,6 +218,8 @@ export default function Contacts({ data }: ContactsProps) {
           }}
         >
           {formFields.map((field) => {
+            const isRequired = field.isRequired;
+
             if (field.fieldType === "select") {
               return (
                 <label
@@ -221,14 +227,14 @@ export default function Contacts({ data }: ContactsProps) {
                   htmlFor={field.fieldName}
                   className="flex flex-col text-sm"
                 >
-                  {field.fieldName}
+                  {field.fieldName} {isRequired && "*"}
                   <MySelect
                     options={data.companyToContact.map((company) => ({
                       value: company.id,
                       label: company.companyTitle,
                     }))}
                     {...register("companyToContact", {
-                      required: "This field is required",
+                      ...(isRequired && { required: "This field is required" }),
                     })}
                   />
                   <div className="h-2">
@@ -249,11 +255,11 @@ export default function Contacts({ data }: ContactsProps) {
                   htmlFor={field.fieldName}
                   className="flex flex-col text-sm"
                 >
-                  {field.fieldName} *
+                  {field.fieldName} {isRequired && "*"}
                   <textarea
                     className="h-40 bg-gray-200 py-1.5 px-3"
                     {...register(field.fieldName, {
-                      required: "This field is required",
+                      ...(isRequired && { required: "This field is required" }),
                     })}
                   />
                   <div className="h-2">
@@ -273,11 +279,11 @@ export default function Contacts({ data }: ContactsProps) {
                 htmlFor={field.fieldName}
                 className="flex flex-col text-sm"
               >
-                {field.fieldName} *
+                {field.fieldName} {isRequired && "*"}
                 <input
                   className="h-10 bg-gray-200 py-1.5 px-3 outline-black"
                   {...register(field.fieldName, {
-                    required: "This field is required",
+                    ...(isRequired && { required: "This field is required" }),
                   })}
                 />
                 <div className="h-2">

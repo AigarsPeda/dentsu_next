@@ -1,17 +1,16 @@
 "use client";
+import classNames from "@/app/[lang]/utils/classNames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
 import { CgWebsite } from "react-icons/cg";
 import { FaDiscord } from "react-icons/fa";
 import { PiGlobeThin } from "react-icons/pi";
-
 import {
   RiFacebookCircleFill,
   RiInstagramLine,
   RiLinkedinBoxFill,
 } from "react-icons/ri";
-import classNames from "../utils/classNames";
 
 interface FooterLink {
   id: number;

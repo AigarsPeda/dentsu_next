@@ -19,7 +19,7 @@
   }
 
   h3 {
-    @apply text-2xl font-bold md:text-2xl;
+    @apply text-2xl font-bold md:text-3xl;
   }
 
   h4 {
@@ -27,7 +27,7 @@
   }
 
   h5 {
-    @apply text-3xl font-bold;
+    @apply text-3xl font-bold md:text-4xl;
   }
 
   h6 {
