@@ -75,10 +75,15 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           playsInline
           id="background-video"
           poster={posterUrl ?? ""}
-          className="absolute inset-0 z-0 object-cover w-full h-full"
+          className="absolute inset-0 z-0 hidden object-cover w-full h-full md:block"
         >
           <source src={imgUrl} type={getVideoType(imgUrl)} />
         </video>
+        <img
+          alt="poster"
+          src={posterUrl ?? ""}
+          className="block object-cover w-full h-full md:hidden"
+        />
         <div className="container absolute z-10 transform -translate-x-1/2 md:-translate-y-1/2 md:top-1/2 left-1/2 bottom-[20%]">
           <h1 className="p-0 text-white">{data.title}</h1>
         </div>
@@ -92,7 +97,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
   return (
     <section
       className="relative flex items-center justify-center w-full md:h-[92vh] h-[80vh] bg-cover bg-center"
-      style={{ backgroundImage: `url(${imgUrl})` }}
+      style={{ backgroundImage: `url(${imgUrl ?? posterUrl ?? ""})` }}
     >
       {/* <div className="absolute inset-0 bg-black opacity-50" /> */}
       <div className="container absolute transform -translate-x-1/2 md:-translate-y-1/2 md:top-1/2 left-1/2 bottom-[20%]">
