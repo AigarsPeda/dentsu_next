@@ -59,7 +59,11 @@ export default function PostSection({ data }: PostSectionProps) {
                   className="object-cover w-full lg:h-[400px] lg:max-h-[500px] max-h-[250px] bg-gray-300"
                 />
               )}
-              <div className="flex items-end p-6 bg-black text-gray-50">
+              <a
+                href={item.postUrl}
+                target={item.isNewTab ? "_blank" : "_self"}
+                className="flex items-end p-6 transition-colors bg-black text-gray-50 hover:bg-dentsu-hover"
+              >
                 <div className="w-full">
                   <div className="mb-3 overflow-hidden h-14 custom-clamp-2">
                     <h6 title={item.title}>{item.title}</h6>
@@ -74,15 +78,11 @@ export default function PostSection({ data }: PostSectionProps) {
                   </div>
                 </div>
                 <div className="p-0.5 md:ml-9 ml-4">
-                  <a
-                    href={item.postUrl}
-                    target={item.isNewTab ? "_blank" : "_self"}
-                    className="flex items-center justify-center text-center text-white transform -rotate-90 rounded-md"
-                  >
+                  <div className="flex items-center justify-center text-center text-white transform -rotate-90 rounded-md">
                     <ArrowIcon className="fill-white w-9 h-9" />
-                  </a>
+                  </div>
                 </div>
-              </div>
+              </a>
             </li>
           );
         })}

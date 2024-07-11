@@ -87,7 +87,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
                 alt="our client logo"
                 className={classNames(
                   isUrlMatchToSearch(item.url) ? "opacity-50" : "",
-                  "object-contain w-full h-full lg:max-h-6 max-h-4"
+                  "object-contain w-full h-full lg:max-h-6 max-h-4 hover:opacity-50 transition-all"
                 )}
               />
             ) : (

@@ -73,12 +73,12 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
               </div>
               <div>
                 <h3 className="mt-4 text-lg font-bold">{newsPost.title}</h3>
-                <p className="h-[7.8rem] mt-2 overflow-hidden text-sm custom-clamp-6">
+                <p className="h-[7.7rem] mt-2 overflow-hidden text-sm custom-clamp-6">
                   {newsPost.description}
                 </p>
                 <a
                   href={newsPost.url}
-                  className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm md:mt-2 bg-black text-gray-50"
+                  className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm transition-all bg-black hover:bg-dentsu-hover md:mt-2 text-gray-50"
                 >
                   {newsPost.buttonTitle}
                   <IoIosArrowForward />
@@ -94,7 +94,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
             <button
               key={index + 1}
               onClick={() => handlePageChange(index + 1)}
-              className={`px-3 py-1 mx-1 ${
+              className={`px-3 py-1 mx-1 hover:bg-dentsu-hover ${
                 index + 1 === currentPage
                   ? "bg-black text-gray-50"
                   : "bg-gray-200"

@@ -11,7 +11,11 @@ export default function Logo({
   children?: React.ReactNode;
 }) {
   return (
-    <Link href={href} aria-label="Back to homepage" className="flex items-end">
+    <Link
+      href={href}
+      aria-label="Back to homepage"
+      className="flex items-end transition-all hover:opacity-70"
+    >
       {src && (
         <img
           src={src}

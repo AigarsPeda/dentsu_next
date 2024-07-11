@@ -221,7 +221,9 @@ function NavLink({ url, text, locale }: NavLink) {
     <li className="flex">
       <Link
         href={`/${locale}${url}`}
-        className={`flex items-center -mb-1 ${path === url && " "}`}
+        className={`flex items-center hover:text-dentsu-navigation-hover -mb-1 ${
+          path === url && " "
+        }`}
       >
         {text}
       </Link>

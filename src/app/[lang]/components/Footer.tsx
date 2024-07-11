@@ -88,7 +88,7 @@ function FooterLink({ url, text, newTab }: FooterLink) {
         target={newTab ? "_blank" : "_self"}
         className={classNames(
           path === url && "text-gray-100 hover:text-gray-100",
-          "text-base leading-7 text-gray-50 hover:text-gray-200 transition-all"
+          "text-base leading-7 text-gray-50 transition-all hover:text-dentsu-navigation-hover"
         )}
       >
         {text}
@@ -102,20 +102,36 @@ export function RenderSocialIcon({ social }: { social: string | undefined }) {
 
   switch (s) {
     case "WEBSITE":
-      return <CgWebsite className="w-10 h-10 " />;
+      return (
+        <CgWebsite className="w-10 h-10 transition-all hover:fill-dentsu-navigation-hover" />
+      );
     case "TWITTER":
-      return <AiFillTwitterCircle className="w-10 h-10 " />;
+      return (
+        <AiFillTwitterCircle className="w-10 h-10 transition-all hover:fill-dentsu-navigation-hover" />
+      );
     case "YOUTUBE":
-      return <AiFillYoutube className="w-10 h-10 " />;
+      return (
+        <AiFillYoutube className="w-10 h-10 transition-all hover:fill-dentsu-navigation-hover" />
+      );
     case "DISCORD":
-      return <FaDiscord className="w-10 h-10 " />;
+      return (
+        <FaDiscord className="w-10 h-10 transition-all hover:fill-dentsu-navigation-hover" />
+      );
     case "FACEBOOK":
-      return <RiFacebookCircleFill className="w-10 h-10 " />;
+      return (
+        <RiFacebookCircleFill className="w-10 h-10 transition-all hover:fill-dentsu-navigation-hover" />
+      );
     case "INSTAGRAM":
-      return <RiInstagramLine className="w-10 h-10 " />;
+      return (
+        <RiInstagramLine className="w-10 h-10 transition-all hover:fill-dentsu-navigation-hover" />
+      );
     case "LINKEDIN":
-      return <RiLinkedinBoxFill className="w-10 h-10 " />;
+      return (
+        <RiLinkedinBoxFill className="w-10 h-10 transition-all hover:fill-dentsu-navigation-hover" />
+      );
     default:
-      return <PiGlobeThin className="w-10 h-10 " />;
+      return (
+        <PiGlobeThin className="w-10 h-10 transition-all hover:fill-dentsu-navigation-hover" />
+      );
   }
 }

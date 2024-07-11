@@ -162,7 +162,7 @@ export default function Contacts({ data }: ContactsProps) {
 
     return (
       <button
-        className="inline-flex items-center justify-center w-auto gap-3 px-5 py-2 text-sm bg-black text-gray-50"
+        className="inline-flex items-center justify-center w-auto gap-3 px-5 py-2 text-sm bg-black hover:bg-dentsu-hover text-gray-50"
         type="submit"
       >
         {data.buttonTitle} <IoIosArrowForward />
@@ -221,7 +221,7 @@ export default function Contacts({ data }: ContactsProps) {
                   htmlFor={field.fieldName}
                   className="flex flex-col text-sm"
                 >
-                  {field.fieldName} *
+                  {field.fieldName}
                   <MySelect
                     options={data.companyToContact.map((company) => ({
                       value: company.id,
@@ -298,7 +298,7 @@ export default function Contacts({ data }: ContactsProps) {
                 {...register("privacyCookiesPolicy", {
                   required: "This field is required",
                 })}
-                className="mr-2"
+                className="mr-2 hover:cursor-pointer"
               />
               <span>{createLinks(data.privacyCookiesPolicy)}</span>
             </div>
@@ -316,7 +316,7 @@ export default function Contacts({ data }: ContactsProps) {
               <input
                 type="checkbox"
                 {...register("agreementToReceiveInfo")}
-                className="mr-2"
+                className="mr-2 hover:cursor-pointer"
               />
               <span>{data.agreementToReceiveInfo}</span>
             </div>

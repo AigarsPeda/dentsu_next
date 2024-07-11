@@ -75,7 +75,7 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
         <div className="flex justify-center">
           <a
             href={data.redirectUrl ?? `mailto:${data.contactEmail}` ?? ""}
-            className="flex items-center justify-center gap-3 px-6 py-2 text-base text-white bg-black rounded"
+            className="flex items-center justify-center gap-3 px-6 py-2 text-base text-white transition-all bg-black rounded hover:bg-dentsu-hover"
           >
             <EnvelopeIcon className="w-6 h-6" />
             {data.buttonTitle}

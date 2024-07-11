@@ -6,7 +6,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        "dentsu-hover": "#929292",
         "dentsu-primary": "#05051e",
+        "dentsu-navigation-hover": "#AEAEBC",
       },
       // add new font family
       fontFamily: {
