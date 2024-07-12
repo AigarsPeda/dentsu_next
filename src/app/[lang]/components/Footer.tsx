@@ -11,6 +11,7 @@ import {
   RiInstagramLine,
   RiLinkedinBoxFill,
 } from "react-icons/ri";
+import GlobeIcon from "./icons/GlobeIcon";
 
 interface FooterLink {
   id: number;
@@ -102,7 +103,7 @@ export function RenderSocialIcon({ social }: { social: string | undefined }) {
   switch (s) {
     case "WEBSITE":
       return (
-        <CgWebsite className="w-10 h-10 transition-all hover:fill-dentsu-navigation-hover" />
+        <GlobeIcon className="w-8 h-8 transition-all hover:fill-dentsu-navigation-hover fill-white" />
       );
     case "TWITTER":
       return (
