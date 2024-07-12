@@ -119,7 +119,9 @@ const MapComponent = ({
           target="_blank"
           rel="noreferrer"
           className="flex items-center px-3 py-1 space-x-2 bg-gray-200"
-          href={`https://www.google.com/maps/search/?api=1&query=${address}`}
+          href={`https://www.google.com/maps/search/?api=1&query=${
+            navigationAddress ?? address
+          }`}
         >
           <img alt="Google Maps" className="w-auto h-5" src={googleIcon} />
           <span>Google Maps</span>
