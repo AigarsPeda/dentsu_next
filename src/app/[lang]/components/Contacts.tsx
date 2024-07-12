@@ -71,7 +71,6 @@ type EmailResponseTypes = {
 };
 
 export default function Contacts({ data }: ContactsProps) {
-  console.log("data", data);
   const path = usePathname();
   const urlLocale = path.split("/")[1] || "en";
   const { reset, register, handleSubmit, formState } = useForm<IFormInput>();
