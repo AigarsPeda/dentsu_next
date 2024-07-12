@@ -5,6 +5,7 @@ interface GoogleMapProps {
   address: string;
   wazeIcon: string;
   googleIcon: string;
+  navigationAddress: string;
 }
 
 // Map's styling
@@ -21,14 +22,19 @@ const defaultMapCenter = {
 const defaultMapZoom = 15;
 
 const defaultMapOptions = {
-  zoomControl: true,
   tilt: 0,
-  gestureHandling: "auto",
+  zoomControl: true,
   mapTypeId: "roadmap",
+  gestureHandling: "auto",
   mapId: "b4341bc58b07a93d",
 };
 
-const MapComponent = ({ address, googleIcon, wazeIcon }: GoogleMapProps) => {
+const MapComponent = ({
+  address,
+  googleIcon,
+  wazeIcon,
+  navigationAddress,
+}: GoogleMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
@@ -44,16 +50,19 @@ const MapComponent = ({ address, googleIcon, wazeIcon }: GoogleMapProps) => {
       try {
         const geocoder = new google.maps.Geocoder();
 
-        geocoder.geocode({ address }, (results, status) => {
-          if (status === "OK" && results && results[0]) {
-            const { lat, lng } = results[0].geometry.location;
-            setMapCenter({ lat: lat(), lng: lng() });
-          } else {
-            console.error(
-              "Geocode was not successful for the following reason: " + status
-            );
+        geocoder.geocode(
+          { address: navigationAddress ?? address },
+          (results, status) => {
+            if (status === "OK" && results && results[0]) {
+              const { lat, lng } = results[0].geometry.location;
+              setMapCenter({ lat: lat(), lng: lng() });
+            } else {
+              console.error(
+                "Geocode was not successful for the following reason: " + status
+              );
+            }
           }
-        });
+        );
       } catch (error) {
         console.error("Error geocoding address:", error);
       } finally {
@@ -61,10 +70,10 @@ const MapComponent = ({ address, googleIcon, wazeIcon }: GoogleMapProps) => {
       }
     };
 
-    if (address) {
+    if (address || navigationAddress) {
       geocodeAddress();
     }
-  }, [address]);
+  }, [address, navigationAddress]);
 
   useEffect(() => {
     if (!window.google || !mapRef.current) return;

@@ -22,6 +22,7 @@ interface ContactsProps {
     phoneNumber: string;
     contactEmail: string;
     leadFormEmail: string;
+    navigationAddress: string;
     privacyCookiesPolicy: string;
     agreementToReceiveInfo: string;
     companyToContact: { id: number; companyTitle: string }[];
@@ -70,6 +71,7 @@ type EmailResponseTypes = {
 };
 
 export default function Contacts({ data }: ContactsProps) {
+  console.log("data", data);
   const path = usePathname();
   const urlLocale = path.split("/")[1] || "en";
   const { reset, register, handleSubmit, formState } = useForm<IFormInput>();
@@ -194,6 +196,7 @@ export default function Contacts({ data }: ContactsProps) {
           <MapProvider>
             <MapComponent
               address={data.address}
+              navigationAddress={data.navigationAddress}
               wazeIcon={getStrapiMedia(data.wazeIcon.data.attributes.url) ?? ""}
               googleIcon={
                 getStrapiMedia(data.googleIcon.data.attributes.url) ?? ""
