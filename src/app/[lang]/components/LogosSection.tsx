@@ -83,6 +83,34 @@ export default function LogosSection({ data }: LogosSectionProps) {
     >
       {data.company?.map((item: FeaturesType) => {
         const imgSrc = getStrapiMedia(item.media.data.attributes.url);
+        const isLink = item.url ? true : false;
+
+        if (!isLink) {
+          return (
+            <div
+              key={item.id}
+              className={classNames(
+                "flex items-center justify-center",
+                isUrlMatchToSearch(item.url) ? "opacity-50" : ""
+              )}
+            >
+              {imgSrc ? (
+                <img
+                  src={imgSrc}
+                  alt="our client logo"
+                  className={classNames(
+                    "object-contain w-full h-full lg:max-h-6 max-h-4 transition-all"
+                  )}
+                />
+              ) : (
+                <div className="flex items-center justify-center w-24 h-24 bg-gray-200">
+                  No Image Available
+                </div>
+              )}
+            </div>
+          );
+        }
+
         return (
           <Link
             key={item.id}
