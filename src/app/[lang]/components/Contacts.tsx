@@ -87,6 +87,27 @@ export default function Contacts({ data }: ContactsProps) {
       return acc;
     }, {} as IFormInput);
 
+    // loop over formDataToSend and replace true/false with Yes/No
+    Object.keys(formDataToSend).forEach((key) => {
+      const k = key as keyof IFormInput;
+
+      if (
+        typeof formDataToSend[k] === "boolean" &&
+        formDataToSend[k] === true
+      ) {
+        formDataToSend[k] = "Yes";
+      }
+
+      if (
+        typeof formDataToSend[k] === "boolean" &&
+        formDataToSend[k] === false
+      ) {
+        formDataToSend[k] = "No";
+      }
+    });
+
+    console.log(formDataToSend);
+
     fetch(`https://formsubmit.co/ajax/${data.contactEmail}`, {
       method: "POST",
       headers: {

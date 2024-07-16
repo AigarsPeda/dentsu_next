@@ -1,0 +1,1 @@
+Sitemap: http://134.122.83.203/strapi/api/sitemap/index.xml
