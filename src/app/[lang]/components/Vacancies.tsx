@@ -159,7 +159,7 @@ export default function Vacancies({ data }: VacanciesProps) {
                               `Application for ${vacancy.vacancyName}`
                             );
                           }}
-                          className="flex items-center gap-4 px-4 py-2 mt-4 text-sm bg-black text-gray-50"
+                          className="flex items-center gap-4 px-4 py-2 mt-4 text-sm text-white transition-all bg-black hover:bg-dentsu-hover"
                         >
                           {vacancy.buttonTitle}{" "}
                           <IoIosArrowDown className="w-4 h-4 transform -rotate-90" />
