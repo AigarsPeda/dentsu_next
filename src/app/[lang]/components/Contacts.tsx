@@ -106,8 +106,6 @@ export default function Contacts({ data }: ContactsProps) {
       }
     });
 
-    console.log(formDataToSend);
-
     fetch(`https://formsubmit.co/ajax/${data.contactEmail}`, {
       method: "POST",
       headers: {
