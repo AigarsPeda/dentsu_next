@@ -17,7 +17,7 @@ interface PostImageProps {
 
 export default function PostImage({ data }: PostImageProps) {
   const alt = data.media.data[0].attributes.alternativeText ?? "";
-  const src = getStrapiMedia(data.media.data[0]?.attributes.url) ?? "";
+  const src = getStrapiMedia(data.media.data[0]?.attributes?.url) ?? "";
 
   return (
     <div className="container py-3 mx-auto h-96">
