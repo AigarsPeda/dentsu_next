@@ -53,17 +53,30 @@ export async function generateMetadata({
   const { metadata, favicon } = meta.data.attributes;
   const { url } = favicon.data.attributes;
 
-  console.log("metadata", metadata);
-  console.log("favicon", favicon);
-  console.log("[new URL(url, getStrapiURL())]", [new URL(url, getStrapiURL())]);
+  console.log("[new URL(url, getStrapiURL())]", [
+    new URL(url, getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH ?? "")),
+  ]);
 
-  return {
+  console.log("url", url);
+  console.log(">>>", process.env.NEXT_PUBLIC_STRAPI_PATH ?? "");
+  console.log("GET", getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH ?? ""));
+
+  const m = {
     title: metadata.metaTitle,
     description: metadata.metaDescription,
-    icons: {
-      icon: [new URL(url, getStrapiURL())],
-    },
+    icon: new URL(
+      getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH ?? "") + url
+    ),
+    // icons: {
+    //   icon: [
+    //     new URL(url, getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH ?? "")),
+    //   ],
+    // },
   };
+
+  console.log("META", m);
+
+  return m;
 }
 
 export type StrapiLocaleType = {
