@@ -141,8 +141,6 @@ export default async function RootLayout({
     };
   });
 
-  console.log(global.data);
-
   return (
     <html className={`${halcom.className}`} lang={params.lang}>
       <body className="text-white">
