@@ -53,6 +53,10 @@ export async function generateMetadata({
   const { metadata, favicon } = meta.data.attributes;
   const { url } = favicon.data.attributes;
 
+  console.log("metadata", metadata);
+  console.log("favicon", favicon);
+  console.log("[new URL(url, getStrapiURL())]", [new URL(url, getStrapiURL())]);
+
   return {
     title: metadata.metaTitle,
     description: metadata.metaDescription,
