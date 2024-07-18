@@ -82,7 +82,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
       // )}
       className={classNames(
         !data.showInMobile ? "hidden md:grid" : "md:grid",
-        "grid-cols-1 lg:grid-cols-4 gap-6 py-10 lg:py-14 space-y-10"
+        "grid-cols-1 lg:grid-cols-4 gap-6 py-10 lg:py-14 space-y-10 md:space-y-0"
       )}
     >
       {data.company?.map((item: FeaturesType) => {
@@ -103,7 +103,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
                   src={imgSrc}
                   alt="our client logo"
                   className={classNames(
-                    "object-contain w-full h-full lg:max-h-6 max-h-4 transition-all"
+                    "object-contain w-full h-full max-h-6 transition-all"
                   )}
                 />
               ) : (
