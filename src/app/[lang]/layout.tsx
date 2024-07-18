@@ -56,7 +56,7 @@ export async function generateMetadata({
   const m = {
     title: metadata.metaTitle,
     description: metadata.metaDescription,
-    icon: new URL(getStrapiURL() + url),
+    icon: "./favicon.jpg",
     // icons: {
     //   icon: [
     //     new URL(url, getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH ?? "")),
