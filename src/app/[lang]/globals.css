@@ -5,13 +5,7 @@
 
 @layer base {
   h1 {
-    @apply font-bold;
-
-    font-size: 14vw;
-
-    @screen md {
-      font-size: 6.4rem;
-    }
+    @apply font-bold text-[14vw] md:text-9xl;
   }
 
   h2 {
