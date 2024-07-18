@@ -62,12 +62,14 @@ export async function generateMetadata({
     //     new URL(url, getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH ?? "")),
     //   ],
     // },
+    icons: {
+      icon: new URL(
+        `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
+      ),
+    },
   };
 
-  console.log(
-    "META",
-    new URL(`${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`)
-  );
+  console.log("META", m);
 
   return m;
 }
