@@ -36,12 +36,12 @@ interface ContactUsSectionProps {
 
 export default function ContactUsSection({ data }: ContactUsSectionProps) {
   return (
-    <div className="container pt-5 pb-2 mx-auto lg:pt-16">
-      <div className="lg:pb-4">
+    <div className="container pt-5 mx-auto pb-7 lg:pt-16">
+      <div className="pt-4 lg:pb-4">
         <a href={data.redirectUrl ?? ""}>
           <h3 className="text-center">{data.title}</h3>
         </a>
-        <h4 className="px-10 text-center lg:mt-4">{data.description}</h4>
+        <h4 className="px-10 mt-3 text-center lg:mt-4">{data.description}</h4>
       </div>
       <div className="mx-auto grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] md:gap-10 md:grid-cols-[repeat(auto-fit,minmax(150px,0.44fr))] pt-10">
         {data.feature.map((item) => {
@@ -75,7 +75,7 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
         <div className="flex justify-center">
           <a
             href={data.redirectUrl ?? `mailto:${data.contactEmail}` ?? ""}
-            className="flex items-center justify-center gap-3 px-6 py-2 text-base text-white transition-all bg-black rounded hover:bg-dentsu-hover"
+            className="flex items-center justify-center gap-3 px-6 py-2 text-base text-white transition-all bg-black hover:bg-dentsu-hover"
           >
             <EnvelopeIcon className="w-6 h-6" />
             {data.buttonTitle}

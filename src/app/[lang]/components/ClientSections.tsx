@@ -43,7 +43,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
 
   return (
     <div className="bg-[#e5e5e9]">
-      <div className="container px-5 mx-auto lg:pb-20 py-9 lg:px-12">
+      <div className="container px-5 py-12 mx-auto lg:pb-24 lg:px-12">
         <h2 className="pb-8 text-xl font-normal text-center lg:pb-14 lg:text-4xl">
           {data.title}
         </h2>

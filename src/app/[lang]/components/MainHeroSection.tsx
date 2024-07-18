@@ -84,8 +84,8 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           src={posterUrl ?? ""}
           className="block object-cover w-full h-full md:hidden"
         />
-        <div className="container absolute z-10 transform -translate-x-1/2 md:-translate-y-1/2 md:top-1/2 left-1/2 bottom-[20%]">
-          <h1 className="p-0 text-white">{data.title}</h1>
+        <div className="w-full md:max-w-[55rem] absolute z-10 transform left-2 md:-translate-y-1/2 md:top-1/2 bottom-[20%]">
+          <h1 className="p-0 leading-[7rem] text-white">{data.title}</h1>
         </div>
         <div className="absolute hidden transform bottom-10 animate-bounce md:block">
           <ArrowIcon className="w-12 h-12 fill-gray-50" />
@@ -100,7 +100,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
       style={{ backgroundImage: `url(${imgUrl ?? posterUrl ?? ""})` }}
     >
       {/* <div className="absolute inset-0 bg-black opacity-50" /> */}
-      <div className="container absolute transform -translate-x-1/2 md:-translate-y-1/2 md:top-1/2 left-1/2 bottom-[20%]">
+      <div className="w-full md:max-w-[55rem] absolute z-10 transform left-2 md:-translate-y-1/2 md:top-1/2 bottom-[20%]">
         <h1 className="p-0 text-white">{data.title}</h1>
       </div>
       <div className="absolute hidden transform bottom-10 animate-bounce md:block">

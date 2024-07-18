@@ -1,3 +1,6 @@
+"use client";
+import { useLayoutEffect, useRef, useState } from "react";
+
 interface VacanciesHeadlineProps {
   data: {
     headline: string;
@@ -8,28 +11,108 @@ interface VacanciesHeadlineProps {
 }
 
 export default function VacanciesHeadline({ data }: VacanciesHeadlineProps) {
+  const ref = useRef<HTMLHeadingElement | null>(null);
+  const [height, setHeight] = useState(200);
+
+  const updateHeight = () => {
+    if (ref.current) {
+      setHeight(ref.current.clientHeight);
+    }
+  };
+
+  const isEmail = (text: string) => {
+    return text.includes("@");
+  };
+
+  const isLinkedIn = (text: string) => text.toLowerCase() === "linkedin";
+
+  const createLinks = (text: string) => {
+    const splitText = text.split(/({{.*?}})/);
+
+    return (
+      <>
+        {splitText.map((part, index) => {
+          const match = part.match(/{{(.*?)}}/);
+          if (match) {
+            const content = match[1];
+
+            if (isEmail(content)) {
+              return (
+                <a
+                  key={index}
+                  href={`mailto:${content}`}
+                  className="font-bold underline underline-offset-4 text-[#5b19c4]"
+                >
+                  {content}
+                </a>
+              );
+            } else if (isLinkedIn(content)) {
+              return (
+                <a
+                  key={index}
+                  target="_blank"
+                  href="https://www.linkedin.com/company/dentsulv/"
+                  className="font-bold underline underline-offset-4 text-[#5b19c4]"
+                >
+                  LinkedIn
+                </a>
+              );
+            } else {
+              return part; // If not matched, return the original part
+            }
+          } else {
+            return part; // If no match, return the original part
+          }
+        })}
+      </>
+    );
+  };
+
+  useLayoutEffect(() => {
+    updateHeight();
+
+    window.addEventListener("resize", updateHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, []);
+
   return (
-    <div className="relative">
-      <div className="md:absolute py-10 bg-black text-gray-50 max-w-[50rem] lg:w-[52rem] right-[54%] transform bottom-[45%]">
-        <div className="container flex px-10 md:justify-end">
-          <div className="max-w-[23.5rem]">
-            <h1 className="text-2xl font-bold text-left md:text-3xl">
+    <>
+      <div className="container relative grid grid-cols-1 gap-10 py-0 mx-auto md:py-10 md:grid-cols-2">
+        <div
+          className="absolute w-screen h-full bg-black md:z-[1] z-[-1] md:hidden block"
+          style={{
+            height: `${height}px`,
+          }}
+        ></div>
+        <div className="relative">
+          <div
+            className="absolute md:right-0 right-0 w-screen h-full bg-black md:z-[1] z-[-1] md:-top-16 hidden md:block"
+            style={{
+              height: `${height}px`,
+            }}
+          ></div>
+          <div
+            ref={ref}
+            className="left-0 w-full p-10 pl-0 bg-black md:absolute -top-16 z-[2]"
+          >
+            <h1 className="text-xl font-bold text-left text-white md:text-3xl">
               {data.mainHeadline}
             </h1>
           </div>
         </div>
-      </div>
-      <div className="container grid grid-cols-1 gap-10 py-10 mx-auto md:grid-cols-2">
-        <div className="md:col-start-2">
-          <p className="text-base">{data.headline}</p>
+        <div>
+          <p className="text-base">{createLinks(data.headline)}</p>
         </div>
         <div>
-          <p className="text-base">{data.headline2}</p>
+          <p className="text-base">{createLinks(data.headline2)}</p>
         </div>
         <div>
-          <p className="text-base">{data.headline3}</p>
+          <p className="text-base">{createLinks(data.headline3)}</p>
         </div>
       </div>
-    </div>
+    </>
   );
 }

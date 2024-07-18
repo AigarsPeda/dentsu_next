@@ -78,7 +78,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
     <div
       className={classNames(
         !data.showInMobile ? "hidden md:flex" : "md:flex",
-        "container flex-wrap items-center justify-between block mx-auto space-y-6 md:space-y-0 py-9 lg:py-12"
+        "container flex-wrap items-center justify-between block mx-auto space-y-6 md:space-y-0 py-10 lg:py-14"
       )}
     >
       {data.company?.map((item: FeaturesType) => {
