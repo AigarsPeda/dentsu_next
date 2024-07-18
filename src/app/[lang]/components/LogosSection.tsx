@@ -76,10 +76,6 @@ export default function LogosSection({ data }: LogosSectionProps) {
 
   return (
     <div
-      // className={classNames(
-      //   !data.showInMobile ? "hidden md:flex" : "md:flex",
-      //   "container flex-wrap items-center justify-between block mx-auto space-y-6 md:space-y-0 py-10 lg:py-14"
-      // )}
       className={classNames(
         !data.showInMobile ? "hidden md:grid" : "md:grid",
         "grid-cols-1 lg:grid-cols-4 gap-6 py-10 lg:py-14 space-y-10 md:space-y-0"
