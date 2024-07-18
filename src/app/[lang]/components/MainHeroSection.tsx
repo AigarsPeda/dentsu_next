@@ -84,7 +84,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           src={posterUrl ?? ""}
           className="block object-cover w-full h-full md:hidden"
         />
-        <div className="w-full md:max-w-[90rem] absolute z-10 transform pl-6 md:pl-10 lg:pl-0 left-2 md:-translate-y-1/2 md:top-1/2 bottom-[20%]">
+        <div className="w-full md:max-w-[67rem] absolute z-10 transform pl-6 md:pl-10 lg:pl-0 left-2 md:-translate-y-1/2 md:top-1/2 bottom-[20%]">
           <h1 className="p-0 md:leading-[8.5rem] leading-[14vw] text-white">
             {data.title}
           </h1>
