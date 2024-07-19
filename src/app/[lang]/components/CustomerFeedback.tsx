@@ -23,11 +23,13 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
   const params = useSearchParams();
   const search = params.get("search");
 
-  const filteredData = data.feature.filter((item) => {
-    return item.participatingCompany
-      ?.toLowerCase()
-      .includes(search?.toLowerCase() || "");
-  });
+  const filteredData = search
+    ? data.feature.filter((item) => {
+        return item.participatingCompany
+          ?.toLowerCase()
+          .includes(search?.toLowerCase() || "");
+      })
+    : data.feature;
 
   if (filteredData.length === 0) {
     return null;

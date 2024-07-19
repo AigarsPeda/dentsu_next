@@ -6,10 +6,8 @@ import { getStrapiMedia, getStrapiURL } from "@/app/[lang]/utils/api-helpers";
 import { FALLBACK_SEO } from "@/app/[lang]/utils/constants";
 import { fetchAPI } from "@/app/[lang]/utils/fetch-api";
 import type { Metadata } from "next";
-import { i18n } from "../../../i18n-config";
 import localFont from "next/font/local";
-// import HalcomRegular from "../../../public/fonts/Halcom-Regular.ttf";
-// import HalcomBold from "../../../public/fonts/Halcom-Bold.ttf";
+import { i18n } from "../../../i18n-config";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -56,20 +54,12 @@ export async function generateMetadata({
   const m = {
     title: metadata.metaTitle,
     description: metadata.metaDescription,
-    icon: new URL(`${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`),
-    // icons: {
-    //   icon: [
-    //     new URL(url, getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH ?? "")),
-    //   ],
-    // },
     icons: {
       icon: new URL(
         `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
       ),
     },
   };
-
-  console.log("META", m);
 
   return m;
 }
