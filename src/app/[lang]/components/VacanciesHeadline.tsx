@@ -89,17 +89,17 @@ export default function VacanciesHeadline({ data }: VacanciesHeadlineProps) {
         ></div>
         <div className="relative">
           <div
-            className="absolute md:right-0 right-0 w-screen h-full bg-black md:z-[1] z-[-1] md:-top-16 hidden md:block"
+            className="absolute md:right-0 right-0 w-screen h-full bg-black md:z-[1] z-[-1] md:-top-20 hidden md:block"
             style={{
               height: `${height}px`,
             }}
           ></div>
           <div
             ref={ref}
-            className="left-0 w-full p-10 pl-0 bg-black md:absolute -top-16 z-[2]"
+            className="left-0 w-full p-10 pl-0 bg-black md:absolute -top-20 z-[2]"
           >
             <h1 className="text-xl font-bold text-left text-white md:text-3xl">
-              {data.mainHeadline}
+              {createLinks(data.mainHeadline)}
             </h1>
           </div>
         </div>
