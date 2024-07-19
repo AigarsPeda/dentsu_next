@@ -78,7 +78,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
     <div
       className={classNames(
         !data.showInMobile ? "hidden md:grid" : "md:grid",
-        "grid-cols-1 lg:grid-cols-4 gap-6 py-10 lg:py-14 space-y-10 md:space-y-0"
+        "grid-cols-1 lg:grid-cols-4 gap-6 py-10 lg:py-14 space-y-10 md:space-y-0 container mx-auto"
       )}
     >
       {data.company?.map((item: FeaturesType) => {
@@ -90,7 +90,6 @@ export default function LogosSection({ data }: LogosSectionProps) {
             <div
               key={item.id}
               className={classNames(
-                "flex items-center justify-center",
                 isUrlMatchToSearch(item.url) ? "opacity-50" : ""
               )}
             >
@@ -99,7 +98,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
                   src={imgSrc}
                   alt="our client logo"
                   className={classNames(
-                    "object-contain w-full h-full max-h-6 transition-all"
+                    "object-contain max-h-6 transition-all"
                   )}
                 />
               ) : (
@@ -117,7 +116,6 @@ export default function LogosSection({ data }: LogosSectionProps) {
             scroll={false}
             href={getUrl(item.url, item.redirectToOurWork)}
             target={isOurLink(item.url) ? "_self" : "_blank"}
-            className={classNames("flex items-center justify-center")}
           >
             {imgSrc ? (
               <img
@@ -125,7 +123,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
                 alt="our client logo"
                 className={classNames(
                   isUrlMatchToSearch(item.url) ? "opacity-50" : "",
-                  "object-contain w-full h-full lg:max-h-6 max-h-4 hover:opacity-50 transition-all"
+                  "object-contain max-h-6 hover:opacity-50 transition-all"
                 )}
               />
             ) : (
