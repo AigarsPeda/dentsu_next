@@ -78,7 +78,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
     <div
       className={classNames(
         !data.showInMobile ? "hidden md:grid" : "md:grid",
-        "grid-cols-1 lg:grid-cols-4 gap-6 py-10 lg:py-14 space-y-10 md:space-y-0 container mx-auto"
+        "grid-cols-1 lg:grid-cols-4 gap-6 py-10 lg:py-14 space-y-7 md:space-y-0 container mx-auto"
       )}
     >
       {data.company?.map((item: FeaturesType) => {
@@ -90,6 +90,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
             <div
               key={item.id}
               className={classNames(
+                "flex items-center justify-center md:block",
                 isUrlMatchToSearch(item.url) ? "opacity-50" : ""
               )}
             >
@@ -116,6 +117,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
             scroll={false}
             href={getUrl(item.url, item.redirectToOurWork)}
             target={isOurLink(item.url) ? "_self" : "_blank"}
+            className={classNames("flex items-center justify-center md:block")}
           >
             {imgSrc ? (
               <img
