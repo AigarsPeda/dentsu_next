@@ -111,6 +111,16 @@ const MapComponent = ({
     return <div>Loading map...</div>;
   }
 
+  console.log("navigationAddress", navigationAddress);
+  // 56.968488, 24.164263
+  const getLongLat = (address: string) => {
+    const split = address.split(",");
+    return {
+      lat: parseFloat(split[0]),
+      lng: parseFloat(split[1]),
+    };
+  };
+
   return (
     <>
       <div className="w-full" ref={mapRef} style={defaultMapContainerStyle} />
@@ -129,7 +139,9 @@ const MapComponent = ({
         <a
           target="_blank"
           rel="noreferrer"
-          href={`https://waze.com/ul?ll=${mapCenter.lat},${mapCenter.lng}&navigate=yes`}
+          href={`https://www.waze.com/ul?ll=${
+            getLongLat(navigationAddress).lat ?? mapCenter.lat
+          },${getLongLat(navigationAddress).lng ?? mapCenter.lng}&navigate=yes`}
           className="flex items-center px-3 py-1 space-x-2 bg-gray-200"
         >
           <img alt="Waze" className="w-auto h-5" src={wazeIcon} />
