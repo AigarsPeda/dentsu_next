@@ -73,6 +73,13 @@
   }
 }
 
+.staff {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
 @layer utilities {
   .custom-clamp-6 {
     line-clamp: 6;
