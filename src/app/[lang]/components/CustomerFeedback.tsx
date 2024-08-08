@@ -25,9 +25,12 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
 
   const filteredData = search
     ? data.feature.filter((item) => {
-        return item.participatingCompany
-          ?.toLowerCase()
-          .includes(search?.toLowerCase() || "");
+        // return if match or if not participatingCompany
+        return (
+          item.participatingCompany
+            ?.toLowerCase()
+            .includes(search?.toLowerCase() || "") || !item.participatingCompany
+        );
       })
     : data.feature;
 
@@ -44,7 +47,7 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
               <div key={item.id} className="p-6 bg-black text-gray-50">
                 <DoubleArrows className="w-12 h-12 mb-4" />
                 <div className="w-full">
-                  <div className="mb-8 overflow-hidden md:h-60 md:custom-clamp-10">
+                  <div className="mb-8 overflow-hidden md:h-80 md:custom-clamp-10">
                     <p title={item.feedback} className="text-base">
                       {item.feedback}
                     </p>

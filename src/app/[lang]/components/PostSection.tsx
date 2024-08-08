@@ -2,7 +2,7 @@
 import ArrowIcon from "@/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface MediaType {
   id: string;
@@ -34,13 +34,17 @@ interface PostSectionProps {
 }
 
 export default function PostSection({ data }: PostSectionProps) {
+  const path = usePathname();
   const params = useSearchParams();
   const [parent] = useAutoAnimate();
+
   const search = params.get("search");
 
   const filteredData = data.post.filter((item) => {
     return item.company?.toLowerCase().includes(search?.toLowerCase() || "");
   });
+
+  const urlLocale = path.split("/")[1] || "en";
 
   return (
     <div className="container mx-auto mb-10">
@@ -53,14 +57,14 @@ export default function PostSection({ data }: PostSectionProps) {
           return (
             <li key={item.id} className="group">
               <a
-                href={item.postUrl}
+                href={`/${urlLocale}/${item.postUrl}`}
                 target={item.isNewTab ? "_blank" : "_self"}
               >
                 {imgUrl && (
                   <img
                     src={imgUrl}
                     alt="our client logo"
-                    className="object-cover w-full lg:h-[400px] lg:max-h-[500px] max-h-[250px] text-white"
+                    className="object-cover w-full lg:h-[400px] lg:max-h-[500px] max-h-[250px] text-white h-full"
                   />
                 )}
                 <div className="flex items-end p-6 transition-colors bg-black text-gray-50 group-hover:bg-dentsu-hover">
