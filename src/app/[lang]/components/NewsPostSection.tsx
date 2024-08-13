@@ -1,6 +1,6 @@
 "use client";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
@@ -32,6 +32,7 @@ interface NewsPostSectionProps {
 
 export default function NewsPostSection({ data }: NewsPostSectionProps) {
   const router = useRouter();
+  const path = usePathname();
   const searchParams = useSearchParams();
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -41,6 +42,8 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
+
+  const urlLocale = path.split("/")[1] || "en";
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -63,21 +66,26 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
           if (!src) return null;
 
           return (
-            <div key={newsPost.id} className="flex flex-col mt-4 md:mt-10">
-              <div className="relative h-48 overflow-hidden">
+            <div
+              key={newsPost.id}
+              className="flex flex-col justify-between mt-4 md:mt-10"
+            >
+              <div className="relative h-56 overflow-hidden ">
                 <img
                   src={src}
                   alt={thumbnail.alternativeText || "news post image"}
                   className="object-cover w-full h-full bg-gray-300"
                 />
               </div>
-              <div>
+              <div className="h-full max-h-[7.7rem]">
                 <h3 className="mt-4 text-lg font-bold">{newsPost.title}</h3>
-                <p className="h-[7.7rem] mt-2 overflow-hidden text-sm custom-clamp-6">
+                <p className="h-full mt-2 overflow-hidden text-sm ">
                   {newsPost.description}
                 </p>
+              </div>
+              <div>
                 <a
-                  href={newsPost.url}
+                  href={`/${urlLocale}/${newsPost.url}`}
                   className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm transition-all bg-black hover:bg-dentsu-hover md:mt-2 text-gray-50"
                 >
                   {newsPost.buttonTitle}
