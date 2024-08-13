@@ -37,6 +37,18 @@ interface MediaModalProps {
           };
         }[];
       };
+      thumbnail: {
+        data: {
+          id: number;
+          attributes: {
+            url: string;
+            width: number;
+            height: number;
+            caption: null | string;
+            alternativeText: null | string;
+          };
+        };
+      };
     }[];
   };
 }
@@ -113,12 +125,12 @@ export default function MediaModal({
               ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
               : null;
 
-            console.log("videoUrl", videoUrl);
-
             const embedVideoUrl =
               item.url && !isImageUrl(item.url) ? getEmbedUrl(item.url) : null;
 
-            console.log("embedVideoUrl", embedVideoUrl);
+            // const thumbnail = item.thumbnail.data?.[0]?.attributes;
+
+            // console.log("embedVideoUrl", embedVideoUrl);
 
             return (
               <Transition
