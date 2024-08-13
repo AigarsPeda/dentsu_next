@@ -1,4 +1,9 @@
-const getEmbedUrl = (videoUrl: string): string => {
+const getEmbedUrl = (videoUrl: string | null): string | null => {
+  if (!videoUrl) {
+    console.error("No video URL provided");
+    return null;
+  }
+
   const youtubeRegex =
     /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|watch\?v%3D)([\w-]{11}).*/;
   const youtubeMatch = videoUrl.match(youtubeRegex);

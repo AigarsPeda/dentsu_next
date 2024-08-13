@@ -8,7 +8,11 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 
 export const isImageUrl = (url: string): boolean => {
-  return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/.test(url);
+  return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/.test(url.toLocaleUpperCase());
+};
+
+export const isVideoUrl = (url: string): boolean => {
+  return /\.(mp4|webm|ogg|mov|flv|avi|wmv|3gp|mkv)$/.test(url.toLowerCase());
 };
 
 interface MediaModalProps {
@@ -100,7 +104,21 @@ export default function MediaModal({
 
         <div className="relative w-full h-full overflow-hidden text-center rounded-sm">
           {data.imageCarousel.map((item, index) => {
-            const isAvailableVideo = item.url && !isImageUrl(item.url);
+            // const isAvailableVideo = item.url && !isImageUrl(item.url);
+            // const isUpLoadedVideo = isVideoUrl(
+            //   item.media.data?.[0]?.attributes?.url
+            // );
+
+            const videoUrl = isVideoUrl(item.media.data?.[0]?.attributes?.url)
+              ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
+              : null;
+
+            console.log("videoUrl", videoUrl);
+
+            const embedVideoUrl =
+              item.url && !isImageUrl(item.url) ? getEmbedUrl(item.url) : null;
+
+            console.log("embedVideoUrl", embedVideoUrl);
 
             return (
               <Transition
@@ -113,16 +131,16 @@ export default function MediaModal({
                 enterFrom={transitionClasses.enterFrom}
                 leaveFrom={transitionClasses.leaveFrom}
               >
-                {isAvailableVideo && item.url ? (
+                {videoUrl || embedVideoUrl ? (
                   <iframe
-                    src={getEmbedUrl(item.url)}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
                     width={640}
                     height={360}
+                    allowFullScreen
+                    title="YouTube video player"
                     className="absolute w-full h-full"
+                    src={videoUrl ?? embedVideoUrl ?? ""}
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   ></iframe>
                 ) : (
                   <img
