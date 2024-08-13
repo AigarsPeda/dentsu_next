@@ -69,8 +69,11 @@ export default function MediaCarousel({ data }: CarouselProps) {
             item.url && !isImageUrl(item.url) ? getEmbedUrl(item.url) : null;
 
           const src =
-            getStrapiMedia(item.thumbnail.data?.attributes?.url ?? item.url) ??
-            "";
+            getStrapiMedia(
+              item.thumbnail.data?.attributes?.url ??
+                item.media.data[0].attributes.url ??
+                item.url
+            ) ?? "";
 
           // if (src === "") return null;
 

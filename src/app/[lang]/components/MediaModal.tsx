@@ -167,7 +167,7 @@ export default function MediaModal({
               </Transition>
             );
           })}
-          <div className="absolute z-50 flex items-center justify-between w-full h-full">
+          <div className="absolute z-50 flex items-center justify-between top-[50%] -left-5">
             <button
               className="m-4 rounded-full"
               onClick={() => {
@@ -177,6 +177,8 @@ export default function MediaModal({
             >
               <IoIosArrowBack className="w-10 h-10" />
             </button>
+          </div>
+          <div className="absolute z-50 flex items-center justify-between top-[50%] -right-5">
             <button
               className="m-4 rounded-full"
               onClick={() => {
