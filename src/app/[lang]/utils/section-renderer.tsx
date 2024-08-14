@@ -13,6 +13,7 @@ import MainHeroSection from "@/app/[lang]/components/MainHeroSection";
 import MediaCarousel from "@/app/[lang]/components/MediaCarousel";
 import NewsPostSection from "@/app/[lang]/components/NewsPostSection";
 import NewsPostTitle from "@/app/[lang]/components/NewsPostTitle";
+import PDFDisplay from "@/app/[lang]/components/PDFDisplay";
 import PageTitle from "@/app/[lang]/components/PageTitle";
 import PostImage from "@/app/[lang]/components/PostImage";
 import PostSection from "@/app/[lang]/components/PostSection";
@@ -31,10 +32,6 @@ import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
-    case "sections.post-title":
-      return <PostTitle key={index} data={section} />;
-    case "shared.video-embed":
-      return <VideoEmbed key={index} data={section} />;
     case "sections.hero":
       return <Hero key={index} data={section} />;
     case "sections.table":
@@ -51,8 +48,14 @@ export function sectionRenderer(section: any, index: number) {
       return <InfoBlock key={index} data={section} />;
     case "sections.page-title":
       return <PageTitle key={index} data={section} />;
+    case "sections.post-title":
+      return <PostTitle key={index} data={section} />;
     case "sections.vacancies":
       return <Vacancies key={index} data={section} />;
+    case "sections.pdf":
+      return <PDFDisplay key={index} data={section} />;
+    case "shared.video-embed":
+      return <VideoEmbed key={index} data={section} />;
     case "sections.social-share":
       return <SocialShare key={index} data={section} />;
     case "sections.post-section":
