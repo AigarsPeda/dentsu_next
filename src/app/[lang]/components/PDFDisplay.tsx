@@ -34,6 +34,8 @@ const PDFDisplay: FC<PostImageProps> = ({ data }) => {
 
   const pdfUrl = getStrapiMedia(data?.file?.data?.attributes?.url) ?? "";
 
+  const isUrlPdf = pdfUrl.endsWith(".pdf");
+
   useEffect(() => {
     const updateScale = () => {
       if (containerRef.current) {
@@ -60,6 +62,23 @@ const PDFDisplay: FC<PostImageProps> = ({ data }) => {
     setError(true);
     // setIsLoading(false);
   };
+
+  if (!isUrlPdf) {
+    console.error("Invalid PDF URL", pdfUrl);
+    return (
+      <div className="container py-3 mx-auto pdf-container">
+        <div className="flex items-center justify-center h-96">
+          <h2>Failed to load file. Please try again later.</h2>
+          <p>
+            Ore download the file to view it:
+            <a className="ml-2 text-blue-500 underline" href={pdfUrl}>
+              Download
+            </a>
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="container py-3 mx-auto pdf-container">
