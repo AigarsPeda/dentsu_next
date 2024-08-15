@@ -29,7 +29,7 @@ const PDFDisplay: FC<PostImageProps> = ({ data }) => {
   const [scale, setScale] = useState(1.0);
   const [error, setError] = useState(false);
   const [numPages, setNumPages] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const pdfUrl = getStrapiMedia(data?.file?.data?.attributes?.url) ?? "";
@@ -53,21 +53,16 @@ const PDFDisplay: FC<PostImageProps> = ({ data }) => {
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
-    setIsLoading(false);
+    // setIsLoading(false);
   };
 
   const onDocumentLoadError = () => {
     setError(true);
-    setIsLoading(false);
+    // setIsLoading(false);
   };
 
   return (
     <div ref={containerRef} className="container py-3 mx-auto pdf-container">
-      {isLoading && (
-        <div className="flex items-center justify-center h-96">
-          <div className="loader">Loading...</div>
-        </div>
-      )}
       {error && (
         <div className="flex items-center justify-center h-96">
           <h2>Failed to load PDF. Please try again later.</h2>
@@ -83,6 +78,11 @@ const PDFDisplay: FC<PostImageProps> = ({ data }) => {
       <Document
         file={pdfUrl}
         renderMode="canvas"
+        loading={
+          <div className="flex items-center justify-center h-96">
+            Loading...
+          </div>
+        }
         onLoadSuccess={onDocumentLoadSuccess}
         onLoadError={onDocumentLoadError}
       >
