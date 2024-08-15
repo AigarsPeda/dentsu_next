@@ -57,7 +57,7 @@ export default function PostSection({ data }: PostSectionProps) {
           return (
             <li
               key={item.id}
-              className="bg-black group hover:bg-dentsu-hover transition-colors md:h-[32rem]"
+              className="bg-black group hover:bg-dentsu-hover transition-colors md:h-[33rem]"
             >
               <a
                 href={`/${urlLocale}/${item.postUrl}`}
@@ -70,9 +70,9 @@ export default function PostSection({ data }: PostSectionProps) {
                     className="object-cover w-full h-[20rem] text-white"
                   />
                 </div>
-                <div className="flex items-end p-6 transition-colors text-gray-50 ">
+                <div className="flex items-end p-6 transition-colors text-gray-50">
                   <div className="w-full">
-                    <div className="mb-3 overflow-hidden md:h-9 custom-clamp-2">
+                    <div className="mb-3 overflow-hidden md:mb-5 custom-clamp-2">
                       <h6 title={item.title}>{item.title}</h6>
                     </div>
                     <div className="h-24 overflow-hidden custom-clamp-5">
