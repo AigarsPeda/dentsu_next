@@ -62,9 +62,9 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
                   <div className="object-contain w-full h-full max-w-[200px] rounded-full overflow-hidden" />
                 )}
                 <div className="mt-3 text-center">
-                  <h3 className="text-base">{item.name}</h3>
-                  <p className="text-sm">{item.email}</p>
-                  <p className="text-sm">{item.position}</p>
+                  {item.name && <h3 className="text-base">{item.name}</h3>}
+                  {item.email && <p className="text-sm">{item.email}</p>}
+                  {item.position && <p className="text-sm">{item.position}</p>}
                 </div>
               </div>
             </div>
