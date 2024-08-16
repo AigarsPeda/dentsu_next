@@ -2,11 +2,14 @@
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import classNames from "classnames";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useMemo, useRef } from "react";
+// import { useSearchParams } from "next/navigation";
 
 interface FeaturesType {
   id: number;
   url: string | null;
+
   redirectToOurWork: boolean;
   media: {
     data: {
@@ -22,6 +25,7 @@ interface FeaturesType {
 
 interface LogosSectionProps {
   data: {
+    autoSwitch: boolean;
     showInMobile: boolean;
     company: FeaturesType[];
   };
@@ -29,9 +33,20 @@ interface LogosSectionProps {
 
 export default function LogosSection({ data }: LogosSectionProps) {
   const path = usePathname();
+  const router = useRouter();
+
+  const currentIndex = useRef(0);
+  const firstRender = useRef(true);
+
   const params = useSearchParams();
   const search = params.get("search");
   const urlLocale = path.split("/")[1] || "en";
+
+  const companyList = useMemo(() => {
+    return data.company.map((item) => {
+      return item.url;
+    });
+  }, [data.company]);
 
   const isUrlMatchToSearch = (url: string | null) => {
     if (!search) {
@@ -73,6 +88,43 @@ export default function LogosSection({ data }: LogosSectionProps) {
 
     return url || "";
   };
+
+  useEffect(() => {
+    if (data.autoSwitch && companyList.length > 1) {
+      if (firstRender.current) {
+        // Handle the first render logic, i.e., trigger the first switch immediately
+        const url = companyList[currentIndex.current];
+        if (url) {
+          router.push(`${path}?search=${url}`, { scroll: false });
+        }
+        currentIndex.current++;
+        firstRender.current = false; // Mark the first render as done
+      }
+
+      let interval: NodeJS.Timeout;
+
+      interval = setInterval(() => {
+        if (currentIndex.current >= companyList.length) {
+          currentIndex.current = 0;
+        }
+
+        const url = companyList[currentIndex.current];
+
+        if (!url) {
+          currentIndex.current++;
+          return;
+        }
+
+        router.push(`${path}?search=${url}`, {
+          scroll: false,
+        });
+
+        currentIndex.current++;
+      }, 3500);
+
+      return () => clearInterval(interval);
+    }
+  }, [data.autoSwitch, companyList]);
 
   return (
     <div
