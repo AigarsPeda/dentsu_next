@@ -61,7 +61,7 @@ export default function PostStatisticWithImage({
         <div
           className={classNames(
             data.feature.statisticOnRight
-              ? "md:justify-end md:pr-14"
+              ? "md:justify-end md:pr-14 md:pl-44 p-10"
               : "md:pl-14 md:justify-start",
             "md:pt-14 md:pb-14 flex justify-center"
           )}
