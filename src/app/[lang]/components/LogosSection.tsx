@@ -144,7 +144,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
             <div
               key={item.id}
               className={classNames(
-                "flex items-center justify-center md:block",
+                "flex items-center justify-center lg:block",
                 isUrlMatchToSearch(item.url) ? "opacity-50" : ""
               )}
             >
@@ -171,7 +171,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
             scroll={false}
             href={getUrl(item.url, item.redirectToOurWork)}
             target={isOurLink(item.url) ? "_self" : "_blank"}
-            className={classNames("flex items-center justify-center md:block")}
+            className={classNames("flex items-center justify-center lg:block")}
           >
             {imgSrc ? (
               <img
