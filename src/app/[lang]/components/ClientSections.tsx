@@ -44,8 +44,8 @@ export default function ClientSections({ data }: ClientSectionsProps) {
   // bg-[#e5e5e9]
   return (
     <div className="bg-white">
-      <div className="container px-5 py-12 mx-auto lg:pb-24 lg:px-12">
-        <h2 className="pb-8 text-xl font-normal text-center lg:pb-14 lg:text-4xl">
+      <div className="container px-5 py-12 mx-auto md:pb-20 lg:pb-24 lg:px-12">
+        <h2 className="pb-8 text-xl font-normal text-center lg:pb-20 lg:text-4xl">
           {data.title}
         </h2>
         <div className="pb-3 overflow-x-auto md:overflow-auto">

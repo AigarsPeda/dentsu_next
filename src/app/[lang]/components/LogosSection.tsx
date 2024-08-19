@@ -27,6 +27,7 @@ interface LogosSectionProps {
   data: {
     autoSwitch: boolean;
     showInMobile: boolean;
+    bottomPadding: boolean;
     company: FeaturesType[];
   };
 }
@@ -120,7 +121,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
         });
 
         currentIndex.current++;
-      }, 3500);
+      }, 5000);
 
       return () => clearInterval(interval);
     }
@@ -130,7 +131,8 @@ export default function LogosSection({ data }: LogosSectionProps) {
     <div
       className={classNames(
         !data.showInMobile ? "hidden md:grid" : "md:grid",
-        "grid-cols-1 lg:grid-cols-4 gap-6 py-10 lg:py-14 space-y-7 md:space-y-0 container mx-auto"
+        data.bottomPadding ? "pb-24 lg:pb-32" : "pb-10 lg:pb-10",
+        "grid-cols-1 lg:grid-cols-4 gap-6 py-10 lg:py-24 space-y-7 md:space-y-0 container mx-auto"
       )}
     >
       {data.company?.map((item: FeaturesType) => {
