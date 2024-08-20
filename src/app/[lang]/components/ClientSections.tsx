@@ -65,7 +65,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
                       <img
                         src={imgSrc}
                         alt="our client logo"
-                        className="object-contain w-full h-full md:max-h-[100px] max-h-[60px]"
+                        className="object-contain w-full h-full md:max-w-[150px] max-w-[100px]"
                       />
                     )}
                   </Link>
