@@ -1,5 +1,7 @@
+"use client";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import classNames from "classnames";
+import { useLayoutEffect, useRef } from "react";
 
 type PictureType = {
   id: string;
@@ -25,7 +27,14 @@ interface InfoBlockWithImageProps {
 }
 
 export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
+  const divRef = useRef<HTMLDivElement>(null);
   const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
+
+  useLayoutEffect(() => {
+    if (divRef.current && window) {
+      divRef.current.style.width = `${window.innerWidth}px`;
+    }
+  }, [data.pictureOnRight]);
 
   return (
     <div
@@ -61,6 +70,7 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
           >
             <h3>{data.description}</h3>
             <div
+              ref={divRef}
               className={classNames(
                 !data.pictureOnRight ? "left-full" : "right-full",
                 "absolute bottom-0 w-full h-full bg-black hidden md:block"
