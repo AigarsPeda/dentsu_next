@@ -116,21 +116,12 @@ export default function MediaModal({
 
         <div className="relative w-full h-full overflow-hidden text-center rounded-sm">
           {data.imageCarousel.map((item, index) => {
-            // const isAvailableVideo = item.url && !isImageUrl(item.url);
-            // const isUpLoadedVideo = isVideoUrl(
-            //   item.media.data?.[0]?.attributes?.url
-            // );
-
             const videoUrl = isVideoUrl(item.media.data?.[0]?.attributes?.url)
               ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
               : null;
 
             const embedVideoUrl =
               item.url && !isImageUrl(item.url) ? getEmbedUrl(item.url) : null;
-
-            // const thumbnail = item.thumbnail.data?.[0]?.attributes;
-
-            // console.log("embedVideoUrl", embedVideoUrl);
 
             return (
               <Transition

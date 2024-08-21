@@ -111,7 +111,6 @@ const MapComponent = ({
     return <div>Loading map...</div>;
   }
 
-  console.log("navigationAddress", navigationAddress);
   // 56.968488, 24.164263
   const getLongLat = (address: string) => {
     const split = address.split(",");
