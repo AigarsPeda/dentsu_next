@@ -1,6 +1,6 @@
-import { getStrapiMedia } from "../utils/api-helpers";
-import classNames from "../utils/classNames";
-import TitleInCircleWithLine from "./TitleInCircleWithLine";
+import TitleInCircleWithLine from "src/app/[lang]/components/TitleInCircleWithLine";
+import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
+import classNames from "src/app/[lang]/utils/classNames";
 
 interface MediaType {
   id: number;
@@ -22,6 +22,8 @@ interface Statistic {
 interface PostStatisticWithImageProps {
   data: {
     id: number;
+    overlay: number | null;
+    statistic: Statistic[];
     feature: {
       id: number;
       title: string;
@@ -31,7 +33,6 @@ interface PostStatisticWithImageProps {
         data: MediaType[];
       };
     };
-    statistic: Statistic[];
   };
 }
 
@@ -44,10 +45,14 @@ export default function PostStatisticWithImage({
     <section
       className={classNames(
         data.feature.statisticOnRight ? "flex-row-reverse" : "flex-row",
-        "md:flex w-full h-full md:pt-12 pb-5 bg-center bg-cover"
+        "md:flex w-full h-full py-10 bg-center bg-cover min-h-[50vw]"
       )}
       style={{
-        backgroundImage: `url(${imgUrl})`,
+        background: `linear-gradient(
+          rgba(0, 0, 0, ${data.overlay ? data.overlay / 100 : 0.01}),
+          rgba(0, 0, 0, ${data.overlay ? data.overlay / 100 : 0.01})
+        ), url(${imgUrl}) no-repeat center center`,
+        backgroundSize: "cover",
       }}
     >
       <TitleInCircleWithLine
@@ -57,7 +62,7 @@ export default function PostStatisticWithImage({
         pictureOnRight={data.feature.statisticOnRight}
       />
 
-      <div className="w-full pt-3">
+      <div className="w-full">
         <div
           className={classNames(
             data.feature.statisticOnRight
@@ -66,10 +71,10 @@ export default function PostStatisticWithImage({
             "md:pt-14 md:pb-14 flex justify-center"
           )}
         >
-          <div>
+          <div className="flex flex-col justify-center space-y-6">
             {data.statistic.map((statistic, index) => {
               return (
-                <div key={index} className="pb-4 text-white">
+                <div key={index} className="text-white ">
                   <p className="text-6xl font-bold">{statistic.statistic}</p>
                   <p className="text-base font-medium">
                     {statistic.description}

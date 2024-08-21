@@ -47,7 +47,7 @@ export default function PostSectionWithImage({
               />
             )}
           </div>
-          <div className="pt-12 pb-5 bg-black">
+          <div className="pt-12 pb-5 bg-black min-h-[50vw]">
             <TitleInCircleWithLine
               pictureOnRight
               title={data.feature.title}
@@ -57,7 +57,7 @@ export default function PostSectionWithImage({
         </div>
       ) : (
         <div className="grid w-full grid-cols-1 md:grid-cols-2">
-          <div className="pt-16 pb-5 bg-black">
+          <div className="pt-16 pb-5 bg-black min-h-[50vw]">
             <TitleInCircleWithLine
               title={data.feature.title}
               description={data.feature.description}

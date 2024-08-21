@@ -36,10 +36,11 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
     return text;
   };
 
+  // md:justify-center
   return (
     <div
       className={classNames(
-        "flex flex-col md:justify-center h-full md:pl-10 md:pr-28 px-10 py-5",
+        "flex flex-col justify-center h-full md:pl-10 md:pr-28 px-10 py-5",
         {
           "text-gray-50": fontColor === "light",
           "text-black": fontColor === "dark" || !fontColor,
@@ -49,11 +50,11 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
       {data.map((service, index) => (
         <Disclosure
           as="div"
+          key={service.id}
           className={classNames("md:p-4 px-2 py-3 border-b group", {
             "border-gray-50": fontColor === "light",
             "border-black": fontColor === "dark" || !fontColor,
           })}
-          key={service.id}
         >
           {({ open }) => (
             <>

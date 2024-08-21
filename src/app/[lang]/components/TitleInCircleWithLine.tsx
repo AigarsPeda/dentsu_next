@@ -44,11 +44,11 @@ const TitleInCircleWithLine: FC<TitleInCircleWithLineProps> = ({
         <section
           className={classNames(
             !isBackgroundOff && "bg-black",
-            "flex items-center justify-start w-full h-full bg-center bg-cover"
+            "flex items-center justify-start w-full h-full bg-center bg-cover pt-10"
           )}
         >
           <div className="flex flex-col justify-start">
-            <div className="flex items-center w-full pt-10 pb-10 pr-10 md:pt-0">
+            <div className="flex items-center w-full pt-10 pb-10 pr-10 md:pt-0 min-w-96">
               <hr className="w-full h-0.5 my-8 border-0 bg-gray-50"></hr>
               <div
                 ref={textRef}
@@ -57,20 +57,22 @@ const TitleInCircleWithLine: FC<TitleInCircleWithLineProps> = ({
                 <h6 className="text-base font-bold text-white">{title}</h6>
               </div>
             </div>
-            <p className="p-10 mx-auto text-base font-medium md:max-w-xl md:pt-14 md:pb-14 md:pl-14 text-gray-50">
-              {description}
-            </p>
+            {description && (
+              <p className="p-10 mx-auto text-base font-medium md:max-w-xl md:pt-14 md:pb-14 md:pl-14 text-gray-50">
+                {description}
+              </p>
+            )}
           </div>
         </section>
       ) : (
         <section
           className={classNames(
             !isBackgroundOff && "bg-black",
-            "flex items-center justify-end w-full h-full bg-center bg-cover"
+            "flex items-center justify-end w-full h-full bg-center bg-cover pt-10"
           )}
         >
           <div className="flex flex-col justify-end">
-            <div className="flex items-center w-full pt-10 pb-10 pl-10 md:pt-0">
+            <div className="flex items-center w-full pt-10 pb-10 pl-10 md:pt-0 min-w-96">
               <div
                 ref={textRef2}
                 className="flex items-center justify-center p-2 text-center border rounded-full md:w-56 w-72 border-gray-50"
@@ -79,9 +81,11 @@ const TitleInCircleWithLine: FC<TitleInCircleWithLineProps> = ({
               </div>
               <hr className="w-full h-0.5 my-8 border-0 bg-gray-50"></hr>
             </div>
-            <p className="p-10 mx-auto text-base font-medium md:max-w-xl md:pt-14 md:pb-14 md:pr-14 text-gray-50">
-              {description}
-            </p>
+            {description && (
+              <p className="p-10 mx-auto text-base font-medium md:max-w-xl md:pt-14 md:pb-14 md:pr-14 text-gray-50">
+                {description}
+              </p>
+            )}
           </div>
         </section>
       )}
