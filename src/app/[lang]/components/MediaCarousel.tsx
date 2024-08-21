@@ -7,7 +7,8 @@ import MediaModal, {
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { useMemo, useState } from "react";
 import { PiPlayCircleThin } from "react-icons/pi";
-import getEmbedUrl from "../utils/getEmbedUrl";
+import classNames from "src/app/[lang]/utils/classNames";
+import getEmbedUrl from "src/app/[lang]/utils/getEmbedUrl";
 
 interface MediaType {
   id: number;
@@ -43,6 +44,8 @@ export default function MediaCarousel({ data }: CarouselProps) {
     null
   );
 
+  const length = useMemo(() => data.imageCarousel.length, [data]);
+
   const prev = () => {
     setFirstImageSelected((curr) => {
       if (curr === null) return null;
@@ -58,49 +61,54 @@ export default function MediaCarousel({ data }: CarouselProps) {
   };
 
   return (
-    <div className="bg-black">
-      <div className="container grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden md:grid-cols-3">
-        {data?.imageCarousel?.slice(0, 3).map((item, index) => {
-          const videoUrl = isVideoUrl(item.media.data?.[0]?.attributes?.url)
-            ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
-            : null;
+    <div className="w-full bg-black">
+      <div className="container flex items-center justify-center">
+        <div
+          className={classNames(
+            length === 2 && "md:grid-cols-2",
+            length >= 3 && "md:grid-cols-3",
+            "grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden"
+          )}
+        >
+          {data?.imageCarousel?.slice(0, 3).map((item, index) => {
+            const videoUrl = isVideoUrl(item.media.data?.[0]?.attributes?.url)
+              ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
+              : null;
 
-          const embedVideoUrl =
-            item.url && !isImageUrl(item.url) ? getEmbedUrl(item.url) : null;
+            const embedVideoUrl =
+              item.url && !isImageUrl(item.url) ? getEmbedUrl(item.url) : null;
 
-          const src =
-            getStrapiMedia(
-              item.thumbnail.data?.attributes?.url ??
-                item.media.data[0].attributes.url ??
-                item.url
-            ) ?? "";
+            const src =
+              getStrapiMedia(
+                item.thumbnail.data?.attributes?.url ??
+                  item.media.data[0].attributes.url ??
+                  item.url
+              ) ?? "";
 
-          // if (src === "") return null;
-
-          return (
-            <div
-              key={index}
-              role="button"
-              className="relative z-20 flex flex-col w-full h-full max-h-72"
-              onClick={() => {
-                setFirstImageSelected(index);
-              }}
-            >
-              <img
-                src={src}
-                alt={`Carousel image ${index + 1}`}
-                className="object-cover w-auto h-full"
-              />
-              {(videoUrl || embedVideoUrl) && (
-                <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950 bg-opacity-20">
-                  <PiPlayCircleThin className="text-white w-28 h-28" />
-                </div>
-              )}
-            </div>
-          );
-        })}
+            return (
+              <div
+                key={index}
+                role="button"
+                className="relative z-20 flex flex-col w-full h-auto cursor-pointer max-w-72"
+                onClick={() => {
+                  setFirstImageSelected(index);
+                }}
+              >
+                <img
+                  src={src}
+                  alt={`Carousel image ${index + 1}`}
+                  className="object-cover w-auto h-full"
+                />
+                {(videoUrl || embedVideoUrl) && (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950 bg-opacity-20">
+                    <PiPlayCircleThin className="text-white w-28 h-28" />
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
-
       <MediaModal
         data={data}
         handlePrev={prev}
