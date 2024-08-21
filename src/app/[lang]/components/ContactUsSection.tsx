@@ -36,14 +36,14 @@ interface ContactUsSectionProps {
 
 export default function ContactUsSection({ data }: ContactUsSectionProps) {
   return (
-    <div className="container pt-5 mx-auto pb-7 lg:pt-16">
-      <div className="pt-4 lg:pb-4">
+    <div className="container pb-0 mx-auto py-14">
+      <div className="pb-10">
         <a href={data.redirectUrl ?? ""}>
           <h3 className="text-center">{data.title}</h3>
         </a>
         <h4 className="px-10 mt-3 text-center lg:mt-4">{data.description}</h4>
       </div>
-      <div className="mx-auto grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] md:gap-10 md:grid-cols-[repeat(auto-fit,minmax(150px,0.44fr))] pt-10">
+      <div className="mx-auto grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] md:gap-10 md:grid-cols-[repeat(auto-fit,minmax(150px,0.44fr))]">
         {data.feature.map((item) => {
           const imgSrc = getStrapiMedia(item.media.data?.attributes.url);
           return (
@@ -72,7 +72,7 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
         })}
       </div>
       {data.isContactUsButton && (
-        <div className="flex justify-center">
+        <div className="flex justify-center pb-10 md:pb-0">
           <a
             href={data.redirectUrl ?? `mailto:${data.contactEmail}` ?? ""}
             className="flex items-center justify-center gap-3 px-6 py-2 text-base text-white transition-all bg-black hover:bg-dentsu-hover"

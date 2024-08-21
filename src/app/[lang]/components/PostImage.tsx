@@ -20,7 +20,7 @@ export default function PostImage({ data }: PostImageProps) {
   const src = getStrapiMedia(data.media.data[0]?.attributes?.url) ?? "";
 
   return (
-    <div className="container py-3 mx-auto h-96">
+    <div className="container mx-auto h-96">
       <img src={src} alt={alt} className="object-cover w-full h-full" />
     </div>
   );

@@ -40,8 +40,8 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
 
   if (filteredData.length < 3) {
     return (
-      <div className="container mx-auto mt-4 mb-10 md:mb-20">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-12">
+      <div className="container mx-auto mb-10 mt-14 md:mb-20">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-10">
           {filteredData.map((item) => {
             return (
               <div key={item.id} className="p-6 bg-black text-gray-50">
@@ -73,7 +73,7 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
   }
 
   return (
-    <div className="container mx-auto mt-4 mb-10 md:mb-20">
+    <div className="container mx-auto mb-10 mt-14 md:mb-20">
       {/* @ts-ignore */}
       <Slider
         dots={false}
@@ -91,6 +91,7 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
           },
           {
             breakpoint: 600,
+
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
@@ -100,12 +101,12 @@ export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
       >
         {filteredData.map((item) => {
           return (
-            <div key={item.id} className="pl-2 pr-2">
+            <div key={item.id} className="pl-2 pr-2 ">
               <div className="p-6 bg-black text-gray-50">
                 <DoubleArrows className="w-12 h-12 mb-4" />
-                <div className="w-full">
-                  <div className="mb-8 overflow-hidden md:h-60 md:custom-clamp-10">
-                    <p title={item.feedback} className="text-base">
+                <div className="w-full h-[30rem]">
+                  <div className="h-full mb-8 overflow-hidden max-h-[24rem] custom-clamp-16">
+                    <p title={item.feedback} className="text-base ">
                       {item.feedback}
                     </p>
                   </div>

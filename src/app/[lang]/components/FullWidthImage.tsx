@@ -22,7 +22,7 @@ export default function FullWidthImage({ data }: FullWidthImageProps) {
   const imgUrl = getStrapiMedia(data.image.data?.[0]?.attributes?.url);
 
   return (
-    <div className="mx-auto h-96">
+    <div className="mx-auto h-96 pt-14">
       {imgUrl && (
         <img
           src={imgUrl ?? ""}

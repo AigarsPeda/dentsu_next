@@ -6,7 +6,7 @@ interface PageTitleProps {
 
 export default function PageTitle({ data }: PageTitleProps) {
   return (
-    <div className="container py-6 mx-auto md:py-10">
+    <div className="container pb-0 mx-auto py-14">
       <h5 className="text-center">{data.title}</h5>
     </div>
   );

@@ -46,7 +46,7 @@ export default function Vacancies({ data }: VacanciesProps) {
   };
 
   return (
-    <div className={classNames("container md:py-10 py-4 mx-auto")}>
+    <div className={classNames("container py-6 mx-auto")}>
       <div className="min-h-[25rem] md:space-y-6 space-y-4">
         {data.vacancies.map((vacancy, index) => {
           return (

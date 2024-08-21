@@ -107,6 +107,15 @@
   }
 }
 
+@layer utilities {
+  .custom-clamp-16 {
+    line-clamp: 16;
+    display: -webkit-box;
+    -webkit-line-clamp: 16;
+    -webkit-box-orient: vertical;
+  }
+}
+
 @keyframes slideInFromBottom {
   from {
     transform: translateY(100%);

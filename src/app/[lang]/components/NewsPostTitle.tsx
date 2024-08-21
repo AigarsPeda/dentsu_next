@@ -6,8 +6,8 @@ interface NewsPostTitleProps {
 
 export default function NewsPostTitle({ data }: NewsPostTitleProps) {
   return (
-    <div className="container py-10 mx-auto">
-      <h1 className="text-5xl font-bold text-left">{data.title}</h1>
+    <div className="container mx-auto py-14">
+      <h5 className="text-left">{data.title}</h5>
     </div>
   );
 }

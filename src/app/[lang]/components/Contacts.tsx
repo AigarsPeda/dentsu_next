@@ -206,11 +206,10 @@ export default function Contacts({ data }: ContactsProps) {
   }, [formSubmitStatus]);
 
   return (
-    <div className="container flex flex-col-reverse grid-cols-1 gap-10 px-8 mx-auto md:grid md:grid-cols-2 md:pb-10">
+    <div className="container flex flex-col-reverse grid-cols-1 gap-10 mx-auto md:px-16 md:grid md:grid-cols-2 md:py-14">
       <div>
         <div>
           <p className="pb-10 text-sm text-left">{data.title}</p>
-
           <MapProvider>
             <MapComponent
               address={data.address}

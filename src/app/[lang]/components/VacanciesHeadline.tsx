@@ -80,7 +80,7 @@ export default function VacanciesHeadline({ data }: VacanciesHeadlineProps) {
 
   return (
     <>
-      <div className="container relative grid grid-cols-1 gap-10 py-0 mx-auto md:py-10 md:grid-cols-2">
+      <div className="container relative grid grid-cols-1 gap-10 py-0 mx-auto md:py-14 md:grid-cols-2">
         <div
           className="absolute w-screen h-full bg-black md:z-[1] z-[-1] md:hidden block"
           style={{

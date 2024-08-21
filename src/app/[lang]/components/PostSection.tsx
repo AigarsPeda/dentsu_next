@@ -50,7 +50,7 @@ export default function PostSection({ data }: PostSectionProps) {
     <div className="container mx-auto mb-10">
       <ul
         ref={parent}
-        className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12 place-content-center"
+        className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-10 place-content-center"
       >
         {filteredData.map((item) => {
           const imgUrl = getStrapiMedia(item.media.data[0].attributes.url);
