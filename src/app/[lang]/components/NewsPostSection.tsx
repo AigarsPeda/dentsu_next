@@ -58,7 +58,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
 
   return (
     <>
-      <section className="container grid grid-cols-1 gap-8 pb-10 mx-auto md:grid-cols-3 md:px-16">
+      <section className="container grid grid-cols-1 gap-8 pb-10 mx-auto md:grid-cols-3 md:px-14 md:mt-14">
         {currentData.map((newsPost) => {
           const thumbnail = newsPost.thumbnail.data?.[0]?.attributes;
           const src = thumbnail ? getStrapiMedia(thumbnail.url) : null;
@@ -68,7 +68,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
           return (
             <div
               key={newsPost.id}
-              className="flex flex-col justify-between mt-4 md:mt-10"
+              className="flex flex-col justify-between mt-4 "
             >
               <div className="relative h-56 overflow-hidden ">
                 <img
