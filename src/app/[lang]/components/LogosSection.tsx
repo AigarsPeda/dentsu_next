@@ -90,42 +90,42 @@ export default function LogosSection({ data }: LogosSectionProps) {
     return url || "";
   };
 
-  useEffect(() => {
-    if (data.autoSwitch && companyList.length > 1) {
-      if (firstRender.current) {
-        // Handle the first render logic, i.e., trigger the first switch immediately
-        const url = companyList[currentIndex.current];
-        if (url) {
-          router.push(`${path}?search=${url}`, { scroll: false });
-        }
-        currentIndex.current++;
-        firstRender.current = false; // Mark the first render as done
-      }
+  // useEffect(() => {
+  //   if (data.autoSwitch && companyList.length > 1) {
+  //     if (firstRender.current) {
+  //       // Handle the first render logic, i.e., trigger the first switch immediately
+  //       const url = companyList[currentIndex.current];
+  //       if (url) {
+  //         router.push(`${path}?search=${url}`, { scroll: false });
+  //       }
+  //       currentIndex.current++;
+  //       firstRender.current = false; // Mark the first render as done
+  //     }
 
-      let interval: NodeJS.Timeout;
+  //     let interval: NodeJS.Timeout;
 
-      interval = setInterval(() => {
-        if (currentIndex.current >= companyList.length) {
-          currentIndex.current = 0;
-        }
+  //     interval = setInterval(() => {
+  //       if (currentIndex.current >= companyList.length) {
+  //         currentIndex.current = 0;
+  //       }
 
-        const url = companyList[currentIndex.current];
+  //       const url = companyList[currentIndex.current];
 
-        if (!url) {
-          currentIndex.current++;
-          return;
-        }
+  //       if (!url) {
+  //         currentIndex.current++;
+  //         return;
+  //       }
 
-        router.push(`${path}?search=${url}`, {
-          scroll: false,
-        });
+  //       router.push(`${path}?search=${url}`, {
+  //         scroll: false,
+  //       });
 
-        currentIndex.current++;
-      }, 5000);
+  //       currentIndex.current++;
+  //     }, 5000);
 
-      return () => clearInterval(interval);
-    }
-  }, [data.autoSwitch, companyList]);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [data.autoSwitch, companyList]);
 
   return (
     <div
