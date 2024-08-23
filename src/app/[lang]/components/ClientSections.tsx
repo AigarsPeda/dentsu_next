@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import EmblaCarousel from "./EmblaCarousel/EmblaCarousel";
 
 // https://www.embla-carousel.com/api/events/
+// https://www.embla-carousel.com/examples/predefined/
 
 interface MediaTypes {
   id: number;
