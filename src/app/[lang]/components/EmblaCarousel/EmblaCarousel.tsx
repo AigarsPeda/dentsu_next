@@ -126,7 +126,7 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
                       <img
                         src={imgSrc}
                         alt="our client logo"
-                        className="object-contain w-full h-full p-6 max-h-48"
+                        className="object-contain w-full h-full p-6 md:max-h-40 max-h-32"
                       />
                     )}
                   </Link>
