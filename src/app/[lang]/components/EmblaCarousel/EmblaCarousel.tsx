@@ -28,6 +28,7 @@ const EmblaCarousel: React.FC<PropType> = ({
   ]);
 
   const timerId = useRef<NodeJS.Timeout | null>(null);
+  const [userIsInteracting, setUserIsInteracting] = React.useState(false);
 
   const {
     prevBtnDisabled,
@@ -63,6 +64,13 @@ const EmblaCarousel: React.FC<PropType> = ({
   }, [emblaApi]);
 
   useEffect(() => {
+    const autoScroll = emblaApi?.plugins()?.autoScroll;
+
+    if (userIsInteracting || !autoScroll) {
+      timerId.current = null;
+      return;
+    }
+    autoScroll.play();
     const arrayLength = slides.length;
     const timeToSwitch = arrayLength * 1000 * 2; // 2 seconds per slide
 
@@ -76,7 +84,7 @@ const EmblaCarousel: React.FC<PropType> = ({
         timerId.current = null;
       }
     };
-  }, [handArraySwitch, slides]);
+  }, [emblaApi, handArraySwitch, slides, userIsInteracting]);
 
   useEffect(() => {
     const autoScroll = emblaApi?.plugins()?.autoScroll;
@@ -87,13 +95,14 @@ const EmblaCarousel: React.FC<PropType> = ({
 
     emblaApi
       .on("pointerDown", () => {
+        setUserIsInteracting(true);
         if (timerId.current) {
           clearTimeout(timerId.current);
           timerId.current = null;
         }
       })
       .on("pointerUp", () => {
-        console.log("pointerUp");
+        setUserIsInteracting(false);
         timerId.current = setTimeout(() => {
           if (!autoScroll.isPlaying()) {
             autoScroll.play();
@@ -108,7 +117,7 @@ const EmblaCarousel: React.FC<PropType> = ({
         emblaApi?.destroy();
       }
     };
-  }, [emblaApi, handArraySwitch, slides]);
+  }, [emblaApi]);
 
   return (
     <div ref={divRef} className="embla">
