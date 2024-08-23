@@ -1,33 +1,33 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { EmblaOptionsType } from "embla-carousel";
-import useEmblaCarousel from "embla-carousel-react";
+import type { EmblaOptionsType } from "embla-carousel";
 import AutoScroll from "embla-carousel-auto-scroll";
-import {
-  usePrevNextButtons,
-  PrevButton,
-  NextButton,
-} from "./EmblaCarouselArrowButtons";
-import { FeaturesType } from "../ClientSections";
+import useEmblaCarousel from "embla-carousel-react";
 import Link from "next/link";
-import { getStrapiMedia } from "../../utils/api-helpers";
-// import {
-//   NextButton,
-//   PrevButton,
-//   usePrevNextButtons,
-// } from "./EmblaCarouselArrowButtons";
+import React, { useCallback, useEffect, useRef } from "react";
+import type { FeaturesType } from "src/app/[lang]/components/ClientSections";
+import {
+  NextButton,
+  PrevButton,
+  usePrevNextButtons,
+} from "src/app/[lang]/components/EmblaCarousel/EmblaCarouselArrowButtons";
+import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
 
 type PropType = {
   slides: FeaturesType[];
   options?: EmblaOptionsType;
-  // logosArray: FeaturesType[];
+  handArraySwitch: () => void;
 };
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { slides, options } = props;
+const EmblaCarousel: React.FC<PropType> = ({
+  slides,
+  options,
+  handArraySwitch,
+}) => {
+  const divRef = React.useRef<HTMLDivElement>(null);
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     AutoScroll({ playOnInit: false }),
   ]);
-  const [isPlaying, setIsPlaying] = useState(false);
+
+  const timerId = useRef<NodeJS.Timeout | null>(null);
 
   const {
     prevBtnDisabled,
@@ -63,18 +63,55 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   }, [emblaApi]);
 
   useEffect(() => {
+    const arrayLength = slides.length;
+    const timeToSwitch = arrayLength * 1000 * 2; // 2 seconds per slide
+
+    timerId.current = setTimeout(() => {
+      handArraySwitch();
+    }, timeToSwitch);
+
+    return () => {
+      if (timerId.current) {
+        clearTimeout(timerId.current);
+        timerId.current = null;
+      }
+    };
+  }, [handArraySwitch, slides]);
+
+  useEffect(() => {
     const autoScroll = emblaApi?.plugins()?.autoScroll;
+
     if (!autoScroll) return;
 
-    setIsPlaying(autoScroll.isPlaying());
+    autoScroll.play();
+
     emblaApi
-      .on("autoScroll:play", () => setIsPlaying(true))
-      .on("autoScroll:stop", () => setIsPlaying(false))
-      .on("reInit", () => setIsPlaying(autoScroll.isPlaying()));
-  }, [emblaApi]);
+      .on("pointerDown", () => {
+        if (timerId.current) {
+          clearTimeout(timerId.current);
+          timerId.current = null;
+        }
+      })
+      .on("pointerUp", () => {
+        console.log("pointerUp");
+        timerId.current = setTimeout(() => {
+          if (!autoScroll.isPlaying()) {
+            autoScroll.play();
+          }
+        }, 3000); // 3 seconds delay
+      });
+
+    return () => {
+      if (timerId.current) {
+        clearTimeout(timerId.current);
+        timerId.current = null;
+        emblaApi?.destroy();
+      }
+    };
+  }, [emblaApi, handArraySwitch, slides]);
 
   return (
-    <div className="embla">
+    <div ref={divRef} className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((item) => {
@@ -114,7 +151,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         </div>
 
         <button className="embla__play" onClick={toggleAutoplay} type="button">
-          {isPlaying ? "Stop" : "Start"}
+          {/* {isPlaying ? "Stop" : "Start"} */}
         </button>
       </div>
     </div>

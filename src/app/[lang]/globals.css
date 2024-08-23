@@ -156,12 +156,27 @@
 }
 
 .embla {
-  max-width: 84rem;
+  max-width: 89rem;
   margin: auto;
-  --slide-height: 19rem;
+  --slide-height: 14rem;
   --slide-spacing: 1rem;
   --slide-size: 20%;
 }
+
+@media (max-width: 768px) {
+  .embla {
+    --slide-size: 60%;
+    --slide-height: 10rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .embla {
+    --slide-size: 70%;
+    --slide-height: 8rem;
+  }
+}
+
 .embla__viewport {
   overflow: hidden;
 }
