@@ -10,6 +10,7 @@ import {
   usePrevNextButtons,
 } from "src/app/[lang]/components/EmblaCarousel/EmblaCarouselArrowButtons";
 import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 type PropType = {
   slides: FeaturesType[];
@@ -22,9 +23,9 @@ const EmblaCarousel: React.FC<PropType> = ({
   options,
   handArraySwitch,
 }) => {
-  const divRef = React.useRef<HTMLDivElement>(null);
+  const [parent] = useAutoAnimate();
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-    AutoScroll({ playOnInit: false }),
+    AutoScroll({ playOnInit: true }),
   ]);
 
   const timerId = useRef<NodeJS.Timeout | null>(null);
@@ -70,6 +71,7 @@ const EmblaCarousel: React.FC<PropType> = ({
       timerId.current = null;
       return;
     }
+
     autoScroll.play();
     const arrayLength = slides.length;
     const timeToSwitch = arrayLength * 1000 * 2; // 2 seconds per slide
@@ -90,7 +92,7 @@ const EmblaCarousel: React.FC<PropType> = ({
     const autoScroll = emblaApi?.plugins()?.autoScroll;
 
     if (!autoScroll) return;
-
+    console.log("RENDER");
     autoScroll.play();
 
     emblaApi
@@ -114,19 +116,18 @@ const EmblaCarousel: React.FC<PropType> = ({
       if (timerId.current) {
         clearTimeout(timerId.current);
         timerId.current = null;
-        emblaApi?.destroy();
       }
     };
-  }, [emblaApi]);
+  }, [emblaApi, slides]);
 
   return (
-    <div ref={divRef} className="embla">
+    <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((item) => {
             const imgSrc = getStrapiMedia(item.media.data.attributes.url);
             return (
-              <div className="embla__slide" key={item.id}>
+              <div key={item.id} className="embla__slide">
                 <div className="embla__slide__number">
                   <Link
                     href={item.url ?? "/"}
@@ -136,7 +137,7 @@ const EmblaCarousel: React.FC<PropType> = ({
                       <img
                         src={imgSrc}
                         alt="our client logo"
-                        className="object-contain w-full h-full p-6 max-h-40"
+                        className="object-contain w-full h-full p-6 max-h-48"
                       />
                     )}
                   </Link>
@@ -147,7 +148,7 @@ const EmblaCarousel: React.FC<PropType> = ({
         </div>
       </div>
 
-      <div className="embla__controls">
+      {/* <div className="embla__controls">
         <div className="embla__buttons">
           <PrevButton
             onClick={() => onButtonAutoplayClick(onPrevButtonClick)}
@@ -160,9 +161,9 @@ const EmblaCarousel: React.FC<PropType> = ({
         </div>
 
         <button className="embla__play" onClick={toggleAutoplay} type="button">
-          {/* {isPlaying ? "Stop" : "Start"} */}
+          {isPlaying ? "Stop" : "Start"}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

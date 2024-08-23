@@ -1,18 +1,8 @@
 "use client";
-import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-import {
-  animate,
-  AnimationPlaybackControls,
-  motion,
-  useMotionValue,
-  AnimatePresence,
-} from "framer-motion";
-import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import type { EmblaOptionsType } from "embla-carousel";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { use, useEffect, useMemo, useRef, useState } from "react";
-import useMeasure from "react-use-measure";
-import { EmblaOptionsType } from "embla-carousel";
+import { useEffect, useRef, useState } from "react";
 import EmblaCarousel from "./EmblaCarousel/EmblaCarousel";
 
 interface MediaTypes {
@@ -42,15 +32,16 @@ interface ClientSectionsProps {
 }
 
 const OPTIONS: EmblaOptionsType = { loop: true };
+const ORDER_OF_LIST = ["carat", "iprospect", "dentsux", "dentsucreative"];
 
 export default function ClientSections({ data }: ClientSectionsProps) {
-  const [parent] = useAutoAnimate();
-  const searchParams = useSearchParams();
-  const search = searchParams.get("search");
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   const path = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search");
+  const [currentCompany, setCurrentCompany] = useState("");
+  const [isVisible, setIsVisible] = useState(true);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const filteredData = data.feature.filter((item) => {
     return item.participatingCompany
@@ -60,49 +51,83 @@ export default function ClientSections({ data }: ClientSectionsProps) {
 
   const uniqueCompanies = data.feature.reduce((acc, item) => {
     if (item.participatingCompany) {
-      acc.add(item.participatingCompany);
+      acc.add(item.participatingCompany.toLowerCase());
     }
     return acc;
   }, new Set<string>());
 
-  const allInvolvedCompanies = Array.from(uniqueCompanies);
-
-  // [[],[]]
-  const logosArray = useMemo(
-    () =>
-      data.feature
-        .filter(
-          (item) =>
-            item.participatingCompany === allInvolvedCompanies[currentIndex]
-        )
-        .sort((a, b) => a.id - b.id),
-    [currentIndex]
-  );
+  const allInvolvedCompanies = Array.from(uniqueCompanies).sort((a, b) => {
+    return ORDER_OF_LIST.indexOf(a) - ORDER_OF_LIST.indexOf(b);
+  });
 
   useEffect(() => {
-    const url = allInvolvedCompanies[currentIndex].toLowerCase();
+    const searchCompany = search?.toLowerCase();
 
-    router.push(`${path}?search=${url}`, {
-      scroll: false,
-    });
-  }, [currentIndex]);
+    if (!searchCompany) {
+      const url = allInvolvedCompanies[0].toLowerCase();
 
-  // bg-[#e5e5e9]
+      router.push(`${path}?search=${url}`, {
+        scroll: false,
+      });
+
+      return;
+    }
+
+    setCurrentCompany(searchCompany);
+  }, [search]);
+
+  const handleSwitch = () => {
+    setIsVisible(false); // Trigger fade out
+
+    setTimeout(() => {
+      const currentIndex = allInvolvedCompanies.indexOf(currentCompany);
+      const nextCompany =
+        allInvolvedCompanies[currentIndex + 1] || allInvolvedCompanies[0];
+      const url = nextCompany.toLowerCase();
+
+      router.push(`${path}?search=${url}`, {
+        scroll: false,
+      });
+    }, 500); // Delay routing until fade out is complete (match the duration)
+  };
+
+  const fadeVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  useEffect(() => {
+    setIsVisible(true); // Trigger fade in after URL change
+  }, [currentCompany]);
+
   return (
-    <div ref={parent} className="container mx-auto">
-      <EmblaCarousel
-        handArraySwitch={() => {
-          setCurrentIndex((prev) => {
-            if (prev === allInvolvedCompanies.length - 1) {
-              return 0;
-            } else {
-              return prev + 1;
-            }
-          });
+    <div className="container mx-auto" ref={containerRef}>
+      <div
+        style={{
+          position: "relative",
+          height: containerRef.current?.offsetHeight,
         }}
-        slides={logosArray}
-        options={OPTIONS}
-      />
+      >
+        <AnimatePresence mode="wait">
+          {isVisible && (
+            <motion.div
+              key={currentCompany}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={fadeVariants}
+              transition={{ duration: 0.5 }}
+              style={{ width: "100%" }}
+            >
+              <EmblaCarousel
+                options={OPTIONS}
+                slides={filteredData}
+                handArraySwitch={handleSwitch}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
