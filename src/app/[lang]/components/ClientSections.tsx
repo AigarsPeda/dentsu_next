@@ -102,7 +102,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
 
   return (
     <div className="container relative mx-auto" ref={containerRef}>
-      <div className="absolute z-10 w-10 h-full bg-gradient-to-r from-white to-transparent"></div>
+      <div className="absolute top-0 z-10 w-20 h-full left-8 bg-gradient-to-r from-white to-transparent"></div>
       <div
         style={{
           position: "relative",
@@ -129,7 +129,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
           )}
         </AnimatePresence>
       </div>
-      <div className="absolute top-0 z-10 w-16 h-full bg-gradient-to-l from-white to-transparent right-10"></div>
+      <div className="absolute top-0 z-10 w-20 h-full bg-gradient-to-l from-white to-transparent right-8"></div>
     </div>
   );
 }
