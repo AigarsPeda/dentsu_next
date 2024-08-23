@@ -5,6 +5,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import EmblaCarousel from "./EmblaCarousel/EmblaCarousel";
 
+// https://www.embla-carousel.com/api/events/
+
 interface MediaTypes {
   id: number;
   attributes: {

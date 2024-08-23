@@ -6,6 +6,8 @@ import { type FC, useCallback, useEffect, useRef, useState } from "react";
 import type { FeaturesType } from "src/app/[lang]/components/ClientSections";
 import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
 
+// https://www.embla-carousel.com/api/events/
+
 type PropType = {
   slides: FeaturesType[];
   options?: EmblaOptionsType;
