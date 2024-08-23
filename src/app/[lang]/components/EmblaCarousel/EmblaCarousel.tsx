@@ -2,15 +2,9 @@ import type { EmblaOptionsType } from "embla-carousel";
 import AutoScroll from "embla-carousel-auto-scroll";
 import useEmblaCarousel from "embla-carousel-react";
 import Link from "next/link";
-import React, { useCallback, useEffect, useRef } from "react";
+import { type FC, useCallback, useEffect, useRef, useState } from "react";
 import type { FeaturesType } from "src/app/[lang]/components/ClientSections";
-import {
-  NextButton,
-  PrevButton,
-  usePrevNextButtons,
-} from "src/app/[lang]/components/EmblaCarousel/EmblaCarouselArrowButtons";
 import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 type PropType = {
   slides: FeaturesType[];
@@ -18,25 +12,20 @@ type PropType = {
   handArraySwitch: () => void;
 };
 
-const EmblaCarousel: React.FC<PropType> = ({
-  slides,
-  options,
-  handArraySwitch,
-}) => {
-  const [parent] = useAutoAnimate();
+const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     AutoScroll({ playOnInit: true }),
   ]);
 
   const timerId = useRef<NodeJS.Timeout | null>(null);
-  const [userIsInteracting, setUserIsInteracting] = React.useState(false);
+  const [userIsInteracting, setUserIsInteracting] = useState(false);
 
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick,
-  } = usePrevNextButtons(emblaApi);
+  // const {
+  //   prevBtnDisabled,
+  //   nextBtnDisabled,
+  //   onPrevButtonClick,
+  //   onNextButtonClick,
+  // } = usePrevNextButtons(emblaApi);
 
   const onButtonAutoplayClick = useCallback(
     (callback: () => void) => {
