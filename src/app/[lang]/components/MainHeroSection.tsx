@@ -112,8 +112,8 @@ interface MainHeadLineProps {
 
 const MainHeadLine: FC<MainHeadLineProps> = ({ title }) => {
   return (
-    <div className="w-full flex md:max-w-[67rem] absolute z-10 transform pl-6 md:pl-10 lg:pl-0 left-2 h-full flex-col justify-center">
-      <h1 className="p-0 text-white lg:text-[8vw] leading-[60px] md:leading-tight font-bold">
+    <div className="w-full flex md:max-w-[67rem] absolute z-10 transform py-6 md:pl-10 lg:pl-0 left-2 h-full flex-col justify-center">
+      <h1 className="text-white lg:text-[8vw] leading-[60px] md:leading-tight font-bold">
         {title}
       </h1>
     </div>
