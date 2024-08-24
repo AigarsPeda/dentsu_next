@@ -46,15 +46,15 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
     [emblaApi]
   );
 
-  const toggleAutoplay = useCallback(() => {
-    const autoScroll = emblaApi?.plugins()?.autoScroll;
-    if (!autoScroll) return;
+  // const toggleAutoplay = useCallback(() => {
+  //   const autoScroll = emblaApi?.plugins()?.autoScroll;
+  //   if (!autoScroll) return;
 
-    const playOrStop = autoScroll.isPlaying()
-      ? autoScroll.stop
-      : autoScroll.play;
-    playOrStop();
-  }, [emblaApi]);
+  //   const playOrStop = autoScroll.isPlaying()
+  //     ? autoScroll.stop
+  //     : autoScroll.play;
+  //   playOrStop();
+  // }, [emblaApi]);
 
   useEffect(() => {
     const autoScroll = emblaApi?.plugins()?.autoScroll;
@@ -84,7 +84,6 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
     const autoScroll = emblaApi?.plugins()?.autoScroll;
 
     if (!autoScroll) return;
-    console.log("RENDER");
     autoScroll.play();
 
     emblaApi
