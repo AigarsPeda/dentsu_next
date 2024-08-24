@@ -119,15 +119,8 @@ export default function ClientSections({ data }: ClientSectionsProps) {
       <h2 className="text-xl font-normal text-center md:text-3xl">
         {data.title}
       </h2>
-      <div
-        style={{
-          minHeight: "10rem",
-          position: "relative",
-        }}
-        className="relative"
-      >
+      <div className="relative min-h-[7.7rem] md:min-h-[10rem]">
         <div className="absolute top-0 left-0 z-10 w-20 h-full bg-gradient-to-r from-white to-transparent"></div>
-
         <AnimatePresence mode="wait">
           {isVisible && (
             <motion.div
@@ -147,7 +140,6 @@ export default function ClientSections({ data }: ClientSectionsProps) {
             </motion.div>
           )}
         </AnimatePresence>
-        {/* </div> */}
         <div className="absolute top-0 right-0 z-10 w-20 h-full bg-gradient-to-l from-white to-transparent"></div>
       </div>
     </div>
