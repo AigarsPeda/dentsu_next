@@ -81,9 +81,11 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
   }, [emblaApi, handArraySwitch, slides, userIsInteracting]);
 
   useEffect(() => {
+    emblaApi?.reInit();
     const autoScroll = emblaApi?.plugins()?.autoScroll;
 
     if (!autoScroll) return;
+
     autoScroll.play();
 
     emblaApi

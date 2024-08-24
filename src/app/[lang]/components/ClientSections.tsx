@@ -49,7 +49,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
   const search = searchParams.get("search");
   const [currentCompany, setCurrentCompany] = useState("");
   const [isVisible, setIsVisible] = useState(true);
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  // const containerRef = useRef<HTMLDivElement | null>(null);
 
   const filteredData = useMemo(() => {
     setIsVisible(false); // Trigger fade out
@@ -115,15 +115,19 @@ export default function ClientSections({ data }: ClientSectionsProps) {
   }, [currentCompany]);
 
   return (
-    <div className="container relative mx-auto" ref={containerRef}>
-      <div className="absolute top-0 z-10 w-20 h-full left-8 bg-gradient-to-r from-white to-transparent"></div>
+    <div className="container mx-auto">
+      <h2 className="text-xl font-normal text-center md:text-3xl">
+        {data.title}
+      </h2>
       <div
         style={{
           minHeight: "10rem",
           position: "relative",
-          height: containerRef.current?.offsetHeight,
         }}
+        className="relative"
       >
+        <div className="absolute top-0 left-0 z-10 w-20 h-full bg-gradient-to-r from-white to-transparent"></div>
+
         <AnimatePresence mode="wait">
           {isVisible && (
             <motion.div
@@ -143,8 +147,9 @@ export default function ClientSections({ data }: ClientSectionsProps) {
             </motion.div>
           )}
         </AnimatePresence>
+        {/* </div> */}
+        <div className="absolute top-0 right-0 z-10 w-20 h-full bg-gradient-to-l from-white to-transparent"></div>
       </div>
-      <div className="absolute top-0 z-10 w-20 h-full bg-gradient-to-l from-white to-transparent right-8"></div>
     </div>
   );
 }
