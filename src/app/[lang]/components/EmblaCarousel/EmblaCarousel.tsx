@@ -119,6 +119,7 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
         <div className="embla__container">
           {slides.map((item) => {
             const imgSrc = getStrapiMedia(item.media.data.attributes.url);
+
             return (
               <div key={item.id} className="embla__slide">
                 <div className="embla__slide__number">
@@ -127,11 +128,13 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
                     target={item.newTab ? "_self" : "_blank"}
                   >
                     {imgSrc && (
-                      <img
-                        src={imgSrc}
-                        alt="our client logo"
-                        className="object-contain w-full h-full p-6 md:max-h-40 max-h-32"
-                      />
+                      <>
+                        <img
+                          src={imgSrc}
+                          alt="our client logo"
+                          className="object-contain h-32 p-6 md:h-40"
+                        />
+                      </>
                     )}
                   </Link>
                 </div>
