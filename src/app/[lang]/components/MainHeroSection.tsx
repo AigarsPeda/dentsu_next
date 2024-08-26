@@ -95,7 +95,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
 
   return (
     <section
-      className="relative flex items-center justify-center w-full aspect-[1/1.8] md:aspect-[16/9] bg-cover bg-center"
+      className="relative flex items-center justify-center w-full aspect-[1/1.7] md:aspect-[16/9] bg-cover bg-center"
       style={{ backgroundImage: `url(${imgUrl ?? posterUrl ?? ""})` }}
     >
       <MainHeadLine title={data.title} />
@@ -113,7 +113,7 @@ interface MainHeadLineProps {
 const MainHeadLine: FC<MainHeadLineProps> = ({ title }) => {
   return (
     <div className="w-full flex md:max-w-[67rem] absolute z-10 transform py-6 md:pl-10 lg:pl-0 left-2 h-full flex-col justify-center">
-      <h1 className="text-white lg:text-[8vw] leading-[60px] md:leading-tight font-bold">
+      <h1 className="text-white lg:text-[8vw] leading-[60px] md:text-6xl md:leading-tight font-bold">
         {title}
       </h1>
     </div>
