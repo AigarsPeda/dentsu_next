@@ -5,6 +5,9 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}", flowbite.content()],
   theme: {
     extend: {
+      spacing: {
+        "2/3": "66.666667%",
+      },
       colors: {
         "dentsu-hover": "#929292",
         "dentsu-primary": "#05051e",

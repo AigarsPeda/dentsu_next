@@ -68,7 +68,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
 
   if (isVideoUrl(imgUrl) && imgUrl) {
     return (
-      <div className="relative flex items-center justify-center md:h-[92vh] h-[80vh]">
+      <div className="relative flex items-center justify-center aspect-[1/1.8] md:aspect-[16/9]">
         <video
           loop
           muted
@@ -95,7 +95,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
 
   return (
     <section
-      className="relative flex items-center justify-center w-full md:h-[92vh] h-[80vh] bg-cover bg-center"
+      className="relative flex items-center justify-center w-full aspect-[1/1.8] md:aspect-[16/9] bg-cover bg-center"
       style={{ backgroundImage: `url(${imgUrl ?? posterUrl ?? ""})` }}
     >
       <MainHeadLine title={data.title} />
