@@ -68,7 +68,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
 
   if (isVideoUrl(imgUrl) && imgUrl) {
     return (
-      <div className="relative flex items-center justify-center aspect-[1/1.8] md:aspect-[16/9]">
+      <div className="relative flex items-center justify-center aspect-[1/1.7] md:aspect-[16/9]">
         <video
           loop
           muted

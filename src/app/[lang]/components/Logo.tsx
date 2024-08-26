@@ -1,4 +1,3 @@
-import HomeIcon from "@/app/[lang]/components/icons/HomeIcon";
 import Link from "next/link";
 
 export default function Logo({
@@ -24,9 +23,9 @@ export default function Logo({
         />
       )}
       <div className="ml-2">{children}</div>
-      <div>
+      {/* <div>
         <HomeIcon className="w-5 h-5" />
-      </div>
+      </div> */}
     </Link>
   );
 }
