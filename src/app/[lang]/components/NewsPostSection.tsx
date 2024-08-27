@@ -1,8 +1,10 @@
 "use client";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import { loader } from "./ServicesHeadlineWithImage";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -70,11 +72,19 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
               key={newsPost.id}
               className="flex flex-col justify-between mt-4 "
             >
-              <div className="relative overflow-hidden ">
-                <img
+              <div className="relative overflow-hidden md:aspect-[16/9] aspect-[4/3]">
+                {/* <img
                   src={src}
                   alt={thumbnail.alternativeText || "news post image"}
                   className="object-cover w-full h-full bg-gray-300 md:aspect-[16/9] aspect-[4/3]"
+                /> */}
+                <Image
+                  fill
+                  alt=""
+                  src={src}
+                  priority
+                  loader={loader}
+                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
                 />
               </div>
               <div className="h-full max-h-[7.7rem]">

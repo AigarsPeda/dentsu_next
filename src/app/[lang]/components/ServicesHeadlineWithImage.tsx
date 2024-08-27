@@ -2,8 +2,19 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import ArrowIcon from "src/app/[lang]/components/icons/ArrowIcon";
-import { loader } from "src/app/[lang]/components/PostImage";
 import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
+
+export const loader = ({
+  src,
+  width,
+  quality,
+}: {
+  src: string;
+  width: number;
+  quality?: number;
+}) => {
+  return `${src}?w=${width}&q=${quality || 75}`;
+};
 
 interface ServicesHeadlineWithImageProps {
   data: {

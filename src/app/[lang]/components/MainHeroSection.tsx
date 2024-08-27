@@ -1,12 +1,8 @@
-"use client";
 import ArrowIcon from "@/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import isVideoUrl from "@/app/[lang]/utils/isVideoUrl";
-import { FC, useMemo } from "react";
-// import Image from "next/image";
-import { loader } from "./PostImage";
 import dynamic from "next/dynamic";
-// const ImageCrop = dynamic(() => import('../components/avatar-editor'), { ssr: false })
+import type { FC } from "react";
 
 const DynamicImage = dynamic(() => import("next/image"), { ssr: false });
 
@@ -35,9 +31,18 @@ interface MainHeroSectionProps {
 }
 
 export default function MainHeroSection({ data }: MainHeroSectionProps) {
-  const imgUrl = getStrapiMedia(data.picture.data?.[0]?.attributes.url);
   const posterUrl = getStrapiMedia(data.poster.data.attributes?.url);
-  // const { width = 0, height = 0 } = useWindowSize();
+  const imgUrl = getStrapiMedia(data.picture.data?.[0]?.attributes.url);
+
+  // const width =
+  //   data.poster.data.attributes.width ??
+  //   data.picture.data?.[0]?.attributes.width ??
+  //   1920;
+
+  // const height =
+  //   data.poster.data.attributes.height ??
+  //   data.picture.data?.[0]?.attributes.height ??
+  //   1080;
 
   const getVideoType = (url: string | null): string => {
     if (!url) return "";
@@ -74,21 +79,6 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
     return /\.(mp4)$/.test(url) ? "video/mp4" : "";
   };
 
-  const { width, height } = useMemo(() => {
-    // get width and height from widows object
-    if (typeof window !== "undefined") {
-      return {
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
-    }
-
-    return {
-      width: undefined,
-      height: undefined,
-    };
-  }, []);
-
   if (isVideoUrl(imgUrl) && imgUrl) {
     return (
       <div className="relative flex items-center justify-center aspect-[1/1.5] md:aspect-[16/9]">
@@ -103,23 +93,11 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
         >
           <source src={imgUrl} type={getVideoType(imgUrl)} />
         </video>
-        {/* <img
+        <img
           alt="poster"
           src={posterUrl ?? ""}
           className="block object-cover w-full h-full md:hidden"
-        /> */}
-        <div className="relative block object-cover w-full h-full md:hidden">
-          <DynamicImage
-            // fill
-            priority
-            alt="poster"
-            width={width}
-            height={height}
-            loader={loader}
-            src={posterUrl ?? ""}
-            style={{ objectFit: "cover", width: "100%", height: "100%" }}
-          />
-        </div>
+        />
         <MainHeadLine title={data.title} />
         <div className="absolute hidden transform bottom-10 animate-bounce md:block">
           <ArrowIcon className="w-12 h-12 fill-gray-50" />
@@ -129,33 +107,15 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
   }
 
   return (
-    // <section
-    //   className="relative flex items-center justify-center w-full aspect-[1/1.5] md:aspect-[16/9] bg-cover bg-center"
-    //   style={{ backgroundImage: `url(${imgUrl ?? posterUrl ?? ""})` }}
-    // >
-    //   <MainHeadLine title={data.title} />
-    //   <div className="absolute hidden transform bottom-10 animate-bounce md:block">
-    //     <ArrowIcon className="w-12 h-12 fill-gray-50" />
-    //   </div>
-    // </section>
-    <div className="relative flex items-center justify-center aspect-[1/1.5] md:aspect-[16/9]">
-      <div className="relative block object-cover w-full h-full">
-        <DynamicImage
-          // fill
-          alt=""
-          priority
-          width={width}
-          height={height}
-          loader={loader}
-          src={imgUrl ?? posterUrl ?? ""}
-          style={{ objectFit: "cover", width: "100%", height: "100%" }}
-        />
-      </div>
+    <section
+      className="relative flex items-center justify-center w-full aspect-[1/1.5] md:aspect-[16/9] bg-cover bg-center"
+      style={{ backgroundImage: `url(${imgUrl ?? posterUrl ?? ""})` }}
+    >
       <MainHeadLine title={data.title} />
       <div className="absolute hidden transform bottom-10 animate-bounce md:block">
         <ArrowIcon className="w-12 h-12 fill-gray-50" />
       </div>
-    </div>
+    </section>
   );
 }
 

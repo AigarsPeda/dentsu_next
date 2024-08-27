@@ -3,6 +3,8 @@ import ArrowIcon from "@/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { usePathname, useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { loader } from "./ServicesHeadlineWithImage";
 
 interface MediaType {
   id: string;
@@ -63,11 +65,23 @@ export default function PostSection({ data }: PostSectionProps) {
                 href={`/${urlLocale}/${item.postUrl}`}
                 target={item.isNewTab ? "_blank" : "_self"}
               >
-                <div className="md:aspect-[16/9] aspect-[4/3]">
-                  <img
+                <div className="md:aspect-[16/9] aspect-[4/3] relative">
+                  {/* <img
                     src={imgUrl || ""}
                     alt="our client logo"
                     className="object-cover w-full h-full text-white"
+                  /> */}
+                  <Image
+                    fill
+                    alt=""
+                    src={imgUrl || ""}
+                    priority
+                    loader={loader}
+                    style={{
+                      objectFit: "cover",
+                      width: "100%",
+                      height: "100%",
+                    }}
                   />
                 </div>
                 <div className="flex items-end justify-between p-6 transition-colors text-gray-50">
