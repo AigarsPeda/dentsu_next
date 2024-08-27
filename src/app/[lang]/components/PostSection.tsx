@@ -72,7 +72,9 @@ export default function PostSection({ data }: PostSectionProps) {
                     className="object-cover w-full h-full text-white"
                   /> */}
                   <Image
-                    fill
+                    // fill
+                    width={600}
+                    height={337}
                     alt=""
                     src={imgUrl || ""}
                     priority
