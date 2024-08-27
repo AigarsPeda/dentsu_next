@@ -45,7 +45,7 @@ export default function PostStatisticWithImage({
     <section
       className={classNames(
         data.feature.statisticOnRight ? "flex-row-reverse" : "flex-row",
-        "md:flex w-full h-full py-10 bg-center bg-cover min-h-[50vw]"
+        "md:flex w-full h-full py-10 bg-center bg-cover md:aspect-[16/6]"
       )}
       style={{
         background: `linear-gradient(

@@ -57,22 +57,22 @@ export default function PostSection({ data }: PostSectionProps) {
           return (
             <li
               key={item.id}
-              className="bg-black group hover:bg-dentsu-hover transition-colors md:h-[33rem]"
+              className="transition-colors bg-black group hover:bg-dentsu-hover"
             >
               <a
                 href={`/${urlLocale}/${item.postUrl}`}
                 target={item.isNewTab ? "_blank" : "_self"}
               >
-                <div>
+                <div className="md:aspect-[16/9] aspect-[4/3]">
                   <img
                     src={imgUrl || ""}
                     alt="our client logo"
-                    className="object-cover w-full h-[20rem] text-white"
+                    className="object-cover w-full h-full text-white"
                   />
                 </div>
-                <div className="flex items-end p-6 transition-colors text-gray-50">
-                  <div className="w-full">
-                    <div className="mb-3 overflow-hidden md:mb-5 custom-clamp-2">
+                <div className="flex items-end justify-between p-6 transition-colors text-gray-50">
+                  <div>
+                    <div className="overflow-hidden h-14 custom-clamp-2">
                       <h6 title={item.title}>{item.title}</h6>
                     </div>
                     <div className="h-24 overflow-hidden custom-clamp-5">
@@ -92,40 +92,6 @@ export default function PostSection({ data }: PostSectionProps) {
                 </div>
               </a>
             </li>
-            // <li key={item.id} className="group">
-            //   <a
-            //     href={`/${urlLocale}/${item.postUrl}`}
-            //     target={item.isNewTab ? "_blank" : "_self"}
-            //   >
-            //     {imgUrl && (
-            //       <img
-            //         src={imgUrl}
-            //         alt="our client logo"
-            //         className="object-cover w-full lg:h-[400px] lg:max-h-[500px] max-h-[250px] text-white h-full"
-            //       />
-            //     )}
-            //     <div className="flex items-end p-6 transition-colors bg-black text-gray-50 group-hover:bg-dentsu-hover">
-            //       <div className="w-full">
-            //         <div className="mb-3 overflow-hidden h-14 custom-clamp-2">
-            //           <h6 title={item.title}>{item.title}</h6>
-            //         </div>
-            //         <div className="h-24 overflow-hidden custom-clamp-4">
-            //           <p
-            //             title={item.description}
-            //             className="text-sm font-normal text-white"
-            //           >
-            //             {item.description}
-            //           </p>
-            //         </div>
-            //       </div>
-            //       <div className="p-0.5 md:ml-9 ml-4">
-            //         <div className="flex items-center justify-center text-center text-white transform -rotate-90 rounded-md">
-            //           <ArrowIcon className="fill-white w-9 h-9" />
-            //         </div>
-            //       </div>
-            //     </div>
-            //   </a>
-            // </li>
           );
         })}
       </ul>

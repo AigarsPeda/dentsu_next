@@ -83,7 +83,8 @@ export default function Services({ data }: ServicesProps) {
   return (
     <div
       className="grid grid-cols-1 mx-auto bg-white md:grid-cols-2"
-      style={{ height: `${isMobile ? mobHeight : height}px` }}
+      // style={{ height: `${isMobile ? mobHeight : height}px` }}
+      style={{ height: isMobile ? `${height}px` : "auto" }}
     >
       <DivWithImage
         imgUrl={imgUrl}
@@ -135,7 +136,7 @@ export const DivWithImage = ({
   return (
     <>
       <div
-        className="relative items-center justify-center hidden bg-center bg-cover md:flex"
+        className="relative items-center justify-center hidden bg-center bg-cover md:flex md:aspect-[1/1]"
         style={{
           ...(pictureOnRight && {
             ...createBackgroundImage(imgUrl),

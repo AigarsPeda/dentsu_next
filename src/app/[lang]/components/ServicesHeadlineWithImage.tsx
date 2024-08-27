@@ -59,7 +59,7 @@ export default function ServicesHeadlineWithImage({
         ref={divRef}
         className={classNames(
           data.isParallax ? "md:bg-fixed" : "",
-          "object-cover w-full h-[62vh] bg-gray-300 bg-cover bg-center"
+          "object-cover w-full  bg-gray-300 bg-cover bg-center md:aspect-[16/6] aspect-[1/1.5]"
         )}
         style={{
           backgroundImage: `url(${imgUrl})`,

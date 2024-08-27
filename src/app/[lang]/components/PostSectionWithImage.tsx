@@ -43,7 +43,7 @@ export default function PostSectionWithImage({
                   data.feature.media.data[0].attributes.alternativeText ??
                   "none provided"
                 }
-                className="object-cover w-full h-full overflow-hidden"
+                className="object-cover w-full h-full overflow-hidden aspect-[1/1]"
               />
             )}
           </div>
@@ -71,7 +71,7 @@ export default function PostSectionWithImage({
                   data.feature.media.data[0].attributes.alternativeText ??
                   "none provided"
                 }
-                className="object-cover w-full h-full overflow-hidden"
+                className="object-cover w-full h-full overflow-hidden aspect-[1/1]"
               />
             )}
           </div>
