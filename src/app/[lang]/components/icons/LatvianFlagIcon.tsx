@@ -34,3 +34,4 @@ const LatvianFlagIcon = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 export default LatvianFlagIcon;
+//
