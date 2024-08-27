@@ -1,8 +1,9 @@
 "use client";
-import classNames from "classnames";
-import { getStrapiMedia } from "../utils/api-helpers";
-import ArrowIcon from "./icons/ArrowIcon";
-import { use, useEffect, useRef } from "react";
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+import ArrowIcon from "src/app/[lang]/components/icons/ArrowIcon";
+import { loader } from "src/app/[lang]/components/PostImage";
+import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
 
 interface ServicesHeadlineWithImageProps {
   data: {
@@ -55,7 +56,32 @@ export default function ServicesHeadlineWithImage({
 
   return (
     <div className="relative -z-10">
-      <div
+      <div className="mx-auto md:aspect-[16/6] aspect-[1/1.2] relative">
+        <Image
+          fill
+          alt=""
+          src={imgUrl}
+          priority
+          loader={loader}
+          style={{ objectFit: "cover", width: "100%", height: "100%" }}
+        />
+        <div
+          ref={contentRef}
+          className="inset-0 w-full h-full grid-cols-2 md:grid md:absolute"
+        >
+          <div className="flex items-end w-full h-full col-span-1 col-end-3 start-1">
+            <div className="bg-white max-w-[35rem]">
+              <h3 className="p-10 font-normal text-black md:p-12">
+                {data.title}
+              </h3>
+              <div className="items-center justify-center hidden w-full md:flex md:mt-14">
+                <ArrowIcon className="w-8 h-8 fill-black " />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div
         ref={divRef}
         className={classNames(
           data.isParallax ? "md:bg-fixed" : "",
@@ -80,7 +106,7 @@ export default function ServicesHeadlineWithImage({
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -17,7 +17,7 @@ interface PostImageProps {
   };
 }
 
-const loader = ({
+export const loader = ({
   src,
   width,
   quality,
@@ -42,12 +42,12 @@ export default function PostImage({ data }: PostImageProps) {
   return (
     <div className="container mx-auto md:aspect-[4/1] aspect-[1/1] relative">
       <Image
+        fill
         alt=""
         src={src}
-        fill
-        style={{ objectFit: "cover", width: "100%", height: "100%" }}
-        loader={loader}
         priority
+        loader={loader}
+        style={{ objectFit: "cover", width: "100%", height: "100%" }}
       />
     </div>
   );
