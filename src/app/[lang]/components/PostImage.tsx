@@ -1,4 +1,5 @@
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import Image from "next/image";
 
 interface PostImageProps {
   data: {
@@ -19,9 +20,15 @@ export default function PostImage({ data }: PostImageProps) {
   const alt = data.media.data[0].attributes.alternativeText ?? "";
   const src = getStrapiMedia(data.media.data[0]?.attributes?.url) ?? "";
 
+  // return (
+  //   <div className="container mx-auto md:aspect-[4/1] aspect-[1/1]">
+  //     <img src={src} alt={alt} className="object-cover w-full h-full" />
+  //   </div>
+  // );
+
   return (
-    <div className="container mx-auto md:aspect-[4/1] aspect-[1/1]">
-      <img src={src} alt={alt} className="object-cover w-full h-full" />
+    <div className="container mx-auto md:aspect-[4/1] aspect-[1/1] relative">
+      <Image alt="" src={src} fill style={{ objectFit: "cover" }} />
     </div>
   );
 }
