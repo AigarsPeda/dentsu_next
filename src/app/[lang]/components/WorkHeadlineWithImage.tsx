@@ -27,7 +27,7 @@ export default function WorkHeadlineWithImage({
 
   return (
     <section
-      className="relative flex items-center justify-center md:aspect-[16/6] aspect-[1/1.3] bg-cover bg-center"
+      className="relative flex items-center justify-center md:aspect-[16/6] aspect-[1/1.2] bg-cover bg-center"
       style={{ backgroundImage: `url(${imgUrl})` }}
     >
       <div className="container absolute bottom-12 md:bottom-40 md:right-0 right-5 bg-black md:w-[50%] w-[90%] p-10">
