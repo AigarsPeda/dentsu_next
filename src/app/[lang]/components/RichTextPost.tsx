@@ -13,7 +13,7 @@ interface RichTextPostProps {
 
 const RichTextPost: React.FC<RichTextPostProps> = ({ data }) => {
   return (
-    <div className="container pt-0 mx-auto md:pt-14 pb-14">
+    <div className="container mx-auto py-14">
       <BlocksRenderer
         content={data.post}
         blocks={{
