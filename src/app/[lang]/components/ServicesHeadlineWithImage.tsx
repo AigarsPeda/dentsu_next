@@ -83,7 +83,7 @@ export default function ServicesHeadlineWithImage({
           className="absolute bottom-0 w-full h-full grid-cols-2 md:inset-0 md:grid"
         >
           <div className="flex items-end w-full h-full col-span-1 col-end-3 start-1">
-            <div className="bg-white max-w-[35rem] md:pb-4">
+            <div className="bg-white max-w-[35rem] pb-5">
               <h3 className="p-10 font-normal text-black md:p-14">
                 {data.title}
               </h3>
