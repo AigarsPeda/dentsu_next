@@ -208,30 +208,32 @@ export default function Contacts({ data }: ContactsProps) {
   return (
     <div className="container flex flex-col-reverse grid-cols-1 gap-10 mx-auto md:px-16 md:grid md:grid-cols-2 md:py-14">
       <div>
-        <div>
-          <p className="pb-10 text-sm text-left">{data.title}</p>
-          <MapProvider>
-            <MapComponent
-              address={data.address}
-              navigationAddress={data.navigationAddress}
-              wazeIcon={getStrapiMedia(data.wazeIcon.data.attributes.url) ?? ""}
-              googleIcon={
-                getStrapiMedia(data.googleIcon.data.attributes.url) ?? ""
-              }
-            />
-          </MapProvider>
-        </div>
+        {/* <div className="h-full"> */}
+        <p className="pb-10 text-sm text-left">{data.title}</p>
+        <MapProvider>
+          <MapComponent
+            address={data.address}
+            navigationAddress={data.navigationAddress}
+            wazeIcon={getStrapiMedia(data.wazeIcon.data.attributes.url) ?? ""}
+            googleIcon={
+              getStrapiMedia(data.googleIcon.data.attributes.url) ?? ""
+            }
+          />
+        </MapProvider>
+        {/* </div> */}
 
-        <div className="pb-10 mt-4">
-          <p className="text-sm text-left">{data.address}</p>
-          <p className="text-sm text-left">{data.phoneNumber}</p>
-          <p className="text-sm text-left">{data.email}</p>
-          <p className="text-sm text-left">{data.workingTime}</p>
+        <div className="flex items-end pb-10 mt-4 md:pb-0">
+          <div>
+            <p className="text-sm text-left">{data.address}</p>
+            <p className="text-sm text-left">{data.phoneNumber}</p>
+            <p className="text-sm text-left">{data.email}</p>
+            <p className="text-sm text-left">{data.workingTime}</p>
+          </div>
         </div>
       </div>
       <div>
         <form
-          className="flex flex-col p-4 space-y-3 border border-black"
+          className="flex flex-col h-full p-4 space-y-3 border border-black"
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit(onSubmit)();

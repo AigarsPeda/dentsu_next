@@ -46,8 +46,8 @@ export default function Vacancies({ data }: VacanciesProps) {
   };
 
   return (
-    <div className={classNames("container py-6 mx-auto")}>
-      <div className="min-h-[25rem] md:space-y-6 space-y-4">
+    <div className={classNames("container py-14 mx-auto")}>
+      <div className="space-y-4 md:space-y-6">
         {data.vacancies.map((vacancy, index) => {
           return (
             <Disclosure as="div" key={vacancy.id} defaultOpen={false}>

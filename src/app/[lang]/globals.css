@@ -173,7 +173,7 @@
 
 @media (max-width: 480px) {
   .embla {
-    --slide-size: 70%;
+    --slide-size: 60%;
     --slide-height: 8rem;
   }
 }

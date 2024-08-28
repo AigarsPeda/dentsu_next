@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { loader } from "./ServicesHeadlineWithImage";
+import Link from "next/link";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -70,7 +71,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
           return (
             <div
               key={newsPost.id}
-              className="flex flex-col justify-between mt-4 "
+              className="flex flex-col justify-between mt-4"
             >
               <div className="relative overflow-hidden md:aspect-[16/9] aspect-[4/3]">
                 {/* <img
@@ -96,13 +97,21 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
                 </p>
               </div>
               <div>
-                <a
+                {/* <a
                   href={`/${urlLocale}/${newsPost.url}`}
                   className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm transition-all bg-black hover:bg-dentsu-hover md:mt-2 text-gray-50"
                 >
                   {newsPost.buttonTitle}
                   <IoIosArrowForward />
-                </a>
+                </a> */}
+                <Link
+                  href={`/${urlLocale}/${newsPost.url}`}
+                  passHref
+                  className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm transition-all bg-black hover:bg-dentsu-hover md:mt-2 text-gray-50"
+                >
+                  {newsPost.buttonTitle}
+                  <IoIosArrowForward />
+                </Link>
               </div>
             </div>
           );

@@ -62,7 +62,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
 
   return (
     <div className="w-full bg-black">
-      <div className="container flex items-center justify-center">
+      <div className="container flex items-center justify-center mx-auto">
         <div
           className={classNames(
             length === 2 && "md:grid-cols-2",

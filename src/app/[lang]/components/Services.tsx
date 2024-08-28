@@ -61,7 +61,7 @@ export default function Services({ data }: ServicesProps) {
     ? getStrapiMedia(data.mobLogo.data.attributes.url)
     : undefined;
 
-  const height = 300 + data.services.length * 60;
+  const height = 260 + data.services.length * 60;
   const mobHeight = 300 + data.services.length * 50;
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function Services({ data }: ServicesProps) {
     <div
       className="grid grid-cols-1 mx-auto bg-white md:grid-cols-2"
       // style={{ height: `${isMobile ? mobHeight : height}px` }}
-      style={{ height: isMobile ? `${height}px` : "auto" }}
+      // style={{ height: isMobile ? `${height}px` : "auto" }}
     >
       <DivWithImage
         imgUrl={imgUrl}
@@ -120,23 +120,42 @@ export const DivWithImage = ({
   const createBackgroundImage = (url: string) => {
     if (!isDarkOverlay) {
       return {
-        backgroundSize: "cover",
+        backgroundSize: "cover", // Revert to 'cover' to fill the container
         backgroundPosition: "center",
+        backgroundAttachment: "fixed", // Fixes background to prevent zoom effect
         backgroundImage: `url(${url})`,
       };
     }
 
     return {
-      backgroundSize: "cover",
+      backgroundSize: "cover", // Revert to 'cover' to fill the container
       backgroundPosition: "center",
+      backgroundAttachment: "fixed", // Fixes background to prevent zoom effect
       backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`,
     };
   };
+  // const createBackgroundImage = (url: string) => {
+  //   if (!isDarkOverlay) {
+  //     return {
+  //       backgroundSize: "cover", // Use cover instead of cover
+  //       backgroundPosition: "center",
+  //       backgroundRepeat: "no-repeat", // Prevent repeating when using cover
+  //       backgroundImage: `url(${url})`,
+  //     };
+  //   }
+
+  //   return {
+  //     backgroundSize: "cover", // Use cover instead of cover
+  //     backgroundPosition: "center",
+  //     backgroundRepeat: "no-repeat", // Prevent repeating when using cover
+  //     backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`,
+  //   };
+  // };
 
   return (
     <>
       <div
-        className="relative items-center justify-center hidden bg-center bg-cover md:flex md:aspect-[1/1]"
+        className="relative items-center justify-center hidden bg-center bg-cover md:flex"
         style={{
           ...(pictureOnRight && {
             ...createBackgroundImage(imgUrl),

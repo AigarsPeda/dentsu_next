@@ -9,9 +9,11 @@ interface InfoBlockProps {
   };
 }
 
+// md:py-20 py-14
+
 export default function InfoBlock({ data }: InfoBlockProps) {
   return (
-    <div className="container mx-auto md:py-20 py-14">
+    <div className="container py-20 mx-auto">
       {data.title && data.title.length > 0 && (
         <h2
           className={classNames(

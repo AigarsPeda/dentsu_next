@@ -32,7 +32,25 @@ export default function Navbar({
 
   const urlLocale = path.split("/")[1] || "en";
 
-  const switchLocale = (newLocale: string) => {
+  // const switchLocale = (newLocale: string) => {
+  //   const availableLocalesCodes = availableLocales.map((locale) => locale.code);
+  //   const currentLocale = availableLocalesCodes.reduce((acc, locale) => {
+  //     if (path.includes(locale)) {
+  //       return locale;
+  //     }
+  //     return acc;
+  //   });
+
+  //   const newPath = path.replace(currentLocale, newLocale);
+  //   router.push(newPath);
+  // };
+
+  const linksWithLocale = links.map((link) => ({
+    ...link,
+    locale: urlLocale,
+  }));
+
+  const getCurrentLocaleAndReplace = (path: string, newLocale: string) => {
     const availableLocalesCodes = availableLocales.map((locale) => locale.code);
     const currentLocale = availableLocalesCodes.reduce((acc, locale) => {
       if (path.includes(locale)) {
@@ -41,14 +59,8 @@ export default function Navbar({
       return acc;
     });
 
-    const newPath = path.replace(currentLocale, newLocale);
-    router.push(newPath);
+    return path.replace(currentLocale, newLocale);
   };
-
-  const linksWithLocale = links.map((link) => ({
-    ...link,
-    locale: urlLocale,
-  }));
 
   return (
     <div className="sticky top-0 z-30 py-4 bg-dentsu-primary">
@@ -67,11 +79,10 @@ export default function Navbar({
           </ul>
           <div className="flex items-center justify-center ml-6 space-x-3">
             {availableLocales.map((locale) => (
-              <button
-                type="button"
+              <Link
                 key={locale.id}
-                title={locale.name}
-                onClick={() => switchLocale(locale.code)}
+                locale={locale.code}
+                href={getCurrentLocaleAndReplace(path, locale.code)}
               >
                 <div
                   style={{
@@ -90,7 +101,7 @@ export default function Navbar({
                     locale.name
                   )}
                 </div>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
@@ -162,11 +173,10 @@ export default function Navbar({
               </div>
               <div className="flex flex-col items-center justify-center gap-6 mt-6">
                 {availableLocales.map((locale) => (
-                  <button
-                    type="button"
+                  <Link
                     key={locale.id}
-                    title={locale.name}
-                    onClick={() => switchLocale(locale.code)}
+                    locale={locale.code}
+                    href={getCurrentLocaleAndReplace(path, locale.code)}
                   >
                     <div
                       style={{
@@ -185,7 +195,7 @@ export default function Navbar({
                         locale.name
                       )}
                     </div>
-                  </button>
+                  </Link>
                 ))}
               </div>
             </DialogPanel>

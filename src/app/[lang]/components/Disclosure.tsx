@@ -36,11 +36,23 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
     return text;
   };
 
+  // const height = 260 + data.description.length * 60;
+
+  // const descriptionLength = data.map((service) => service.description.length)
+
+  // const allDescriptionLength = data.reduce((acc, service) => {
+  //   return acc + service.description.length;
+  // }, 0);
+
+  // console.log(allDescriptionLength);
+
   // md:justify-center
+  // md:h-[50rem] h-[40rem]
   return (
     <div
+      // style={{ height: `${allDescriptionLength}px` }}
       className={classNames(
-        "flex flex-col justify-center h-full md:pl-10 md:pr-28 px-10 py-5",
+        "flex flex-col justify-center md:h-[50rem] md:pl-10 md:pr-28 px-10 py-10",
         {
           "text-gray-50": fontColor === "light",
           "text-black": fontColor === "dark" || !fontColor,

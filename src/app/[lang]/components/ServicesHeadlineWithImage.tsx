@@ -67,7 +67,7 @@ export default function ServicesHeadlineWithImage({
 
   return (
     <div className="relative -z-10">
-      <div className="mx-auto md:aspect-[16/6] aspect-[1/1.2] relative">
+      <div className="relative flex items-center justify-center md:h-[92vh] h-[80vh]">
         <Image
           fill
           alt=""
@@ -83,7 +83,7 @@ export default function ServicesHeadlineWithImage({
           className="inset-0 w-full h-full grid-cols-2 md:grid md:absolute"
         >
           <div className="flex items-end w-full h-full col-span-1 col-end-3 start-1">
-            <div className="bg-white max-w-[35rem]">
+            <div className="bg-white max-w-[35rem] md:pb-4">
               <h3 className="p-10 font-normal text-black md:p-12">
                 {data.title}
               </h3>

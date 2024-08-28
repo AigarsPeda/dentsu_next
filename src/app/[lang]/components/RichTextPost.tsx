@@ -12,6 +12,7 @@ interface RichTextPostProps {
 }
 
 const RichTextPost: React.FC<RichTextPostProps> = ({ data }) => {
+  console.log(data);
   return (
     <div className="container mx-auto py-14">
       <BlocksRenderer
@@ -36,7 +37,11 @@ const RichTextPost: React.FC<RichTextPostProps> = ({ data }) => {
             );
           },
           link: ({ children, url }) => (
-            <a className="text-blue-500 underline" href={url} target="_blank">
+            <a
+              className="text-[#5b19c4] font-bold underline underline-offset-4 "
+              href={url}
+              target="_blank"
+            >
               {children}
             </a>
           ),
