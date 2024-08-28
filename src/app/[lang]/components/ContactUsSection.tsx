@@ -53,15 +53,17 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
             >
               <div className="flex flex-col items-center">
                 {imgSrc ? (
-                  <img
-                    src={imgSrc}
-                    alt="our client logo"
-                    className="object-contain w-full h-full max-w-[200px] rounded-full overflow-hidden"
-                  />
+                  <div className="w-[200px] h-[200px]">
+                    <img
+                      src={imgSrc}
+                      alt="our client logo"
+                      className="object-cover w-full h-full overflow-hidden rounded-full"
+                    />
+                  </div>
                 ) : (
                   <div className="object-contain w-full h-full max-w-[200px] rounded-full overflow-hidden" />
                 )}
-                <div className="mt-3 text-center">
+                <div className="h-10 mt-3 text-center">
                   {item.name && <h3 className="text-base">{item.name}</h3>}
                   {item.email && <p className="text-sm">{item.email}</p>}
                   {item.position && <p className="text-sm">{item.position}</p>}

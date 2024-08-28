@@ -81,7 +81,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
 
   if (isVideoUrl(imgUrl) && imgUrl) {
     return (
-      <div className="relative flex items-center justify-center aspect-[1/1.5] md:aspect-[16/9]">
+      <div className="relative flex items-center justify-center md:h-[92vh] h-[80vh]">
         <video
           loop
           muted
@@ -124,10 +124,31 @@ interface MainHeadLineProps {
 }
 
 const MainHeadLine: FC<MainHeadLineProps> = ({ title }) => {
+  // brake text in 3 lines get array of strings and break it in 3 lines
+  const brakeText = (text: string): string[] => {
+    const words = text.split(" ");
+    const lines = [];
+
+    const wordsPerLine = Math.ceil(words.length / 3);
+
+    for (let i = 0; i < words.length; i += wordsPerLine) {
+      lines.push(words.slice(i, i + wordsPerLine).join(" "));
+    }
+
+    return lines;
+  };
+
   return (
     <div className="w-full flex md:max-w-[67rem] absolute z-10 transform py-6 md:pl-10 lg:pl-0 left-2 h-full flex-col justify-center">
       <h1 className="text-white lg:text-[8vw] leading-[60px] md:text-6xl md:leading-tight font-bold">
-        {title}
+        {/* <span className="hidden md:block">{title}</span> */}
+        <span className="md:hidden">
+          {brakeText(title).map((line, index) => (
+            <span key={index} className="block">
+              {line} <br />
+            </span>
+          ))}
+        </span>
       </h1>
     </div>
   );

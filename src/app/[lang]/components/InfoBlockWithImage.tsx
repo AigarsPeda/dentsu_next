@@ -49,7 +49,7 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
             src={imgUrl}
             alt={"Image"}
             className={classNames(
-              "object-cover w-full h-full top-0 left-0 bg-gray-300 md:aspect-[16/9] aspect-[4/3]"
+              "object-cover w-full h-full top-0 left-0 bg-gray-300 md:aspect-[16/9] aspect-[4/3] max-h-[45rem]"
             )}
           />
         </div>
@@ -89,7 +89,7 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
             src={imgUrl}
             alt={"Image"}
             className={classNames(
-              "object-cover w-full h-full top-0 left-0 bg-gray-300 md:aspect-[16/9] aspect-[4/3]"
+              "object-cover w-full h-full top-0 left-0 bg-gray-300 md:aspect-[16/9] aspect-[4/3] max-h-[45rem]"
             )}
           />
         </div>
