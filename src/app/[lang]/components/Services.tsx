@@ -54,38 +54,14 @@ interface ServicesProps {
 }
 
 export default function Services({ data }: ServicesProps) {
-  // const [isMobile, setIsMobile] = useState(false);
   const logoUrl = getStrapiMedia(data.logo.data.attributes.url) ?? "";
   const imgUrl = getStrapiMedia(data.media.data[0]?.attributes.url) ?? "";
   const mobLogoUrl = data.mobLogo.data
     ? getStrapiMedia(data.mobLogo.data.attributes.url)
     : undefined;
 
-  const height = 260 + data.services.length * 60;
-  const mobHeight = 300 + data.services.length * 50;
-
-  // useEffect(() => {
-  //   if (typeof window === "undefined") return;
-
-  //   setIsMobile(window.innerWidth < 768);
-
-  //   const handleResize = () => {
-  //     setIsMobile(window.innerWidth < 768);
-  //   };
-
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
-
   return (
-    <div
-      className="grid grid-cols-1 mx-auto bg-white md:grid-cols-2"
-      // style={{ height: `${isMobile ? mobHeight : height}px` }}
-      // style={{ height: isMobile ? `${height}px` : "auto" }}
-    >
+    <div className="grid grid-cols-1 mx-auto bg-white md:grid-cols-2">
       <DivWithImage
         imgUrl={imgUrl}
         logoUrl={logoUrl}
@@ -117,63 +93,39 @@ export const DivWithImage = ({
   pictureOnRight: boolean;
   children?: React.ReactNode;
 }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
   const createBackgroundImage = (url: string) => {
     const baseStyle = {
-      backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundImage: isDarkOverlay
         ? `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`
         : `url(${url})`,
     };
 
-    // Media query to apply `backgroundAttachment: fixed` only on mobile devices
-    const mobileStyle = {
-      ...baseStyle,
-      backgroundAttachment: "fixed",
-    };
-
     return baseStyle;
   };
 
-  // const createBackgroundImage = (url: string) => {
-  //   if (!isDarkOverlay) {
-  //     return {
-  //       backgroundSize: "cover", // Revert to 'cover' to fill the container
-  //       backgroundPosition: "center",
-  //       backgroundAttachment: "fixed", // Fixes background to prevent zoom effect
-  //       backgroundImage: `url(${url})`,
-  //     };
-  //   }
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-  //   return {
-  //     backgroundSize: "cover", // Revert to 'cover' to fill the container
-  //     backgroundPosition: "center",
-  //     backgroundAttachment: "fixed", // Fixes background to prevent zoom effect
-  //     backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`,
-  //   };
-  // };
-  // const createBackgroundImage = (url: string) => {
-  //   if (!isDarkOverlay) {
-  //     return {
-  //       backgroundSize: "cover", // Use cover instead of cover
-  //       backgroundPosition: "center",
-  //       backgroundRepeat: "no-repeat", // Prevent repeating when using cover
-  //       backgroundImage: `url(${url})`,
-  //     };
-  //   }
+    setIsMobile(window.innerWidth < 768);
 
-  //   return {
-  //     backgroundSize: "cover", // Use cover instead of cover
-  //     backgroundPosition: "center",
-  //     backgroundRepeat: "no-repeat", // Prevent repeating when using cover
-  //     backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`,
-  //   };
-  // };
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <>
       <div
-        className="relative items-center justify-center hidden bg-center bg-cover md:flex"
+        className="relative items-center justify-center hidden bg-center md:bg-cover md:flex"
         style={{
           ...(pictureOnRight && {
             ...createBackgroundImage(imgUrl),
@@ -191,10 +143,12 @@ export const DivWithImage = ({
         </div>
       </div>
       <div
+        className=" md:flex"
         style={{
           ...(!pictureOnRight && {
             ...createBackgroundImage(imgUrl),
           }),
+          backgroundAttachment: isMobile ? "fixed" : "cover",
         }}
       >
         {children}
