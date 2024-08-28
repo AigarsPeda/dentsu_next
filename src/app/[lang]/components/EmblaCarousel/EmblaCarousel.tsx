@@ -64,9 +64,15 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
       return;
     }
 
+    // make shure loop is enabled
+
+    // emblaApi.reInit({ loop: true });
+    // }
+
     autoScroll.play();
-    const arrayLength = slides.length;
-    const timeToSwitch = arrayLength * 1000 * 2; // 2 seconds per slide
+    // const arrayLength = slides.length;
+    // const timeToSwitch = arrayLength * 1000 * 2; // 2 seconds per slide
+    const timeToSwitch = 10 * 1000 * 1.2; // 1.2 seconds per slide
 
     timerId.current = setTimeout(() => {
       handArraySwitch();

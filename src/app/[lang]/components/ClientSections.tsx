@@ -53,12 +53,18 @@ export default function ClientSections({ data }: ClientSectionsProps) {
 
   const filteredData = useMemo(() => {
     setIsVisible(false); // Trigger fade out
-
-    return data.feature.filter((item) => {
+    const filterData = data.feature.filter((item) => {
       return item.participatingCompany
         ?.toLowerCase()
         .includes(search?.toLowerCase() || "");
     });
+
+    // if filterData is less then 7
+    if (filterData.length <= 7) {
+      return filterData.concat(filterData);
+    }
+
+    return filterData;
   }, [search]);
 
   const uniqueCompanies = data.feature.reduce((acc, item) => {
