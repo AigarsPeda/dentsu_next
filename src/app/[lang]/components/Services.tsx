@@ -54,7 +54,7 @@ interface ServicesProps {
 }
 
 export default function Services({ data }: ServicesProps) {
-  const [isMobile, setIsMobile] = useState(false);
+  // const [isMobile, setIsMobile] = useState(false);
   const logoUrl = getStrapiMedia(data.logo.data.attributes.url) ?? "";
   const imgUrl = getStrapiMedia(data.media.data[0]?.attributes.url) ?? "";
   const mobLogoUrl = data.mobLogo.data
@@ -64,21 +64,21 @@ export default function Services({ data }: ServicesProps) {
   const height = 260 + data.services.length * 60;
   const mobHeight = 300 + data.services.length * 50;
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
+  // useEffect(() => {
+  //   if (typeof window === "undefined") return;
 
-    setIsMobile(window.innerWidth < 768);
+  //   setIsMobile(window.innerWidth < 768);
 
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+  //   const handleResize = () => {
+  //     setIsMobile(window.innerWidth < 768);
+  //   };
 
-    window.addEventListener("resize", handleResize);
+  //   window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
   return (
     <div
@@ -118,22 +118,40 @@ export const DivWithImage = ({
   children?: React.ReactNode;
 }) => {
   const createBackgroundImage = (url: string) => {
-    if (!isDarkOverlay) {
-      return {
-        backgroundSize: "cover", // Revert to 'cover' to fill the container
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed", // Fixes background to prevent zoom effect
-        backgroundImage: `url(${url})`,
-      };
-    }
-
-    return {
-      backgroundSize: "cover", // Revert to 'cover' to fill the container
+    const baseStyle = {
+      backgroundSize: "cover",
       backgroundPosition: "center",
-      backgroundAttachment: "fixed", // Fixes background to prevent zoom effect
-      backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`,
+      backgroundImage: isDarkOverlay
+        ? `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`
+        : `url(${url})`,
     };
+
+    // Media query to apply `backgroundAttachment: fixed` only on mobile devices
+    const mobileStyle = {
+      ...baseStyle,
+      backgroundAttachment: "fixed",
+    };
+
+    return baseStyle;
   };
+
+  // const createBackgroundImage = (url: string) => {
+  //   if (!isDarkOverlay) {
+  //     return {
+  //       backgroundSize: "cover", // Revert to 'cover' to fill the container
+  //       backgroundPosition: "center",
+  //       backgroundAttachment: "fixed", // Fixes background to prevent zoom effect
+  //       backgroundImage: `url(${url})`,
+  //     };
+  //   }
+
+  //   return {
+  //     backgroundSize: "cover", // Revert to 'cover' to fill the container
+  //     backgroundPosition: "center",
+  //     backgroundAttachment: "fixed", // Fixes background to prevent zoom effect
+  //     backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`,
+  //   };
+  // };
   // const createBackgroundImage = (url: string) => {
   //   if (!isDarkOverlay) {
   //     return {

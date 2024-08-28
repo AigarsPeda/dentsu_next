@@ -52,7 +52,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({ data, fontColor }) => {
     <div
       // style={{ height: `${allDescriptionLength}px` }}
       className={classNames(
-        "flex flex-col justify-center md:h-[50rem] md:pl-10 md:pr-28 px-10 py-10",
+        "flex flex-col justify-center md:h-[55rem] md:pl-10 md:pr-28 px-10 py-10",
         {
           "text-gray-50": fontColor === "light",
           "text-black": fontColor === "dark" || !fontColor,
