@@ -28,7 +28,7 @@ import Vacancies from "@/app/[lang]/components/Vacancies";
 import VacanciesHeadline from "@/app/[lang]/components/VacanciesHeadline";
 import VideoEmbed from "@/app/[lang]/components/VideoEmbed";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
-import DynamicPdf from "../components/DynamicPdf";
+import DynamicPdf from "src/app/[lang]/components/DynamicPdf";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {

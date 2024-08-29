@@ -9,7 +9,6 @@ import { useEffect, useMemo, useRef } from "react";
 interface FeaturesType {
   id: number;
   url: string | null;
-
   redirectToOurWork: boolean;
   media: {
     data: {
@@ -34,20 +33,20 @@ interface LogosSectionProps {
 
 export default function LogosSection({ data }: LogosSectionProps) {
   const path = usePathname();
-  const router = useRouter();
+  // const router = useRouter();
 
-  const currentIndex = useRef(0);
-  const firstRender = useRef(true);
+  // const currentIndex = useRef(0);
+  // const firstRender = useRef(true);
 
   const params = useSearchParams();
   const search = params.get("search");
   const urlLocale = path.split("/")[1] || "en";
 
-  const companyList = useMemo(() => {
-    return data.company.map((item) => {
-      return item.url;
-    });
-  }, [data.company]);
+  // const companyList = useMemo(() => {
+  //   return data.company.map((item) => {
+  //     return item.url;
+  //   });
+  // }, [data.company]);
 
   const isUrlMatchToSearch = (url: string | null) => {
     if (!search) {
@@ -89,43 +88,6 @@ export default function LogosSection({ data }: LogosSectionProps) {
 
     return url || "";
   };
-
-  // useEffect(() => {
-  //   if (data.autoSwitch && companyList.length > 1) {
-  //     if (firstRender.current) {
-  //       // Handle the first render logic, i.e., trigger the first switch immediately
-  //       const url = companyList[currentIndex.current];
-  //       if (url) {
-  //         router.push(`${path}?search=${url}`, { scroll: false });
-  //       }
-  //       currentIndex.current++;
-  //       firstRender.current = false; // Mark the first render as done
-  //     }
-
-  //     let interval: NodeJS.Timeout;
-
-  //     interval = setInterval(() => {
-  //       if (currentIndex.current >= companyList.length) {
-  //         currentIndex.current = 0;
-  //       }
-
-  //       const url = companyList[currentIndex.current];
-
-  //       if (!url) {
-  //         currentIndex.current++;
-  //         return;
-  //       }
-
-  //       router.push(`${path}?search=${url}`, {
-  //         scroll: false,
-  //       });
-
-  //       currentIndex.current++;
-  //     }, 5000);
-
-  //     return () => clearInterval(interval);
-  //   }
-  // }, [data.autoSwitch, companyList]);
 
   return (
     <div
