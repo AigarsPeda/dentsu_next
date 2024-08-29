@@ -148,7 +148,9 @@ export const DivWithImage = ({
           ...(!pictureOnRight && {
             ...createBackgroundImage(imgUrl),
           }),
-          backgroundAttachment: isMobile ? "fixed" : "cover",
+          // backgroundAttachment: isMobile ? "fixed" : "cover",
+          backgroundAttachment: "cover",
+          // WebkitBackgroundSize: "2650px 1440px;",
         }}
       >
         {children}
