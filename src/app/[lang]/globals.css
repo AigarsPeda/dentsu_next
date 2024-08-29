@@ -159,7 +159,7 @@
   max-width: 89rem;
   margin: auto;
   --slide-height: 5rem;
-  --slide-spacing: 5rem;
+  --slide-spacing: 5.5rem;
   /* --slide-size: 25%; */
   --slide-size: auto;
 }
