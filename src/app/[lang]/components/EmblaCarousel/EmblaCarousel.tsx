@@ -132,7 +132,7 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
                   <Link
                     href={item.url ?? "/"}
                     target={item.newTab ? "_self" : "_blank"}
-                    className="object-cover w-full h-32 p-4 md:p-8"
+                    className="object-cover w-full h-full"
                   >
                     {imgSrc && (
                       <>
