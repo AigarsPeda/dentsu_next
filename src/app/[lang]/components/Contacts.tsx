@@ -231,7 +231,7 @@ export default function Contacts({ data }: ContactsProps) {
           </div>
         </div>
       </div>
-      <div>
+      <div className="pt-14 md:pt-0">
         <form
           className="flex flex-col h-full p-4 space-y-3 border border-black"
           onSubmit={(e) => {
