@@ -81,24 +81,23 @@ export default function ClientSections({ data }: ClientSectionsProps) {
   });
 
   const handleSwitch = () => {
-    setIsVisible(false); // Trigger fade out
-
     const index = sortedCompanies.indexOf(currentCompany);
     const nextCompany = sortedCompanies[index + 1] || sortedCompanies[0];
-    const url = nextCompany.toLowerCase();
 
-    setCurrentCompany(url);
+    setCurrentCompany(nextCompany.toLowerCase());
   };
 
   useEffect(() => {
     if (!currentCompany) {
-      const url = sortedCompanies[0].toLowerCase();
-      setCurrentCompany(url);
+      setCurrentCompany(sortedCompanies[0].toLowerCase());
     }
   }, []);
 
+  // every time currentCompany changes fade in
   useEffect(() => {
-    setIsVisible(true); // Trigger fade in after URL change
+    if (currentCompany) {
+      setIsVisible(true);
+    }
   }, [currentCompany]);
 
   return (
@@ -163,7 +162,10 @@ export default function ClientSections({ data }: ClientSectionsProps) {
                 <EmblaCarousel
                   options={OPTIONS}
                   slides={filteredData}
-                  handArraySwitch={handleSwitch}
+                  handArraySwitch={() => {
+                    setIsVisible(false);
+                    handleSwitch();
+                  }}
                 />
               </motion.div>
             )}
