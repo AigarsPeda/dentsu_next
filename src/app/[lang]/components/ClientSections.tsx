@@ -122,7 +122,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
 
   return (
     <div className="container mx-auto">
-      <h2 className="text-xl font-normal text-center md:text-3xl">
+      <h2 className="pb-2 text-xl font-normal text-center md:text-3xl">
         {data.title}
       </h2>
       <div className="relative min-h-[5.7rem] md:min-h-[10rem] flex justify-center items-center">
