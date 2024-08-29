@@ -173,10 +173,9 @@
 
 @media (max-width: 480px) {
   .embla {
-    /* --slide-size: 70%; */
-    --slide-size: 30%;
-    --slide-spacing: 2rem;
-    --slide-height: 4rem;
+    --slide-size: auto;
+    --slide-spacing: 3rem;
+    --slide-height: 4.3rem;
   }
 }
 
@@ -216,7 +215,7 @@
 .embla__buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.6rem;
+  /* gap: 0.6rem; */
   align-items: center;
 }
 .embla__button {
