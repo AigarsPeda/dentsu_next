@@ -207,20 +207,20 @@ export default function Contacts({ data }: ContactsProps) {
 
   return (
     <div className="container flex flex-col-reverse grid-cols-1 gap-10 mx-auto md:px-16 md:grid md:grid-cols-2 md:py-14">
-      <div>
-        {/* <div className="h-full"> */}
-        <p className="pb-10 text-sm text-left">{data.title}</p>
-        <MapProvider>
-          <MapComponent
-            address={data.address}
-            navigationAddress={data.navigationAddress}
-            wazeIcon={getStrapiMedia(data.wazeIcon.data.attributes.url) ?? ""}
-            googleIcon={
-              getStrapiMedia(data.googleIcon.data.attributes.url) ?? ""
-            }
-          />
-        </MapProvider>
-        {/* </div> */}
+      <div className="flex flex-col justify-between">
+        <div>
+          <p className="pb-8 text-sm text-left">{data.title}</p>
+          <MapProvider>
+            <MapComponent
+              address={data.address}
+              navigationAddress={data.navigationAddress}
+              wazeIcon={getStrapiMedia(data.wazeIcon.data.attributes.url) ?? ""}
+              googleIcon={
+                getStrapiMedia(data.googleIcon.data.attributes.url) ?? ""
+              }
+            />
+          </MapProvider>
+        </div>
 
         <div className="flex items-end pb-10 mt-4 md:pb-0">
           <div>

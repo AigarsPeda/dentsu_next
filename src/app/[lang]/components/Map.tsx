@@ -11,7 +11,8 @@ interface GoogleMapProps {
 // Map's styling
 export const defaultMapContainerStyle = {
   width: "100%",
-  height: "55vh",
+  height: "53vh",
+  // height: "100%",
 };
 
 const defaultMapCenter = {
