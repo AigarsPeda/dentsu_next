@@ -80,6 +80,7 @@ export default function Navbar({
           <div className="flex items-center justify-center ml-6 space-x-3">
             {availableLocales.map((locale) => (
               <Link
+                scroll={false}
                 key={locale.id}
                 locale={locale.code}
                 href={getCurrentLocaleAndReplace(path, locale.code)}
@@ -174,6 +175,7 @@ export default function Navbar({
               <div className="flex flex-col items-center justify-center gap-6 mt-6">
                 {availableLocales.map((locale) => (
                   <Link
+                    scroll={false}
                     key={locale.id}
                     locale={locale.code}
                     href={getCurrentLocaleAndReplace(path, locale.code)}
