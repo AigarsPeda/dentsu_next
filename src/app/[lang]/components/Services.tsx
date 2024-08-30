@@ -10,7 +10,7 @@ const VARIANTS: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.7, ease: "easeOut" },
   },
 };
 
@@ -111,7 +111,7 @@ export const DivWithImage = ({
 }) => {
   const controls = useAnimation();
   const { ref, inView } = useInView({
-    threshold: 0.1, // Trigger animation when 10% of the component is visible
+    threshold: 0.3, // Trigger animation when 10% of the component is visible
     triggerOnce: true, // Only trigger once
   });
 
