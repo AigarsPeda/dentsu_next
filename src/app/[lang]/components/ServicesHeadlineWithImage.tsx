@@ -136,7 +136,7 @@ export default function ServicesHeadlineWithImage({
               <button
                 type="button"
                 onClick={scrollToNextSection}
-                className="items-center justify-center hidden w-full md:flex md:mt-14 animate-bounce"
+                className="flex items-center justify-center w-full md:flex md:mt-14 animate-bounce"
                 aria-label="Scroll to next section"
               >
                 <ArrowIcon className="w-12 h-12 fill-black " />

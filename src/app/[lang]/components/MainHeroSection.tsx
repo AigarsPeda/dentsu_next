@@ -119,7 +119,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
         <button
           type="button"
           onClick={scrollToNextSection}
-          className="absolute hidden transform bottom-10 z-[99] animate-bounce md:block"
+          className="absolute transform bottom-10 z-[99] animate-bounce"
         >
           <ArrowIcon className="w-12 h-12 fill-gray-50" />
         </button>
@@ -137,7 +137,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
       <button
         type="button"
         onClick={scrollToNextSection}
-        className="absolute hidden transform bottom-10 animate-bounce md:block"
+        className="absolute transform bottom-10 animate-bounce"
       >
         <ArrowIcon className="w-12 h-12 fill-gray-50" />
       </button>
