@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { animateScroll as scroll } from "react-scroll";
 import ArrowIcon from "src/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
 
@@ -43,6 +44,17 @@ export default function ServicesHeadlineWithImage({
   const contentRef = useRef<HTMLDivElement>(null);
   const imgUrl = getStrapiMedia(data.media.data[0]?.attributes.url) ?? "";
 
+  const scrollToNextSection = () => {
+    const element = divRef.current;
+    const elementHeight = element?.clientHeight ?? 0;
+
+    scroll.scrollMore(elementHeight, {
+      duration: 500,
+      smooth: true,
+      offset: -100,
+    });
+  };
+
   useEffect(() => {
     if (!data.isParallax || typeof window === "undefined") {
       return;
@@ -66,7 +78,7 @@ export default function ServicesHeadlineWithImage({
   }, [data.isParallax]);
 
   return (
-    <div className="relative -z-10">
+    <div ref={divRef} className="relative overflow-hidden">
       <div className="relative flex items-center justify-center md:h-[92vh] h-[80vh]">
         <Image
           fill
@@ -80,46 +92,24 @@ export default function ServicesHeadlineWithImage({
         />
         <div
           ref={contentRef}
-          className="absolute bottom-0 w-full h-full grid-cols-2 md:inset-0 md:grid"
+          className="absolute bottom-0 z-10 w-full h-full grid-cols-2 md:inset-0 md:grid"
         >
           <div className="flex items-end w-full h-full col-span-1 col-end-3 start-1">
-            <div className="bg-white max-w-[35rem] pb-5">
+            <div className="bg-white max-w-[35rem] pb-14">
               <h3 className="p-10 font-normal text-black md:p-14">
                 {data.title}
               </h3>
-              <div className="items-center justify-center hidden w-full md:flex md:mt-14">
-                <ArrowIcon className="w-8 h-8 fill-black " />
-              </div>
+              <button
+                type="button"
+                onClick={scrollToNextSection}
+                className="items-center justify-center hidden w-full md:flex md:mt-14 animate-bounce"
+              >
+                <ArrowIcon className="w-12 h-12 fill-black " />
+              </button>
             </div>
           </div>
         </div>
       </div>
-      {/* <div
-        ref={divRef}
-        className={classNames(
-          data.isParallax ? "md:bg-fixed" : "",
-          "object-cover w-full  bg-gray-300 bg-cover bg-center md:aspect-[16/6] aspect-[1/1.2]"
-        )}
-        style={{
-          backgroundImage: `url(${imgUrl})`,
-        }}
-      >
-        <div
-          ref={contentRef}
-          className="inset-0 w-full h-full grid-cols-2 md:grid md:absolute"
-        >
-          <div className="flex items-end w-full h-full col-span-1 col-end-3 start-1">
-            <div className="bg-white max-w-[35rem]">
-              <h3 className="p-10 font-normal text-black md:p-12">
-                {data.title}
-              </h3>
-              <div className="items-center justify-center hidden w-full md:flex md:mt-14">
-                <ArrowIcon className="w-8 h-8 fill-black " />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 }

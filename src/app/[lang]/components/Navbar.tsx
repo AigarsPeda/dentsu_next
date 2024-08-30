@@ -63,7 +63,7 @@ export default function Navbar({
   };
 
   return (
-    <div className="sticky top-0 z-30 py-4 bg-dentsu-primary">
+    <div className="sticky top-0 z-[999] py-4 bg-dentsu-primary">
       <div className="container flex items-center justify-center mx-auto lg:justify-between h-9 md:h-14">
         <div>
           <Logo href={`/${urlLocale}`} src={logoUrl}>

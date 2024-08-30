@@ -13,7 +13,7 @@ interface InfoBlockProps {
 
 export default function InfoBlock({ data }: InfoBlockProps) {
   return (
-    <div className="container mx-auto md:py-20 py-14">
+    <section className="container mx-auto md:py-20 py-14">
       {data.title && data.title.length > 0 && (
         <h2
           className={classNames(
@@ -39,6 +39,6 @@ export default function InfoBlock({ data }: InfoBlockProps) {
         )}
         {data.description_3 && <p>{data.description_3}</p>}
       </div>
-    </div>
+    </section>
   );
 }

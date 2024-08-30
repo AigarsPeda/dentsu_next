@@ -1,8 +1,10 @@
+"use client";
 import ArrowIcon from "@/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import isVideoUrl from "@/app/[lang]/utils/isVideoUrl";
 import dynamic from "next/dynamic";
-import type { FC } from "react";
+import { useRef, type FC } from "react";
+import { animateScroll as scroll } from "react-scroll";
 
 const DynamicImage = dynamic(() => import("next/image"), { ssr: false });
 
@@ -31,6 +33,7 @@ interface MainHeroSectionProps {
 }
 
 export default function MainHeroSection({ data }: MainHeroSectionProps) {
+  const divRef = useRef<HTMLDivElement>(null);
   const posterUrl = getStrapiMedia(data.poster.data.attributes?.url);
   const imgUrl = getStrapiMedia(data.picture.data?.[0]?.attributes.url);
 
@@ -79,9 +82,23 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
     return /\.(mp4)$/.test(url) ? "video/mp4" : "";
   };
 
+  const scrollToNextSection = () => {
+    const element = divRef.current;
+    const elementHeight = element?.clientHeight ?? 0;
+
+    scroll.scrollMore(elementHeight, {
+      duration: 500,
+      smooth: true,
+      offset: -100,
+    });
+  };
+
   if (isVideoUrl(imgUrl) && imgUrl) {
     return (
-      <div className="relative flex items-center justify-center md:h-[92vh] h-[80vh]">
+      <div
+        ref={divRef}
+        className="relative flex items-center justify-center md:h-[92vh] h-[80vh]"
+      >
         <video
           loop
           muted
@@ -99,22 +116,31 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           className="block object-cover w-full h-full md:hidden"
         />
         <MainHeadLine title={data.title} />
-        <div className="absolute hidden transform bottom-10 animate-bounce md:block">
+        <button
+          type="button"
+          onClick={scrollToNextSection}
+          className="absolute hidden transform bottom-10 z-[99] animate-bounce md:block"
+        >
           <ArrowIcon className="w-12 h-12 fill-gray-50" />
-        </div>
+        </button>
       </div>
     );
   }
 
   return (
     <section
+      ref={divRef}
       className="relative flex items-center justify-center w-full aspect-[1/1.5] md:aspect-[16/9] bg-cover bg-center"
       style={{ backgroundImage: `url(${imgUrl ?? posterUrl ?? ""})` }}
     >
       <MainHeadLine title={data.title} />
-      <div className="absolute hidden transform bottom-10 animate-bounce md:block">
+      <button
+        type="button"
+        onClick={scrollToNextSection}
+        className="absolute hidden transform bottom-10 animate-bounce md:block"
+      >
         <ArrowIcon className="w-12 h-12 fill-gray-50" />
-      </div>
+      </button>
     </section>
   );
 }
