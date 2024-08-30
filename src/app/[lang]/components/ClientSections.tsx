@@ -109,7 +109,6 @@ export default function ClientSections({ data }: ClientSectionsProps) {
       >
         {data.Department?.map((item) => {
           const imgSrc = getStrapiMedia(item.media.data.attributes.url);
-          const isLink = item.url ? true : false;
 
           return (
             <div

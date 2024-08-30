@@ -279,7 +279,7 @@ export default function Contacts({ data }: ContactsProps) {
                 >
                   {field.fieldName} {isRequired && "*"}
                   <textarea
-                    className="h-40 bg-gray-200 py-1.5 px-3"
+                    className="h-32 bg-gray-200 py-1.5 px-3"
                     {...register(field.fieldName, {
                       ...(isRequired && { required: "This field is required" }),
                     })}

@@ -145,7 +145,7 @@ export default async function RootLayout({
 
   return (
     <html className={`${halcom.className}`} lang={params.lang}>
-      <body className="text-white">
+      <body className="min-h-screen text-white">
         <Navbar
           links={navbar.links}
           logoUrl={navbarLogoUrl}
@@ -153,9 +153,7 @@ export default async function RootLayout({
           logoText={navbar.navbarLogo.logoText}
         />
 
-        <main className="relative min-h-screen overflow-hidden text-black">
-          {children}
-        </main>
+        <main className="relative overflow-hidden text-black">{children}</main>
 
         <Banner data={notificationBanner} />
         <Footer footer={footer} />
