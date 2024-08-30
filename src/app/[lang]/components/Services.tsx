@@ -1,11 +1,23 @@
 "use client";
 import ServiceDisclosure from "@/app/[lang]/components/Disclosure";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
-import { useEffect, useState } from "react";
+import { motion, useAnimation, Variants } from "framer-motion";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+
+const VARIANTS: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
 
 interface ServicesProps {
   data: {
     id: number;
+    animate: boolean;
     isDarkOverlay: boolean;
     pictureOnRight: boolean;
     media: {
@@ -65,6 +77,7 @@ export default function Services({ data }: ServicesProps) {
       <DivWithImage
         imgUrl={imgUrl}
         logoUrl={logoUrl}
+        isAnimateOn={data.animate}
         isDarkOverlay={data.isDarkOverlay}
         pictureOnRight={data.pictureOnRight}
       >
@@ -73,6 +86,7 @@ export default function Services({ data }: ServicesProps) {
         </div>
         <ServiceDisclosure
           data={data.services}
+          isAnimateOn={data.animate}
           fontColor={data.fontColor?.fontColor}
         />
       </DivWithImage>
@@ -84,16 +98,28 @@ export const DivWithImage = ({
   imgUrl,
   logoUrl,
   children,
+  isAnimateOn,
   isDarkOverlay,
   pictureOnRight,
 }: {
   imgUrl: string;
   logoUrl: string;
+  isAnimateOn: boolean;
   isDarkOverlay: boolean;
   pictureOnRight: boolean;
   children?: React.ReactNode;
 }) => {
-  const [isMobile, setIsMobile] = useState(false);
+  const controls = useAnimation();
+  const { ref, inView } = useInView({
+    threshold: 0.1, // Trigger animation when 10% of the component is visible
+    triggerOnce: true, // Only trigger once
+  });
+
+  useEffect(() => {
+    if (inView && isAnimateOn) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
 
   const createBackgroundImage = (url: string) => {
     const baseStyle = {
@@ -106,22 +132,6 @@ export const DivWithImage = ({
     return baseStyle;
   };
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    setIsMobile(window.innerWidth < 768);
-
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <>
       <div
@@ -133,13 +143,19 @@ export const DivWithImage = ({
         }}
       >
         <div className="container relative flex items-center justify-center w-full h-full">
-          <div className="flex items-center justify-center">
+          <motion.div
+            ref={ref}
+            animate={controls}
+            variants={VARIANTS}
+            initial={isAnimateOn ? "hidden" : "visible"}
+            className="flex items-center justify-center"
+          >
             <img
               src={logoUrl}
               alt="our client logo"
               className="object-contain h-12 max-h-6 lg:h-16"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
       <div
