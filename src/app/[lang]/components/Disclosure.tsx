@@ -35,11 +35,12 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
     useInView({ threshold: 0.05, triggerOnce: true })
   );
 
-  // Trigger animations for each item individually
   useEffect(() => {
     refsArray.forEach(({ inView }, index) => {
       if (inView && isAnimateOn) {
         controlsArray[index].start("visible");
+      } else {
+        controlsArray[index].start("hidden");
       }
     });
   }, [refsArray.map((ref) => ref.inView), controlsArray, isAnimateOn]);
@@ -75,8 +76,8 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
           key={service.id}
           ref={refsArray[index].ref}
           animate={controlsArray[index]}
+          variants={itemVariants(index)}
           initial={isAnimateOn ? "hidden" : "visible"}
-          variants={itemVariants(index)} // Pass index to calculate delay
           className={classNames("md:p-4 px-2 py-3 border-b group", {
             "border-gray-50": fontColor === "light",
             "border-black": fontColor === "dark" || !fontColor,

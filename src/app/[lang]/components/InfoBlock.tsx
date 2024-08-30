@@ -19,7 +19,7 @@ const variants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
@@ -33,8 +33,10 @@ export default function InfoBlock({ data }: InfoBlockProps) {
   useEffect(() => {
     if (inView && data.animate) {
       controls.start("visible");
+    } else if (!inView && data.animate) {
+      controls.start("hidden");
     }
-  }, [controls, inView]);
+  }, [inView, data.animate, controls]);
 
   return (
     <motion.section

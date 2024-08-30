@@ -132,8 +132,10 @@ export const DivWithImage = ({
   useEffect(() => {
     if (inView && isAnimateOn) {
       controls.start("visible");
+    } else if (!inView && isAnimateOn) {
+      controls.start("hidden");
     }
-  }, [controls, inView]);
+  }, [inView, isAnimateOn, controls]);
 
   const createBackgroundImage = (url: string) => {
     const baseStyle = {

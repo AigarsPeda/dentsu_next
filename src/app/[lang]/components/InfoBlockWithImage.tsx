@@ -62,15 +62,13 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
   useEffect(() => {
     if (inView && data.animation) {
       controls.start("visible");
+    } else if (!inView && data.animation) {
+      controls.start("hidden");
     }
-  }, [controls, inView]);
+  }, [inView, data.animation, controls]);
 
   return (
     <section
-      // ref={ref}
-      // initial="hidden"
-      // animate={controls}
-      // variants={variants}
       className={classNames(
         data.pictureOnRight ? "justify-end" : "justify-start",
         "relative flex flex-col w-full md:flex-row md:pb-14"
