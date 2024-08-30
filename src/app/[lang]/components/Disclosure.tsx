@@ -18,15 +18,18 @@ interface ServiceDisclosureProps {
     description: string;
   }[];
   isAnimateOn?: boolean;
+  openIndex: number | null;
+  togglePanel: (index: number) => void;
   fontColor: "light" | "dark" | undefined;
 }
 
 const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
   data,
+  openIndex,
   fontColor,
+  togglePanel,
   isAnimateOn,
 }) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const controlsArray = data.map(() => useAnimation());
   const refsArray = data.map(() =>
     useInView({ threshold: 0.05, triggerOnce: true })
@@ -40,14 +43,6 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
       }
     });
   }, [refsArray.map((ref) => ref.inView), controlsArray, isAnimateOn]);
-
-  const togglePanel = (index: number) => {
-    if (openIndex === index) {
-      setOpenIndex(null);
-    } else {
-      setOpenIndex(index);
-    }
-  };
 
   const truncateText = (text: string, limit: number) => {
     if (text.length > limit) {

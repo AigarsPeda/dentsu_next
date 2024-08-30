@@ -2,7 +2,7 @@
 import ServiceDisclosure from "@/app/[lang]/components/Disclosure";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { motion, useAnimation, Variants } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 const VARIANTS: Variants = {
@@ -66,11 +66,20 @@ interface ServicesProps {
 }
 
 export default function Services({ data }: ServicesProps) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const logoUrl = getStrapiMedia(data.logo.data.attributes.url) ?? "";
   const imgUrl = getStrapiMedia(data.media.data[0]?.attributes.url) ?? "";
   const mobLogoUrl = data.mobLogo.data
     ? getStrapiMedia(data.mobLogo.data.attributes.url)
     : undefined;
+
+  const togglePanel = (index: number) => {
+    if (openIndex === index) {
+      setOpenIndex(null);
+    } else {
+      setOpenIndex(index);
+    }
+  };
 
   return (
     <div className="grid grid-cols-1 mx-auto bg-white md:grid-cols-2">
@@ -78,6 +87,7 @@ export default function Services({ data }: ServicesProps) {
         imgUrl={imgUrl}
         logoUrl={logoUrl}
         isAnimateOn={data.animate}
+        isMenuOpen={openIndex !== null}
         isDarkOverlay={data.isDarkOverlay}
         pictureOnRight={data.pictureOnRight}
       >
@@ -85,7 +95,9 @@ export default function Services({ data }: ServicesProps) {
           <DisplayLogo logoUrl={mobLogoUrl ?? logoUrl} />
         </div>
         <ServiceDisclosure
+          openIndex={openIndex}
           data={data.services}
+          togglePanel={togglePanel}
           isAnimateOn={data.animate}
           fontColor={data.fontColor?.fontColor}
         />
@@ -98,12 +110,14 @@ export const DivWithImage = ({
   imgUrl,
   logoUrl,
   children,
+  isMenuOpen,
   isAnimateOn,
   isDarkOverlay,
   pictureOnRight,
 }: {
   imgUrl: string;
   logoUrl: string;
+  isMenuOpen: boolean;
   isAnimateOn: boolean;
   isDarkOverlay: boolean;
   pictureOnRight: boolean;
@@ -135,7 +149,7 @@ export const DivWithImage = ({
   return (
     <>
       <div
-        className="relative items-center justify-center hidden bg-center md:bg-cover md:flex"
+        className="relative items-center justify-center hidden overflow-hidden bg-center md:bg-cover md:flex"
         style={{
           ...(pictureOnRight && {
             ...createBackgroundImage(imgUrl),
@@ -159,14 +173,13 @@ export const DivWithImage = ({
         </div>
       </div>
       <div
-        className=" md:flex"
+        className="transition-all duration-300 md:flex"
         style={{
+          backgroundAttachment: "cover",
+          backgroundSize: isMenuOpen ? "110% 110%" : "100% 100%",
           ...(!pictureOnRight && {
             ...createBackgroundImage(imgUrl),
           }),
-          // backgroundAttachment: isMobile ? "fixed" : "cover",
-          backgroundAttachment: "cover",
-          // WebkitBackgroundSize: "2650px 1440px;",
         }}
       >
         {children}
