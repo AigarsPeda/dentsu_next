@@ -31,9 +31,17 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
   const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
 
   useLayoutEffect(() => {
-    if (divRef.current && window) {
-      divRef.current.style.width = `${window.innerWidth}px`;
-    }
+    // if (divRef.current && window) {
+    //   divRef.current.style.width = `${window.innerWidth}px`;
+    // }
+
+    const handleResize = () => {
+      if (divRef.current && window) {
+        divRef.current.style.width = `${window.innerWidth}px`;
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
   }, [data.pictureOnRight]);
 
   return (
