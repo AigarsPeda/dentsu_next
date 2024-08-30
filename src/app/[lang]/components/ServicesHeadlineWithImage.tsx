@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import ArrowIcon from "src/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
@@ -42,6 +42,8 @@ export default function ServicesHeadlineWithImage({
 }: ServicesHeadlineWithImageProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
   const imgUrl = getStrapiMedia(data.media.data[0]?.attributes.url) ?? "";
 
   const scrollToNextSection = () => {
@@ -55,39 +57,71 @@ export default function ServicesHeadlineWithImage({
     });
   };
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!divRef.current) return;
+
+    const rect = divRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    setMousePos({
+      x: (x / rect.width - 0.5) * 2, // Normalize to range [-1, 1]
+      y: (y / rect.height - 0.5) * 2, // Normalize to range [-1, 1]
+    });
+  };
+
   useEffect(() => {
     if (!data.isParallax || typeof window === "undefined") {
       return;
     }
 
-    window.addEventListener("scroll", () => {
+    const handleScroll = () => {
       const scrollY = window.scrollY;
 
       if (contentRef.current) {
-        contentRef.current.style.transform = `translateY(${scrollY * 0.5}px)`;
+        contentRef.current.style.transform = `translateY(${scrollY * 0.7}px)`;
       }
 
       if (divRef.current) {
-        divRef.current.style.backgroundPositionY = `-${scrollY * 0.02}px`;
+        divRef.current.style.backgroundPositionY = `-${scrollY * 0.04}px`;
       }
-    });
+    };
+
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", () => {});
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [data.isParallax]);
 
   return (
-    <div ref={divRef} className="relative overflow-hidden">
+    <div
+      ref={divRef}
+      className="relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="relative flex items-center justify-center md:h-[92vh] h-[80vh]">
         <Image
           fill
-          alt=""
+          alt={
+            data.media.data[0]?.attributes.alternativeText || "Service Image"
+          }
           src={imgUrl}
           priority
           loader={loader}
-          style={{ objectFit: "cover", width: "100%", height: "100%" }}
-          blurDataURL="data:image/bmp;base64,Qk32BAAAAAAAADYAAAAoAAAACAAAAAgAAAABABgAAAAAAMAAAAATCwAAEwsAAAAAAAAAAAAAr5+jpJaUi4JxfHtehIdxioyAenZtUDcixbq4urGrpJ+Nm5uCpaiVra2inpiOeWdR29PO0cvCv72qu7ylx8m5z87EwLqvn4946OPc4t3S1tTB1tfD4uTX6Ofg2tTKva+Z7Obf6eTa5ePT6evb9Pbt9/fz6uXe0si16eDb6uPa7uvd9vfr/v/8/v7/8u/s4NnK4tfV597Y8u7j/f31////////9PPz6OPX39PR5dvW8+7l///4////////9fP16ubb"
+          style={{
+            objectFit: "cover",
+            width: "100%",
+            height: "100%",
+            transform: isHovered
+              ? `translate(${mousePos.x * 10}px, ${mousePos.y * 10}px)`
+              : "translate(0, 0)", // Adjust the multiplier for more or less parallax effect
+            transition: "transform 0.1s ease-out",
+            scale: 1.1,
+          }}
+          blurDataURL="data:image/bmp;base64,Qk32BAAAAAAAADYAAAAoAAAACAAAAAgAAAABABgAAAAAAMAAAAATCwAAEwsAAAAAAAAAAAAAr5+jpJaUi4JxfHtehIdxioyAenZtUDcixbq4urGrpJ+Nm5uCpaiVra2inpiOeWdR29PO0cvCv72qu7ylx8m5z87EwLqvn494"
           placeholder="blur"
         />
         <div
@@ -103,6 +137,7 @@ export default function ServicesHeadlineWithImage({
                 type="button"
                 onClick={scrollToNextSection}
                 className="items-center justify-center hidden w-full md:flex md:mt-14 animate-bounce"
+                aria-label="Scroll to next section"
               >
                 <ArrowIcon className="w-12 h-12 fill-black " />
               </button>
