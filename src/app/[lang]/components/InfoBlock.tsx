@@ -26,7 +26,7 @@ const variants: Variants = {
 export default function InfoBlock({ data }: InfoBlockProps) {
   const controls = useAnimation();
   const { ref, inView } = useInView({
-    threshold: 0.1, // Trigger animation when 10% of the component is visible
+    threshold: 0.3, // Trigger animation when 10% of the component is visible
     triggerOnce: true, // Only trigger once
   });
 
