@@ -3,8 +3,8 @@ import classNames from "classnames";
 import type { EmblaOptionsType } from "embla-carousel";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
+import EmblaCarousel from "src/app/[lang]/components/EmblaCarousel/EmblaCarousel";
 import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
-import EmblaCarousel from "./EmblaCarousel/EmblaCarousel";
 
 // https://www.embla-carousel.com/api/events/
 // https://www.embla-carousel.com/examples/predefined/
@@ -53,20 +53,23 @@ export default function ClientSections({ data }: ClientSectionsProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [currentCompany, setCurrentCompany] = useState("");
 
+  // create obj with key as company name and value as array of features
+  const featuresByCompany = useMemo(() => {
+    return data.feature.reduce((acc, item) => {
+      const company = item.participatingCompany?.toLowerCase();
+      if (company) {
+        if (!acc[company]) {
+          acc[company] = [];
+        }
+        acc[company].push(item);
+      }
+      return acc;
+    }, {} as Record<string, FeaturesType[]>);
+  }, [data.feature]);
+
   const filteredData = useMemo(() => {
     setIsVisible(false); // Trigger fade out
-    const filterData = data.feature.filter((item) => {
-      return item.participatingCompany
-        ?.toLowerCase()
-        .includes(currentCompany?.toLowerCase() || "");
-    });
-
-    // if filterData is less then 7
-    if (filterData.length <= 7) {
-      return filterData.concat(filterData);
-    }
-
-    return filterData;
+    return featuresByCompany[currentCompany] || [];
   }, [currentCompany]);
 
   const uniqueCompanies = data.feature.reduce((acc, item) => {
@@ -95,10 +98,10 @@ export default function ClientSections({ data }: ClientSectionsProps) {
 
   // every time currentCompany changes fade in
   useEffect(() => {
-    if (currentCompany) {
+    if (currentCompany && !isVisible) {
       setIsVisible(true);
     }
-  }, [currentCompany]);
+  }, [currentCompany && !isVisible]);
 
   return (
     <>
@@ -120,6 +123,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
             >
               {imgSrc ? (
                 <button
+                  type="button"
                   onClick={() => {
                     setCurrentCompany(item.url);
                   }}
@@ -161,10 +165,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
                 <EmblaCarousel
                   options={OPTIONS}
                   slides={filteredData}
-                  handArraySwitch={() => {
-                    setIsVisible(false);
-                    handleSwitch();
-                  }}
+                  handArraySwitch={handleSwitch}
                 />
               </motion.div>
             )}

@@ -1,4 +1,5 @@
 "use client";
+import { m } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 interface GoogleMapProps {
@@ -11,7 +12,8 @@ interface GoogleMapProps {
 // Map's styling
 export const defaultMapContainerStyle = {
   width: "100%",
-  height: "53vh",
+  height: "48vh",
+  maxHeight: "600px",
   // height: "100%",
 };
 
