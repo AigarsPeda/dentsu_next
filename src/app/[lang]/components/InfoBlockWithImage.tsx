@@ -1,7 +1,18 @@
 "use client";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import classNames from "classnames";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+const variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
 
 type PictureType = {
   id: string;
@@ -20,6 +31,7 @@ type PictureDataType = {
 
 interface InfoBlockWithImageProps {
   data: {
+    animation: boolean;
     description: string;
     pictureOnRight: boolean;
     picture: PictureDataType;
@@ -29,6 +41,11 @@ interface InfoBlockWithImageProps {
 export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const imgUrl = getStrapiMedia(data.picture.data[0]?.attributes.url);
+  const controls = useAnimation();
+  const { ref, inView } = useInView({
+    threshold: 0.1, // Trigger animation when 10% of the component is visible
+    triggerOnce: true, // Only trigger once
+  });
 
   useLayoutEffect(() => {
     const handleResize = () => {
@@ -42,15 +59,31 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
     window.addEventListener("resize", handleResize);
   }, [data.pictureOnRight]);
 
+  useEffect(() => {
+    if (inView && data.animation) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
   return (
-    <div
+    <section
+      // ref={ref}
+      // initial="hidden"
+      // animate={controls}
+      // variants={variants}
       className={classNames(
         data.pictureOnRight ? "justify-end" : "justify-start",
         "relative flex flex-col w-full md:flex-row md:pb-14"
       )}
     >
       {imgUrl && !data.pictureOnRight && (
-        <div className={classNames("md:w-[60%]")}>
+        <motion.div
+          ref={ref}
+          animate={controls}
+          variants={variants}
+          className={classNames("md:w-[60%]")}
+          initial={data.animation ? "hidden" : "visible"}
+        >
           <img
             src={imgUrl}
             alt={"Image"}
@@ -58,7 +91,7 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
               "object-cover w-full h-full top-0 left-0 bg-gray-300 md:aspect-[16/9] aspect-[4/3] max-h-[45rem]"
             )}
           />
-        </div>
+        </motion.div>
       )}
 
       <div
@@ -90,7 +123,13 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
         </div>
       </div>
       {imgUrl && data.pictureOnRight && (
-        <div className="md:w-[60%]">
+        <motion.div
+          ref={ref}
+          animate={controls}
+          variants={variants}
+          className="md:w-[60%]"
+          initial={data.animation ? "hidden" : "visible"}
+        >
           <img
             src={imgUrl}
             alt={"Image"}
@@ -98,9 +137,9 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
               "object-cover w-full h-full top-0 left-0 bg-gray-300 md:aspect-[16/9] aspect-[4/3] max-h-[45rem]"
             )}
           />
-        </div>
+        </motion.div>
       )}
-    </div>
+    </section>
   );
 }
 

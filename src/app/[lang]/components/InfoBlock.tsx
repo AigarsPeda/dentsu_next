@@ -1,6 +1,6 @@
 "use client";
 import classNames from "@/app/[lang]/utils/classNames";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -14,7 +14,7 @@ interface InfoBlockProps {
   };
 }
 
-const variants = {
+const variants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -39,10 +39,10 @@ export default function InfoBlock({ data }: InfoBlockProps) {
   return (
     <motion.section
       ref={ref}
-      initial="hidden"
       animate={controls}
       variants={variants}
       className="container mx-auto md:py-20 py-14"
+      initial={data.animate ? "hidden" : "visible"}
     >
       {data.title && data.title.length > 0 && (
         <motion.h2
