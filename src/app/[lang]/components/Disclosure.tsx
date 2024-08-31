@@ -36,6 +36,13 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
   );
 
   useEffect(() => {
+    const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+    if (isMobile) {
+      // controls.set("visible");
+      controlsArray.forEach((control) => control.start("visible"));
+      return;
+    }
+
     refsArray.forEach(({ inView }, index) => {
       if (inView && isAnimateOn) {
         controlsArray[index].start("visible");
@@ -77,7 +84,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
           ref={refsArray[index].ref}
           animate={controlsArray[index]}
           variants={itemVariants(index)}
-          initial={isAnimateOn ? "hidden" : "visible"}
+          initial="hidden"
           className={classNames("md:p-4 px-2 py-3 border-b group", {
             "border-gray-50": fontColor === "light",
             "border-black": fontColor === "dark" || !fontColor,
