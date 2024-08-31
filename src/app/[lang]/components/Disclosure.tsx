@@ -36,8 +36,8 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
   );
 
   useEffect(() => {
-    const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
-    if (isMobile && !isAnimateOn) {
+    // const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+    if (!isAnimateOn) {
       controlsArray.forEach((control) => control.set("visible"));
       return;
     }
