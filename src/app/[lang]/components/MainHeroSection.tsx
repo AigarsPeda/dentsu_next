@@ -2,11 +2,10 @@
 import ArrowIcon from "@/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import isVideoUrl from "@/app/[lang]/utils/isVideoUrl";
-import dynamic from "next/dynamic";
 import { useRef, type FC } from "react";
 import { animateScroll as scroll } from "react-scroll";
 
-const DynamicImage = dynamic(() => import("next/image"), { ssr: false });
+// const DynamicImage = dynamic(() => import("next/image"), { ssr: false });
 
 type PictureType = {
   id: string;

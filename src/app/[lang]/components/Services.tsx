@@ -130,11 +130,11 @@ export const DivWithImage = ({
   });
 
   useEffect(() => {
-    const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
-    if (isMobile) {
-      controls.set("visible");
-      return;
-    }
+    // const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+    // if (isMobile) {
+    //   controls.set("visible");
+    //   return;
+    // }
 
     if (inView && isAnimateOn) {
       controls.start("visible");

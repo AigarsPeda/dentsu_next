@@ -31,11 +31,11 @@ export default function InfoBlock({ data }: InfoBlockProps) {
   });
 
   useEffect(() => {
-    const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
-    if (isMobile) {
-      controls.set("visible");
-      return;
-    }
+    // const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+    // if (isMobile) {
+    //   controls.set("visible");
+    //   return;
+    // }
 
     if (inView && data.animate) {
       controls.start("visible");
