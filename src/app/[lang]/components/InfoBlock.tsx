@@ -31,6 +31,12 @@ export default function InfoBlock({ data }: InfoBlockProps) {
   });
 
   useEffect(() => {
+    const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+    if (isMobile) {
+      controls.set("visible");
+      return;
+    }
+
     if (inView && data.animate) {
       controls.start("visible");
     } else if (!inView && data.animate) {
@@ -41,10 +47,10 @@ export default function InfoBlock({ data }: InfoBlockProps) {
   return (
     <motion.section
       ref={ref}
+      initial="visible"
       animate={controls}
       variants={variants}
       className="container mx-auto md:py-20 py-14"
-      initial={data.animate ? "hidden" : "visible"}
     >
       {data.title && data.title.length > 0 && (
         <motion.h2

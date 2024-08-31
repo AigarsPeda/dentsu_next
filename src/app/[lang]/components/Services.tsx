@@ -130,6 +130,12 @@ export const DivWithImage = ({
   });
 
   useEffect(() => {
+    const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+    if (isMobile) {
+      controls.set("visible");
+      return;
+    }
+
     if (inView && isAnimateOn) {
       controls.start("visible");
     } else if (!inView && isAnimateOn) {
@@ -161,9 +167,9 @@ export const DivWithImage = ({
         <div className="container relative flex items-center justify-center w-full h-full">
           <motion.div
             ref={ref}
+            initial="visible"
             animate={controls}
             variants={VARIANTS}
-            initial={isAnimateOn ? "hidden" : "visible"}
             className="flex items-center justify-center"
           >
             <img
