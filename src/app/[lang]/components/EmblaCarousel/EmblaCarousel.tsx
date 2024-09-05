@@ -108,7 +108,7 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
           if (!autoScroll.isPlaying()) {
             autoScroll.play();
           }
-        }, 3000); // 3 seconds delay
+        }, 3000);
       });
 
     return () => {
