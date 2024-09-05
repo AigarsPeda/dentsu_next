@@ -66,7 +66,7 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
 
   useEffect(() => {
     const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
-    if (isMobile) {
+    if (isMobile || !data.animate) {
       controls.set("visible");
       return;
     }
@@ -87,7 +87,6 @@ export default function InfoBlockWithImage({ data }: InfoBlockWithImageProps) {
       )}
     >
       <motion.div
-        initial={"hidden"} // Set initial state based on screen size
         animate={controls}
         variants={variants}
         className={classNames("md:w-[60%]")}

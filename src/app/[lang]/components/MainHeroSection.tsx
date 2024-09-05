@@ -28,11 +28,15 @@ interface MainHeroSectionProps {
     poster: {
       data: PictureType;
     };
+    video: {
+      data: PictureType;
+    };
   };
 }
 
 export default function MainHeroSection({ data }: MainHeroSectionProps) {
   const divRef = useRef<HTMLDivElement>(null);
+  const videoUrl = getStrapiMedia(data.video.data?.attributes.url);
   const posterUrl = getStrapiMedia(data.poster.data.attributes?.url);
   const imgUrl = getStrapiMedia(data.picture.data?.[0]?.attributes.url);
 
@@ -92,7 +96,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
     });
   };
 
-  if (isVideoUrl(imgUrl) && imgUrl) {
+  if (isVideoUrl(videoUrl) && videoUrl) {
     return (
       <div
         ref={divRef}
@@ -107,7 +111,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           poster={posterUrl ?? ""}
           className="absolute inset-0 z-0 hidden object-cover w-full h-full md:block"
         >
-          <source src={imgUrl} type={getVideoType(imgUrl)} />
+          <source src={videoUrl} type={getVideoType(videoUrl)} />
         </video>
         <img
           alt="poster"
@@ -118,7 +122,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
         <button
           type="button"
           onClick={scrollToNextSection}
-          className="absolute transform bottom-14 z-[99] animate-bounce"
+          className="absolute transform bottom-14 z-[35] animate-bounce"
         >
           <ArrowIcon className="w-12 h-12 fill-gray-50" />
         </button>

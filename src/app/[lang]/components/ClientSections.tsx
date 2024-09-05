@@ -164,8 +164,8 @@ export default function ClientSections({ data }: ClientSectionsProps) {
               >
                 <EmblaCarousel
                   options={OPTIONS}
-                  slides={filteredData}
                   handArraySwitch={handleSwitch}
+                  slides={[...filteredData, ...filteredData]} // Duplicate to loop have infinite loop
                 />
               </motion.div>
             )}

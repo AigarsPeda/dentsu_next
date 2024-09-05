@@ -2,9 +2,7 @@
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import classNames from "classnames";
 import Link from "next/link";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef } from "react";
-// import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface FeaturesType {
   id: number;
@@ -33,20 +31,9 @@ interface LogosSectionProps {
 
 export default function LogosSection({ data }: LogosSectionProps) {
   const path = usePathname();
-  // const router = useRouter();
-
-  // const currentIndex = useRef(0);
-  // const firstRender = useRef(true);
-
   const params = useSearchParams();
   const search = params.get("search");
   const urlLocale = path.split("/")[1] || "en";
-
-  // const companyList = useMemo(() => {
-  //   return data.company.map((item) => {
-  //     return item.url;
-  //   });
-  // }, [data.company]);
 
   const isUrlMatchToSearch = (url: string | null) => {
     if (!search) {

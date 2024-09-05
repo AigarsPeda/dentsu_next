@@ -22,7 +22,7 @@ export default function SocialShare({ data }: SocialShareProps) {
   }, []);
 
   return (
-    <div className="container flex items-center py-5 mx-auto space-x-6 text-gray-700">
+    <div className="container flex items-center mx-auto space-x-6 text-gray-700 py-14">
       <p className="text-base">{data.title}</p>
 
       <div className="flex items-center space-x-3 text-gray-500">

@@ -73,23 +73,19 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
               key={newsPost.id}
               href={`/${urlLocale}/${newsPost.url}`}
               passHref
-              className="flex flex-col justify-between mt-4"
+              className="flex flex-col justify-between mt-4 group"
             >
               <div className="relative overflow-hidden md:aspect-[16/9] aspect-[4/3]">
-                {/* <img
-                  src={src}
-                  alt={thumbnail.alternativeText || "news post image"}
-                  className="object-cover w-full h-full bg-gray-300 md:aspect-[16/9] aspect-[4/3]"
-                /> */}
                 <Image
                   fill
                   alt=""
                   src={src}
                   priority
                   loader={loader}
+                  placeholder="blur"
+                  className="transition-all duration-300 group-hover:scale-105"
                   style={{ objectFit: "cover", width: "100%", height: "100%" }}
                   blurDataURL="data:image/bmp;base64,Qk32BAAAAAAAADYAAAAoAAAACAAAAAgAAAABABgAAAAAAMAAAAATCwAAEwsAAAAAAAAAAAAAr5+jpJaUi4JxfHtehIdxioyAenZtUDcixbq4urGrpJ+Nm5uCpaiVra2inpiOeWdR29PO0cvCv72qu7ylx8m5z87EwLqvn4946OPc4t3S1tTB1tfD4uTX6Ofg2tTKva+Z7Obf6eTa5ePT6evb9Pbt9/fz6uXe0si16eDb6uPa7uvd9vfr/v/8/v7/8u/s4NnK4tfV597Y8u7j/f31////////9PPz6OPX39PR5dvW8+7l///4////////9fP16ubb"
-                  placeholder="blur"
                 />
               </div>
               <div className="h-full max-h-[7.7rem]">

@@ -22,6 +22,7 @@ async function getGlobal(lang: string): Promise<any> {
     populate: [
       "metadata.shareImage",
       "favicon",
+      "navbar.locales",
       "notificationBanner.link",
       "navbar.links",
       "navbar.locales",
@@ -116,15 +117,15 @@ export default async function RootLayout({
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
 
-  const { notificationBanner, navbar, footer } = global.data.attributes;
+  const { navbar, footer } = global.data.attributes;
 
   const navbarLogoUrl = getStrapiMedia(
     navbar.navbarLogo.logoImg.data?.attributes.url
   );
 
-  const footerLogoUrl = getStrapiMedia(
-    footer.footerLogo?.logoImg?.data?.attributes.url
-  );
+  // const footerLogoUrl = getStrapiMedia(
+  //   footer.footerLogo?.logoImg?.data?.attributes.url
+  // );
 
   const localesWithUrls = navbar.locales.map((locale: StrapiLocaleType) => {
     const localeUrl = locale.img.data?.attributes.url;
@@ -144,7 +145,7 @@ export default async function RootLayout({
   });
 
   return (
-    <html className={`${halcom.className}`} lang={params.lang}>
+    <html className={`${halcom.className}`} lang={params.lang ?? "eng"}>
       <body className="text-white">
         <Navbar
           links={navbar.links}
@@ -157,7 +158,7 @@ export default async function RootLayout({
           {children}
         </main>
 
-        <Banner data={notificationBanner} />
+        {/* <Banner data={notificationBanner} /> */}
         <Footer footer={footer} />
       </body>
     </html>

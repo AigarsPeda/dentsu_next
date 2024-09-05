@@ -10,7 +10,7 @@ const VARIANTS: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
@@ -184,7 +184,7 @@ export const DivWithImage = ({
         className="transition-all duration-300 md:flex"
         style={{
           backgroundAttachment: "cover",
-          backgroundSize: isMenuOpen ? "110% 110%" : "100% 100%",
+          backgroundSize: isMenuOpen ? "105% 105%" : "100% 100%",
           ...(!pictureOnRight && {
             ...createBackgroundImage(imgUrl),
           }),

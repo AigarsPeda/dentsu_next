@@ -63,14 +63,15 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut", delay: index * 0.2 }, // Add delay based on index
+      // transition: { duration: 0.5, ease: "easeOut", delay: index * 0.2 }, // Add delay based on index
+      transition: { duration: 0.5, ease: "easeOut" },
     },
   });
 
   return (
     <div
       className={classNames(
-        "flex flex-col justify-center md:h-[55rem] min-h-[30rem] md:pl-10 px-10 py-5 w-full",
+        "flex flex-col justify-center md:min-h-[50vw] min-h-[30rem] md:pl-10 px-10 py-5 w-full",
         {
           "text-gray-50": fontColor === "light",
           "text-black": fontColor === "dark" || !fontColor,

@@ -36,7 +36,7 @@ interface ContactUsSectionProps {
 
 export default function ContactUsSection({ data }: ContactUsSectionProps) {
   return (
-    <div className="container pb-0 mx-auto py-14">
+    <div className="container mx-auto py-14">
       <div className="pb-10">
         <a href={data.redirectUrl ?? ""}>
           <h3 className="text-center">{data.title}</h3>
