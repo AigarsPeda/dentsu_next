@@ -123,7 +123,7 @@ export default function Navbar({
             leaveFrom="transform translate-y-0 md:translate-x-0 opacity-100"
             leaveTo="transform -translate-y-full md:-translate-x-full opacity-0"
           >
-            <div className="fixed inset-0 z-40 bg-dentsu-primary" />
+            <div className="fixed inset-0 z-[50] bg-dentsu-primary" />
           </TransitionChild>
           <TransitionChild
             as={Fragment}
@@ -134,7 +134,7 @@ export default function Navbar({
             leaveFrom="transform translate-y-0 md:translate-x-0 opacity-100"
             leaveTo="transform -translate-y-full md:-translate-x-full opacity-0"
           >
-            <DialogPanel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto text-center bg-dentsu-primary rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
+            <DialogPanel className="fixed inset-y-0 z-[50] w-full px-6 py-6 overflow-y-auto text-center rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
               <div className="flow-root mt-24">
                 <div className="-my-6 divide-y divide-gray-700">
                   <div className="py-6 space-y-2">
