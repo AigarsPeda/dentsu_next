@@ -123,11 +123,11 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((item) => {
+          {slides.map((item, i) => {
             const imgSrc = getStrapiMedia(item.media.data.attributes.url);
 
             return (
-              <div key={item.id} className="embla__slide">
+              <div key={`${item.id}${i}`} className="embla__slide">
                 <div className="embla__slide__number">
                   <Link
                     href={item.url ?? "/"}
