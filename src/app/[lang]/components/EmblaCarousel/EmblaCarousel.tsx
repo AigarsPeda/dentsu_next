@@ -71,7 +71,7 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
 
     autoScroll.play();
     // const arrayLength = slides.length;
-    // const timeToSwitch = arrayLength * 1000 * 2; // 2 seconds per slide ->
+    // const timeToSwitch = arrayLength * 1000 * 2; // 2 seconds per slide
     const timeToSwitch = 10 * 1000 * 2.2; // 1.2 seconds per slide
 
     timerId.current = setTimeout(() => {
