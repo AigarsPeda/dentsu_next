@@ -26,24 +26,8 @@ export default function Navbar({
   const router = useRouter();
   const path = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const closeMenu = () => {
-    setMobileMenuOpen(false);
-  };
 
   const urlLocale = path.split("/")[1] || "en";
-
-  // const switchLocale = (newLocale: string) => {
-  //   const availableLocalesCodes = availableLocales.map((locale) => locale.code);
-  //   const currentLocale = availableLocalesCodes.reduce((acc, locale) => {
-  //     if (path.includes(locale)) {
-  //       return locale;
-  //     }
-  //     return acc;
-  //   });
-
-  //   const newPath = path.replace(currentLocale, newLocale);
-  //   router.push(newPath);
-  // };
 
   const linksWithLocale = links.map((link) => ({
     ...link,
@@ -107,12 +91,28 @@ export default function Navbar({
           </div>
         </div>
       </div>
+
+      <div className="flex justify-center pt-3 lg:hidden">
+        <button
+          className="pt-1"
+          onClick={() => {
+            setMobileMenuOpen((prev) => !prev);
+          }}
+        >
+          {mobileMenuOpen ? (
+            <XMarkIcon className="w-6 h-6" aria-hidden="true" />
+          ) : (
+            <Bars3Icon className="text-white h-7 w-7" aria-hidden="true" />
+          )}
+        </button>
+      </div>
+
       <Transition show={mobileMenuOpen} as={Fragment}>
         <Dialog
           as="div"
           className="lg:hidden"
           open={mobileMenuOpen}
-          onClose={setMobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
         >
           <TransitionChild
             as={Fragment}
@@ -135,37 +135,13 @@ export default function Navbar({
             leaveTo="transform -translate-y-full md:-translate-x-full opacity-0"
           >
             <DialogPanel className="fixed inset-y-0 z-50 w-full px-6 py-6 overflow-y-auto text-center bg-dentsu-primary rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
-              <button
-                type="button"
-                onClick={() => {
-                  router.push(`/${urlLocale}`);
-                  setMobileMenuOpen(false);
-                }}
-                className="flex items-center justify-center w-full pb-10"
-              >
-                <Logo href={`/${urlLocale}`} src={logoUrl}>
-                  {logoText && (
-                    <h2 className="text-2xl font-bold">{logoText}</h2>
-                  )}
-                </Logo>
-              </button>
-              <div className="flex items-center justify-center w-full">
-                <button
-                  type="button"
-                  className="-m-2.5 rounded-md p-2.5 text-white"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="sr-only">Close menu</span>
-                  <XMarkIcon className="w-6 h-6" aria-hidden="true" />
-                </button>
-              </div>
-              <div className="flow-root mt-6">
+              <div className="flow-root mt-24">
                 <div className="-my-6 divide-y divide-gray-700">
                   <div className="py-6 space-y-2">
                     {linksWithLocale.map((item) => (
                       <MobileNavLink
                         key={item.id}
-                        closeMenu={closeMenu}
+                        closeMenu={() => setMobileMenuOpen(false)}
                         {...item}
                       />
                     ))}
@@ -189,9 +165,9 @@ export default function Navbar({
                     >
                       {locale.img.data?.attributes.url ? (
                         <img
-                          src={locale.img.data.attributes.url}
                           alt={locale.name}
                           className="w-full h-full"
+                          src={locale.img.data.attributes.url}
                         />
                       ) : (
                         locale.name
@@ -204,12 +180,6 @@ export default function Navbar({
           </TransitionChild>
         </Dialog>
       </Transition>
-
-      <div className="flex justify-center pt-3 lg:hidden">
-        <button className="pt-1" onClick={() => setMobileMenuOpen(true)}>
-          <Bars3Icon className="text-white h-7 w-7" aria-hidden="true" />
-        </button>
-      </div>
     </div>
   );
 }
@@ -246,13 +216,13 @@ function NavLink({ url, text, locale }: NavLink) {
 function MobileNavLink({ url, text, locale, closeMenu }: MobileNavLink) {
   const path = usePathname();
 
-  const handleClick = () => {
-    closeMenu();
-  };
+  // const handleClick = () => {
+  //   closeMenu();
+  // };
 
   return (
     <Link
-      onClick={handleClick}
+      onClick={closeMenu}
       href={`/${locale}${url}`}
       className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-900 ${
         path === url && ""
