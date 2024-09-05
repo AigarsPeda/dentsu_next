@@ -32,7 +32,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
 }) => {
   const controlsArray = data.map(() => useAnimation());
   const refsArray = data.map(() =>
-    useInView({ threshold: 0.05, triggerOnce: true })
+    useInView({ threshold: 0.5, triggerOnce: true })
   );
 
   useEffect(() => {

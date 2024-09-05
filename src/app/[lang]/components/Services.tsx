@@ -125,20 +125,19 @@ export const DivWithImage = ({
 }) => {
   const controls = useAnimation();
   const { ref, inView } = useInView({
-    threshold: 0.3, // Trigger animation when 10% of the component is visible
+    threshold: 0.5, // Trigger animation when 10% of the component is visible
     triggerOnce: true, // Only trigger once
   });
 
   useEffect(() => {
-    // const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
-    // if (isMobile) {
-    //   controls.set("visible");
-    //   return;
-    // }
+    if (!isAnimateOn) {
+      controls.set("visible");
+      return;
+    }
 
     if (inView && isAnimateOn) {
       controls.start("visible");
-    } else if (!inView && isAnimateOn) {
+    } else {
       controls.start("hidden");
     }
   }, [inView, isAnimateOn, controls]);
@@ -167,7 +166,7 @@ export const DivWithImage = ({
         <div className="container relative flex items-center justify-center w-full h-full">
           <motion.div
             ref={ref}
-            initial="visible"
+            initial="hidden"
             animate={controls}
             variants={VARIANTS}
             className="flex items-center justify-center"
