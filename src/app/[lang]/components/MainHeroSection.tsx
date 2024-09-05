@@ -115,7 +115,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
         </video>
         <img
           alt="poster"
-          src={posterUrl ?? ""}
+          src={imgUrl ?? posterUrl ?? ""}
           className="block object-cover w-full h-full md:hidden"
         />
         <MainHeadLine title={data.title} />
