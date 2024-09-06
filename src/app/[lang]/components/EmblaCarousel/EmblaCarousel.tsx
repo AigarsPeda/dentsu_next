@@ -176,14 +176,26 @@ import Link from "next/link";
 import { type FC, useCallback, useEffect, useRef, useState } from "react";
 import type { FeaturesType } from "src/app/[lang]/components/ClientSections";
 
-// Utility to preload images
-const preloadImages = (imageUrls: string[]) => {
-  imageUrls.forEach((url) => {
-    if (url) {
-      const img = new Image();
-      img.src = url;
-    }
-  });
+// Preload the images and store them in a ref
+const usePreloadImages = (slides: FeaturesType[]) => {
+  const [loadedImages, setLoadedImages] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const preloadImages = () => {
+      const imageMap: Record<string, string> = {};
+      slides.forEach((item) => {
+        const img = new Image();
+        img.src = item.media.data.attributes.url;
+        img.onload = () => {
+          imageMap[item.id] = img.src; // Store the preloaded image URL once loaded
+          setLoadedImages((prev) => ({ ...prev, [item.id]: img.src }));
+        };
+      });
+    };
+    preloadImages();
+  }, [slides]);
+
+  return loadedImages;
 };
 
 type PropType = {
@@ -200,11 +212,8 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
   const timerId = useRef<NodeJS.Timeout | null>(null);
   const [userIsInteracting, setUserIsInteracting] = useState(false);
 
-  // Preload the images when the component mounts
-  useEffect(() => {
-    const imageUrls = slides.map((item) => item.media.data.attributes.url);
-    preloadImages(imageUrls);
-  }, [slides]);
+  // Use the preloaded images
+  const loadedImages = usePreloadImages(slides);
 
   const onButtonAutoplayClick = useCallback(
     (callback: () => void) => {
@@ -284,27 +293,27 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((item, i) => {
-            return (
-              <div key={`${item.id}${i}`} className="embla__slide">
-                <div className="embla__slide__number">
-                  <Link
-                    href={item.url ?? "/"}
-                    target={item.newTab ? "_self" : "_blank"}
-                    className="object-cover w-full h-full"
-                  >
-                    {item.media.data.attributes.url && (
-                      <img
-                        src={item.media.data.attributes.url}
-                        alt="our client logo"
-                        className="object-contain w-full h-full"
-                      />
-                    )}
-                  </Link>
-                </div>
+          {slides.map((item, i) => (
+            <div key={`${item.id}${i}`} className="embla__slide">
+              <div className="embla__slide__number">
+                <Link
+                  href={item.url ?? "/"}
+                  target={item.newTab ? "_self" : "_blank"}
+                  className="object-cover w-full h-full"
+                >
+                  {loadedImages[item.id] ? (
+                    <img
+                      src={loadedImages[item.id]} // Use the preloaded image URL
+                      alt="our client logo"
+                      className="object-contain w-full h-full"
+                    />
+                  ) : (
+                    <div>Loading...</div> // Placeholder while loading
+                  )}
+                </Link>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </div>
