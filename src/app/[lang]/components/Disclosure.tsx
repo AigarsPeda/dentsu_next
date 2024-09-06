@@ -96,7 +96,10 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
                 "border-black": fontColor === "dark" || !fontColor,
               })}
             >
-              <AccordionTrigger onClick={() => handleToggle(index)}>
+              <AccordionTrigger
+                className="bg-transparent"
+                onClick={() => handleToggle(index)}
+              >
                 <h3 className="flex gap-4 text-base font-bold truncate md:items-center md:text-xl">
                   {truncateText(service.title, 29)}
                 </h3>
