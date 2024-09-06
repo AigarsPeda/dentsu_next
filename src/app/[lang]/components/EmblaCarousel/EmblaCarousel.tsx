@@ -6,7 +6,7 @@ import { type FC, useCallback, useEffect, useRef, useState } from "react";
 import type { FeaturesType } from "src/app/[lang]/components/ClientSections";
 
 // Preload all images and resolve when all are loaded
-const preloadAllImages = (slides: FeaturesType[]) => {
+export const preloadAllImages = (slides: FeaturesType[]) => {
   return new Promise<void>((resolve) => {
     let loadedCount = 0;
     slides.forEach((item) => {
