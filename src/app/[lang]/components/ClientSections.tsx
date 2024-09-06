@@ -55,7 +55,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
 
   // create obj with key as company name and value as array of features
   const featuresByCompany = useMemo(() => {
-    return data.feature.reduce((acc, item) => {
+    const obj = data.feature.reduce((acc, item) => {
       const company = item.participatingCompany?.toLowerCase();
       if (company) {
         if (!acc[company]) {
@@ -65,6 +65,13 @@ export default function ClientSections({ data }: ClientSectionsProps) {
       }
       return acc;
     }, {} as Record<string, FeaturesType[]>);
+
+    // make all 2 times the length
+    Object.keys(obj).forEach((key) => {
+      obj[key] = obj[key].concat(obj[key]);
+    });
+
+    return obj;
   }, [data.feature]);
 
   const filteredData = useMemo(() => {
@@ -160,12 +167,12 @@ export default function ClientSections({ data }: ClientSectionsProps) {
                 key={currentCompany}
                 variants={FADE_VARIANTS}
                 style={{ width: "100%" }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 1.1 }}
               >
                 <EmblaCarousel
                   options={OPTIONS}
+                  slides={filteredData}
                   handArraySwitch={handleSwitch}
-                  slides={[...filteredData, ...filteredData]} // Duplicate to loop have infinite loop
                 />
               </motion.div>
             )}
