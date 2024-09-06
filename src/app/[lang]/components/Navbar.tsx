@@ -1,16 +1,30 @@
 "use client";
 import Logo from "@/app/[lang]/components/Logo";
 import type { StrapiLocaleType } from "@/app/[lang]/layout";
-import {
-  Dialog,
-  DialogPanel,
-  Transition,
-  TransitionChild,
-} from "@headlessui/react";
+import { Dialog, DialogPanel, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Variants, motion, useAnimation } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+
+const variants: Variants = {
+  hidden: {
+    y: "-100%", // Start from above the viewport
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+  visible: {
+    y: 0, // Slide down into view
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
 export default function Navbar({
   links,
@@ -25,6 +39,7 @@ export default function Navbar({
 }) {
   const router = useRouter();
   const path = usePathname();
+  const controls = useAnimation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const urlLocale = path.split("/")[1] || "en";
@@ -46,95 +61,90 @@ export default function Navbar({
     return path.replace(currentLocale, newLocale);
   };
 
-  return (
-    <div className="sticky top-0 z-[999] py-4 bg-dentsu-primary">
-      <div className="container flex items-center justify-center mx-auto lg:justify-between h-9 md:h-14">
-        <div>
-          <Logo href={`/${urlLocale}`} src={logoUrl}>
-            {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
-          </Logo>
-        </div>
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      controls.start("visible");
+    } else {
+      controls.start("hidden");
+    }
+  }, [mobileMenuOpen]);
 
-        <div className="items-center flex-shrink-0 hidden lg:flex">
-          <ul className="items-stretch space-x-6 lg:flex">
-            {linksWithLocale.map((item: NavLink) => (
-              <NavLink key={item.id} {...item} />
-            ))}
-          </ul>
-          <div className="flex items-center justify-center ml-6 space-x-3">
-            {availableLocales.map((locale) => (
-              <Link
-                scroll={false}
-                key={locale.id}
-                locale={locale.code}
-                href={getCurrentLocaleAndReplace(path, locale.code)}
-              >
-                <div
-                  style={{
-                    width: 27,
-                    height: 17,
-                    overflow: "hidden",
-                  }}
+  return (
+    <>
+      <div className="sticky top-0 z-[999] py-4 bg-dentsu-primary">
+        <div className="container flex items-center justify-center mx-auto lg:justify-between h-9 md:h-14">
+          <div>
+            <Logo href={`/${urlLocale}`} src={logoUrl}>
+              {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
+            </Logo>
+          </div>
+
+          <div className="items-center flex-shrink-0 hidden lg:flex">
+            <ul className="items-stretch space-x-6 lg:flex">
+              {linksWithLocale.map((item: NavLink) => (
+                <NavLink key={item.id} {...item} />
+              ))}
+            </ul>
+            <div className="flex items-center justify-center ml-6 space-x-3">
+              {availableLocales.map((locale) => (
+                <Link
+                  scroll={false}
+                  key={locale.id}
+                  locale={locale.code}
+                  href={getCurrentLocaleAndReplace(path, locale.code)}
                 >
-                  {locale.img.data?.attributes.url ? (
-                    <img
-                      src={locale.img.data.attributes.url}
-                      alt={locale.name}
-                      className="w-full h-full"
-                    />
-                  ) : (
-                    locale.name
-                  )}
-                </div>
-              </Link>
-            ))}
+                  <div
+                    style={{
+                      width: 27,
+                      height: 17,
+                      overflow: "hidden",
+                    }}
+                  >
+                    {locale.img.data?.attributes.url ? (
+                      <img
+                        src={locale.img.data.attributes.url}
+                        alt={locale.name}
+                        className="w-full h-full"
+                      />
+                    ) : (
+                      locale.name
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="flex justify-center pt-3 lg:hidden">
-        <button
-          className="pt-1"
-          onClick={() => {
-            setMobileMenuOpen((prev) => !prev);
-          }}
-        >
-          {mobileMenuOpen ? (
-            <XMarkIcon className="w-6 h-6" aria-hidden="true" />
-          ) : (
-            <Bars3Icon className="text-white h-7 w-7" aria-hidden="true" />
-          )}
-        </button>
+        <div className="flex justify-center pt-3 lg:hidden">
+          <button
+            className="pt-1"
+            onClick={() => {
+              setMobileMenuOpen((prev) => !prev);
+            }}
+          >
+            {mobileMenuOpen ? (
+              <XMarkIcon className="w-6 h-6" aria-hidden="true" />
+            ) : (
+              <Bars3Icon className="text-white h-7 w-7" aria-hidden="true" />
+            )}
+          </button>
+        </div>
       </div>
-
       <Transition show={mobileMenuOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="lg:hidden"
           open={mobileMenuOpen}
           onClose={() => setMobileMenuOpen(false)}
+          className="relative z-50"
         >
-          <TransitionChild
-            as={Fragment}
-            enter="transition-all duration-500"
-            enterFrom="transform -translate-y-full md:-translate-x-full opacity-0"
-            enterTo="transform translate-y-0 md:translate-x-0 opacity-100"
-            leave="transition-all duration-300"
-            leaveFrom="transform translate-y-0 md:translate-x-0 opacity-100"
-            leaveTo="transform -translate-y-full md:-translate-x-full opacity-0"
+          <motion.div
+            initial="hidden"
+            variants={variants}
+            animate={mobileMenuOpen ? "visible" : "hidden"}
+            className="fixed inset-0 z-50 p-6 mx-auto bg-dentsu-primary lg:hidden"
           >
-            <div className="fixed inset-0 z-[50] bg-dentsu-primary" />
-          </TransitionChild>
-          <TransitionChild
-            as={Fragment}
-            enter="transition-all duration-500"
-            enterFrom="transform -translate-y-full md:-translate-x-full opacity-0"
-            enterTo="transform translate-y-0 md:translate-x-0 opacity-100"
-            leave="transition-all duration-300"
-            leaveFrom="transform translate-y-0 md:translate-x-0 opacity-100"
-            leaveTo="transform -translate-y-full md:-translate-x-full opacity-0"
-          >
-            <DialogPanel className="fixed inset-y-0 z-[50] w-full px-6 py-6 overflow-y-auto text-center rtl:left-0 ltr:right-0 sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
+            <DialogPanel className="fixed inset-0 z-50 w-full max-w-xs px-6 py-6 mx-auto overflow-y-auto text-center bg-dentsu-primary sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
               <div className="flow-root mt-24">
                 <div className="-my-6 divide-y divide-gray-700">
                   <div className="py-6 space-y-2">
@@ -177,10 +187,10 @@ export default function Navbar({
                 ))}
               </div>
             </DialogPanel>
-          </TransitionChild>
+          </motion.div>
         </Dialog>
       </Transition>
-    </div>
+    </>
   );
 }
 
