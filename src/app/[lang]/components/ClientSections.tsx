@@ -61,6 +61,22 @@ export default function ClientSections({ data }: ClientSectionsProps) {
         if (!acc[company]) {
           acc[company] = [];
         }
+
+        // item = { ...item, url:  getStrapiMedia(item.media.data.attributes.url) };
+        item = {
+          ...item,
+          media: {
+            data: {
+              ...item.media.data,
+              // url: getStrapiMedia(item.media.data.attributes.url),
+              attributes: {
+                ...item.media.data.attributes,
+                url: getStrapiMedia(item.media.data.attributes.url) ?? " ",
+              },
+            },
+          },
+        };
+
         acc[company].push(item);
       }
       return acc;

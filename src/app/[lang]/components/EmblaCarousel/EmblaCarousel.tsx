@@ -4,7 +4,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import Link from "next/link";
 import { type FC, useCallback, useEffect, useRef, useState } from "react";
 import type { FeaturesType } from "src/app/[lang]/components/ClientSections";
-import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
 
 // https://www.embla-carousel.com/api/events/
 // https://www.embla-carousel.com/examples/predefined/
@@ -124,7 +123,7 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((item, i) => {
-            const imgSrc = getStrapiMedia(item.media.data.attributes.url);
+            // const imgSrc = getStrapiMedia(item.media.data.attributes.url);
 
             return (
               <div key={`${item.id}${i}`} className="embla__slide">
@@ -134,10 +133,10 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
                     target={item.newTab ? "_self" : "_blank"}
                     className="object-cover w-full h-full"
                   >
-                    {imgSrc && (
+                    {item.media.data.attributes.url && (
                       <>
                         <img
-                          src={imgSrc}
+                          src={item.media.data.attributes.url}
                           alt="our client logo"
                           className="object-contain w-full h-full"
                         />
