@@ -45,7 +45,7 @@ const PDFDisplay: FC<PostImageProps> = ({ data }) => {
         <img
           src={getStrapiMedia(data.image.data.attributes.url) ?? ""}
           alt="pdf"
-          className="object-cover w-full h-[28rem]"
+          className="object-cover w-full md:aspect-[3/1] max-h-[28rem] aspect-[1/1]"
         />
       </div>
       <div className="pb-8 pt-14">
