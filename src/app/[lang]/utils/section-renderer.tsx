@@ -28,7 +28,7 @@ import Vacancies from "@/app/[lang]/components/Vacancies";
 import VacanciesHeadline from "@/app/[lang]/components/VacanciesHeadline";
 import VideoEmbed from "@/app/[lang]/components/VideoEmbed";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
-import DynamicPdf from "src/app/[lang]/components/DynamicPdf";
+import PDFDisplay from "@/app/[lang]/components/PDFDisplay";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
@@ -53,7 +53,8 @@ export function sectionRenderer(section: any, index: number) {
     case "sections.vacancies":
       return <Vacancies key={index} data={section} />;
     case "sections.pdf":
-      return <DynamicPdf key={index} data={section} />;
+      // return <DynamicPdf key={index} data={section} />;
+      return <PDFDisplay key={index} data={section} />;
     case "shared.video-embed":
       return <VideoEmbed key={index} data={section} />;
     case "sections.social-share":
