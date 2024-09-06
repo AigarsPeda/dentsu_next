@@ -32,7 +32,6 @@ type PropType = {
   slides: FeaturesType[];
   options?: EmblaOptionsType;
   handArraySwitch: () => void;
-  handelIsLoaded: () => void;
 };
 
 const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
