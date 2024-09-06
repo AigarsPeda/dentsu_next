@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import ArrowIcon from "src/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
+import { IMAGE_DATA_FOR_BLUR } from "./NewsPostSection";
 
 export const loader = ({
   src,
@@ -121,7 +122,7 @@ export default function ServicesHeadlineWithImage({
             transition: "transform 0.1s ease-out",
             scale: 1.1,
           }}
-          blurDataURL="data:image/bmp;base64,Qk32BAAAAAAAADYAAAAoAAAACAAAAAgAAAABABgAAAAAAMAAAAATCwAAEwsAAAAAAAAAAAAAr5+jpJaUi4JxfHtehIdxioyAenZtUDcixbq4urGrpJ+Nm5uCpaiVra2inpiOeWdR29PO0cvCv72qu7ylx8m5z87EwLqvn494"
+          blurDataURL={IMAGE_DATA_FOR_BLUR}
           placeholder="blur"
         />
         <div

@@ -5,6 +5,9 @@ import type { FC } from "react";
 import { pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import Image from "next/image";
+import { loader } from "./ServicesHeadlineWithImage";
+import { IMAGE_DATA_FOR_BLUR } from "./NewsPostSection";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -41,11 +44,21 @@ const PDFDisplay: FC<PostImageProps> = ({ data }) => {
 
   return (
     <div className="container mx-auto ">
-      <div>
-        <img
-          src={getStrapiMedia(data.image.data.attributes.url) ?? ""}
+      <div className="object-cover w-full md:aspect-[3/1] max-h-[28rem] aspect-[1/1]">
+        <Image
+          priority
           alt="pdf"
-          className="object-cover w-full md:aspect-[3/1] max-h-[28rem] aspect-[1/1]"
+          width={600}
+          height={337}
+          loader={loader}
+          placeholder="blur"
+          blurDataURL={IMAGE_DATA_FOR_BLUR}
+          src={getStrapiMedia(data.image.data.attributes.url) ?? ""}
+          style={{
+            objectFit: "cover",
+            width: "100%",
+            height: "100%",
+          }}
         />
       </div>
       <div className="pb-8 pt-14">

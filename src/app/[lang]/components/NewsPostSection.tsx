@@ -7,6 +7,9 @@ import { IoIosArrowForward } from "react-icons/io";
 import { loader } from "./ServicesHeadlineWithImage";
 import Link from "next/link";
 
+export const IMAGE_DATA_FOR_BLUR =
+  "data:image/bmp;base64,Qk32BAAAAAAAADYAAAAoAAAACAAAAAgAAAABABgAAAAAAMAAAAATCwAAEwsAAAAAAAAAAAAAr5+jpJaUi4JxfHtehIdxioyAenZtUDcixbq4urGrpJ+Nm5uCpaiVra2inpiOeWdR29PO0cvCv72qu7ylx8m5z87EwLqvn4946OPc4t3S1tTB1tfD4uTX6Ofg2tTKva+Z7Obf6eTa5ePT6evb9Pbt9/fz6uXe0si16eDb6uPa7uvd9vfr/v/8/v7/8u/s4NnK4tfV597Y8u7j/f31////////9PPz6OPX39PR5dvW8+7l///4////////9fP16ubb";
+
 const ITEMS_PER_PAGE = 6;
 
 interface NewsPostSectionProps {
@@ -85,7 +88,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
                   placeholder="blur"
                   className="transition-all duration-300 group-hover:scale-105"
                   style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                  blurDataURL="data:image/bmp;base64,Qk32BAAAAAAAADYAAAAoAAAACAAAAAgAAAABABgAAAAAAMAAAAATCwAAEwsAAAAAAAAAAAAAr5+jpJaUi4JxfHtehIdxioyAenZtUDcixbq4urGrpJ+Nm5uCpaiVra2inpiOeWdR29PO0cvCv72qu7ylx8m5z87EwLqvn4946OPc4t3S1tTB1tfD4uTX6Ofg2tTKva+Z7Obf6eTa5ePT6evb9Pbt9/fz6uXe0si16eDb6uPa7uvd9vfr/v/8/v7/8u/s4NnK4tfV597Y8u7j/f31////////9PPz6OPX39PR5dvW8+7l///4////////9fP16ubb"
+                  blurDataURL={IMAGE_DATA_FOR_BLUR}
                 />
               </div>
               <div className="h-full max-h-[7.7rem]">
