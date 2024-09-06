@@ -221,15 +221,15 @@
   .embla {
     --slide-size: auto;
     --slide-spacing: 4rem;
-    --slide-height: 4.5rem;
+    --slide-height: 5rem;
   }
 }
 
 @media (max-width: 480px) {
   .embla {
-    --slide-size: 45%;
+    --slide-size: 47%;
     --slide-spacing: 3rem;
-    --slide-height: 4.5rem;
+    --slide-height: 5rem;
   }
 }
 
