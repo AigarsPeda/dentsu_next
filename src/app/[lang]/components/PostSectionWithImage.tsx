@@ -47,7 +47,8 @@ export default function PostSectionWithImage({
               />
             )}
           </div>
-          <div className="pt-12 pb-5 bg-black min-h-[50vw]">
+          {/* min-h-[50vw] */}
+          <div className="pt-12 pb-5 bg-black md:h-[55rem] min-h-[30rem]">
             <TitleInCircleWithLine
               pictureOnRight
               title={data.feature.title}
@@ -56,8 +57,9 @@ export default function PostSectionWithImage({
           </div>
         </div>
       ) : (
+        // min-h-[50vw]
         <div className="grid w-full grid-cols-1 md:grid-cols-2">
-          <div className="pt-16 pb-5 bg-black min-h-[50vw]">
+          <div className="pt-16 pb-5 bg-black md:h-[55rem] min-h-[30rem]">
             <TitleInCircleWithLine
               title={data.feature.title}
               description={data.feature.description}
