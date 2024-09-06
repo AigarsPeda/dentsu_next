@@ -3,7 +3,8 @@ import { cn } from "@/lib/utils";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import classNames from "classnames";
 import * as React from "react";
-import { IoMdAdd } from "react-icons/io";
+import { IoIosArrowDown, IoMdAdd } from "react-icons/io";
+import { IoCloseSharp } from "react-icons/io5";
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -27,7 +28,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex w-full gap-3 hover:border-black focus:border-black focus:outline-none [&[data-state=open]>svg]:rotate-45",
+        "flex w-full items-center gap-3 bg-gray-200 hover:border-black focus:border-black focus:outline-none [&[data-state=open]>svg]:rotate-45",
         className
       )}
       {...props}
@@ -39,11 +40,33 @@ const AccordionTrigger = React.forwardRef<
         )}
       />
       {children}
-      {/* <ChevronDown className="w-4 h-4 transition-transform duration-200 shrink-0" /> */}
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+
+const GrayAccordionTrigger = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => {
+  return (
+    <AccordionPrimitive.Header className="flex">
+      <AccordionPrimitive.Trigger
+        ref={ref}
+        className={cn(
+          "flex w-full justify-between gap-3 hover:border-black focus:border-black focus:outline-none [&[data-state=open]>svg]:rotate-180",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        <IoIosArrowDown className="transition-transform transform w-7 h-7 group-data-[state=open]:hidden" />
+        <IoCloseSharp className="transition-transform transform w-7 h-7 group-data-[state=closed]:hidden" />
+      </AccordionPrimitive.Trigger>
+    </AccordionPrimitive.Header>
+  );
+});
+GrayAccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
@@ -60,4 +83,10 @@ const AccordionContent = React.forwardRef<
 
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger };
+export {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  GrayAccordionTrigger,
+};
