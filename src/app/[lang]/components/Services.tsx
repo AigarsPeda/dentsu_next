@@ -73,12 +73,13 @@ export default function Services({ data }: ServicesProps) {
     ? getStrapiMedia(data.mobLogo.data.attributes.url)
     : undefined;
 
-  const togglePanel = (index: number) => {
-    if (openIndex === index) {
-      setOpenIndex(null);
-    } else {
-      setOpenIndex(index);
-    }
+  const handleToggle = (index: number) => {
+    // if (openIndex === index) {
+    //   setOpenIndex(null);
+    // } else {
+    //   setOpenIndex(index);
+    // }
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
@@ -95,10 +96,10 @@ export default function Services({ data }: ServicesProps) {
           <DisplayLogo logoUrl={mobLogoUrl ?? logoUrl} />
         </div>
         <ServiceDisclosure
-          openIndex={openIndex}
           data={data.services}
-          togglePanel={togglePanel}
+          openIndex={openIndex}
           isAnimateOn={data.animate}
+          handleToggle={handleToggle}
           fontColor={data.fontColor?.fontColor}
         />
       </DivWithImage>
@@ -128,6 +129,8 @@ export const DivWithImage = ({
     threshold: 0.5, // Trigger animation when 10% of the component is visible
     triggerOnce: true, // Only trigger once
   });
+
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
 
   useEffect(() => {
     if (!isAnimateOn) {
@@ -183,7 +186,7 @@ export const DivWithImage = ({
         className="transition-all duration-300 md:flex"
         style={{
           backgroundAttachment: "cover",
-          backgroundSize: isMenuOpen ? "105% 105%" : "100% 100%",
+          backgroundSize: isMobile && isMenuOpen ? "105% 105%" : "100% 100%",
           ...(!pictureOnRight && {
             ...createBackgroundImage(imgUrl),
           }),
