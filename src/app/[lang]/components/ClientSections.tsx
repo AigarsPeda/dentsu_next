@@ -160,7 +160,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
                 key={currentCompany}
                 variants={FADE_VARIANTS}
                 style={{ width: "100%" }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 1 }}
               >
                 <EmblaCarousel
                   options={OPTIONS}
