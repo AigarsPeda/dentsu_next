@@ -1,3 +1,205 @@
+// "use client";
+// import classNames from "classnames";
+// import type { EmblaOptionsType } from "embla-carousel";
+// import { AnimatePresence, motion, Variants } from "framer-motion";
+// import { useEffect, useMemo, useState } from "react";
+// import EmblaCarousel from "src/app/[lang]/components/EmblaCarousel/EmblaCarousel";
+// import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
+
+// // https://www.embla-carousel.com/api/events/
+// // https://www.embla-carousel.com/examples/predefined/
+
+// interface MediaTypes {
+//   id: number;
+//   attributes: {
+//     url: string;
+//     width: number;
+//     height: number;
+//     caption: string | null;
+//     alternativeText: string | null;
+//   };
+// }
+
+// export interface FeaturesType {
+//   id: number;
+//   newTab: boolean;
+//   isNewTab: boolean;
+//   url: string | null;
+//   participatingCompany: string | null;
+//   media: {
+//     data: MediaTypes;
+//   };
+// }
+
+// export interface Department {
+//   id: number;
+//   url: string;
+//   media: { data: MediaTypes };
+// }
+
+// const FADE_VARIANTS: Variants = {
+//   hidden: { opacity: 0 },
+//   visible: { opacity: 1 },
+// };
+
+// interface ClientSectionsProps {
+//   data: { title: string; feature: FeaturesType[]; Department: Department[] };
+// }
+
+// const OPTIONS: EmblaOptionsType = { loop: true, align: "start" };
+// const ORDER_OF_LIST = ["carat", "iprospect", "dentsux", "dentsucreative"];
+
+// export default function ClientSections({ data }: ClientSectionsProps) {
+//   const [isVisible, setIsVisible] = useState(true);
+//   const [currentCompany, setCurrentCompany] = useState("");
+
+//   // create obj with key as company name and value as array of features
+//   const featuresByCompany = useMemo(() => {
+//     const obj = data.feature.reduce((acc, item) => {
+//       const company = item.participatingCompany?.toLowerCase();
+//       if (company) {
+//         if (!acc[company]) {
+//           acc[company] = [];
+//         }
+
+//         // item = { ...item, url:  getStrapiMedia(item.media.data.attributes.url) };
+//         item = {
+//           ...item,
+//           media: {
+//             data: {
+//               ...item.media.data,
+//               // url: getStrapiMedia(item.media.data.attributes.url),
+//               attributes: {
+//                 ...item.media.data.attributes,
+//                 url: getStrapiMedia(item.media.data.attributes.url) ?? " ",
+//               },
+//             },
+//           },
+//         };
+
+//         acc[company].push(item);
+//       }
+//       return acc;
+//     }, {} as Record<string, FeaturesType[]>);
+
+//     // make all 2 times the length
+//     Object.keys(obj).forEach((key) => {
+//       obj[key] = obj[key].concat(obj[key]);
+//     });
+
+//     return obj;
+//   }, [data.feature]);
+
+//   const filteredData = useMemo(() => {
+//     setIsVisible(false); // Trigger fade out
+//     return featuresByCompany[currentCompany] || [];
+//   }, [currentCompany]);
+
+//   const uniqueCompanies = data.feature.reduce((acc, item) => {
+//     if (item.participatingCompany) {
+//       acc.add(item.participatingCompany.toLowerCase());
+//     }
+//     return acc;
+//   }, new Set<string>());
+
+//   const sortedCompanies = Array.from(uniqueCompanies).sort((a, b) => {
+//     return ORDER_OF_LIST.indexOf(a) - ORDER_OF_LIST.indexOf(b);
+//   });
+
+//   const handleSwitch = () => {
+//     const index = sortedCompanies.indexOf(currentCompany);
+//     const nextCompany = sortedCompanies[index + 1] || sortedCompanies[0];
+
+//     setCurrentCompany(nextCompany.toLowerCase());
+//   };
+
+//   useEffect(() => {
+//     if (!currentCompany) {
+//       setCurrentCompany(sortedCompanies[0].toLowerCase());
+//     }
+//   }, []);
+
+//   // every time currentCompany changes fade in
+//   useEffect(() => {
+//     if (currentCompany && !isVisible) {
+//       setIsVisible(true);
+//     }
+//   }, [currentCompany && !isVisible]);
+
+//   return (
+//     <>
+//       <div
+//         className={classNames(
+//           "grid-cols-1 lg:grid-cols-4 gap-6 space-y-7 md:space-y-0 container mx-auto py-14 grid"
+//         )}
+//       >
+//         {data.Department?.map((item) => {
+//           const imgSrc = getStrapiMedia(item.media.data.attributes.url);
+
+//           return (
+//             <div
+//               key={item.id}
+//               className={classNames(
+//                 "flex items-center justify-center lg:block object-contain max-h-6 hover:opacity-50 transition-all",
+//                 currentCompany !== item.url ? "opacity-35" : ""
+//               )}
+//             >
+//               {imgSrc ? (
+//                 <button
+//                   type="button"
+//                   onClick={() => {
+//                     setCurrentCompany(item.url);
+//                   }}
+//                 >
+//                   <img
+//                     src={imgSrc}
+//                     alt="our client logo"
+//                     className={classNames(
+//                       "object-contain max-h-6 transition-all"
+//                     )}
+//                   />
+//                 </button>
+//               ) : (
+//                 <div className="flex items-center justify-center w-24 h-24 bg-gray-200">
+//                   No Image Available
+//                 </div>
+//               )}
+//             </div>
+//           );
+//         })}
+//       </div>
+//       <div className="container mx-auto">
+//         <h2 className="pb-2 text-xl font-normal text-center md:text-3xl">
+//           {data.title}
+//         </h2>
+//         <div className="relative min-h-[5.7rem] md:min-h-[10rem] flex justify-center items-center">
+//           <div className="absolute top-0 left-0 z-10 w-20 h-full bg-gradient-to-r from-white to-transparent"></div>
+//           <AnimatePresence mode="wait">
+//             {isVisible && (
+//               <motion.div
+//                 exit="hidden"
+//                 initial="hidden"
+//                 animate="visible"
+//                 key={currentCompany}
+//                 variants={FADE_VARIANTS}
+//                 style={{ width: "100%" }}
+//                 transition={{ duration: 1.1 }}
+//               >
+//                 <EmblaCarousel
+//                   options={OPTIONS}
+//                   slides={filteredData}
+//                   handArraySwitch={handleSwitch}
+//                 />
+//               </motion.div>
+//             )}
+//           </AnimatePresence>
+//           <div className="absolute top-0 right-0 z-10 w-20 h-full bg-gradient-to-l from-white to-transparent"></div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
 "use client";
 import classNames from "classnames";
 import type { EmblaOptionsType } from "embla-carousel";
@@ -6,9 +208,7 @@ import { useEffect, useMemo, useState } from "react";
 import EmblaCarousel from "src/app/[lang]/components/EmblaCarousel/EmblaCarousel";
 import { getStrapiMedia } from "src/app/[lang]/utils/api-helpers";
 
-// https://www.embla-carousel.com/api/events/
-// https://www.embla-carousel.com/examples/predefined/
-
+// Define MediaTypes and FeaturesType
 interface MediaTypes {
   id: number;
   attributes: {
@@ -37,6 +237,7 @@ export interface Department {
   media: { data: MediaTypes };
 }
 
+// Animation Variants for Fade
 const FADE_VARIANTS: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
@@ -49,11 +250,26 @@ interface ClientSectionsProps {
 const OPTIONS: EmblaOptionsType = { loop: true, align: "start" };
 const ORDER_OF_LIST = ["carat", "iprospect", "dentsux", "dentsucreative"];
 
+// Preload all images in the provided slides and departments
+const preloadImages = (urls: string[]) => {
+  return Promise.all(
+    urls.map(
+      (url) =>
+        new Promise<void>((resolve) => {
+          const img = new Image();
+          img.src = url;
+          img.onload = () => resolve();
+          img.onerror = () => resolve(); // Resolve even on error
+        })
+    )
+  );
+};
+
 export default function ClientSections({ data }: ClientSectionsProps) {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false); // Initially loading state
   const [currentCompany, setCurrentCompany] = useState("");
 
-  // create obj with key as company name and value as array of features
+  // Create object with key as company name and value as array of features
   const featuresByCompany = useMemo(() => {
     const obj = data.feature.reduce((acc, item) => {
       const company = item.participatingCompany?.toLowerCase();
@@ -62,13 +278,11 @@ export default function ClientSections({ data }: ClientSectionsProps) {
           acc[company] = [];
         }
 
-        // item = { ...item, url:  getStrapiMedia(item.media.data.attributes.url) };
         item = {
           ...item,
           media: {
             data: {
               ...item.media.data,
-              // url: getStrapiMedia(item.media.data.attributes.url),
               attributes: {
                 ...item.media.data.attributes,
                 url: getStrapiMedia(item.media.data.attributes.url) ?? " ",
@@ -82,7 +296,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
       return acc;
     }, {} as Record<string, FeaturesType[]>);
 
-    // make all 2 times the length
+    // Double the length of features for each company
     Object.keys(obj).forEach((key) => {
       obj[key] = obj[key].concat(obj[key]);
     });
@@ -91,9 +305,8 @@ export default function ClientSections({ data }: ClientSectionsProps) {
   }, [data.feature]);
 
   const filteredData = useMemo(() => {
-    setIsVisible(false); // Trigger fade out
     return featuresByCompany[currentCompany] || [];
-  }, [currentCompany]);
+  }, [currentCompany, featuresByCompany]);
 
   const uniqueCompanies = data.feature.reduce((acc, item) => {
     if (item.participatingCompany) {
@@ -109,22 +322,34 @@ export default function ClientSections({ data }: ClientSectionsProps) {
   const handleSwitch = () => {
     const index = sortedCompanies.indexOf(currentCompany);
     const nextCompany = sortedCompanies[index + 1] || sortedCompanies[0];
-
     setCurrentCompany(nextCompany.toLowerCase());
   };
 
+  // Preload all images before showing the content
   useEffect(() => {
     if (!currentCompany) {
       setCurrentCompany(sortedCompanies[0].toLowerCase());
     }
-  }, []);
 
-  // every time currentCompany changes fade in
-  useEffect(() => {
-    if (currentCompany && !isVisible) {
-      setIsVisible(true);
-    }
-  }, [currentCompany && !isVisible]);
+    const featureUrls = data.feature.map((item) =>
+      getStrapiMedia(item.media.data.attributes.url)
+    );
+    const departmentUrls = data.Department.map((item) =>
+      getStrapiMedia(item.media.data.attributes.url)
+    );
+
+    const allUrls = [...featureUrls, ...departmentUrls].filter(Boolean);
+
+    // if (allUrls.length === 0) {
+    //   setIsVisible(true);
+    //   return;
+    // }
+
+    // @ts-ignore
+    preloadImages(allUrls).then(() => {
+      setIsVisible(true); // Show content after images are preloaded
+    });
+  }, [data.feature, data.Department, currentCompany, sortedCompanies]);
 
   return (
     <>
@@ -168,6 +393,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
           );
         })}
       </div>
+
       <div className="container mx-auto">
         <h2 className="pb-2 text-xl font-normal text-center md:text-3xl">
           {data.title}
