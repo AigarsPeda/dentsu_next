@@ -14,7 +14,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url
 ).toString();
 
-interface PostImageProps {
+export interface PdfPostImageProps {
   data: {
     file: {
       data: {
@@ -36,7 +36,7 @@ interface PostImageProps {
   };
 }
 
-const PDFDisplay: FC<PostImageProps> = ({ data }) => {
+const PDFDisplay: FC<PdfPostImageProps> = ({ data }) => {
   const path = usePathname();
   const pdfUrl = getStrapiMedia(data?.file?.data?.attributes?.url) ?? "";
 

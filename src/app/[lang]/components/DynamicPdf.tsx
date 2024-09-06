@@ -2,23 +2,11 @@
 
 import { FC } from "react";
 import dynamic from "next/dynamic";
+import { PdfPostImageProps } from "./PDFDisplay";
 
 const PDFDisplay = dynamic(() => import("./PDFDisplay"), { ssr: false });
 
-interface PostImageProps {
-  data: {
-    file: {
-      data: {
-        id: number;
-        attributes: {
-          url: string;
-        };
-      };
-    };
-  };
-}
-
-const DynamicPdf: FC<PostImageProps> = ({ data }) => {
+const DynamicPdf: FC<PdfPostImageProps> = ({ data }) => {
   return <PDFDisplay data={data} />;
 };
 
