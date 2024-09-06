@@ -1,11 +1,10 @@
 "use client";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
-import { FC, useEffect, useRef, useState } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
+import { usePathname } from "next/navigation";
+import type { FC } from "react";
+import { pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
-
-//
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -22,98 +21,65 @@ interface PostImageProps {
         };
       };
     };
+    image: {
+      data: {
+        id: number;
+        attributes: {
+          url: string;
+        };
+      };
+    };
+    description: string;
   };
 }
 
 const PDFDisplay: FC<PostImageProps> = ({ data }) => {
-  const [scale, setScale] = useState(1.0);
-  const [error, setError] = useState(false);
-  const [numPages, setNumPages] = useState(0);
-  // const [isLoading, setIsLoading] = useState(true);
-  const containerRef = useRef<HTMLDivElement>(null);
-
+  const path = usePathname();
   const pdfUrl = getStrapiMedia(data?.file?.data?.attributes?.url) ?? "";
 
-  const isUrlPdf = pdfUrl.endsWith(".pdf");
-
-  useEffect(() => {
-    const updateScale = () => {
-      if (containerRef.current) {
-        const containerWidth = containerRef.current.clientWidth;
-        const scaleFactor = containerWidth / 800; // Assuming the PDF's original width is around 800px
-        setScale(scaleFactor);
-      }
-    };
-
-    updateScale();
-    window.addEventListener("resize", updateScale);
-
-    return () => {
-      window.removeEventListener("resize", updateScale);
-    };
-  }, []);
-
-  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
-    setNumPages(numPages);
-    // setIsLoading(false);
-  };
-
-  const onDocumentLoadError = () => {
-    setError(true);
-    // setIsLoading(false);
-  };
-
-  if (!isUrlPdf) {
-    console.error("Invalid PDF URL", pdfUrl);
-    return (
-      <div className="container py-3 mx-auto pdf-container">
-        <div className="flex items-center justify-center h-96">
-          <h2>Failed to load file. Please try again later.</h2>
-          <p>
-            Ore download the file to view it:
-            <a className="ml-2 text-blue-500 underline" href={pdfUrl}>
-              Download
-            </a>
-          </p>
-        </div>
-      </div>
-    );
-  }
+  const urlLocale = path.split("/")[1] || "en";
 
   return (
-    <div ref={containerRef} className="container py-3 mx-auto pdf-container">
-      {error && (
-        <div className="flex items-center justify-center h-96">
-          <h2>Failed to load PDF. Please try again later.</h2>
-          <p>
-            Your browser does not support PDFs. Please download the PDF to view
-            it:
-            <a className="ml-2 text-blue-500 underline" href={pdfUrl}>
-              Download PDF
-            </a>
-          </p>
-        </div>
-      )}
-      <Document
-        file={pdfUrl}
-        renderMode="canvas"
-        loading={
-          <div className="flex items-center justify-center h-96">
-            Loading...
-          </div>
-        }
-        onLoadSuccess={onDocumentLoadSuccess}
-        onLoadError={onDocumentLoadError}
-      >
-        {Array.from({ length: numPages }, (_, i) => i + 1).map((page) => (
-          <Page
-            scale={scale}
-            className="pb-10"
-            pageNumber={page}
-            key={`page_${page}_pdf`}
-          />
-        ))}
-      </Document>
+    <div className="container mx-auto ">
+      <div>
+        <img
+          src={getStrapiMedia(data.image.data.attributes.url) ?? ""}
+          alt="pdf"
+          className="object-cover w-full h-[28rem]"
+        />
+      </div>
+      <div className="pb-8 pt-14">
+        <p>{data.description}</p>
+      </div>
+      <div className="">
+        {urlLocale === "en" ? (
+          <a
+            download
+            href={pdfUrl}
+            target="_blank"
+            className="text-lg"
+            rel="noopener noreferrer"
+          >
+            Download{" "}
+            <span className="text-[#5b19c4] underline-offset-4 underline ml-1 font-bold">
+              research
+            </span>
+          </a>
+        ) : (
+          <a
+            download
+            href={pdfUrl}
+            target="_blank"
+            className="text-lg"
+            rel="noopener noreferrer"
+          >
+            Lejuplādēt{" "}
+            <span className="text-[#5b19c4] underline-offset-4 underline ml-1 font-bold">
+              pētījumu
+            </span>
+          </a>
+        )}
+      </div>
     </div>
   );
 };

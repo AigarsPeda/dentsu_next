@@ -50,15 +50,17 @@ export default function Navbar({
   }));
 
   const getCurrentLocaleAndReplace = (path: string, newLocale: string) => {
-    const availableLocalesCodes = availableLocales.map((locale) => locale.code);
-    const currentLocale = availableLocalesCodes.reduce((acc, locale) => {
-      if (path.includes(locale)) {
-        return locale;
-      }
-      return acc;
-    });
+    // const availableLocalesCodes = availableLocales.map((locale) => locale.code);
+    // const currentLocale = availableLocalesCodes.reduce((acc, locale) => {
+    //   if (path.includes(locale)) {
+    //     return locale;
+    //   }
+    //   return acc;
+    // });
 
-    return path.replace(currentLocale, newLocale);
+    // return path.replace(currentLocale, newLocale);
+
+    return path.replace(/\/[a-z]{2}\//, `/${newLocale}/`);
   };
 
   useEffect(() => {
