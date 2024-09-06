@@ -119,12 +119,12 @@ export default function ClientSections({ data }: ClientSectionsProps) {
     }
   }, []);
 
-  // every time currentCompany changes fade in
-  useEffect(() => {
-    if (currentCompany && !isVisible) {
-      setIsVisible(true);
-    }
-  }, [currentCompany && !isVisible]);
+  // // every time currentCompany changes fade in
+  // useEffect(() => {
+  //   if (currentCompany && !isVisible) {
+  //     setIsVisible(true);
+  //   }
+  // }, [currentCompany && !isVisible]);
 
   return (
     <>
@@ -175,23 +175,28 @@ export default function ClientSections({ data }: ClientSectionsProps) {
         <div className="relative min-h-[5.7rem] md:min-h-[10rem] flex justify-center items-center">
           <div className="absolute top-0 left-0 z-10 w-20 h-full bg-gradient-to-r from-white to-transparent"></div>
           <AnimatePresence mode="wait">
-            {isVisible && (
-              <motion.div
-                exit="hidden"
-                initial="hidden"
-                animate="visible"
-                key={currentCompany}
-                variants={FADE_VARIANTS}
-                style={{ width: "100%" }}
-                transition={{ duration: 1.1 }}
-              >
-                <EmblaCarousel
-                  options={OPTIONS}
-                  slides={filteredData}
-                  handArraySwitch={handleSwitch}
-                />
-              </motion.div>
-            )}
+            {/* {isVisible && ( */}
+            <motion.div
+              exit="hidden"
+              initial="hidden"
+              // animate="visible"
+              animate={isVisible ? "visible" : "hidden"}
+              key={currentCompany}
+              variants={FADE_VARIANTS}
+              style={{ width: "100%" }}
+              transition={{ duration: 1.1 }}
+            >
+              <EmblaCarousel
+                options={OPTIONS}
+                slides={filteredData}
+                handArraySwitch={handleSwitch}
+                handelIsLoading={() => {
+                  console.log("loaded");
+                  setIsVisible(true);
+                }}
+              />
+            </motion.div>
+            {/* )} */}
           </AnimatePresence>
           <div className="absolute top-0 right-0 z-10 w-20 h-full bg-gradient-to-l from-white to-transparent"></div>
         </div>

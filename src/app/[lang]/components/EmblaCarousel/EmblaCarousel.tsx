@@ -32,20 +32,27 @@ type PropType = {
   slides: FeaturesType[];
   options?: EmblaOptionsType;
   handArraySwitch: () => void;
+  handelIsLoading: () => void;
 };
 
-const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
+const EmblaCarousel: FC<PropType> = ({
+  slides,
+  options,
+  handArraySwitch,
+  handelIsLoading,
+}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     AutoScroll({ playOnInit: true }),
   ]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const timerId = useRef<NodeJS.Timeout | null>(null);
   const [userIsInteracting, setUserIsInteracting] = useState(false);
 
   // Preload all images before showing the carousel
   useEffect(() => {
     preloadAllImages(slides).then(() => {
-      setIsLoading(false);
+      // setIsLoading(false);
+      handelIsLoading();
     });
   }, [slides]);
 
@@ -123,10 +130,10 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
     };
   }, [emblaApi, slides]);
 
-  if (isLoading) {
-    // Display loading state until all images are preloaded
-    return <div className="bg-transparent sr-only">Loading...</div>;
-  }
+  // if (isLoading) {
+  //   // Display loading state until all images are preloaded
+  //   return <div className="bg-transparent sr-only">Loading...</div>;
+  // }
 
   return (
     <div className="embla">
