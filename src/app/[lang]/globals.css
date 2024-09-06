@@ -221,7 +221,7 @@
   .embla {
     --slide-size: auto;
     --slide-spacing: 4rem;
-    --slide-height: 4.3rem;
+    --slide-height: 4.5rem;
   }
 }
 
@@ -229,7 +229,7 @@
   .embla {
     --slide-size: 45%;
     --slide-spacing: 3rem;
-    --slide-height: 4rem;
+    --slide-height: 4.5rem;
   }
 }
 
