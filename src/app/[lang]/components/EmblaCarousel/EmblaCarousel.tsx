@@ -32,6 +32,7 @@ type PropType = {
   slides: FeaturesType[];
   options?: EmblaOptionsType;
   handArraySwitch: () => void;
+  handelIsLoaded: () => void;
 };
 
 const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
@@ -125,7 +126,7 @@ const EmblaCarousel: FC<PropType> = ({ slides, options, handArraySwitch }) => {
 
   if (isLoading) {
     // Display loading state until all images are preloaded
-    return <div>Loading...</div>;
+    return <div className="bg-transparent sr-only">Loading...</div>;
   }
 
   return (

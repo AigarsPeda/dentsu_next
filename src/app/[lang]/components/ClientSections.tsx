@@ -188,6 +188,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
                 <EmblaCarousel
                   options={OPTIONS}
                   slides={filteredData}
+                  handelIsLoaded={() => {}}
                   handArraySwitch={handleSwitch}
                 />
               </motion.div>
