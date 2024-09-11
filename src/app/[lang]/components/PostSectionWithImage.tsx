@@ -32,9 +32,9 @@ export default function PostSectionWithImage({
   const imgUrl = getStrapiMedia(data.feature.media.data[0]?.attributes.url);
 
   return (
-    <>
+    <div className="grid w-full grid-cols-1 md:grid-cols-2 md:h-[55rem] min-h-[30rem]">
       {data.feature.pictureOnRight ? (
-        <div className="grid w-full grid-cols-1 overflow-hidden md:grid-cols-2 md:h-[55rem] min-h-[30rem]">
+        <>
           <div className="w-full h-full bg-center bg-cover">
             {imgUrl && (
               <img
@@ -55,10 +55,10 @@ export default function PostSectionWithImage({
               description={data.feature.description}
             />
           </div>
-        </div>
+        </>
       ) : (
         // min-h-[50vw]
-        <div className="grid w-full grid-cols-1 md:grid-cols-2 md:h-[55rem] min-h-[30rem]">
+        <>
           <div className="bg-black">
             <TitleInCircleWithLine
               title={data.feature.title}
@@ -77,8 +77,8 @@ export default function PostSectionWithImage({
               />
             )}
           </div>
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
