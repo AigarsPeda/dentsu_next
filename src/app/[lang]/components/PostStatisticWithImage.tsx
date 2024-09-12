@@ -71,7 +71,7 @@ export default function PostStatisticWithImage({
             "md:pt-14 md:pb-14 flex justify-center"
           )}
         >
-          <div className="flex flex-col justify-center space-y-6">
+          <div className="flex flex-col justify-center space-y-6 max-w-[32rem]">
             {data.statistic.map((statistic, index) => {
               return (
                 <div key={index} className="text-white ">
