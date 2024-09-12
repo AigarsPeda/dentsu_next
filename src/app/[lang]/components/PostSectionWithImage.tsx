@@ -32,7 +32,7 @@ export default function PostSectionWithImage({
   const imgUrl = getStrapiMedia(data.feature.media.data[0]?.attributes.url);
 
   return (
-    <div className="grid w-full grid-cols-1 md:grid-cols-2 md:h-[55rem] min-h-[30rem]">
+    <div className="grid w-full grid-cols-1 md:grid-cols-2 md:min-h-[55rem] min-h-[30rem]">
       {data.feature.pictureOnRight ? (
         <>
           <div className="w-full h-full bg-center bg-cover">
