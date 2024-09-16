@@ -189,7 +189,6 @@ export default function ClientSections({ data }: ClientSectionsProps) {
                 slides={filteredData}
                 handArraySwitch={handleSwitch}
                 handelIsLoading={() => {
-                  console.log("loaded");
                   setIsVisible(true);
                 }}
               />
