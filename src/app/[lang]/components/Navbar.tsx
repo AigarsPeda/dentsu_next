@@ -49,18 +49,16 @@ export default function Navbar({
     locale: urlLocale,
   }));
 
-  const getCurrentLocaleAndReplace = (path: string, newLocale: string) => {
-    // const availableLocalesCodes = availableLocales.map((locale) => locale.code);
-    // const currentLocale = availableLocalesCodes.reduce((acc, locale) => {
-    //   if (path.includes(locale)) {
-    //     return locale;
-    //   }
-    //   return acc;
-    // });
+  const getCurrentLocaleAndReplace = (newLocale: string) => {
+    const pathArray = path.split("/");
 
-    // return path.replace(currentLocale, newLocale);
+    if (pathArray.length === 1) {
+      console.error("Path is not valid");
+    }
 
-    return path.replace(/\/[a-z]{2}\//, `/${newLocale}/`);
+    pathArray[1] = newLocale;
+
+    return pathArray.join("/");
   };
 
   useEffect(() => {
@@ -73,6 +71,7 @@ export default function Navbar({
 
   return (
     <>
+      {console.log("availableLocales", availableLocales)}
       <div className="sticky top-0 z-[999] py-4 bg-dentsu-primary">
         <div className="container flex items-center justify-center mx-auto lg:justify-between h-9 md:h-14">
           <div>
@@ -89,11 +88,19 @@ export default function Navbar({
             </ul>
             <div className="flex items-center justify-center ml-6 space-x-3">
               {availableLocales.map((locale) => (
-                <Link
-                  scroll={false}
+                // <Link
+                //   scroll={false}
+                //   key={locale.id}
+                //   locale={locale.code}
+                //   href={getCurrentLocaleAndReplace(path, locale.code)}
+                // >
+                <button
                   key={locale.id}
-                  locale={locale.code}
-                  href={getCurrentLocaleAndReplace(path, locale.code)}
+                  onClick={() => {
+                    // setMobileMenuOpen(false);
+                    router.push(getCurrentLocaleAndReplace(locale.code));
+                  }}
+                  className=""
                 >
                   <div
                     style={{
@@ -112,7 +119,7 @@ export default function Navbar({
                       locale.name
                     )}
                   </div>
-                </Link>
+                </button>
               ))}
             </div>
           </div>
@@ -162,11 +169,13 @@ export default function Navbar({
               </div>
               <div className="flex flex-col items-center justify-center gap-6 mt-6">
                 {availableLocales.map((locale) => (
-                  <Link
-                    scroll={false}
+                  <button
                     key={locale.id}
-                    locale={locale.code}
-                    href={getCurrentLocaleAndReplace(path, locale.code)}
+                    onClick={() => {
+                      // setMobileMenuOpen(false);
+                      router.push(getCurrentLocaleAndReplace(locale.code));
+                    }}
+                    className=""
                   >
                     <div
                       style={{
@@ -185,7 +194,7 @@ export default function Navbar({
                         locale.name
                       )}
                     </div>
-                  </Link>
+                  </button>
                 ))}
               </div>
             </DialogPanel>
