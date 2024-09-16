@@ -32,22 +32,19 @@ export default function PostSectionWithImage({
   const imgUrl = getStrapiMedia(data.feature.media.data[0]?.attributes.url);
 
   return (
-    <div className="grid w-full grid-cols-1 md:grid-cols-2 max-h-[55rem] min-h-[30rem]">
+    <div className="grid w-full grid-cols-1 md:grid-cols-2 md:min-h-[55rem] min-h-[30rem]">
       {data.feature.pictureOnRight ? (
         <>
-          <div className="w-full h-full bg-center bg-cover">
-            {imgUrl && (
-              <img
-                src={imgUrl}
-                alt={
-                  data.feature.media.data[0].attributes.alternativeText ??
-                  "none provided"
-                }
-                className="object-cover w-full h-full overflow-hidden"
-              />
-            )}
-          </div>
-          {/* min-h-[50vw] */}
+          {imgUrl && (
+            <img
+              src={imgUrl}
+              alt={
+                data.feature.media.data[0].attributes.alternativeText ??
+                "none provided"
+              }
+              className="object-fill w-full h-full max-h-[55rem]"
+            />
+          )}
           <div className="bg-black">
             <TitleInCircleWithLine
               pictureOnRight
@@ -57,7 +54,6 @@ export default function PostSectionWithImage({
           </div>
         </>
       ) : (
-        // min-h-[50vw]
         <>
           <div className="bg-black">
             <TitleInCircleWithLine
@@ -65,18 +61,16 @@ export default function PostSectionWithImage({
               description={data.feature.description}
             />
           </div>
-          <div className="w-full h-full bg-center bg-cover">
-            {imgUrl && (
-              <img
-                src={imgUrl}
-                alt={
-                  data.feature.media.data[0].attributes.alternativeText ??
-                  "none provided"
-                }
-                className="object-cover w-full h-full overflow-hidden"
-              />
-            )}
-          </div>
+          {imgUrl && (
+            <img
+              src={imgUrl}
+              alt={
+                data.feature.media.data[0].attributes.alternativeText ??
+                "none provided"
+              }
+              className="object-fill w-full h-full max-h-[55rem]"
+            />
+          )}
         </>
       )}
     </div>
