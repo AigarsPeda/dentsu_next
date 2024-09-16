@@ -130,7 +130,9 @@ export const DivWithImage = ({
     triggerOnce: true, // Only trigger once
   });
 
-  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+  // const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (!isAnimateOn) {
@@ -147,6 +149,7 @@ export const DivWithImage = ({
 
   const createBackgroundImage = (url: string) => {
     const baseStyle = {
+      backgroundSize: "100% 100%",
       backgroundPosition: "center",
       backgroundImage: isDarkOverlay
         ? `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`
@@ -156,14 +159,32 @@ export const DivWithImage = ({
     return baseStyle;
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <div
         className="relative items-center justify-center hidden overflow-hidden bg-center md:bg-cover md:flex"
         style={{
-          ...(pictureOnRight && {
-            ...createBackgroundImage(imgUrl),
-          }),
+          ...(pictureOnRight &&
+            !isMobile && {
+              ...createBackgroundImage(imgUrl),
+            }),
+          ...(pictureOnRight &&
+            isMobile && {
+              backgroundColor: "#000",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }),
         }}
       >
         <div className="container relative flex items-center justify-center w-full h-full">
@@ -185,11 +206,16 @@ export const DivWithImage = ({
       <div
         className="transition-all duration-300 md:flex"
         style={{
-          backgroundAttachment: "cover",
-          backgroundSize: isMobile && isMenuOpen ? "105% 105%" : "100% 100%",
-          ...(!pictureOnRight && {
-            ...createBackgroundImage(imgUrl),
-          }),
+          ...(!pictureOnRight &&
+            !isMobile && {
+              ...createBackgroundImage(imgUrl),
+            }),
+          ...(!pictureOnRight &&
+            isMobile && {
+              backgroundColor: "#000",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }),
         }}
       >
         {children}
