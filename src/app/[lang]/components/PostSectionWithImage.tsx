@@ -42,7 +42,7 @@ export default function PostSectionWithImage({
                 data.feature.media.data[0].attributes.alternativeText ??
                 "none provided"
               }
-              className="object-fill w-full h-full max-h-[55rem]"
+              className="object-cover w-full h-full max-h-[55rem]"
             />
           )}
           <div className="bg-black">
@@ -68,7 +68,7 @@ export default function PostSectionWithImage({
                 data.feature.media.data[0].attributes.alternativeText ??
                 "none provided"
               }
-              className="object-fill w-full h-full max-h-[55rem]"
+              className="object-cover w-full h-full max-h-[55rem]"
             />
           )}
         </>
