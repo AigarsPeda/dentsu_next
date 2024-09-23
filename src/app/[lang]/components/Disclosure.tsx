@@ -91,6 +91,7 @@ const ServiceDisclosure: FC<ServiceDisclosureProps> = ({
           >
             <AccordionItem
               value={`item-${index}`}
+              data-description={service.description}
               className={classNames("md:p-4 px-2 py-3 group", {
                 "border-gray-50": fontColor === "light",
                 "border-black": fontColor === "dark" || !fontColor,
