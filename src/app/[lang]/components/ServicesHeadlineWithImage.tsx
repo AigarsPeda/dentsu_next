@@ -127,9 +127,9 @@ export default function ServicesHeadlineWithImage({
         />
         <div
           ref={contentRef}
-          className="absolute bottom-0 z-10 w-full h-full grid-cols-2 md:inset-0 md:grid"
+          className="absolute bottom-0 z-10 w-full h-full md:grid-cols-2 md:inset-0 md:grid"
         >
-          <div className="flex items-end w-full h-full col-span-1 col-end-3 start-1">
+          <div className="flex items-end justify-center w-full h-full col-span-1 col-end-3 start-1">
             <div className="bg-white max-w-[35rem] pb-14">
               <h3 className="p-10 font-normal text-black md:p-14">
                 {data.title}
