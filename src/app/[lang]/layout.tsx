@@ -8,6 +8,7 @@ import { fetchAPI } from "@/app/[lang]/utils/fetch-api";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { i18n } from "../../../i18n-config";
+import GoogleAnalytics from "../../script/GoogleAnalytics";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -112,6 +113,9 @@ export default async function RootLayout({
   readonly params: { lang: string };
 }) {
   const global = await getGlobal(params.lang);
+
+  console.log("global", global);
+
   // const availableLocales = await getAvailableLocales();
 
   // TODO: CREATE A CUSTOM ERROR PAGE
@@ -146,6 +150,11 @@ export default async function RootLayout({
 
   return (
     <html className={`${halcom.className}`} lang={params.lang ?? "eng"}>
+      <GoogleAnalytics
+        googleAnalyticsMeasurementId={
+          global.data.attributes.GoogleAnalyticsMeasurementId ?? ""
+        }
+      />
       <body className="text-white">
         <Navbar
           links={navbar.links}
