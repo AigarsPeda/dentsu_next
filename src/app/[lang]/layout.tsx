@@ -152,7 +152,7 @@ export default async function RootLayout({
     <html className={`${halcom.className}`} lang={params.lang ?? "eng"}>
       <GoogleAnalytics
         googleAnalyticsMeasurementId={
-          global.data.attributes.GoogleAnalyticsMeasurementId ?? ""
+          global?.data?.attributes?.GoogleAnalyticsMeasurementId ?? ""
         }
       />
       <body className="text-white">
