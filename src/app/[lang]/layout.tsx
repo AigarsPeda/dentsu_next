@@ -114,8 +114,6 @@ export default async function RootLayout({
 }) {
   const global = await getGlobal(params.lang);
 
-  console.log("global", global);
-
   // const availableLocales = await getAvailableLocales();
 
   // TODO: CREATE A CUSTOM ERROR PAGE
