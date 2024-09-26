@@ -8,7 +8,7 @@ interface TableProps {
 }
 export default function Table({ data }: TableProps) {
   return (
-    <div className="container py-10 mx-auto">
+    <div className="container mx-auto overflow-x-auto">
       <Markdown children={data.tableMarkdown} remarkPlugins={[remarkGfm]} />
     </div>
   );
