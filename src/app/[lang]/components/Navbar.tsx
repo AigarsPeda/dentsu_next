@@ -6,7 +6,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Variants, motion, useAnimation } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
+import { Suspense, Fragment, useEffect, useState } from "react";
 
 const variants: Variants = {
   hidden: {
@@ -26,7 +26,32 @@ const variants: Variants = {
   },
 };
 
-export default function Navbar({
+type NavbarProps = {
+  links: Array<NavLink>;
+  logoUrl: string | null;
+  logoText: string | null;
+  availableLocales: StrapiLocaleType[];
+};
+
+export default function NavbarContent({
+  links,
+  logoUrl,
+  logoText,
+  availableLocales,
+}: NavbarProps) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Navbar
+        links={links}
+        logoUrl={logoUrl}
+        logoText={logoText}
+        availableLocales={availableLocales}
+      />
+    </Suspense>
+  );
+}
+
+function Navbar({
   links,
   logoUrl,
   logoText,
@@ -63,7 +88,7 @@ export default function Navbar({
     const newPath = pathArray.join("/");
 
     // Get search params and append them back to the new path
-    const searchParams = params.toString(); // Convert search params to string
+    const searchParams = params?.toString(); // Convert search params to string
 
     return searchParams ? `${newPath}?${searchParams}` : newPath;
   };

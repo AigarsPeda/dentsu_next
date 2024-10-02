@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { i18n } from "../../../i18n-config";
 import GoogleAnalytics from "../../script/GoogleAnalytics";
+import NavbarContent from "@/app/[lang]/components/Navbar";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -154,7 +155,7 @@ export default async function RootLayout({
         }
       />
       <body className="text-white">
-        <Navbar
+        <NavbarContent
           links={navbar.links}
           logoUrl={navbarLogoUrl}
           availableLocales={localesWithUrls}
