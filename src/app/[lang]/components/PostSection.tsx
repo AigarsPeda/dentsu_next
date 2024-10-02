@@ -2,10 +2,11 @@
 import ArrowIcon from "@/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { loader } from "./ServicesHeadlineWithImage";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 import { IMAGE_DATA_FOR_BLUR } from "./NewsPostSection";
+import { loader } from "./ServicesHeadlineWithImage";
 
 interface MediaType {
   id: string;
@@ -43,9 +44,11 @@ export default function PostSection({ data }: PostSectionProps) {
 
   const search = params.get("search");
 
-  const filteredData = data.post.filter((item) => {
-    return item.company?.toLowerCase().includes(search?.toLowerCase() || "");
-  });
+  const filteredData = useMemo(() => {
+    return data.post.filter((item) => {
+      return item.company?.toLowerCase().includes(search?.toLowerCase() || "");
+    });
+  }, [data.post, search]);
 
   const urlLocale = path.split("/")[1] || "en";
 

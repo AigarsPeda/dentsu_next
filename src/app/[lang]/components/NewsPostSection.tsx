@@ -56,18 +56,6 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
     router.push(`?page=${newPage}`);
   };
 
-  // const getCurrentLocaleAndReplace = (newLocale: string) => {
-  //   const pathArray = path.split("/");
-
-  //   if (pathArray.length === 1) {
-  //     console.error("Path is not valid");
-  //   }
-
-  //   pathArray[1] = newLocale;
-
-  //   return pathArray.join("/");
-  // };
-
   useEffect(() => {
     if (page) {
       setCurrentPage(parseInt(page as string));

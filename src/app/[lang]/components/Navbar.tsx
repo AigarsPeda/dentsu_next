@@ -5,8 +5,8 @@ import { Dialog, DialogPanel, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Variants, motion, useAnimation } from "framer-motion";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Suspense, Fragment, useEffect, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { Fragment, Suspense, useEffect, useState } from "react";
 
 const variants: Variants = {
   hidden: {
@@ -62,7 +62,6 @@ function Navbar({
   logoText: string | null;
   availableLocales: StrapiLocaleType[];
 }) {
-  const router = useRouter();
   const path = usePathname();
   const controls = useAnimation();
   const params = useSearchParams();
