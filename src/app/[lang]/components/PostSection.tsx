@@ -47,6 +47,8 @@ export default function PostSection({ data }: PostSectionProps) {
     return item.company?.toLowerCase().includes(search?.toLowerCase() || "");
   });
 
+  console.log("filteredData", filteredData);
+
   const urlLocale = path.split("/")[1] || "en";
 
   return (

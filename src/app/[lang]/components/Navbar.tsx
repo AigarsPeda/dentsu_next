@@ -5,7 +5,7 @@ import { Dialog, DialogPanel, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Variants, motion, useAnimation } from "framer-motion";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 
 const variants: Variants = {
@@ -40,6 +40,7 @@ export default function Navbar({
   const router = useRouter();
   const path = usePathname();
   const controls = useAnimation();
+  const params = useSearchParams();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const urlLocale = path.split("/")[1] || "en";
@@ -53,12 +54,18 @@ export default function Navbar({
     const pathArray = path.split("/");
 
     if (pathArray.length === 1) {
-      console.error("Path is not valid");
+      return path; // Return the original path if it's invalid
     }
 
     pathArray[1] = newLocale;
 
-    return pathArray.join("/");
+    // Rebuild the path without the locale and add back search params
+    const newPath = pathArray.join("/");
+
+    // Get search params and append them back to the new path
+    const searchParams = params.toString(); // Convert search params to string
+
+    return searchParams ? `${newPath}?${searchParams}` : newPath;
   };
 
   useEffect(() => {

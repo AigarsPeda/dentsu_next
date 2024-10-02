@@ -80,11 +80,12 @@ export default function Footer({ footer }: { footer: Footer }) {
 
 function FooterLink({ url, text, newTab }: FooterLink) {
   const path = usePathname();
+  const urlLocale = path.split("/")[1] || "en";
 
   return (
     <li className="flex">
       <Link
-        href={url}
+        href={`/${urlLocale}/${url}`}
         target={newTab ? "_blank" : "_self"}
         className={classNames(
           path === url && "text-gray-100 hover:text-gray-100",
