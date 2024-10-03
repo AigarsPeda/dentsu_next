@@ -68,6 +68,28 @@ const GrayAccordionTrigger = React.forwardRef<
 });
 GrayAccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
+const CookieAccordionTrigger = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => {
+  return (
+    <AccordionPrimitive.Header className="flex">
+      <AccordionPrimitive.Trigger
+        ref={ref}
+        className={cn(
+          "flex w-full justify-between gap-3 hover:border-black focus:border-black focus:outline-none [&[data-state=open]>svg]:-rotate-0",
+          className
+        )}
+        {...props}
+      >
+        <IoIosArrowDown className="text-gray-400 transition-transform transform -rotate-90 w-7 h-7" />
+        {children}
+      </AccordionPrimitive.Trigger>
+    </AccordionPrimitive.Header>
+  );
+});
+CookieAccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
@@ -89,4 +111,5 @@ export {
   AccordionItem,
   AccordionTrigger,
   GrayAccordionTrigger,
+  CookieAccordionTrigger,
 };

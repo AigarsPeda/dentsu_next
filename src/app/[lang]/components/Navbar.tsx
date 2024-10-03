@@ -155,9 +155,9 @@ function Navbar({
             }}
           >
             {mobileMenuOpen ? (
-              <XMarkIcon className="w-6 h-6" aria-hidden="true" />
+              <XMarkIcon className="w-6 h-6" />
             ) : (
-              <Bars3Icon className="text-white h-7 w-7" aria-hidden="true" />
+              <Bars3Icon className="text-white h-7 w-7" />
             )}
           </button>
         </div>

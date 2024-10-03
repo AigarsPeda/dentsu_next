@@ -1,4 +1,10 @@
 "use client";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  CookieAccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -40,7 +46,7 @@ const CookieBanner = () => {
           </div>
         </div>
 
-        <DialogContent className="sm:max-w-md">
+        <DialogContent>
           <DialogHeader>
             <DialogTitle className="pb-4 text-black">
               Privacy Overview
@@ -63,16 +69,57 @@ const CookieBanner = () => {
               {isShowMore ? "Show less" : "Show more"}
             </button>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="grid flex-1 gap-2"></div>
+          <div>
+            <Accordion type="single" collapsible>
+              <AccordionItem className="pb-5" value={`item-${1}`}>
+                <CookieAccordionTrigger className="flex items-center px-2 py-3 bg-gray-200 md:p-4">
+                  <div className="flex items-center justify-between w-full">
+                    <p className="flex gap-4 text-sm font-normal text-left text-black truncate">
+                      {"Necessary"}
+                    </p>
+                    <p className="text-sm font-normal text-black">
+                      {"Always Enabled"}
+                    </p>
+                  </div>
+                </CookieAccordionTrigger>
+                <AccordionContent className="pb-0 text-black">
+                  <div className="p-5">
+                    <p className="text-sm">
+                      {
+                        "Necessary cookies are absolutely essential for the website to function properly. This category only includes cookies that ensures basic functionalities and security features of the website. These cookies do not store any personal information."
+                      }
+                    </p>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value={`item-${2}`}>
+                <CookieAccordionTrigger className="flex items-center px-2 py-3 bg-gray-200 md:p-4">
+                  <div className="flex items-center justify-between w-full">
+                    <p className="flex gap-4 text-sm font-normal text-left text-black truncate">
+                      {"Non-necessary"}
+                    </p>
+                    <p className="text-sm font-normal text-black">
+                      {"This needs to switch"}
+                    </p>
+                  </div>
+                </CookieAccordionTrigger>
+                <AccordionContent className="pb-0 text-black">
+                  <div className="p-5">
+                    <p className="text-sm">
+                      {
+                        "Any cookies that may not be particularly necessary for the website to function and is used specifically to collect user personal data via analytics, ads, other embedded contents are termed as non-necessary cookies. It is mandatory to procure user consent prior to running these cookies on your website."
+                      }
+                    </p>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
-          {/* <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter> */}
+          <div className="flex items-center justify-end">
+            <button className="px-4 py-2 text-sm text-white bg-black">
+              SAVE AND ACCEPT
+            </button>
+          </div>
         </DialogContent>
       </Dialog>
     </div>

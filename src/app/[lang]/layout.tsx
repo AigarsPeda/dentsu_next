@@ -165,8 +165,6 @@ export default async function RootLayout({
           {children}
         </main>
         <CookieBanner />
-
-        {/* <Banner data={notificationBanner} /> */}
         <Footer footer={footer} />
       </body>
     </html>
