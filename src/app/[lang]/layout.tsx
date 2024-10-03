@@ -1,15 +1,14 @@
-import Banner from "@/app/[lang]/components/Banner";
+import CookieBanner from "@/app/[lang]/components/CookieBanner";
 import Footer from "@/app/[lang]/components/Footer";
-import Navbar from "@/app/[lang]/components/Navbar";
+import NavbarContent from "@/app/[lang]/components/Navbar";
 import "@/app/[lang]/globals.css";
 import { getStrapiMedia, getStrapiURL } from "@/app/[lang]/utils/api-helpers";
 import { FALLBACK_SEO } from "@/app/[lang]/utils/constants";
 import { fetchAPI } from "@/app/[lang]/utils/fetch-api";
+import GoogleAnalytics from "@/script/GoogleAnalytics";
+import { i18n } from "i18n-config";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { i18n } from "../../../i18n-config";
-import GoogleAnalytics from "../../script/GoogleAnalytics";
-import NavbarContent from "@/app/[lang]/components/Navbar";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -165,6 +164,7 @@ export default async function RootLayout({
         <main className="relative min-h-[94vh] overflow-hidden text-black">
           {children}
         </main>
+        <CookieBanner />
 
         {/* <Banner data={notificationBanner} /> */}
         <Footer footer={footer} />
