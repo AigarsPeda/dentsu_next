@@ -16,6 +16,7 @@
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-switch": "^1.1.1",
     "@react-google-maps/api": "^2.19.3",
     "@strapi/blocks-react-renderer": "^1.0.1",
     "@types/negotiator": "^0.6.3",

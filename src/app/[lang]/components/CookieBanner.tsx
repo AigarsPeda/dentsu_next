@@ -16,11 +16,13 @@ import {
 } from "@/components/ui/dialog";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Switch } from "@/components/ui/switch";
 
 const CookieBanner = () => {
   const path = usePathname();
   const urlLocale = path.split("/")[1] || "en";
   const [isShowMore, setIsShowMore] = useState(false);
+  const [isNonNecessary, setIsNonNecessary] = useState(true);
 
   return (
     <div>
@@ -71,8 +73,8 @@ const CookieBanner = () => {
           </div>
           <div>
             <Accordion type="single" collapsible>
-              <AccordionItem className="pb-5" value={`item-${1}`}>
-                <CookieAccordionTrigger className="flex items-center px-2 py-3 bg-gray-200 md:p-4">
+              <AccordionItem className="pb-2" value={`item-${1}`}>
+                <CookieAccordionTrigger className="flex items-center px-3 py-2 bg-gray-200">
                   <div className="flex items-center justify-between w-full">
                     <p className="flex gap-4 text-sm font-normal text-left text-black truncate">
                       {"Necessary"}
@@ -93,16 +95,22 @@ const CookieBanner = () => {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value={`item-${2}`}>
-                <CookieAccordionTrigger className="flex items-center px-2 py-3 bg-gray-200 md:p-4">
-                  <div className="flex items-center justify-between w-full">
-                    <p className="flex gap-4 text-sm font-normal text-left text-black truncate">
-                      {"Non-necessary"}
-                    </p>
-                    <p className="text-sm font-normal text-black">
-                      {"This needs to switch"}
-                    </p>
-                  </div>
-                </CookieAccordionTrigger>
+                <div className="flex items-center justify-between w-full pr-2 bg-gray-200">
+                  <CookieAccordionTrigger className="flex items-center px-3 py-2 bg-gray-200">
+                    <div className="flex items-center justify-between w-full">
+                      <p className="flex gap-4 text-sm font-normal text-left text-black truncate">
+                        {"Non-necessary"}
+                      </p>
+                    </div>
+                  </CookieAccordionTrigger>
+                  <Switch
+                    className="text-black"
+                    id="airplane-mode"
+                    checked={isNonNecessary}
+                    onClick={() => setIsNonNecessary((state) => !state)}
+                  />
+                </div>
+
                 <AccordionContent className="pb-0 text-black">
                   <div className="p-5">
                     <p className="text-sm">
@@ -115,7 +123,7 @@ const CookieBanner = () => {
               </AccordionItem>
             </Accordion>
           </div>
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end pt-1">
             <button className="px-4 py-2 text-sm text-white bg-black">
               SAVE AND ACCEPT
             </button>
