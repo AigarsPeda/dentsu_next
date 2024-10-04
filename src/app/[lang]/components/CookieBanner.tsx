@@ -47,8 +47,6 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
   const [isShowDialog, setIsShowDialog] = useState(false);
   const [isNonNecessary, setIsNonNecessary] = useState(true);
 
-  console.log("cookieBannerData", cookieBannerData);
-
   const addCookieToPage = () => {
     const COOKIE = {
       necessary: true,
