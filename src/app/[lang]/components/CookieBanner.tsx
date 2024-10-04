@@ -132,7 +132,10 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
               <Accordion type="single" collapsible>
                 {cookieBannerData?.cookieChoices.map((choice) => (
                   <div key={choice.id} className="pb-2">
-                    <AccordionItem value={`item-${choice?.id}`}>
+                    <AccordionItem
+                      value={`item-${choice?.id}`}
+                      className="border-b-transparent"
+                    >
                       <div className="flex items-center justify-between w-full pr-2 bg-gray-200">
                         <CookieAccordionTrigger className="flex items-center px-3 py-2 bg-gray-200">
                           <div className="flex items-center justify-between w-full">
