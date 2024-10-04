@@ -27,7 +27,7 @@ const GoogleAnalytics = ({
             strategy="lazyOnload"
             src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}`}
           />
-          <Script id="" strategy="lazyOnload">
+          <Script id="google-analytics-lazyOnload" strategy="lazyOnload">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
