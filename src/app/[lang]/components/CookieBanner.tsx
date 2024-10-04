@@ -63,9 +63,14 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
 
   const words = cookieBannerData?.dialog.split(" ");
   const isMoreWords = words.length > 81;
-  const dialogText = isShowMore
-    ? cookieBannerData?.dialog
-    : `${words.slice(0, 81).join(" ")}...`;
+  const dialogText = isMoreWords
+    ? isShowMore
+      ? cookieBannerData?.dialog
+      : `${words.slice(0, 81).join(" ")}...`
+    : cookieBannerData?.dialog;
+  //  isShowMore
+  //   ? cookieBannerData?.dialog
+  //   : `${words.slice(0, 81).join(" ")}...`;
 
   useEffect(() => {
     if (cookies?.necessary?.version !== "1.0.0") {

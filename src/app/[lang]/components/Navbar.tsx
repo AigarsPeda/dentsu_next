@@ -167,15 +167,15 @@ function Navbar({
           as="div"
           open={mobileMenuOpen}
           onClose={() => setMobileMenuOpen(false)}
-          className="relative z-50"
+          className="relative z-[999]"
         >
           <motion.div
             initial="hidden"
             variants={variants}
             animate={mobileMenuOpen ? "visible" : "hidden"}
-            className="fixed inset-0 z-50 p-6 mx-auto bg-dentsu-primary lg:hidden"
+            className="fixed inset-0 z-[999] p-6 mx-auto bg-dentsu-primary lg:hidden"
           >
-            <DialogPanel className="fixed inset-0 z-50 w-full max-w-xs px-6 py-6 mx-auto overflow-y-auto text-center bg-dentsu-primary sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
+            <DialogPanel className="fixed inset-0 z-[999] w-full max-w-xs px-6 py-6 mx-auto overflow-y-auto text-center bg-dentsu-primary sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
               <div className="flow-root mt-24">
                 <div className="-my-6 divide-y divide-gray-700">
                   <div className="py-6 space-y-2">
