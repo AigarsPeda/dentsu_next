@@ -36,6 +36,8 @@ async function getGlobal(lang: string): Promise<any> {
       "footer.socialLinks",
       "footer.categories",
       "footer.localesFlags",
+      "CookieBanner",
+      "CookieBanner.cookieChoices",
     ],
     locale: lang,
   };
@@ -120,15 +122,15 @@ export default async function RootLayout({
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
 
-  const { navbar, footer } = global.data.attributes;
+  const {
+    navbar,
+    footer,
+    CookieBanner: cookieBannerData,
+  } = global.data.attributes;
 
   const navbarLogoUrl = getStrapiMedia(
     navbar.navbarLogo.logoImg.data?.attributes.url
   );
-
-  // const footerLogoUrl = getStrapiMedia(
-  //   footer.footerLogo?.logoImg?.data?.attributes.url
-  // );
 
   const localesWithUrls = navbar.locales.map((locale: StrapiLocaleType) => {
     const localeUrl = locale.img.data?.attributes.url;
@@ -166,7 +168,7 @@ export default async function RootLayout({
           <main className="relative min-h-[94vh] overflow-hidden text-black">
             {children}
           </main>
-          <CookieBanner />
+          <CookieBanner cookieBannerData={cookieBannerData} />
           <Footer footer={footer} />
         </body>
       </html>
