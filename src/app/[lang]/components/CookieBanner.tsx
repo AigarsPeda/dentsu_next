@@ -29,6 +29,7 @@ interface CookieBannerProps {
     acceptButtonTitle: string;
     dialogTitle: string;
     dialog: string;
+    dialogButtonTitle: string;
     manageCookieSettingsTitle: string;
     cookieChoices: {
       id: number;
@@ -85,24 +86,24 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
           >
             <div className="container flex flex-wrap items-center justify-center gap-3 mx-auto md:justify-center">
               <p className="text-sm text-center xl:text-left">
-                {cookieBannerData.description}
+                {cookieBannerData?.description}
               </p>
               <a
-                href={`/${urlLocale}/${cookieBannerData.moreInfoTextLink}`}
+                href={`/${urlLocale}/${cookieBannerData?.moreInfoTextLink}`}
                 className="inline-block text-sm underline"
               >
-                {cookieBannerData.moreInfoText}
+                {cookieBannerData?.moreInfoText}
               </a>
               <DialogTrigger asChild>
                 <Button variant="violet">
-                  {cookieBannerData.manageCookieSettingsTitle}
+                  {cookieBannerData?.manageCookieSettingsTitle}
                 </Button>
               </DialogTrigger>
               <button
                 className="px-5 py-1 ml-2 text-sm text-white bg-black"
                 onClick={addCookieToPage}
               >
-                {cookieBannerData.acceptButtonTitle}
+                {cookieBannerData?.acceptButtonTitle}
               </button>
             </div>
           </motion.div>
@@ -127,22 +128,22 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
 
             <div>
               <Accordion type="single" collapsible>
-                {cookieBannerData.cookieChoices.map((choice) => (
+                {cookieBannerData?.cookieChoices.map((choice) => (
                   <div key={choice.id} className="pb-2">
-                    <AccordionItem value={`item-${choice.id}`}>
+                    <AccordionItem value={`item-${choice?.id}`}>
                       <div className="flex items-center justify-between w-full pr-2 bg-gray-200">
                         <CookieAccordionTrigger className="flex items-center px-3 py-2 bg-gray-200">
                           <div className="flex items-center justify-between w-full">
                             <p className="flex gap-4 text-sm font-normal text-left text-black truncate">
-                              {choice.title}
+                              {choice?.title}
                             </p>
                           </div>
                         </CookieAccordionTrigger>
-                        {choice.isNonNecessary && (
+                        {choice?.isNonNecessary && (
                           <Switch
                             className="text-black"
                             id="airplane-mode"
-                            checked={choice.isNonNecessary}
+                            checked={choice?.isNonNecessary}
                             onClick={() => setIsNonNecessary((state) => !state)}
                           />
                         )}
@@ -150,7 +151,7 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
 
                       <AccordionContent className="pb-0 text-black">
                         <div className="p-5">
-                          <p className="text-sm">{choice.description}</p>
+                          <p className="text-sm">{choice?.description}</p>
                         </div>
                       </AccordionContent>
                     </AccordionItem>
@@ -163,7 +164,7 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
                 className="px-4 py-2 text-sm text-white bg-black"
                 onClick={addCookieToPage}
               >
-                SAVE AND ACCEPT
+                {cookieBannerData?.dialogButtonTitle}
               </button>
             </div>
           </DialogContent>
