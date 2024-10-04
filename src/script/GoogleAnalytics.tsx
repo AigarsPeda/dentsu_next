@@ -14,9 +14,13 @@ const GoogleAnalytics = ({
   const { cookies } = useCookieConsent();
   const { necessary } = cookies;
 
+  const isNonNecessary = necessary?.nonNecessary === true;
+  const isUndefinedNonNecessary = necessary?.nonNecessary === undefined;
+  const isAddGoogleAnalytics = isNonNecessary || isUndefinedNonNecessary;
+
   return (
     <>
-      {necessary?.nonNecessary && (
+      {isAddGoogleAnalytics && (
         <>
           <Script
             id="google-analytics"
