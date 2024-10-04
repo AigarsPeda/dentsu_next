@@ -81,7 +81,7 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
             animate={{ y: 0, opacity: 1 }}
             initial={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-0 left-0 right-0 px-3 py-2 text-black bg-white"
+            className="fixed bottom-0 left-0 right-0 px-3 py-2 text-black bg-white z-[999]"
           >
             <div className="container flex flex-wrap items-center justify-center gap-3 mx-auto md:justify-center">
               <p className="text-sm text-center xl:text-left">
