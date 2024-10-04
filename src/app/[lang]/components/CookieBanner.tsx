@@ -68,9 +68,6 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
       ? cookieBannerData?.dialog
       : `${words.slice(0, 81).join(" ")}...`
     : cookieBannerData?.dialog;
-  //  isShowMore
-  //   ? cookieBannerData?.dialog
-  //   : `${words.slice(0, 81).join(" ")}...`;
 
   useEffect(() => {
     if (cookies?.necessary?.version !== "1.0.0") {
