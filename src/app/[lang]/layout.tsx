@@ -9,6 +9,7 @@ import GoogleAnalytics from "@/script/GoogleAnalytics";
 import { i18n } from "i18n-config";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { CookieConsentProvider } from "../../contexts/CookieConsentContext";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -147,27 +148,29 @@ export default async function RootLayout({
   });
 
   return (
-    <html className={`${halcom.className}`} lang={params.lang ?? "eng"}>
-      <GoogleAnalytics
-        googleAnalyticsMeasurementId={
-          global?.data?.attributes?.GoogleAnalyticsMeasurementId ?? ""
-        }
-      />
-      <body className="text-white">
-        <NavbarContent
-          links={navbar.links}
-          logoUrl={navbarLogoUrl}
-          availableLocales={localesWithUrls}
-          logoText={navbar.navbarLogo.logoText}
+    <CookieConsentProvider>
+      <html className={`${halcom.className}`} lang={params.lang ?? "eng"}>
+        <GoogleAnalytics
+          googleAnalyticsMeasurementId={
+            global?.data?.attributes?.GoogleAnalyticsMeasurementId ?? ""
+          }
         />
+        <body className="text-white">
+          <NavbarContent
+            links={navbar.links}
+            logoUrl={navbarLogoUrl}
+            availableLocales={localesWithUrls}
+            logoText={navbar.navbarLogo.logoText}
+          />
 
-        <main className="relative min-h-[94vh] overflow-hidden text-black">
-          {children}
-        </main>
-        <CookieBanner />
-        <Footer footer={footer} />
-      </body>
-    </html>
+          <main className="relative min-h-[94vh] overflow-hidden text-black">
+            {children}
+          </main>
+          <CookieBanner />
+          <Footer footer={footer} />
+        </body>
+      </html>
+    </CookieConsentProvider>
   );
 }
 

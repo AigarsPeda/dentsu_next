@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import Script from "next/script";
 
 interface GoogleAnalyticsProps {
@@ -10,15 +11,20 @@ interface GoogleAnalyticsProps {
 const GoogleAnalytics = ({
   googleAnalyticsMeasurementId,
 }: GoogleAnalyticsProps) => {
+  const { cookies } = useCookieConsent();
+  const { necessary } = cookies;
+
   return (
     <>
-      <Script
-        strategy="lazyOnload"
-        src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}`}
-      />
-
-      <Script id="" strategy="lazyOnload">
-        {`
+      {necessary?.nonNecessary && (
+        <>
+          <Script
+            id="google-analytics"
+            strategy="lazyOnload"
+            src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}`}
+          />
+          <Script id="" strategy="lazyOnload">
+            {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
@@ -26,7 +32,9 @@ const GoogleAnalytics = ({
               page_path: window.location.pathname,
               });
           `}
-      </Script>
+          </Script>
+        </>
+      )}
     </>
   );
 };
