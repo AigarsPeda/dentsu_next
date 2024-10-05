@@ -115,7 +115,7 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
               <DialogTitle className="pb-4 text-black">
                 {cookieBannerData?.dialogTitle}
               </DialogTitle>
-              <DialogDescription className="overflow-y-auto text-left max-h-48">
+              <DialogDescription className="overflow-y-auto text-left max-h-52">
                 {dialogText}
               </DialogDescription>
             </DialogHeader>
