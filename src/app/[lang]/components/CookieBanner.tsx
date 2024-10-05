@@ -84,9 +84,9 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
             animate={{ y: 0, opacity: 1 }}
             initial={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-0 left-0 right-0 px-3 py-2 text-black bg-white z-[699]"
+            className="fixed bottom-0 left-0 right-0 p-3 text-black bg-white z-[699]"
           >
-            <div className="container flex flex-wrap items-center justify-center gap-3 mx-auto md:justify-center">
+            <div className="container flex flex-wrap items-center justify-center gap-2 mx-auto md:gap-3 md:justify-center">
               <p className="text-sm text-center xl:text-left">
                 {cookieBannerData?.description}
               </p>
@@ -97,7 +97,7 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
                 {cookieBannerData?.moreInfoText}
               </a>
               <DialogTrigger asChild>
-                <Button variant="violet">
+                <Button variant="violet" className="px-0 md:px-4">
                   {cookieBannerData?.manageCookieSettingsTitle}
                 </Button>
               </DialogTrigger>
@@ -115,7 +115,7 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
               <DialogTitle className="pb-4 text-black">
                 {cookieBannerData?.dialogTitle}
               </DialogTitle>
-              <DialogDescription className="overflow-y-auto text-left max-h-52">
+              <DialogDescription className="overflow-y-auto text-left max-h-48">
                 {dialogText}
               </DialogDescription>
             </DialogHeader>
