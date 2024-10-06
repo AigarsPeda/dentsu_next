@@ -35,7 +35,7 @@ interface CookieBannerProps {
       id: number;
       title: string;
       description: string;
-      isNonNecessary: boolean;
+      isNecessary: boolean;
     }[];
   };
 }
@@ -146,11 +146,11 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
                             </p>
                           </div>
                         </CookieAccordionTrigger>
-                        {choice?.isNonNecessary && (
+                        {!choice?.isNecessary && (
                           <Switch
                             className="text-black"
                             id="airplane-mode"
-                            checked={choice?.isNonNecessary}
+                            checked={isNonNecessary}
                             onClick={() => setIsNonNecessary((state) => !state)}
                           />
                         )}
