@@ -48,11 +48,11 @@ export default function Vacancies({ data }: VacanciesProps) {
     <div className={classNames("container py-14 mx-auto")}>
       <div className="space-y-4 md:space-y-6">
         <Accordion type="multiple">
-          {data.vacancies.map((vacancy) => {
+          {data.vacancies.map((vacancy, i) => {
             return (
               <AccordionItem
-                key={crypto.randomUUID()}
-                value={`item-${crypto.randomUUID()}`}
+                key={`vacancy-${i}-${vacancy.id}`}
+                value={`item-${i}-${vacancy.id}`}
                 className={classNames("group mb-4")}
               >
                 <GrayAccordionTrigger className="flex items-center px-2 py-3 bg-gray-200 md:p-4">
