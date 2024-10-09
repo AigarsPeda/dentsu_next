@@ -62,7 +62,7 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
   // if cookieBannerData?.dialog is more 40 Words, then show more button
 
   const words = cookieBannerData?.dialog.split(" ");
-  const isMoreWords = words.length > 81;
+  const isMoreWords = words?.length > 81;
   const dialogText = isMoreWords
     ? isShowMore
       ? cookieBannerData?.dialog
@@ -87,34 +87,44 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
             className="fixed bottom-0 left-0 right-0 p-3 text-black bg-white z-[699]"
           >
             <div className="container flex flex-wrap items-center justify-center gap-2 mx-auto md:gap-3 md:justify-center">
-              <p className="text-sm text-center xl:text-left">
-                {cookieBannerData?.description}
-              </p>
-              <a
-                href={`/${urlLocale}/${cookieBannerData?.moreInfoTextLink}`}
-                className="inline-block text-sm underline"
-              >
-                {cookieBannerData?.moreInfoText}
-              </a>
-              <DialogTrigger asChild>
-                <Button variant="violet" className="px-0 md:px-4">
-                  {cookieBannerData?.manageCookieSettingsTitle}
-                </Button>
-              </DialogTrigger>
-              <button
-                className="px-5 py-1 ml-2 text-sm text-white bg-black"
-                onClick={addCookieToPage}
-              >
-                {cookieBannerData?.acceptButtonTitle}
-              </button>
+              {cookieBannerData?.description && (
+                <p className="text-sm text-center xl:text-left">
+                  {cookieBannerData?.description}
+                </p>
+              )}
+              {cookieBannerData?.moreInfoText && (
+                <a
+                  href={`/${urlLocale}/${cookieBannerData?.moreInfoTextLink}`}
+                  className="inline-block text-sm underline"
+                >
+                  {cookieBannerData?.moreInfoText}
+                </a>
+              )}
+              {cookieBannerData?.manageCookieSettingsTitle && (
+                <DialogTrigger asChild>
+                  <Button variant="violet" className="px-0 md:px-4">
+                    {cookieBannerData?.manageCookieSettingsTitle}
+                  </Button>
+                </DialogTrigger>
+              )}
+              {cookieBannerData?.acceptButtonTitle && (
+                <button
+                  className="px-5 py-1 ml-2 text-sm text-white bg-black"
+                  onClick={addCookieToPage}
+                >
+                  {cookieBannerData?.acceptButtonTitle}
+                </button>
+              )}
             </div>
           </motion.div>
 
           <DialogContent>
             <DialogHeader>
-              <DialogTitle className="pb-4 text-black">
-                {cookieBannerData?.dialogTitle}
-              </DialogTitle>
+              {cookieBannerData?.dialogTitle && (
+                <DialogTitle className="pb-4 text-black">
+                  {cookieBannerData?.dialogTitle}
+                </DialogTitle>
+              )}
               <DialogDescription className="overflow-y-auto text-left max-h-48">
                 {dialogText}
               </DialogDescription>
