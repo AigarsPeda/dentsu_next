@@ -149,7 +149,7 @@ export const DivWithImage = ({
 
   const createBackgroundImage = (url: string) => {
     const baseStyle = {
-      backgroundSize: "100% 100%",
+      // backgroundSize: "100% 100%",
       backgroundPosition: "center",
       backgroundImage: isDarkOverlay
         ? `linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${url})`
