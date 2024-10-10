@@ -175,7 +175,7 @@ function Navbar({
             animate={mobileMenuOpen ? "visible" : "hidden"}
             className="fixed inset-0 z-[999] p-6 mx-auto bg-dentsu-primary lg:hidden "
           >
-            <DialogPanel className="fixed inset-0  z-[999] w-full max-w-xs px-6 py-6 mx-auto overflow-y-auto text-center bg-dentsu-primary sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
+            <DialogPanel className="fixed inset-0  z-[999] w-full max-w-xs px-6 py-6 mx-auto overflow-y-auto text-center bg-dentsu-primary sm:max-w-sm">
               <>
                 {/* <div className="flex justify-center items-center mt-14">
                   <Logo
