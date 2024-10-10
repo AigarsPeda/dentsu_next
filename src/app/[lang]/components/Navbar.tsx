@@ -17,7 +17,7 @@ const variants: Variants = {
     },
   },
   visible: {
-    y: 0, // Slide down into view
+    y: 96, // Slide down into view
     opacity: 1,
     transition: {
       duration: 0.5,
@@ -102,7 +102,7 @@ function Navbar({
 
   return (
     <>
-      <div className="sticky top-0 z-[999] py-4 bg-dentsu-primary">
+      <div className="sticky top-0 z-[1999] py-4 bg-dentsu-primary">
         <div className="container flex items-center justify-center mx-auto lg:justify-between h-9 md:h-14">
           <div>
             <Logo href={`/${urlLocale}`} src={logoUrl}>
@@ -173,10 +173,23 @@ function Navbar({
             initial="hidden"
             variants={variants}
             animate={mobileMenuOpen ? "visible" : "hidden"}
-            className="fixed inset-0 z-[999] p-6 mx-auto bg-dentsu-primary lg:hidden"
+            className="fixed inset-0 z-[999] p-6 mx-auto bg-dentsu-primary lg:hidden "
           >
-            <DialogPanel className="fixed inset-0 z-[999] w-full max-w-xs px-6 py-6 mx-auto overflow-y-auto text-center bg-dentsu-primary sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
-              <div className="flow-root mt-24">
+            <DialogPanel className="fixed inset-0  z-[999] w-full max-w-xs px-6 py-6 mx-auto overflow-y-auto text-center bg-dentsu-primary sm:max-w-sm sm:ring-1 sm:ring-inset sm:ring-white/10">
+              <>
+                {/* <div className="flex justify-center items-center mt-14">
+                  <Logo
+                    href={`/${urlLocale}`}
+                    src={logoUrl}
+                    closeMenu={() => setMobileMenuOpen(false)}
+                  >
+                    {logoText && (
+                      <h2 className="text-2xl font-bold">{logoText}</h2>
+                    )}
+                  </Logo>
+                </div> */}
+              </>
+              <div className="flow-root mt-14">
                 <div className="-my-6 divide-y divide-gray-700">
                   <div className="py-6 space-y-2">
                     {linksWithLocale.map((item) => (

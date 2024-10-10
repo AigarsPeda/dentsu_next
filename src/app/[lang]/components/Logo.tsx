@@ -4,16 +4,23 @@ export default function Logo({
   src,
   href,
   children,
+  closeMenu,
 }: {
   href: string;
   src: string | null;
   children?: React.ReactNode;
+  closeMenu?: () => void;
 }) {
   return (
     <Link
       href={href}
       aria-label="Back to homepage"
       className="flex items-end transition-all hover:opacity-70"
+      onClick={() => {
+        if (closeMenu) {
+          closeMenu();
+        }
+      }}
     >
       {src && (
         <img
