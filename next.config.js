@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  webpack: (config) => {
-    config.resolve.alias.canvas = false;
+  // webpack: (config) => {
+  //   config.resolve.alias.canvas = false;
 
-    return config;
-  },
+  //   return config;
+  // },
+  output: "standalone",
+  compress: false,
   swcMinify: false,
   images: {
     remotePatterns: [
