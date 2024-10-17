@@ -8,7 +8,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 
 export const isImageUrl = (url: string): boolean => {
-  return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/.test(url.toLocaleUpperCase());
+  return /\.(jpg|jpeg|png|gif|bmp|webp|svg)$/.test(url?.toLocaleUpperCase());
 };
 
 export const isVideoUrl = (url: string): boolean => {
