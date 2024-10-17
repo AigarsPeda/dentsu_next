@@ -67,7 +67,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
       <section className="container grid grid-cols-1 gap-8 pb-10 mx-auto md:grid-cols-3 md:px-14 mt-14">
         {currentData.map((newsPost) => {
           const thumbnail = newsPost.thumbnail.data?.[0]?.attributes;
-          const src = thumbnail ? getStrapiMedia(thumbnail.url) : null;
+          const src = thumbnail ? getStrapiMedia(thumbnail?.url) : null;
 
           if (!src) return null;
 
