@@ -12,7 +12,7 @@ export const isImageUrl = (url: string): boolean => {
 };
 
 export const isVideoUrl = (url: string): boolean => {
-  return /\.(mp4|webm|ogg|mov|flv|avi|wmv|3gp|mkv)$/.test(url.toLowerCase());
+  return /\.(mp4|webm|ogg|mov|flv|avi|wmv|3gp|mkv)$/.test(url?.toLowerCase());
 };
 
 interface MediaModalProps {
@@ -115,7 +115,7 @@ export default function MediaModal({
         </button>
 
         <div className="relative w-full h-full overflow-hidden text-center rounded-sm">
-          {data.imageCarousel.map((item, index) => {
+          {data?.imageCarousel?.map((item, index) => {
             const videoUrl = isVideoUrl(item.media.data?.[0]?.attributes?.url)
               ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
               : null;

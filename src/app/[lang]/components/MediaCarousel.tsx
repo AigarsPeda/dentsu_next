@@ -109,6 +109,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
           })}
         </div>
       </div>
+
       <MediaModal
         data={data}
         handlePrev={prev}

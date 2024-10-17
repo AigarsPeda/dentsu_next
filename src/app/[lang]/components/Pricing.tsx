@@ -57,7 +57,7 @@ export default function Pricing({ data }: PriceProps) {
                           : "dark:text-violet-500"
                       }`}
                     >
-                      {plan.pricePeriod.toLowerCase()}
+                      {plan.pricePeriod?.toLowerCase()}
                     </span>
                   </span>
                 </div>

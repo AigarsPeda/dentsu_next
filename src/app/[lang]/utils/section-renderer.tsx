@@ -53,7 +53,6 @@ export function sectionRenderer(section: any, index: number) {
     case "sections.vacancies":
       return <Vacancies key={index} data={section} />;
     case "sections.pdf":
-      // return <DynamicPdf key={index} data={section} />;
       return <PDFDisplay key={index} data={section} />;
     case "shared.video-embed":
       return <VideoEmbed key={index} data={section} />;

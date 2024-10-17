@@ -24,7 +24,7 @@ export default function VacanciesHeadline({ data }: VacanciesHeadlineProps) {
     return text.includes("@");
   };
 
-  const isLinkedIn = (text: string) => text.toLowerCase() === "linkedin";
+  const isLinkedIn = (text: string) => text?.toLowerCase() === "linkedin";
 
   const createLinks = (text: string) => {
     const splitText = text.split(/({{.*?}})/);

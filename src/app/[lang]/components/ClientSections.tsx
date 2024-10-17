@@ -97,7 +97,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
 
   const uniqueCompanies = data.feature.reduce((acc, item) => {
     if (item.participatingCompany) {
-      acc.add(item.participatingCompany.toLowerCase());
+      acc.add(item.participatingCompany?.toLowerCase());
     }
     return acc;
   }, new Set<string>());
@@ -110,12 +110,12 @@ export default function ClientSections({ data }: ClientSectionsProps) {
     const index = sortedCompanies.indexOf(currentCompany);
     const nextCompany = sortedCompanies[index + 1] || sortedCompanies[0];
 
-    setCurrentCompany(nextCompany.toLowerCase());
+    setCurrentCompany(nextCompany?.toLowerCase());
   };
 
   useEffect(() => {
     if (!currentCompany) {
-      setCurrentCompany(sortedCompanies[0].toLowerCase());
+      setCurrentCompany(sortedCompanies[0]?.toLowerCase());
     }
   }, []);
 
