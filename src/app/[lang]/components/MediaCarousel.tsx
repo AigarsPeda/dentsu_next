@@ -83,7 +83,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
             const src =
               getStrapiMedia(
                 item.thumbnail.data?.attributes?.url ??
-                  item.media.data[0].attributes.url ??
+                  item.media.data?.[0]?.attributes.url ??
                   item.url
               ) ?? "";
 
@@ -96,11 +96,13 @@ export default function MediaCarousel({ data }: CarouselProps) {
                   setFirstImageSelected(index);
                 }}
               >
-                <img
-                  src={src}
-                  alt={`Carousel image ${index + 1}`}
-                  className="object-cover w-auto h-full"
-                />
+                {src && (
+                  <img
+                    src={src}
+                    alt={`Carousel image ${index + 1}`}
+                    className="object-cover w-auto h-full"
+                  />
+                )}
                 {(videoUrl || embedVideoUrl) && (
                   <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950 bg-opacity-20">
                     <PiPlayCircleThin className="text-white w-28 h-28" />
