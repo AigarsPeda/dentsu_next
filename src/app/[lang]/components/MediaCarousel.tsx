@@ -60,6 +60,8 @@ export default function MediaCarousel({ data }: CarouselProps) {
     });
   };
 
+  if (!data?.imageCarousel) return null;
+
   return (
     <div className="w-full bg-black">
       <div className="container flex items-center justify-center mx-auto">
