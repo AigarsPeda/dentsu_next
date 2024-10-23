@@ -93,12 +93,10 @@ export default function MediaCarousel({ data }: CarouselProps) {
 
   return (
     <div className="w-full bg-black">
-      <div className="container flex items-center justify-center mx-auto">
+      <div className="container w-full mx-auto">
         <div
           className={classNames(
-            length === 2 && "md:grid-cols-2",
-            length >= 3 && "md:grid-cols-3",
-            "grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden"
+            "py-10 mx-auto overflow-hidden flex items-center justify-center"
           )}
         >
           {data?.imageCarousel?.slice(0, 3).map((item, index) => {
