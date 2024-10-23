@@ -118,7 +118,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
               <div
                 key={index}
                 role="button"
-                className="relative z-20 flex flex-col w-full h-80 cursor-pointer"
+                className="relative z-20 flex flex-col w-full h-80 cursor-pointer max-w-72"
                 onClick={() => {
                   setFirstImageSelected(index);
                 }}
