@@ -85,7 +85,7 @@ export default function LogosSection({ data }: LogosSectionProps) {
       )}
     >
       {data.company?.map((item: FeaturesType) => {
-        const imgSrc = getStrapiMedia(item.media.data.attributes.url);
+        const imgSrc = getStrapiMedia(item.media.data?.attributes?.url);
         const isLink = item.url ? true : false;
 
         if (!isLink) {

@@ -47,9 +47,9 @@ export default function ArticleSelect({
             if (category.attributes.articles.data.length === 0) return null;
             return (
               <Link
-                href={`/blog/${category.attributes.slug}`}
+                href={`/blog/${category?.attributes?.slug}`}
                 className={selectedFilter(
-                  category.attributes.slug,
+                  category?.attributes?.slug,
                   params.category
                 )}
               >

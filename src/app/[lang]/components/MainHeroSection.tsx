@@ -38,7 +38,7 @@ interface MainHeroSectionProps {
 export default function MainHeroSection({ data }: MainHeroSectionProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const videoUrl = getStrapiMedia(data.video.data?.attributes.url);
-  const posterUrl = getStrapiMedia(data.poster.data.attributes?.url);
+  const posterUrl = getStrapiMedia(data.poster.data?.attributes?.url);
   const imgUrl = getStrapiMedia(data.picture.data?.[0]?.attributes.url);
   const [origThumbFromVideo, setOrigThumbFromVideo] = useState<string | null>(
     null

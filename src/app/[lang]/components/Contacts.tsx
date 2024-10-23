@@ -214,9 +214,11 @@ export default function Contacts({ data }: ContactsProps) {
             <MapComponent
               address={data.address}
               navigationAddress={data.navigationAddress}
-              wazeIcon={getStrapiMedia(data.wazeIcon.data.attributes.url) ?? ""}
+              wazeIcon={
+                getStrapiMedia(data.wazeIcon.data?.attributes?.url) ?? ""
+              }
               googleIcon={
-                getStrapiMedia(data.googleIcon.data.attributes.url) ?? ""
+                getStrapiMedia(data.googleIcon.data?.attributes?.url) ?? ""
               }
             />
           </MapProvider>

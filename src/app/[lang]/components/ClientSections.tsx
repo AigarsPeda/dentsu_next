@@ -71,7 +71,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
               // url: getStrapiMedia(item.media.data.attributes.url),
               attributes: {
                 ...item.media.data.attributes,
-                url: getStrapiMedia(item.media.data.attributes.url) ?? " ",
+                url: getStrapiMedia(item.media.data?.attributes?.url) ?? " ",
               },
             },
           },
@@ -134,7 +134,7 @@ export default function ClientSections({ data }: ClientSectionsProps) {
         )}
       >
         {data.Department?.map((item) => {
-          const imgSrc = getStrapiMedia(item.media.data.attributes.url);
+          const imgSrc = getStrapiMedia(item.media.data?.attributes?.url);
 
           return (
             <div

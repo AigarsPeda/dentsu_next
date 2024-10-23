@@ -130,7 +130,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
 
               const src =
                 getStrapiMedia(
-                  item.media.data?.[0]?.attributes.url ?? item.url
+                  item.media.data?.[0]?.attributes?.url ?? item.url
                 ) ?? "";
 
               const videoThumbnail = videoThumbnails[index]; // Use the captured video thumbnail
@@ -152,7 +152,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
                     />
                   ) : (
                     <img
-                      src={item.thumbnail.data?.attributes?.url ?? src}
+                      src={item?.thumbnail?.data?.attributes?.url ?? src}
                       alt={`Carousel image ${index + 1}`}
                       className="object-cover w-full h-full"
                     />

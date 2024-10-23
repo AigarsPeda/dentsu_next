@@ -53,7 +53,7 @@ const PDFDisplay: FC<PdfPostImageProps> = ({ data }) => {
           loader={loader}
           placeholder="blur"
           blurDataURL={IMAGE_DATA_FOR_BLUR}
-          src={getStrapiMedia(data.image.data.attributes.url) ?? ""}
+          src={getStrapiMedia(data.image.data?.attributes?.url) ?? ""}
           style={{
             objectFit: "cover",
             width: "100%",
