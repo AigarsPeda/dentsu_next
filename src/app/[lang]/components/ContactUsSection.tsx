@@ -1,5 +1,7 @@
+"use client";
 import EnvelopeIcon from "@/app/[lang]/components/icons/Envelope";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import { usePathname } from "next/navigation";
 
 interface MediaType {
   data: {
@@ -35,10 +37,13 @@ interface ContactUsSectionProps {
 }
 
 export default function ContactUsSection({ data }: ContactUsSectionProps) {
+  const path = usePathname();
+  const urlLocale = path.split("/")[1] || "en";
+
   return (
     <div className="container mx-auto py-14">
       <div className="pb-10">
-        <a href={data.redirectUrl ?? ""}>
+        <a href={`/${urlLocale}${data.redirectUrl}`}>
           <h3 className="text-center">{data.title}</h3>
         </a>
         <h4 className="px-10 mt-3 text-center lg:mt-4">{data.description}</h4>
@@ -76,7 +81,12 @@ export default function ContactUsSection({ data }: ContactUsSectionProps) {
       {data.isContactUsButton && (
         <div className="flex justify-center">
           <a
-            href={data.redirectUrl ?? `mailto:${data.contactEmail}` ?? ""}
+            // href={data.redirectUrl ?? `mailto:${data.contactEmail}` ?? ""}
+            href={
+              data.redirectUrl
+                ? `/${urlLocale}${data.redirectUrl}`
+                : `mailto:${data.contactEmail}`
+            }
             className="flex items-center justify-center gap-3 px-6 py-2 text-base text-white transition-all bg-black hover:bg-dentsu-hover"
           >
             <EnvelopeIcon className="w-6 h-6" />
