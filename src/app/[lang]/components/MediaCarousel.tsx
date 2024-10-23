@@ -96,7 +96,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
       <div className="container w-full mx-auto">
         <div
           className={classNames(
-            "py-10 mx-auto overflow-hidden flex items-center justify-center"
+            "py-10 mx-auto overflow-hidden flex items-center justify-center space-x-4"
           )}
         >
           {data?.imageCarousel?.slice(0, 3).map((item, index) => {
@@ -118,7 +118,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
               <div
                 key={index}
                 role="button"
-                className="relative z-20 flex flex-col w-full h-auto cursor-pointer max-w-72"
+                className="relative z-20 flex flex-col w-full h-80 cursor-pointer"
                 onClick={() => {
                   setFirstImageSelected(index);
                 }}
@@ -127,13 +127,13 @@ export default function MediaCarousel({ data }: CarouselProps) {
                   <img
                     src={videoThumbnail}
                     alt={`Video thumbnail ${index + 1}`}
-                    className="object-cover w-auto h-full"
+                    className="object-cover w-full h-full"
                   />
                 ) : (
                   <img
                     src={item.thumbnail.data?.attributes?.url ?? src}
                     alt={`Carousel image ${index + 1}`}
-                    className="object-cover w-auto h-full"
+                    className="object-cover w-full h-full"
                   />
                 )}
                 {(videoUrl || embedVideoUrl) && (
