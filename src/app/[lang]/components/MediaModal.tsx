@@ -1,3 +1,4 @@
+"use client";
 import MyModal from "@/app/[lang]/components/MyModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import getEmbedUrl from "@/app/[lang]/utils/getEmbedUrl";

@@ -1,5 +1,4 @@
 "use client";
-
 import MediaModal, {
   isImageUrl,
   isVideoUrl,
@@ -78,7 +77,7 @@ export default function MediaCarousel({ data }: CarouselProps) {
               ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
               : null;
 
-            const origThumbFromVideo = await captureVideoFrame(videoUrl, 0);
+            const origThumbFromVideo = await captureVideoFrame(videoUrl, 1);
 
             const embedVideoUrl =
               item.url && !isImageUrl(item.url) ? getEmbedUrl(item.url) : null;

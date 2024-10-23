@@ -91,7 +91,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
   };
 
   useEffect(() => {
-    captureVideoFrame(videoUrl, 0).then((thumb) => {
+    captureVideoFrame(videoUrl, 1).then((thumb) => {
       setOrigThumbFromVideo(thumb);
     });
   }, [videoUrl]);
