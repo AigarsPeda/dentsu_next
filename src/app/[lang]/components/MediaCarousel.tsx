@@ -1,10 +1,11 @@
 "use client";
+
 import MediaModal, {
   isImageUrl,
   isVideoUrl,
 } from "@/app/[lang]/components/MediaModal";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { PiPlayCircleThin } from "react-icons/pi";
 import captureVideoFrame from "src/app/[lang]/utils/captureVideoFrame";
 import classNames from "src/app/[lang]/utils/classNames";
@@ -43,8 +44,38 @@ export default function MediaCarousel({ data }: CarouselProps) {
   const [firstImageSelected, setFirstImageSelected] = useState<number | null>(
     null
   );
+  const [videoThumbnails, setVideoThumbnails] = useState<(string | null)[]>([]); // Store video thumbnails
 
   const length = useMemo(() => data.imageCarousel.length, [data]);
+
+  useEffect(() => {
+    // Only run in the browser
+    if (typeof window === "undefined") return;
+
+    const fetchVideoThumbnails = async () => {
+      const thumbnails = await Promise.all(
+        data.imageCarousel.map(async (item) => {
+          const videoUrl = isVideoUrl(item.media.data?.[0]?.attributes?.url)
+            ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
+            : null;
+
+          if (videoUrl) {
+            try {
+              const thumb = await captureVideoFrame(videoUrl, 1); // Capture frame at 1s
+              return thumb;
+            } catch (err) {
+              console.error("Error capturing video frame:", err);
+              return null;
+            }
+          }
+          return null;
+        })
+      );
+      setVideoThumbnails(thumbnails);
+    };
+
+    fetchVideoThumbnails();
+  }, [data]);
 
   const prev = () => {
     setFirstImageSelected((curr) => {
@@ -60,8 +91,6 @@ export default function MediaCarousel({ data }: CarouselProps) {
     });
   };
 
-  if (!data?.imageCarousel) return null;
-
   return (
     <div className="w-full bg-black">
       <div className="container flex items-center justify-center mx-auto">
@@ -72,12 +101,10 @@ export default function MediaCarousel({ data }: CarouselProps) {
             "grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden"
           )}
         >
-          {data?.imageCarousel?.slice(0, 3).map(async (item, index) => {
+          {data?.imageCarousel?.slice(0, 3).map((item, index) => {
             const videoUrl = isVideoUrl(item.media.data?.[0]?.attributes?.url)
               ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
               : null;
-
-            const origThumbFromVideo = await captureVideoFrame(videoUrl, 1);
 
             const embedVideoUrl =
               item.url && !isImageUrl(item.url) ? getEmbedUrl(item.url) : null;
@@ -86,6 +113,8 @@ export default function MediaCarousel({ data }: CarouselProps) {
               getStrapiMedia(
                 item.media.data?.[0]?.attributes.url ?? item.url
               ) ?? "";
+
+            const videoThumbnail = videoThumbnails[index]; // Use the captured video thumbnail
 
             return (
               <div
@@ -96,13 +125,15 @@ export default function MediaCarousel({ data }: CarouselProps) {
                   setFirstImageSelected(index);
                 }}
               >
-                {src && (
+                {videoThumbnail ? (
                   <img
-                    src={
-                      item.thumbnail.data?.attributes?.url ??
-                      origThumbFromVideo ??
-                      src
-                    }
+                    src={videoThumbnail}
+                    alt={`Video thumbnail ${index + 1}`}
+                    className="object-cover w-auto h-full"
+                  />
+                ) : (
+                  <img
+                    src={item.thumbnail.data?.attributes?.url ?? src}
                     alt={`Carousel image ${index + 1}`}
                     className="object-cover w-auto h-full"
                   />

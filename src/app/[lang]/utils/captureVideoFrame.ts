@@ -4,10 +4,12 @@ const captureVideoFrame = (
 ): Promise<string> => {
   if (!url) return Promise.resolve("");
 
+  if (typeof document === "undefined") return Promise.resolve("");
+
   return new Promise((resolve, reject) => {
-    const video = document.createElement("video");
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d");
+    const video = document?.createElement("video");
+    const canvas = document?.createElement("canvas");
+    const context = canvas?.getContext("2d");
 
     video.src = url;
     video.crossOrigin = "anonymous"; // Ensure CORS is allowed if necessary
