@@ -60,6 +60,38 @@ export default function MediaCarousel({ data }: CarouselProps) {
     });
   };
 
+  const captureVideoFrame = (
+    url: string | null,
+    time: number
+  ): Promise<string> => {
+    if (!url) return Promise.resolve("");
+
+    return new Promise((resolve, reject) => {
+      const video = document.createElement("video");
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+
+      video.src = url;
+      video.crossOrigin = "anonymous"; // Ensure CORS is allowed if necessary
+      video.muted = true; // Prevent autoplay blocking
+      video.load();
+
+      video.addEventListener("loadeddata", () => {
+        video.currentTime = time; // Seek to desired time (0 for first frame, 1 for second frame)
+      });
+
+      video.addEventListener("seeked", () => {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context?.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+        const imageDataUrl = canvas.toDataURL("image/png");
+        resolve(imageDataUrl); // Return the image as a Base64 string
+      });
+
+      video.addEventListener("error", (err) => reject(err));
+    });
+  };
+
   if (!data?.imageCarousel) return null;
 
   return (
@@ -72,19 +104,19 @@ export default function MediaCarousel({ data }: CarouselProps) {
             "grid grid-cols-1 gap-10 py-10 mx-auto overflow-hidden"
           )}
         >
-          {data?.imageCarousel?.slice(0, 3).map((item, index) => {
+          {data?.imageCarousel?.slice(0, 3).map(async (item, index) => {
             const videoUrl = isVideoUrl(item.media.data?.[0]?.attributes?.url)
               ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
               : null;
+
+            const origThumbFromVideo = await captureVideoFrame(videoUrl, 0);
 
             const embedVideoUrl =
               item.url && !isImageUrl(item.url) ? getEmbedUrl(item.url) : null;
 
             const src =
               getStrapiMedia(
-                item.thumbnail.data?.attributes?.url ??
-                  item.media.data?.[0]?.attributes.url ??
-                  item.url
+                item.media.data?.[0]?.attributes.url ?? item.url
               ) ?? "";
 
             return (
@@ -98,7 +130,11 @@ export default function MediaCarousel({ data }: CarouselProps) {
               >
                 {src && (
                   <img
-                    src={src}
+                    src={
+                      item.thumbnail.data?.attributes?.url ??
+                      origThumbFromVideo ??
+                      src
+                    }
                     alt={`Carousel image ${index + 1}`}
                     className="object-cover w-auto h-full"
                   />
