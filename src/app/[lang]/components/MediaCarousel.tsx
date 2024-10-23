@@ -7,6 +7,7 @@ import MediaModal, {
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { useMemo, useState } from "react";
 import { PiPlayCircleThin } from "react-icons/pi";
+import captureVideoFrame from "src/app/[lang]/utils/captureVideoFrame";
 import classNames from "src/app/[lang]/utils/classNames";
 import getEmbedUrl from "src/app/[lang]/utils/getEmbedUrl";
 
@@ -57,38 +58,6 @@ export default function MediaCarousel({ data }: CarouselProps) {
     setFirstImageSelected((curr) => {
       if (curr === null) return null;
       return curr === data.imageCarousel.length - 1 ? 0 : curr + 1;
-    });
-  };
-
-  const captureVideoFrame = (
-    url: string | null,
-    time: number
-  ): Promise<string> => {
-    if (!url) return Promise.resolve("");
-
-    return new Promise((resolve, reject) => {
-      const video = document.createElement("video");
-      const canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d");
-
-      video.src = url;
-      video.crossOrigin = "anonymous"; // Ensure CORS is allowed if necessary
-      video.muted = true; // Prevent autoplay blocking
-      video.load();
-
-      video.addEventListener("loadeddata", () => {
-        video.currentTime = time; // Seek to desired time (0 for first frame, 1 for second frame)
-      });
-
-      video.addEventListener("seeked", () => {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        context?.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-        const imageDataUrl = canvas.toDataURL("image/png");
-        resolve(imageDataUrl); // Return the image as a Base64 string
-      });
-
-      video.addEventListener("error", (err) => reject(err));
     });
   };
 

@@ -2,8 +2,9 @@
 import ArrowIcon from "@/app/[lang]/components/icons/ArrowIcon";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import isVideoUrl from "@/app/[lang]/utils/isVideoUrl";
-import { useRef, type FC } from "react";
+import { use, useEffect, useRef, useState, type FC } from "react";
 import { animateScroll as scroll } from "react-scroll";
+import captureVideoFrame from "../utils/captureVideoFrame";
 
 // const DynamicImage = dynamic(() => import("next/image"), { ssr: false });
 
@@ -39,16 +40,9 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
   const videoUrl = getStrapiMedia(data.video.data?.attributes.url);
   const posterUrl = getStrapiMedia(data.poster.data.attributes?.url);
   const imgUrl = getStrapiMedia(data.picture.data?.[0]?.attributes.url);
-
-  // const width =
-  //   data.poster.data.attributes.width ??
-  //   data.picture.data?.[0]?.attributes.width ??
-  //   1920;
-
-  // const height =
-  //   data.poster.data.attributes.height ??
-  //   data.picture.data?.[0]?.attributes.height ??
-  //   1080;
+  const [origThumbFromVideo, setOrigThumbFromVideo] = useState<string | null>(
+    null
+  );
 
   const getVideoType = (url: string | null): string => {
     if (!url) return "";
@@ -96,6 +90,12 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
     });
   };
 
+  useEffect(() => {
+    captureVideoFrame(videoUrl, 0).then((thumb) => {
+      setOrigThumbFromVideo(thumb);
+    });
+  }, [videoUrl]);
+
   if (isVideoUrl(videoUrl) && videoUrl) {
     return (
       <div
@@ -108,7 +108,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           autoPlay
           playsInline
           id="background-video"
-          poster={posterUrl ?? ""}
+          poster={posterUrl ?? origThumbFromVideo ?? ""}
           className="absolute inset-0 z-0 hidden object-cover w-full h-full md:block"
         >
           <source src={videoUrl} type={getVideoType(videoUrl)} />
