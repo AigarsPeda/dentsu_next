@@ -95,7 +95,7 @@ export default function Pricing({ data }: PriceProps) {
                           clipRule="evenodd"
                         ></path>
                       </svg>
-                      <span>{feature.attributes.name}</span>
+                      <span>{feature?.attributes?.name}</span>
                     </li>
                   ))}
                 </ul>

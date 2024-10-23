@@ -147,9 +147,9 @@ const EmblaCarousel: FC<PropType> = ({
                   target={item.newTab ? "_self" : "_blank"}
                   className="object-cover w-full h-full"
                 >
-                  {item.media.data.attributes.url && (
+                  {item.media.data?.attributes?.url && (
                     <img
-                      src={item.media.data.attributes.url}
+                      src={item.media.data?.attributes?.url}
                       alt="our client logo"
                       className="object-contain w-full h-full"
                     />

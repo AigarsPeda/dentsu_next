@@ -67,8 +67,8 @@ interface ServicesProps {
 
 export default function Services({ data }: ServicesProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const logoUrl = getStrapiMedia(data.logo.data.attributes.url) ?? "";
-  const imgUrl = getStrapiMedia(data.media.data[0]?.attributes.url) ?? "";
+  const logoUrl = getStrapiMedia(data.logo.data?.attributes?.url) ?? "";
+  const imgUrl = getStrapiMedia(data.media.data[0]?.attributes?.url) ?? "";
   const mobLogoUrl = data.mobLogo.data
     ? getStrapiMedia(data.mobLogo.data.attributes.url)
     : undefined;

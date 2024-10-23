@@ -72,7 +72,7 @@ export default function Post({ data }: { data: Article }) {
       <div className="dark:text-white">
         <p>{description}</p>
 
-        {data.attributes.blocks.map((section: any, index: number) =>
+        {data?.attributes?.blocks.map((section: any, index: number) =>
           postRenderer(section, index)
         )}
       </div>

@@ -39,7 +39,7 @@ export default function PostSectionWithImage({
             <img
               src={imgUrl}
               alt={
-                data.feature.media.data[0].attributes.alternativeText ??
+                data.feature.media.data[0]?.attributes?.alternativeText ??
                 "none provided"
               }
               className="object-cover w-full h-full max-h-[55rem]"
@@ -65,7 +65,7 @@ export default function PostSectionWithImage({
             <img
               src={imgUrl}
               alt={
-                data.feature.media.data[0].attributes.alternativeText ??
+                data.feature.media.data[0]?.attributes?.alternativeText ??
                 "none provided"
               }
               className="object-cover w-full h-full max-h-[55rem]"

@@ -225,7 +225,7 @@ function Navbar({
                         <img
                           alt={locale.name}
                           className="w-full h-full"
-                          src={locale.img.data.attributes.url}
+                          src={locale.img.data?.attributes?.url}
                         />
                       ) : (
                         locale.name

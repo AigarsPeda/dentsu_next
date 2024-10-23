@@ -67,7 +67,7 @@ export default function PostList({
 
           return (
             <Link
-              href={`/blog/${category?.slug}/${article.attributes.slug}`}
+              href={`/blog/${category?.slug}/${article?.attributes?.slug}`}
               key={article.id}
               className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900 lg:w-[300px] xl:min-w-[375px] rounded-2xl overflow-hidden shadow-lg"
             >
@@ -88,12 +88,12 @@ export default function PostList({
                 )}
 
                 <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline">
-                  {article.attributes.title}
+                  {article.attributes?.title}
                 </h3>
 
                 <div className="flex items-center justify-between">
                   <span className="text-xs dark:text-gray-400">
-                    {formatDate(article.attributes.publishedAt)}
+                    {formatDate(article.attributes?.publishedAt)}
                   </span>
                   {authorsBio && (
                     <span className="text-xs dark:text-gray-400">
