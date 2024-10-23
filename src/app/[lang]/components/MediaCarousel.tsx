@@ -91,6 +91,23 @@ export default function MediaCarousel({ data }: CarouselProps) {
     });
   };
 
+  const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setDevice("mobile");
+      } else {
+        setDevice("desktop");
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="w-full bg-black">
       <div className="container w-full mx-auto">
@@ -99,51 +116,55 @@ export default function MediaCarousel({ data }: CarouselProps) {
             "py-10 mx-auto overflow-hidden flex items-center justify-center space-x-4"
           )}
         >
-          {data?.imageCarousel?.slice(0, 3).map((item, index) => {
-            const videoUrl = isVideoUrl(item.media.data?.[0]?.attributes?.url)
-              ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
-              : null;
+          {data?.imageCarousel
+            ?.slice(0, device === "desktop" ? 3 : 1)
+            .map((item, index) => {
+              const videoUrl = isVideoUrl(item.media.data?.[0]?.attributes?.url)
+                ? getStrapiMedia(item.media.data?.[0]?.attributes?.url)
+                : null;
 
-            const embedVideoUrl =
-              item.url && !isImageUrl(item.url) ? getEmbedUrl(item.url) : null;
+              const embedVideoUrl =
+                item.url && !isImageUrl(item.url)
+                  ? getEmbedUrl(item.url)
+                  : null;
 
-            const src =
-              getStrapiMedia(
-                item.media.data?.[0]?.attributes.url ?? item.url
-              ) ?? "";
+              const src =
+                getStrapiMedia(
+                  item.media.data?.[0]?.attributes.url ?? item.url
+                ) ?? "";
 
-            const videoThumbnail = videoThumbnails[index]; // Use the captured video thumbnail
+              const videoThumbnail = videoThumbnails[index]; // Use the captured video thumbnail
 
-            return (
-              <div
-                key={index}
-                role="button"
-                className="relative z-20 flex flex-col w-full h-80 cursor-pointer max-w-72"
-                onClick={() => {
-                  setFirstImageSelected(index);
-                }}
-              >
-                {videoThumbnail ? (
-                  <img
-                    src={videoThumbnail}
-                    alt={`Video thumbnail ${index + 1}`}
-                    className="object-cover w-full h-full"
-                  />
-                ) : (
-                  <img
-                    src={item.thumbnail.data?.attributes?.url ?? src}
-                    alt={`Carousel image ${index + 1}`}
-                    className="object-cover w-full h-full"
-                  />
-                )}
-                {(videoUrl || embedVideoUrl) && (
-                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950 bg-opacity-20">
-                    <PiPlayCircleThin className="text-white w-28 h-28" />
-                  </div>
-                )}
-              </div>
-            );
-          })}
+              return (
+                <div
+                  key={index}
+                  role="button"
+                  className="relative z-20 flex flex-col w-full h-80 cursor-pointer"
+                  onClick={() => {
+                    setFirstImageSelected(index);
+                  }}
+                >
+                  {videoThumbnail ? (
+                    <img
+                      src={videoThumbnail}
+                      alt={`Video thumbnail ${index + 1}`}
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <img
+                      src={item.thumbnail.data?.attributes?.url ?? src}
+                      alt={`Carousel image ${index + 1}`}
+                      className="object-cover w-full h-full"
+                    />
+                  )}
+                  {(videoUrl || embedVideoUrl) && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-950 bg-opacity-20">
+                      <PiPlayCircleThin className="text-white w-28 h-28" />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
         </div>
       </div>
 
