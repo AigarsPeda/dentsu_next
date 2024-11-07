@@ -73,6 +73,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
 
           return (
             <Link
+              prefetch={true}
               key={newsPost.id}
               href={`/${urlLocale}/${newsPost.url}`}
               passHref
@@ -86,6 +87,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
                   priority
                   loader={loader}
                   placeholder="blur"
+                  loading="eager"
                   className="transition-all duration-300 group-hover:scale-105"
                   style={{ objectFit: "cover", width: "100%", height: "100%" }}
                   blurDataURL={IMAGE_DATA_FOR_BLUR}

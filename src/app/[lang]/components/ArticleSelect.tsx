@@ -47,6 +47,7 @@ export default function ArticleSelect({
             if (category.attributes.articles.data.length === 0) return null;
             return (
               <Link
+                prefetch={true}
                 href={`/blog/${category?.attributes?.slug}`}
                 className={selectedFilter(
                   category?.attributes?.slug,
@@ -57,7 +58,11 @@ export default function ArticleSelect({
               </Link>
             );
           })}
-          <Link href={"/blog"} className={selectedFilter("", "filter")}>
+          <Link
+            href={"/blog"}
+            prefetch={true}
+            className={selectedFilter("", "filter")}
+          >
             #all
           </Link>
         </div>

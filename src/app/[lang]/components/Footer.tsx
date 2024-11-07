@@ -85,6 +85,7 @@ function FooterLink({ url, text, newTab }: FooterLink) {
   return (
     <li className="flex">
       <Link
+        prefetch={true}
         href={`/${urlLocale}/${url}`}
         target={newTab ? "_blank" : "_self"}
         className={classNames(

@@ -111,6 +111,7 @@ export default function ServicesHeadlineWithImage({
           }
           src={imgUrl}
           priority
+          loading="eager"
           loader={loader}
           style={{
             objectFit: "cover",

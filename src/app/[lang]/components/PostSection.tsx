@@ -74,6 +74,7 @@ export default function PostSection({ data }: PostSectionProps) {
                     priority
                     width={600}
                     height={337}
+                    loading="eager"
                     alt="post image"
                     placeholder="blur"
                     src={imgUrl || ""}

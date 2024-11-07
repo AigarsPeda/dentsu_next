@@ -125,6 +125,7 @@ function Navbar({
                 <Link
                   scroll={false}
                   key={locale.id}
+                  prefetch={true}
                   locale={locale.code}
                   href={getCurrentLocaleAndReplace(locale.code)}
                 >
@@ -211,6 +212,7 @@ function Navbar({
                   <Link
                     scroll={false}
                     key={locale.id}
+                    prefetch={true}
                     locale={locale.code}
                     href={getCurrentLocaleAndReplace(locale.code)}
                   >
@@ -260,6 +262,7 @@ function NavLink({ url, text, locale }: NavLink) {
   return (
     <li className="flex">
       <Link
+        prefetch={true}
         href={`/${locale}${url}`}
         className={`flex items-center hover:text-dentsu-navigation-hover -mb-1 ${
           path === url && " "
@@ -280,6 +283,7 @@ function MobileNavLink({ url, text, locale, closeMenu }: MobileNavLink) {
 
   return (
     <Link
+      prefetch={true}
       onClick={closeMenu}
       href={`/${locale}${url}`}
       className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-900 ${

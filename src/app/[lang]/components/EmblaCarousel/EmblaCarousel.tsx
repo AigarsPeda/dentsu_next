@@ -143,6 +143,7 @@ const EmblaCarousel: FC<PropType> = ({
             <div key={`${item.id}${i}`} className="embla__slide">
               <div className="embla__slide__number">
                 <Link
+                  prefetch={true}
                   href={item.url ?? "/"}
                   target={item.newTab ? "_self" : "_blank"}
                   className="object-cover w-full h-full"

@@ -14,6 +14,7 @@ export default function Logo({
   return (
     <Link
       href={href}
+      prefetch={true}
       aria-label="Back to homepage"
       className="flex items-end transition-all hover:opacity-70"
       onClick={() => {

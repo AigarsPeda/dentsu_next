@@ -57,6 +57,7 @@ export default function Hero({ data }: HeroProps) {
             {data.buttons.map((button: Button, index: number) => (
               <Link
                 key={index}
+                prefetch={true}
                 href={button.url}
                 target={button.newTab ? "_blank" : "_self"}
                 className={renderButtonStyle(button.type)}
