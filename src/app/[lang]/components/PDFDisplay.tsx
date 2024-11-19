@@ -1,21 +1,21 @@
 "use client";
 import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
-import { usePathname } from "next/navigation";
+import Image from "next/image";
 import type { FC } from "react";
 import { pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
-import Image from "next/image";
-import { loader } from "./ServicesHeadlineWithImage";
 import { IMAGE_DATA_FOR_BLUR } from "./NewsPostSection";
+import { loader } from "./ServicesHeadlineWithImage";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
+// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+//   "pdfjs-dist/build/pdf.worker.min.mjs",
+//   import.meta.url
+// ).toString();
 
 export interface PdfPostImageProps {
   data: {
+    buttonTitle: string;
     file: {
       data: {
         id: number;
@@ -37,10 +37,32 @@ export interface PdfPostImageProps {
 }
 
 const PDFDisplay: FC<PdfPostImageProps> = ({ data }) => {
-  const path = usePathname();
   const pdfUrl = getStrapiMedia(data?.file?.data?.attributes?.url) ?? "";
 
-  const urlLocale = path.split("/")[1] || "en";
+  const downloadLink = (str: string) => {
+    const regex = /{{(.*?)}}/g;
+    const segments = str.split(regex);
+    const matches = str.match(regex);
+
+    if (!matches) return str;
+
+    return (
+      <>
+        {segments.map((segment, i) =>
+          i % 2 === 0 ? (
+            segment
+          ) : (
+            <span
+              key={i}
+              className="text-[#5b19c4] underline-offset-4 underline ml-1 font-bold"
+            >
+              {segment}
+            </span>
+          )
+        )}
+      </>
+    );
+  };
 
   return (
     <div className="container mx-auto ">
@@ -66,7 +88,16 @@ const PDFDisplay: FC<PdfPostImageProps> = ({ data }) => {
         <p>{data.description}</p>
       </div>
       <div className="">
-        {urlLocale === "en" ? (
+        <a
+          download
+          href={pdfUrl}
+          target="_blank"
+          className="text-lg"
+          rel="noopener noreferrer"
+        >
+          {downloadLink(data.buttonTitle)}
+        </a>
+        {/* {urlLocale === "en" ? (
           <a
             download
             href={pdfUrl}
@@ -92,7 +123,7 @@ const PDFDisplay: FC<PdfPostImageProps> = ({ data }) => {
               pētījumu
             </span>
           </a>
-        )}
+        )} */}
       </div>
     </div>
   );
