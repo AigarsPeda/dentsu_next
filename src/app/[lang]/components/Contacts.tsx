@@ -21,7 +21,6 @@ interface ContactsProps {
     workingTime: string;
     phoneNumber: string;
     contactEmail: string;
-    leadFormEmail: string;
     navigationAddress: string;
     privacyCookiesPolicy: string;
     agreementToReceiveInfo: string;
@@ -112,7 +111,6 @@ export default function Contacts({ data }: ContactsProps) {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      // body: JSON.stringify(formData),
       body: JSON.stringify(formDataToSend),
     })
       .then((response) => response.json())
