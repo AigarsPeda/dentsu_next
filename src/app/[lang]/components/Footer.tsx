@@ -3,7 +3,6 @@ import classNames from "@/app/[lang]/utils/classNames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
-import { CgWebsite } from "react-icons/cg";
 import { FaDiscord } from "react-icons/fa";
 import { PiGlobeThin } from "react-icons/pi";
 import {
@@ -12,6 +11,7 @@ import {
   RiLinkedinBoxFill,
 } from "react-icons/ri";
 import GlobeIcon from "./icons/GlobeIcon";
+import TikTokIcon from "./icons/TikTokIcon";
 
 interface FooterLink {
   id: number;
@@ -130,6 +130,11 @@ export function RenderSocialIcon({ social }: { social: string | undefined }) {
     case "LINKEDIN":
       return (
         <RiLinkedinBoxFill className="w-10 h-10 transition-all hover:fill-dentsu-navigation-hover" />
+      );
+
+    case "TIKTOK":
+      return (
+        <TikTokIcon className="w-[1.9rem] h-[1.9rem] fill-[#fff] transition-all hover:fill-dentsu-navigation-hover" />
       );
     default:
       return (
