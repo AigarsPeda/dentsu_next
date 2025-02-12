@@ -29,6 +29,22 @@ const nextConfig = {
         protocol: "http",
         hostname: "134.122.83.203",
       },
+      {
+        protocol: "http",
+        hostname: "dentsu.lv",
+      },
+      {
+        protocol: "https",
+        hostname: "dentsu.lv",
+      },
+      {
+        protocol: "https",
+        hostname: "www.dentsu.lv",
+      },
+      {
+        protocol: "http",
+        hostname: "www.dentsu.lv",
+      },
     ],
   },
 };
