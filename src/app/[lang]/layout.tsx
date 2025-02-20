@@ -60,7 +60,9 @@ export async function generateMetadata({
   const m = {
     title: metadata.metaTitle,
     description: metadata.metaDescription,
-    verification: { google: "O5fvAaD-sXEj2jjuU_EPLgByz_DT4triV3bNhMdrJ7s" },
+    "google-site-verification": {
+      content: "O5fvAaD-sXEj2jjuU_EPLgByz_DT4triV3bNhMdrJ7s",
+    },
     icons: {
       icon: new URL(
         `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
