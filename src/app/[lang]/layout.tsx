@@ -60,6 +60,7 @@ export async function generateMetadata({
   const m = {
     title: metadata.metaTitle,
     description: metadata.metaDescription,
+    verification: { google: "O5fvAaD-sXEj2jjuU_EPLgByz_DT4triV3bNhMdrJ7s" },
     icons: {
       icon: new URL(
         `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
@@ -153,12 +154,6 @@ export default async function RootLayout({
   return (
     <CookieConsentProvider>
       <html className={`${halcom.className}`} lang={params.lang ?? "eng"}>
-        <head>
-          <meta
-            name="google-site-verification"
-            content="O5fvAaD-sXEj2jjuU_EPLgByz_DT4triV3bNhMdrJ7s"
-          />
-        </head>
         <GoogleAnalytics
           googleAnalyticsMeasurementId={
             global?.data?.attributes?.GoogleAnalyticsMeasurementId ?? ""
