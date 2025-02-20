@@ -10,6 +10,7 @@ import { i18n } from "i18n-config";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { CookieConsentProvider } from "../../contexts/CookieConsentContext";
+import Head from "next/head";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -152,6 +153,12 @@ export default async function RootLayout({
   return (
     <CookieConsentProvider>
       <html className={`${halcom.className}`} lang={params.lang ?? "eng"}>
+        <head>
+          <meta
+            name="google-site-verification"
+            content="O5fvAaD-sXEj2jjuU_EPLgByz_DT4triV3bNhMdrJ7s"
+          />
+        </head>
         <GoogleAnalytics
           googleAnalyticsMeasurementId={
             global?.data?.attributes?.GoogleAnalyticsMeasurementId ?? ""
