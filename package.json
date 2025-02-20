@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build && node postbuild.js",
     "lint": "next lint",
-    "postbuild": "next-sitemap",
     "start": "node .next/standalone/server.js"
   },
   "dependencies": {
