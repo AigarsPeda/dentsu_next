@@ -1,9 +1,4 @@
-# *
 User-agent: *
 Allow: /
-
-# Host
-Host: https://dentsu.lv
-
 
 Sitemap: https://dentsu.lv/strapi/api/sitemap/index.xml
