@@ -1,1 +1,9 @@
-Sitemap: http://134.122.83.203/strapi/api/sitemap/index.xml
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://dentsu.lv
+
+
+Sitemap: http://dentsu.lv/strapi/api/sitemap/index.xml
