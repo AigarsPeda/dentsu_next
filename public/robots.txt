@@ -6,4 +6,4 @@ Allow: /
 Host: https://dentsu.lv
 
 
-Sitemap: http://dentsu.lv/strapi/api/sitemap/index.xml
+Sitemap: https://dentsu.lv/strapi/api/sitemap/index.xml
