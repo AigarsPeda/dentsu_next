@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-import { i18n } from "../i18n-config";
+import { i18n } from "../i18n-config"; // Import your i18n config file
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
@@ -13,47 +13,103 @@ function getLocale(request: NextRequest): string | undefined {
 
   // Use negotiator and intl-localematcher to get best locale
   let languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-  // @ts-ignore locales are readonly
-  const locales: string[] = i18n.locales;
-  return matchLocale(languages, locales, i18n.defaultLocale);
+  const locales: string[] = [...i18n.locales];
+  const matchedLocale = matchLocale(languages, locales, i18n.defaultLocale);
+
+  // Ensure the matched locale is valid, else use default
+  return matchedLocale || i18n.defaultLocale;
 }
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
-  // // If you have one
+  // Ignore certain paths like manifest.json, favicon.ico, robots.txt
   if (
     [
       "/manifest.json",
       "/favicon.ico",
       "/robots.txt",
-      // Your other files in `public`
+      // Add any other paths to be excluded from the middleware logic
     ].includes(pathname)
-  )
+  ) {
     return;
+  }
 
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
-  // Redirect if there is no locale
+  // Redirect if there is no locale in the pathname
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
 
-    // e.g. incoming request is /products
-    // The new URL is now /en-US/products
-    return NextResponse.redirect(
-      new URL(`/${locale}/${pathname}`, request.url)
-    );
+    // Redirect to a new URL with the detected locale
+    return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
   }
 }
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!_next).*)"],
+  // Matcher to exclude paths like `/_next/` and `/api/` which shouldn't be handled by this middleware
+  matcher: ["/((?!_next|api).*)"],
 };
+
+// import type { NextRequest } from "next/server";
+// import { NextResponse } from "next/server";
+
+// import { i18n } from "../i18n-config";
+
+// import { match as matchLocale } from "@formatjs/intl-localematcher";
+// import Negotiator from "negotiator";
+
+// function getLocale(request: NextRequest): string | undefined {
+//   // Negotiator expects plain object so we need to transform headers
+//   const negotiatorHeaders: Record<string, string> = {};
+//   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+
+//   // Use negotiator and intl-localematcher to get best locale
+//   let languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+//   // @ts-ignore locales are readonly
+//   const locales: string[] = i18n.locales;
+//   return matchLocale(languages, locales, i18n.defaultLocale);
+// }
+
+// export function middleware(request: NextRequest) {
+//   const pathname = request.nextUrl.pathname;
+
+//   // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
+//   // // If you have one
+//   if (
+//     [
+//       "/manifest.json",
+//       "/favicon.ico",
+//       "/robots.txt",
+//       // Your other files in `public`
+//     ].includes(pathname)
+//   )
+//     return;
+
+//   // Check if there is any supported locale in the pathname
+//   const pathnameIsMissingLocale = i18n.locales.every(
+//     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+//   );
+
+//   // Redirect if there is no locale
+//   if (pathnameIsMissingLocale) {
+//     const locale = getLocale(request);
+
+//     // e.g. incoming request is /products
+//     // The new URL is now /en-US/products
+//     return NextResponse.redirect(
+//       new URL(`/${locale}/${pathname}`, request.url)
+//     );
+//   }
+// }
+
+// export const config = {
+//   // Matcher ignoring `/_next/` and `/api/`
+//   matcher: ["/((?!_next).*)"],
+// };
 
 // import type { NextRequest } from "next/server";
 // import { NextResponse } from "next/server";
