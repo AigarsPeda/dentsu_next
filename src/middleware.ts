@@ -39,31 +39,62 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // Ignore certain paths like manifest.json, favicon.ico, robots.txt
-  if (
-    [
-      "/manifest.json",
-      "/favicon.ico",
-      "/robots.txt",
-      // Add any other paths to be excluded from the middleware logic
-    ].includes(pathname)
-  ) {
+  // Handle root path specifically
+  if (pathname === "/") {
+    const locale = getLocale(request);
+    return NextResponse.redirect(new URL(`/${locale}/`, request.url), {
+      status: 308, // Permanent redirect
+    });
+  }
+
+  // Your existing exclusion logic
+  if (["/manifest.json", "/favicon.ico", "/robots.txt"].includes(pathname)) {
     return;
   }
 
-  // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
-  // Redirect if there is no locale in the pathname
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
-
-    // Redirect to a new URL with the detected locale
-    return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
+    return NextResponse.redirect(
+      new URL(`/${locale}${pathname}`, request.url),
+      {
+        status: 308,
+      }
+    );
   }
 }
+
+// export function middleware(request: NextRequest) {
+//   const pathname = request.nextUrl.pathname;
+
+//   // Ignore certain paths like manifest.json, favicon.ico, robots.txt
+//   if (
+//     [
+//       "/manifest.json",
+//       "/favicon.ico",
+//       "/robots.txt",
+//       // Add any other paths to be excluded from the middleware logic
+//     ].includes(pathname)
+//   ) {
+//     return;
+//   }
+
+//   // Check if there is any supported locale in the pathname
+//   const pathnameIsMissingLocale = i18n.locales.every(
+//     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+//   );
+
+//   // Redirect if there is no locale in the pathname
+//   if (pathnameIsMissingLocale) {
+//     const locale = getLocale(request);
+
+//     // Redirect to a new URL with the detected locale
+//     return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
+//   }
+// }
 
 export const config = {
   // Matcher to exclude paths like `/_next/` and `/api/` which shouldn't be handled by this middleware
