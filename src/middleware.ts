@@ -36,37 +36,6 @@ function getLocale(request: NextRequest): string {
   }
 }
 
-// export function middleware(request: NextRequest) {
-//   const pathname = request.nextUrl.pathname;
-
-//   // Handle root path specifically
-//   if (pathname === "/") {
-//     const locale = getLocale(request);
-//     return NextResponse.redirect(new URL(`/${locale}/`, request.url), {
-//       status: 308, // Permanent redirect
-//     });
-//   }
-
-//   // Your existing exclusion logic
-//   if (["/manifest.json", "/favicon.ico", "/robots.txt"].includes(pathname)) {
-//     return;
-//   }
-
-//   const pathnameIsMissingLocale = i18n.locales.every(
-//     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-//   );
-
-//   if (pathnameIsMissingLocale) {
-//     const locale = getLocale(request);
-//     return NextResponse.redirect(
-//       new URL(`/${locale}${pathname}`, request.url),
-//       {
-//         status: 308,
-//       }
-//     );
-//   }
-// }
-
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
