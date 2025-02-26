@@ -36,35 +36,87 @@ function getLocale(request: NextRequest): string | undefined {
   }
 }
 
+// export function middleware(request: NextRequest) {
+//   const pathname = request.nextUrl.pathname;
+
+//   // Handle root path specifically
+//   if (pathname === "/") {
+//     const locale = getLocale(request);
+//     return NextResponse.redirect(new URL(`/${locale}/`, request.url), {
+//       status: 308, // Permanent redirect
+//     });
+//   }
+
+//   // Your existing exclusion logic
+//   if (["/manifest.json", "/favicon.ico", "/robots.txt"].includes(pathname)) {
+//     return;
+//   }
+
+//   const pathnameIsMissingLocale = i18n.locales.every(
+//     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+//   );
+
+//   if (pathnameIsMissingLocale) {
+//     const locale = getLocale(request);
+//     return NextResponse.redirect(
+//       new URL(`/${locale}${pathname}`, request.url),
+//       {
+//         status: 308,
+//       }
+//     );
+//   }
+// }
+
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  // Skip middleware for excluded paths
+  if (shouldSkipMiddleware(pathname)) {
+    return;
+  }
 
   // Handle root path specifically
   if (pathname === "/") {
     const locale = getLocale(request);
-    return NextResponse.redirect(new URL(`/${locale}/`, request.url), {
-      status: 308, // Permanent redirect
-    });
+    return createRedirect(`/${locale}/`, request.url);
   }
 
-  // Your existing exclusion logic
-  if (["/manifest.json", "/favicon.ico", "/robots.txt"].includes(pathname)) {
-    return;
-  }
-
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  // Check if the path already has a locale
+  const hasLocale = i18n.locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  if (pathnameIsMissingLocale) {
+  // If no locale in path, add it
+  if (!hasLocale) {
     const locale = getLocale(request);
-    return NextResponse.redirect(
-      new URL(`/${locale}${pathname}`, request.url),
-      {
-        status: 308,
-      }
-    );
+    return createRedirect(`/${locale}${pathname}`, request.url);
   }
+}
+
+// Helper functions for cleaner code
+function shouldSkipMiddleware(pathname: string): boolean {
+  const excludedPaths = [
+    "/manifest.json",
+    "/favicon.ico",
+    "/robots.txt",
+    "/sitemap.xml",
+  ];
+
+  const excludedPrefixes = ["/_next/", "/api/", "/images/", "/assets/"];
+
+  return (
+    excludedPaths.includes(pathname) ||
+    excludedPrefixes.some((prefix) => pathname.startsWith(prefix))
+  );
+}
+
+function createRedirect(destination: string, requestUrl: string) {
+  return NextResponse.redirect(new URL(destination, requestUrl), {
+    status: 308, // Permanent redirect
+    headers: {
+      "Cache-Control": "public, max-age=3600, s-maxage=86400",
+    },
+  });
 }
 
 export const config = {
