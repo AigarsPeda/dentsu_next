@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
   output: "standalone",
   compress: false,
@@ -43,14 +42,41 @@ const nextConfig = {
     ],
   },
   // Add canonical headers
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.dentsu.lv",
+          },
+        ],
+        destination: "https://dentsu.lv/:path*",
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     return [
       {
+        // Root path
+        source: "/",
+        headers: [
+          {
+            key: "Link",
+            value: '<https://dentsu.lv>; rel="canonical"',
+          },
+        ],
+      },
+      {
+        // All other paths
         source: "/:path*",
         headers: [
           {
             key: "Link",
-            value: '<https://www.dentsu.lv/:path*>; rel="canonical"',
+            value: '<https://dentsu.lv/:path*>; rel="canonical"',
           },
         ],
       },
