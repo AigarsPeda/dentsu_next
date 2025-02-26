@@ -69,13 +69,32 @@ export async function generateMetadata({
     "google-site-verification": {
       content: "ZJBvFY46jqKyoJFq6qksLKH9unCs0a8Vg7zSK_-pLtI",
     },
+    // icons: {
+    //   // icon: new URL(
+    //   //   `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
+    //   // ),
+    //   icon: "/favicon.ico", // Ensure it's available in the `public` folder
+    //   // shortcut: "/favicon.ico",
+    // },
+
     icons: {
-      // icon: new URL(
-      //   `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
-      // ),
-      icon: "/favicon.ico", // Ensure it's available in the `public` folder
-      // shortcut: "/favicon.ico",
+      icon: [
+        {
+          rel: "icon",
+          type: "image/png",
+          url: "/favicon-96x96.png",
+          sizes: "96x96",
+        },
+        { rel: "icon", type: "image/svg+xml", url: "/favicon.svg" },
+        { rel: "shortcut icon", url: "/favicon.ico" },
+        {
+          rel: "apple-touch-icon",
+          sizes: "180x180",
+          url: "/apple-touch-icon.png",
+        },
+      ],
     },
+    manifest: "/site.webmanifest",
   };
 
   return m;
