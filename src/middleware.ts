@@ -39,48 +39,30 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // First, check for static assets and exclude them from middleware
+  // Handle root path specifically
+  if (pathname === "/") {
+    const locale = getLocale(request);
+    return NextResponse.redirect(new URL(`/${locale}/`, request.url), {
+      status: 308, // Permanent redirect
+    });
+  }
+
+  // Your existing exclusion logic
   if (["/manifest.json", "/favicon.ico", "/robots.txt"].includes(pathname)) {
     return;
   }
 
-  // Check if the URL already has the correct locale format
-  const hasLocale = i18n.locales.some(
-    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
+  const pathnameIsMissingLocale = i18n.locales.every(
+    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
-  // MOST IMPORTANT PART: If already on www and has locale, don't redirect
-  if (request.nextUrl.host.startsWith("www.") && hasLocale) {
-    return;
-  }
-
-  // Handle non-www to www redirect
-  if (
-    !request.nextUrl.host.startsWith("www.") &&
-    !request.nextUrl.host.includes("localhost")
-  ) {
-    // IMPORTANT: Keep the original path structure when redirecting to www
-    const url = request.nextUrl.clone();
-    url.host = "www." + request.nextUrl.host;
-    return NextResponse.redirect(url, { status: 308 });
-  }
-
-  // Only handle locale redirects after www is correct
-
-  // Handle root path
-  if (pathname === "/") {
-    const locale = getLocale(request);
-    return NextResponse.redirect(new URL(`/${locale}/`, request.url), {
-      status: 308,
-    });
-  }
-
-  // Add locale if missing
-  if (!hasLocale) {
+  if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
     return NextResponse.redirect(
       new URL(`/${locale}${pathname}`, request.url),
-      { status: 308 }
+      {
+        status: 308,
+      }
     );
   }
 }
