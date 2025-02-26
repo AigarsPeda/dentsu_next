@@ -70,10 +70,10 @@ export async function generateMetadata({
       content: "ZJBvFY46jqKyoJFq6qksLKH9unCs0a8Vg7zSK_-pLtI",
     },
     icons: {
-      icon: new URL(
-        `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
-      ),
-      // icon: "/favicon.ico", // Ensure it's available in the `public` folder
+      // icon: new URL(
+      //   `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
+      // ),
+      icon: "/favicon.ico", // Ensure it's available in the `public` folder
       // shortcut: "/favicon.ico",
     },
   };
