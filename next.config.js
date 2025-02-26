@@ -1,11 +1,6 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  // webpack: (config) => {
-  //   config.resolve.alias.canvas = false;
-
-  //   return config;
-  // },
   output: "standalone",
   compress: false,
   swcMinify: false,
@@ -46,6 +41,20 @@ const nextConfig = {
         hostname: "www.dentsu.lv",
       },
     ],
+  },
+  // Add canonical headers
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Link",
+            value: '<https://www.dentsu.lv/:path*>; rel="canonical"',
+          },
+        ],
+      },
+    ];
   },
 };
 

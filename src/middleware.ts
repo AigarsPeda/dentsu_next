@@ -39,6 +39,33 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  if (
+    !request.nextUrl.host.startsWith("www.") &&
+    !request.nextUrl.host.includes("localhost")
+  ) {
+    const url = request.nextUrl.clone();
+    url.host = "www." + request.nextUrl.host;
+
+    // Check if the path already has a locale
+    const hasLocale = i18n.locales.some(
+      (locale) =>
+        request.nextUrl.pathname === `/${locale}` ||
+        request.nextUrl.pathname.startsWith(`/${locale}/`)
+    );
+
+    // If no locale in path, determine locale and add it
+    if (!hasLocale && request.nextUrl.pathname !== "/") {
+      const locale = getLocale(request);
+      url.pathname = `/${locale}${request.nextUrl.pathname}`;
+    } else if (request.nextUrl.pathname === "/") {
+      // If it's the root path, add locale
+      const locale = getLocale(request);
+      url.pathname = `/${locale}/`;
+    }
+
+    return NextResponse.redirect(url, { status: 308 });
+  }
+
   // Handle root path specifically
   if (pathname === "/") {
     const locale = getLocale(request);
