@@ -10,16 +10,38 @@ type Props = {
   };
 };
 
+// export async function generateMetadata({ params }: Props): Promise<Metadata> {
+//   const page = await getPageBySlug(params.slug, params.lang);
+
+//   if (!page?.data?.[0]?.attributes?.seo) return FALLBACK_SEO;
+//   const metadata = page.data[0]?.attributes?.seo;
+
+//   // Construct canonical URL
+//   const baseUrl = "https://dentsu.lv"; // Your canonical domain
+//   const canonicalPath = params.slug ? `/${params.slug}` : "";
+//   const langPrefix = params.lang !== "lv" ? `/${params.lang}` : ""; // Assuming 'lv' is default language with no prefix
+//   const canonicalUrl = `${baseUrl}${langPrefix}${canonicalPath}`;
+
+//   return {
+//     title: metadata.metaTitle,
+//     description: metadata.metaDescription,
+//     alternates: {
+//       canonical: canonicalUrl,
+//     },
+//   };
+// }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = await getPageBySlug(params.slug, params.lang);
 
   if (!page?.data?.[0]?.attributes?.seo) return FALLBACK_SEO;
   const metadata = page.data[0]?.attributes?.seo;
 
+  // Get base URL from environment or use a default
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://dentsu.lv";
+
   // Construct canonical URL
-  const baseUrl = "https://dentsu.lv"; // Your canonical domain
   const canonicalPath = params.slug ? `/${params.slug}` : "";
-  const langPrefix = params.lang !== "lv" ? `/${params.lang}` : ""; // Assuming 'lv' is default language with no prefix
+  const langPrefix = `/${params.lang}`;
   const canonicalUrl = `${baseUrl}${langPrefix}${canonicalPath}`;
 
   return {
