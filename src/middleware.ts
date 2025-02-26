@@ -39,6 +39,17 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  // Check if the URL is already in the correct format (www and has locale)
+  const hasLocale = i18n.locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+
+  // Don't redirect if already on www domain with a proper locale path
+  if (request.nextUrl.host.startsWith("www.") && hasLocale) {
+    return; // Early return - no redirection needed
+  }
+
+  // Handle www redirect for non-localhost
   if (
     !request.nextUrl.host.startsWith("www.") &&
     !request.nextUrl.host.includes("localhost")
@@ -47,13 +58,6 @@ export function middleware(request: NextRequest) {
     url.host = "www." + request.nextUrl.host;
 
     // Check if the path already has a locale
-    const hasLocale = i18n.locales.some(
-      (locale) =>
-        request.nextUrl.pathname === `/${locale}` ||
-        request.nextUrl.pathname.startsWith(`/${locale}/`)
-    );
-
-    // If no locale in path, determine locale and add it
     if (!hasLocale && request.nextUrl.pathname !== "/") {
       const locale = getLocale(request);
       url.pathname = `/${locale}${request.nextUrl.pathname}`;
