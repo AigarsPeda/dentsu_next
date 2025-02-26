@@ -61,7 +61,7 @@ export async function generateMetadata({
     title: metadata.metaTitle,
     description: metadata.metaDescription,
     "google-site-verification": {
-      content: "O5fvAaD-sXEj2jjuU_EPLgByz_DT4triV3bNhMdrJ7s",
+      content: "ZJBvFY46jqKyoJFq6qksLKH9unCs0a8Vg/zSK",
     },
     icons: {
       icon: new URL(
