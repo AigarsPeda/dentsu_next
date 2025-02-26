@@ -42,46 +42,46 @@ const nextConfig = {
     ],
   },
   // Add canonical headers
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "www.dentsu.lv",
-          },
-        ],
-        destination: "https://dentsu.lv/:path*",
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/:path*",
+  //       has: [
+  //         {
+  //           type: "host",
+  //           value: "www.dentsu.lv",
+  //         },
+  //       ],
+  //       destination: "https://dentsu.lv/:path*",
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 
-  async headers() {
-    return [
-      {
-        // Root path
-        source: "/",
-        headers: [
-          {
-            key: "Link",
-            value: '<https://dentsu.lv>; rel="canonical"',
-          },
-        ],
-      },
-      {
-        // All other paths
-        source: "/:path*",
-        headers: [
-          {
-            key: "Link",
-            value: '<https://dentsu.lv/:path*>; rel="canonical"',
-          },
-        ],
-      },
-    ];
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       // Root path
+  //       source: "/",
+  //       headers: [
+  //         {
+  //           key: "Link",
+  //           value: '<https://dentsu.lv>; rel="canonical"',
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       // All other paths
+  //       source: "/:path*",
+  //       headers: [
+  //         {
+  //           key: "Link",
+  //           value: '<https://dentsu.lv/:path*>; rel="canonical"',
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = nextConfig;
