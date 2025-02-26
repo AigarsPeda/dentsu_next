@@ -11,6 +11,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { CookieConsentProvider } from "../../contexts/CookieConsentContext";
 import Head from "next/head";
+import GoogleTagManager from "@/script/GoogleTagManager";
+import GoogleTagManagerNoScript from "@/script/GoogleTagManagerNoScript";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -161,7 +163,9 @@ export default async function RootLayout({
             global?.data?.attributes?.GoogleAnalyticsMeasurementId ?? ""
           }
         />
+        <GoogleTagManager gtmId="GTM-NVFZQCS2" />
         <body className="text-white">
+          <GoogleTagManagerNoScript gtmId="GTM-NVFZQCS2" />
           <NavbarContent
             links={navbar.links}
             logoUrl={navbarLogoUrl}
