@@ -62,9 +62,9 @@ export async function generateMetadata({
   const m = {
     title: metadata.metaTitle,
     // favicon: "/favicon.ico",
-    favicon: new URL(
-      `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
-    ),
+    // favicon: new URL(
+    //   `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
+    // ),
     description: metadata.metaDescription,
     "google-site-verification": {
       content: "ZJBvFY46jqKyoJFq6qksLKH9unCs0a8Vg7zSK_-pLtI",
