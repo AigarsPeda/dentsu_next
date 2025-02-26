@@ -6,7 +6,7 @@ import { i18n } from "../i18n-config"; // Import your i18n config file
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
-function getLocale(request: NextRequest): string | undefined {
+function getLocale(request: NextRequest): string {
   // Add error handling for negotiator
   try {
     const negotiatorHeaders: Record<string, string> = {};
@@ -75,22 +75,27 @@ export function middleware(request: NextRequest) {
     return;
   }
 
-  // Handle root path specifically
-  if (pathname === "/") {
-    const locale = getLocale(request);
-    return createRedirect(`/${locale}/`, request.url);
-  }
-
   // Check if the path already has a locale
   const hasLocale = i18n.locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  // If no locale in path, add it
-  if (!hasLocale) {
-    const locale = getLocale(request);
-    return createRedirect(`/${locale}${pathname}`, request.url);
+  // If path already has locale, do nothing
+  if (hasLocale) {
+    return;
   }
+
+  // At this point, we know the path has no locale
+  // Handle all paths including root
+  const locale = getLocale(request);
+
+  // For root path
+  if (pathname === "/") {
+    return createRedirect(`/${locale}/`, request.url, locale);
+  }
+
+  // For all other paths
+  return createRedirect(`/${locale}${pathname}`, request.url, locale);
 }
 
 // Helper functions for cleaner code
@@ -110,13 +115,27 @@ function shouldSkipMiddleware(pathname: string): boolean {
   );
 }
 
-function createRedirect(destination: string, requestUrl: string) {
-  return NextResponse.redirect(new URL(destination, requestUrl), {
+function createRedirect(
+  destination: string,
+  requestUrl: string,
+  locale: string
+) {
+  const response = NextResponse.redirect(new URL(destination, requestUrl), {
     status: 308, // Permanent redirect
     headers: {
       "Cache-Control": "public, max-age=3600, s-maxage=86400",
     },
   });
+
+  // Set locale cookie to remember preference
+  response.cookies.set("NEXT_LOCALE", locale, {
+    maxAge: 60 * 60 * 24 * 30, // 30 days
+    path: "/",
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
+  });
+
+  return response;
 }
 
 export const config = {
