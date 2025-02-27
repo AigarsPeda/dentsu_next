@@ -26,7 +26,7 @@ export default function Logo({
       {src && (
         <img
           src={src}
-          alt="dentu logo"
+          alt="dentsu logo"
           className="object-contain w-[105px] h-[22px]"
         />
       )}
