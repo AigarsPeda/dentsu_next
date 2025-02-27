@@ -95,7 +95,7 @@ export async function generateMetadata({
         },
       ],
     },
-    manifest: "/site.webmanifest",
+    // manifest: "/site.webmanifest",
   };
 
   return m;
