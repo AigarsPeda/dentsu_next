@@ -13,6 +13,7 @@ import { CookieConsentProvider } from "../../contexts/CookieConsentContext";
 import Head from "next/head";
 import GoogleTagManager from "@/script/GoogleTagManager";
 import GoogleTagManagerNoScript from "@/script/GoogleTagManagerNoScript";
+import { LogoStructuredData } from "@/script/LogoStructuredData";
 
 async function getGlobal(lang: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -189,6 +190,12 @@ export default async function RootLayout({
           }
         />
         <GoogleTagManager gtmId="GTM-NVFZQCS2" />
+        <LogoStructuredData
+          logoUrl={
+            navbarLogoUrl ||
+            "https://dentsu.lv/strapi/uploads/dentsu_logo_white_2a12dfaf3e.svg"
+          }
+        />
         <body className="text-white">
           <GoogleTagManagerNoScript gtmId="GTM-NVFZQCS2" />
           <NavbarContent

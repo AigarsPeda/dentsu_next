@@ -30,7 +30,7 @@ export default function Logo({
           className="object-contain w-[105px] h-[22px]"
         />
       )}
-      <div className="ml-2">{children}</div>
+      {children && <div className="ml-2">{children}</div>}
       {/* <div>
         <HomeIcon className="w-5 h-5" />
       </div> */}
