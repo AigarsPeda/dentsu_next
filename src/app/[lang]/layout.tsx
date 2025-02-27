@@ -2,17 +2,16 @@ import CookieBanner from "@/app/[lang]/components/CookieBanner";
 import Footer from "@/app/[lang]/components/Footer";
 import NavbarContent from "@/app/[lang]/components/Navbar";
 import "@/app/[lang]/globals.css";
-import { getStrapiMedia, getStrapiURL } from "@/app/[lang]/utils/api-helpers";
+import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
 import { FALLBACK_SEO } from "@/app/[lang]/utils/constants";
 import { fetchAPI } from "@/app/[lang]/utils/fetch-api";
 import GoogleAnalytics from "@/script/GoogleAnalytics";
+import GoogleTagManager from "@/script/GoogleTagManager";
+import GoogleTagManagerNoScript from "@/script/GoogleTagManagerNoScript";
 import { i18n } from "i18n-config";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { CookieConsentProvider } from "../../contexts/CookieConsentContext";
-import Head from "next/head";
-import GoogleTagManager from "@/script/GoogleTagManager";
-import GoogleTagManagerNoScript from "@/script/GoogleTagManagerNoScript";
 import { LogoStructuredData } from "@/script/LogoStructuredData";
 
 async function getGlobal(lang: string): Promise<any> {
@@ -184,6 +183,14 @@ export default async function RootLayout({
   return (
     <CookieConsentProvider>
       <html className={`${halcom.className}`} lang={params.lang ?? "eng"}>
+        <head>
+          {/* Add this LogoStructuredData component */}
+          <LogoStructuredData
+            logoUrl={navbarLogoUrl ?? ""}
+            organizationName="Dentsu"
+            siteUrl="https://dentsu.lv"
+          />
+        </head>
         <GoogleAnalytics
           googleAnalyticsMeasurementId={
             global?.data?.attributes?.GoogleAnalyticsMeasurementId ?? ""

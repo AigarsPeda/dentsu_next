@@ -1,23 +1,26 @@
-import Script from "next/script";
-
 interface LogoStructuredDataProps {
   logoUrl: string;
+  organizationName: string;
+  siteUrl: string;
 }
 
-export function LogoStructuredData({ logoUrl }: LogoStructuredDataProps) {
+export const LogoStructuredData = ({
+  logoUrl,
+  organizationName,
+  siteUrl,
+}: LogoStructuredDataProps) => {
   return (
-    <Script
-      id="logo-structured-data"
+    <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify({
-          //   "@context": "https://schema.org",
-          //   "@type": "Organization",
-          name: "Dentsu",
-          url: "https://dentsu.lv",
-          logo: logoUrl, // Use your optimized logo path here
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          url: siteUrl,
+          name: organizationName,
+          logo: logoUrl,
         }),
       }}
     />
   );
-}
+};
