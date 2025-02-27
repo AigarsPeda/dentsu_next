@@ -190,12 +190,7 @@ export default async function RootLayout({
           }
         />
         <GoogleTagManager gtmId="GTM-NVFZQCS2" />
-        <LogoStructuredData
-          logoUrl={
-            navbarLogoUrl ||
-            "https://dentsu.lv/strapi/uploads/dentsu_logo_white_2a12dfaf3e.svg"
-          }
-        />
+
         <body className="text-white">
           <GoogleTagManagerNoScript gtmId="GTM-NVFZQCS2" />
           <NavbarContent
