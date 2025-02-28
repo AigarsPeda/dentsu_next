@@ -108,7 +108,7 @@ export default function MainHeroSection({ data }: MainHeroSectionProps) {
           autoPlay
           playsInline
           id="background-video"
-          poster={posterUrl ?? origThumbFromVideo ?? ""}
+          poster={posterUrl ?? origThumbFromVideo ?? undefined}
           className="absolute inset-0 z-0 hidden object-cover w-full h-full md:block"
         >
           <source src={videoUrl} type={getVideoType(videoUrl)} />

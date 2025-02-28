@@ -64,11 +64,11 @@ export default function Footer({ footer }: { footer: Footer }) {
           </p>
         </div>
         <div className="flex justify-center w-full lg:justify-end">
-          <div className="flex flex-col items-center md:items-end">
+          <ul className="flex flex-col items-center md:items-end">
             {footer.menuLinks.map((link: FooterLink) => {
               return <FooterLink key={link.id} {...link} />;
             })}
-          </div>
+          </ul>
         </div>
         <p className="block text-sm text-center md:hidden">
           {footer.copyright}

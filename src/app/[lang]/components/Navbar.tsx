@@ -196,7 +196,7 @@ function Navbar({
               </>
               <div className="flow-root mt-14">
                 <div className="-my-6 divide-y divide-gray-700">
-                  <div className="py-6 space-y-2">
+                  <ul className="py-6 space-y-2">
                     {linksWithLocale.map((item) => (
                       <MobileNavLink
                         key={item.id}
@@ -204,7 +204,7 @@ function Navbar({
                         {...item}
                       />
                     ))}
-                  </div>
+                  </ul>
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center gap-6 mt-6">
