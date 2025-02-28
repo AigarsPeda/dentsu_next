@@ -26,14 +26,12 @@ export default function Logo({
       {src && (
         <img
           src={src}
+          id="logo"
           alt="dentsu logo"
           className="object-contain w-[105px] h-[22px]"
         />
       )}
       {children && <div className="ml-2">{children}</div>}
-      {/* <div>
-        <HomeIcon className="w-5 h-5" />
-      </div> */}
     </Link>
   );
 }
