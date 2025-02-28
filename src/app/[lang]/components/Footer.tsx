@@ -35,11 +35,11 @@ export default function Footer({ footer }: { footer: Footer }) {
     <footer className="py-6 bg-dentsu-primary text-gray-50">
       <div className="container grid grid-cols-1 gap-4 mx-auto lg:grid-cols-3">
         <div className="flex w-full">
-          <div className="mx-auto text-center md:w-40 lg:mx-0 lg:text-left">
+          <ul className="mx-auto text-center md:w-40 lg:mx-0 lg:text-left">
             {footer.legalLinks.map((link: FooterLink) => {
               return <FooterLink key={link.id} {...link} />;
             })}
-          </div>
+          </ul>
         </div>
         <div className="w-full">
           <p className="text-base text-center lg:pb-5">{footer.title}</p>
