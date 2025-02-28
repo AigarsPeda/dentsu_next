@@ -94,7 +94,6 @@ export async function generateMetadata({
         },
       ],
     },
-    // manifest: "/site.webmanifest",
   };
 
   return m;
@@ -184,19 +183,18 @@ export default async function RootLayout({
     <CookieConsentProvider>
       <html className={`${halcom.className}`} lang={params.lang ?? "eng"}>
         <head>
-          {/* Add this LogoStructuredData component */}
           <LogoStructuredData
             logoUrl={navbarLogoUrl ?? ""}
             organizationName="Dentsu"
             siteUrl="https://dentsu.lv"
           />
+          <GoogleTagManager gtmId="GTM-NVFZQCS2" />
+          <GoogleAnalytics
+            googleAnalyticsMeasurementId={
+              global?.data?.attributes?.GoogleAnalyticsMeasurementId ?? ""
+            }
+          />
         </head>
-        <GoogleAnalytics
-          googleAnalyticsMeasurementId={
-            global?.data?.attributes?.GoogleAnalyticsMeasurementId ?? ""
-          }
-        />
-        <GoogleTagManager gtmId="GTM-NVFZQCS2" />
 
         <body className="text-white">
           <GoogleTagManagerNoScript gtmId="GTM-NVFZQCS2" />
