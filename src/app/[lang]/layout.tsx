@@ -75,6 +75,10 @@ export async function generateMetadata({
       content:
         GoogleSiteVerification ?? "ZJBvFY46jqKyoJFq6qksLKH9unCs0a8Vg7zSK_-pLtI",
     },
+    // verification: { google: "YOUR-VERIFICATION-CODE-PROVIDED-BY-GOOGLE" },
+    verification: {
+      google: GoogleSiteVerification,
+    },
     icons: {
       icon: [
         {
