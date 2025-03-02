@@ -59,12 +59,14 @@ export async function generateMetadata({
 
   if (!meta.data) return FALLBACK_SEO;
 
-  const { metadata, favicon, favicon_large, favicon_96x96, favicon_svg } =
-    meta.data.attributes;
-  const { url } = favicon.data.attributes;
-  const { url: urlLarge } = favicon_large?.data?.attributes;
-  const { url: url96x96 } = favicon_96x96?.data?.attributes;
-  const { url: urlFavicon_svg } = favicon_svg?.data?.attributes;
+  // const { metadata, favicon, favicon_large, favicon_96x96, favicon_svg } =
+  //   meta.data.attributes;
+  // const { url } = favicon.data.attributes;
+  // const { url: urlLarge } = favicon_large?.data?.attributes;
+  // const { url: url96x96 } = favicon_96x96?.data?.attributes;
+  // const { url: urlFavicon_svg } = favicon_svg?.data?.attributes;
+
+  const { metadata } = meta.data.attributes;
 
   const m = {
     title: metadata.metaTitle,
@@ -77,32 +79,22 @@ export async function generateMetadata({
         {
           rel: "icon",
           type: "image/png",
-          url: url96x96
-            ? `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url96x96}`
-            : "/favicon-96x96.png",
+          url: "/favicon-96x96.png",
           sizes: "96x96",
         },
         {
           rel: "icon",
           type: "image/svg+xml",
-          url: urlFavicon_svg
-            ? `${getStrapiURL(
-                process.env.NEXT_PUBLIC_STRAPI_PATH
-              )}${urlFavicon_svg}`
-            : "/favicon.svg",
+          url: "/favicon.svg",
         },
         {
           rel: "shortcut icon",
-          url: url
-            ? `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
-            : "/favicon.ico",
+          url: "/favicon.ico",
         },
         {
           rel: "apple-touch-icon",
           sizes: "180x180",
-          url: urlLarge
-            ? `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${urlLarge}`
-            : "/apple-touch-icon.png",
+          url: "/apple-touch-icon.png",
         },
       ],
     },
