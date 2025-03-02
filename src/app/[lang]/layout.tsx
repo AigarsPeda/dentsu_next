@@ -65,57 +65,44 @@ export async function generateMetadata({
   const { url: urlLarge } = favicon_large.data.attributes;
   const { url: url96x96 } = favicon_96x96.data.attributes;
   const { url: urlFavicon_svg } = favicon_svg.data.attributes;
-  // const { url: favicon_svg } = favicon_svg.data.attributes;
 
   const m = {
     title: metadata.metaTitle,
-    // favicon: "/favicon.ico",
-    // favicon: new URL(
-    //   `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
-    // ),
     description: metadata.metaDescription,
     "google-site-verification": {
       content: "ZJBvFY46jqKyoJFq6qksLKH9unCs0a8Vg7zSK_-pLtI",
     },
-    // icons: {
-    //   // icon: new URL(
-    //   //   `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
-    //   // ),
-    //   icon: "/favicon.ico", // Ensure it's available in the `public` folder
-    //   // shortcut: "/favicon.ico",
-    // },
-
     icons: {
       icon: [
         {
           rel: "icon",
           type: "image/png",
-          // url: "/favicon-96x96.png",
-          url: `${getStrapiURL(
-            process.env.NEXT_PUBLIC_STRAPI_PATH
-          )}${url96x96}`,
+          url: url96x96
+            ? `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url96x96}`
+            : "/favicon-96x96.png",
           sizes: "96x96",
         },
-        // { rel: "icon", type: "image/svg+xml", url: "/favicon.svg" },
         {
           rel: "icon",
           type: "image/svg+xml",
-          // url: "/favicon.svg",
-          url: `${getStrapiURL(
-            process.env.NEXT_PUBLIC_STRAPI_PATH
-          )}${urlFavicon_svg}`,
+          url: urlFavicon_svg
+            ? `${getStrapiURL(
+                process.env.NEXT_PUBLIC_STRAPI_PATH
+              )}${urlFavicon_svg}`
+            : "/favicon.svg",
         },
         {
           rel: "shortcut icon",
-          url: `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`,
+          url: url
+            ? `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`
+            : "/favicon.ico",
         },
         {
           rel: "apple-touch-icon",
           sizes: "180x180",
-          // url: "/apple-touch-icon.png",
-          url: `${getStrapiURL(
-            process.env.NEXT_PUBLIC_STRAPI_PATH
-          )}${urlLarge}`,
+          url: urlLarge
+            ? `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${urlLarge}`
+            : "/apple-touch-icon.png",
         },
       ],
     },
