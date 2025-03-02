@@ -62,9 +62,9 @@ export async function generateMetadata({
   const { metadata, favicon, favicon_large, favicon_96x96, favicon_svg } =
     meta.data.attributes;
   const { url } = favicon.data.attributes;
-  const { url: urlLarge } = favicon_large.data.attributes;
-  const { url: url96x96 } = favicon_96x96.data.attributes;
-  const { url: urlFavicon_svg } = favicon_svg.data.attributes;
+  const { url: urlLarge } = favicon_large?.data?.attributes;
+  const { url: url96x96 } = favicon_96x96?.data?.attributes;
+  const { url: urlFavicon_svg } = favicon_svg?.data?.attributes;
 
   const m = {
     title: metadata.metaTitle,
