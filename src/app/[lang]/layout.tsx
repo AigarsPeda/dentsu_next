@@ -66,13 +66,14 @@ export async function generateMetadata({
   // const { url: url96x96 } = favicon_96x96?.data?.attributes;
   // const { url: urlFavicon_svg } = favicon_svg?.data?.attributes;
 
-  const { metadata } = meta.data.attributes;
+  const { metadata, GoogleSiteVerification } = meta.data.attributes;
 
   const m = {
     title: metadata.metaTitle,
     description: metadata.metaDescription,
     "google-site-verification": {
-      content: "ZJBvFY46jqKyoJFq6qksLKH9unCs0a8Vg7zSK_-pLtI",
+      content:
+        GoogleSiteVerification ?? "ZJBvFY46jqKyoJFq6qksLKH9unCs0a8Vg7zSK_-pLtI",
     },
     icons: {
       icon: [
@@ -164,6 +165,7 @@ export default async function RootLayout({
     navbar,
     footer,
     CookieBanner: cookieBannerData,
+    GoogleTagManagerID,
   } = global.data.attributes;
 
   const navbarLogoUrl = getStrapiMedia(
@@ -196,7 +198,7 @@ export default async function RootLayout({
             organizationName="Dentsu"
             siteUrl="https://dentsu.lv"
           />
-          <GoogleTagManager gtmId="GTM-NVFZQCS2" />
+          <GoogleTagManager gtmId={GoogleTagManagerID} />
           <GoogleAnalytics
             googleAnalyticsMeasurementId={
               global?.data?.attributes?.GoogleAnalyticsMeasurementId ?? ""
@@ -205,7 +207,7 @@ export default async function RootLayout({
         </head>
 
         <body className="text-white">
-          <GoogleTagManagerNoScript gtmId="GTM-NVFZQCS2" />
+          <GoogleTagManagerNoScript gtmId={GoogleTagManagerID} />
           <NavbarContent
             links={navbar.links}
             logoUrl={navbarLogoUrl}
