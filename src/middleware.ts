@@ -197,6 +197,7 @@ function shouldSkipMiddleware(pathname: string): boolean {
     /\.ico$/i, // All .ico files
     /icon-\d+x\d+/i, // Icon files with dimensions in name
     /\.png$/i, // Consider excluding all PNG files if most are assets
+    /\.svg$/i, // Consider excluding all SVG files if most are assets
     /site\.webmanifest$/i, // Web manifest files
     /browserconfig\.xml$/i, // Browser config files
     /safari-pinned-tab/i, // Safari pinned tab SVG
