@@ -29,6 +29,7 @@ async function getGlobal(lang: string): Promise<any> {
       "favicon",
       "favicon_large",
       "favicon_96x96",
+      "favicon_svg",
       "navbar.locales",
       "notificationBanner.link",
       "navbar.links",
@@ -58,11 +59,13 @@ export async function generateMetadata({
 
   if (!meta.data) return FALLBACK_SEO;
 
-  const { metadata, favicon, favicon_large, favicon_96x96 } =
+  const { metadata, favicon, favicon_large, favicon_96x96, favicon_svg } =
     meta.data.attributes;
   const { url } = favicon.data.attributes;
   const { url: urlLarge } = favicon_large.data.attributes;
   const { url: url96x96 } = favicon_96x96.data.attributes;
+  const { url: urlFavicon_svg } = favicon_svg.data.attributes;
+  // const { url: favicon_svg } = favicon_svg.data.attributes;
 
   const m = {
     title: metadata.metaTitle,
@@ -97,7 +100,10 @@ export async function generateMetadata({
         {
           rel: "icon",
           type: "image/svg+xml",
-          url: "/favicon.svg",
+          // url: "/favicon.svg",
+          url: `${getStrapiURL(
+            process.env.NEXT_PUBLIC_STRAPI_PATH
+          )}${urlFavicon_svg}`,
         },
         {
           rel: "shortcut icon",
