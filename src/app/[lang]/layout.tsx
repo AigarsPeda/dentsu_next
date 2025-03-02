@@ -2,7 +2,7 @@ import CookieBanner from "@/app/[lang]/components/CookieBanner";
 import Footer from "@/app/[lang]/components/Footer";
 import NavbarContent from "@/app/[lang]/components/Navbar";
 import "@/app/[lang]/globals.css";
-import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import { getStrapiMedia, getStrapiURL } from "@/app/[lang]/utils/api-helpers";
 import { FALLBACK_SEO } from "@/app/[lang]/utils/constants";
 import { fetchAPI } from "@/app/[lang]/utils/fetch-api";
 import GoogleAnalytics from "@/script/GoogleAnalytics";
@@ -27,6 +27,8 @@ async function getGlobal(lang: string): Promise<any> {
     populate: [
       "metadata.shareImage",
       "favicon",
+      "favicon_large",
+      "favicon_96x96",
       "navbar.locales",
       "notificationBanner.link",
       "navbar.links",
@@ -56,8 +58,13 @@ export async function generateMetadata({
 
   if (!meta.data) return FALLBACK_SEO;
 
-  const { metadata, favicon } = meta.data.attributes;
+  const { metadata, favicon, favicon_large, favicon_96x96 } =
+    meta.data.attributes;
   const { url } = favicon.data.attributes;
+  const { url: urlLarge } = favicon_large.data.attributes;
+  const { url: url96x96 } = favicon_96x96.data.attributes;
+
+  console.log("favicon_96x96 >>>", favicon_96x96);
 
   const m = {
     title: metadata.metaTitle,
@@ -82,15 +89,29 @@ export async function generateMetadata({
         {
           rel: "icon",
           type: "image/png",
-          url: "/favicon-96x96.png",
+          // url: "/favicon-96x96.png",
+          url: `${getStrapiURL(
+            process.env.NEXT_PUBLIC_STRAPI_PATH
+          )}${url96x96}`,
           sizes: "96x96",
         },
-        { rel: "icon", type: "image/svg+xml", url: "/favicon.svg" },
-        { rel: "shortcut icon", url: "/favicon.ico" },
+        // { rel: "icon", type: "image/svg+xml", url: "/favicon.svg" },
+        {
+          rel: "icon",
+          type: "image/svg+xml",
+          url: "/favicon.svg",
+        },
+        {
+          rel: "shortcut icon",
+          url: `${getStrapiURL(process.env.NEXT_PUBLIC_STRAPI_PATH)}${url}`,
+        },
         {
           rel: "apple-touch-icon",
           sizes: "180x180",
-          url: "/apple-touch-icon.png",
+          // url: "/apple-touch-icon.png",
+          url: `${getStrapiURL(
+            process.env.NEXT_PUBLIC_STRAPI_PATH
+          )}${urlLarge}`,
         },
       ],
     },
