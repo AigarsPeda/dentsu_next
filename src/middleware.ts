@@ -199,7 +199,7 @@ function shouldSkipMiddleware(pathname: string): boolean {
     /\.png$/i, // Consider excluding all PNG files if most are assets
     /site\.webmanifest$/i, // Web manifest files
     /browserconfig\.xml$/i, // Browser config files
-    /safari-pinned-tab/i,
+    /safari-pinned-tab/i, // Safari pinned tab SVG
   ];
 
   // Check exact paths
