@@ -64,8 +64,6 @@ export async function generateMetadata({
   const { url: urlLarge } = favicon_large.data.attributes;
   const { url: url96x96 } = favicon_96x96.data.attributes;
 
-  console.log("favicon_96x96 >>>", favicon_96x96);
-
   const m = {
     title: metadata.metaTitle,
     // favicon: "/favicon.ico",
