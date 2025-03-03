@@ -59,6 +59,11 @@ export async function generateMetadata({
 
   if (!meta.data) return FALLBACK_SEO;
 
+  console.log(
+    "meta",
+    meta.data.attributes.navbar.navbarLogo.logoImg.data.attributes.url
+  );
+
   // const { metadata, favicon, favicon_large, favicon_96x96, favicon_svg } =
   //   meta.data.attributes;
   // const { url } = favicon.data.attributes;
@@ -109,22 +114,26 @@ export async function generateMetadata({
     },
 
     // Add OpenGraph data with locale
-    openGraph: {
-      title: metadata.metaTitle,
-      description: metadata.metaDescription,
-      url: `https://dentsu.lv/${params.lang}`,
-      siteName: metadata.siteName || "Your Site Name",
-      // images: [
-      //   {
-      //     url: metadata.ogImage,
-      //     width: 1200,
-      //     height: 630,
-      //     alt: metadata.metaTitle,
-      //   },
-      // ],
-      locale: params.lang === "en" ? "en_US" : "lv_LV",
-      type: "website",
-    },
+    // openGraph: {
+    //   title: metadata.metaTitle,
+    //   description: metadata.metaDescription,
+    //   url: `https://dentsu.lv/${params.lang}`,
+    //   siteName: metadata.siteName || "dentsu.lv",
+    //   images: [
+    //     {
+    //       // url: metadata.ogImage,
+    //       url:
+    //         getStrapiMedia(
+    //           meta.data.attributes.navbar.navbarLogo.logoImg.data.attributes.url
+    //         ) || "",
+    //       width: 1200,
+    //       height: 630,
+    //       alt: metadata.metaTitle,
+    //     },
+    //   ],
+    //   locale: params.lang === "en" ? "en_US" : "lv_LV",
+    //   type: "website",
+    // },
   };
 
   return m;
