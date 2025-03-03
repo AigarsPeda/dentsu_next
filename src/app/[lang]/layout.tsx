@@ -74,32 +74,58 @@ export async function generateMetadata({
     verification: {
       google: GoogleSiteVerification,
     },
+    // icons: {
+    //   icon: [
+    //     {
+    //       rel: "icon",
+    //       type: "image/png",
+    //       url: "/favicon-96x96.png",
+    //       sizes: "96x96",
+    //     },
+    //     {
+    //       rel: "icon",
+    //       type: "image/svg+xml",
+    //       url: "/favicon.svg",
+    //     },
+    //     {
+    //       rel: "shortcut icon",
+    //       url: "/favicon.ico",
+    //     },
+    //     {
+    //       rel: "apple-touch-icon",
+    //       sizes: "180x180",
+    //       url: "/apple-touch-icon.png",
+    //     },
+    //     {
+    //       rel: "mask-icon",
+    //       url: "/safari-pinned-tab.svg",
+    //     },
+    //   ],
+    //   other: [
+    //     {
+    //       rel: "apple-touch-icon",
+    //       url: "/apple-touch-icon.png",
+    //     },
+    //     {
+    //       rel: "shortcut icon",
+    //       url: "/favicon.ico",
+    //     },
+    //     {
+    //       rel: "manifest",
+    //       url: "/site.webmanifest",
+    //     },
+    //   ],
+    //   apple: [
+    //     { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+    //   ],
+    // },
     icons: {
       icon: [
-        {
-          rel: "icon",
-          type: "image/png",
-          url: "/favicon-96x96.png",
-          sizes: "96x96",
-        },
-        {
-          rel: "icon",
-          type: "image/svg+xml",
-          url: "/favicon.svg",
-        },
-        {
-          rel: "shortcut icon",
-          url: "/favicon.ico",
-        },
-        {
-          rel: "apple-touch-icon",
-          sizes: "180x180",
-          url: "/apple-touch-icon.png",
-        },
-        {
-          rel: "mask-icon",
-          url: "/safari-pinned-tab.svg",
-        },
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      ],
+      apple: [
+        { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
       ],
       other: [
         {
@@ -114,9 +140,6 @@ export async function generateMetadata({
           rel: "manifest",
           url: "/site.webmanifest",
         },
-      ],
-      apple: [
-        { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
       ],
     },
   };
