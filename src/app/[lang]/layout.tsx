@@ -68,57 +68,12 @@ export async function generateMetadata({
 
   const { metadata, GoogleSiteVerification } = meta.data.attributes;
 
-  const m = {
+  const m: Metadata = {
     title: metadata.metaTitle,
     description: metadata.metaDescription,
     verification: {
       google: GoogleSiteVerification,
     },
-    // icons: {
-    //   icon: [
-    //     {
-    //       rel: "icon",
-    //       type: "image/png",
-    //       url: "/favicon-96x96.png",
-    //       sizes: "96x96",
-    //     },
-    //     {
-    //       rel: "icon",
-    //       type: "image/svg+xml",
-    //       url: "/favicon.svg",
-    //     },
-    //     {
-    //       rel: "shortcut icon",
-    //       url: "/favicon.ico",
-    //     },
-    //     {
-    //       rel: "apple-touch-icon",
-    //       sizes: "180x180",
-    //       url: "/apple-touch-icon.png",
-    //     },
-    //     {
-    //       rel: "mask-icon",
-    //       url: "/safari-pinned-tab.svg",
-    //     },
-    //   ],
-    //   other: [
-    //     {
-    //       rel: "apple-touch-icon",
-    //       url: "/apple-touch-icon.png",
-    //     },
-    //     {
-    //       rel: "shortcut icon",
-    //       url: "/favicon.ico",
-    //     },
-    //     {
-    //       rel: "manifest",
-    //       url: "/site.webmanifest",
-    //     },
-    //   ],
-    //   apple: [
-    //     { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
-    //   ],
-    // },
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
@@ -143,6 +98,32 @@ export async function generateMetadata({
           url: "/site.webmanifest",
         },
       ],
+    },
+
+    alternates: {
+      canonical: `https://dentsu.lv/${params.lang}`,
+      languages: {
+        en: `https://dentsu.lv/en`,
+        lv: `https://dentsu.lv/lv`,
+      },
+    },
+
+    // Add OpenGraph data with locale
+    openGraph: {
+      title: metadata.metaTitle,
+      description: metadata.metaDescription,
+      url: `https://dentsu.lv/${params.lang}`,
+      siteName: metadata.siteName || "Your Site Name",
+      // images: [
+      //   {
+      //     url: metadata.ogImage,
+      //     width: 1200,
+      //     height: 630,
+      //     alt: metadata.metaTitle,
+      //   },
+      // ],
+      locale: params.lang === "en" ? "en_US" : "lv_LV",
+      type: "website",
     },
   };
 
