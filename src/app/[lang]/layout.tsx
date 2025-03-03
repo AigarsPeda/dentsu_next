@@ -122,6 +122,7 @@ export async function generateMetadata({
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
         { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
       ],
       apple: [
