@@ -148,8 +148,6 @@ export async function generateMetadata({
         },
       ],
     },
-    themeColor: "#ffffff",
-    manifest: "/site.webmanifest",
   };
 
   return m;
