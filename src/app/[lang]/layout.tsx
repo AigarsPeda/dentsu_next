@@ -104,7 +104,7 @@ export async function generateMetadata({
       other: [
         {
           rel: "apple-touch-icon",
-          url: "/apple-icon.png",
+          url: "/apple-touch-icon.png",
         },
         {
           rel: "shortcut icon",
@@ -115,7 +115,9 @@ export async function generateMetadata({
           url: "/site.webmanifest",
         },
       ],
-      apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+      apple: [
+        { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+      ],
     },
   };
 
