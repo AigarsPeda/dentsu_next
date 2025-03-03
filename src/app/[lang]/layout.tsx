@@ -135,10 +135,6 @@ export async function generateMetadata({
       ],
       other: [
         {
-          rel: "apple-touch-icon",
-          url: "/apple-touch-icon.png",
-        },
-        {
           rel: "shortcut icon",
           url: "/favicon.ico",
         },
