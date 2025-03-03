@@ -71,11 +71,6 @@ export async function generateMetadata({
   const m = {
     title: metadata.metaTitle,
     description: metadata.metaDescription,
-    "google-site-verification": {
-      content:
-        GoogleSiteVerification ?? "ZJBvFY46jqKyoJFq6qksLKH9unCs0a8Vg7zSK_-pLtI",
-    },
-    // verification: { google: "YOUR-VERIFICATION-CODE-PROVIDED-BY-GOOGLE" },
     verification: {
       google: GoogleSiteVerification,
     },
@@ -106,6 +101,21 @@ export async function generateMetadata({
           url: "/safari-pinned-tab.svg",
         },
       ],
+      other: [
+        {
+          rel: "apple-touch-icon",
+          url: "/apple-icon.png",
+        },
+        {
+          rel: "shortcut icon",
+          url: "/favicon.ico",
+        },
+        {
+          rel: "manifest",
+          url: "/site.webmanifest",
+        },
+      ],
+      apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
     },
   };
 
