@@ -59,11 +59,6 @@ export async function generateMetadata({
 
   if (!meta.data) return FALLBACK_SEO;
 
-  console.log(
-    "meta",
-    meta.data.attributes.navbar.navbarLogo.logoImg.data.attributes.url
-  );
-
   // const { metadata, favicon, favicon_large, favicon_96x96, favicon_svg } =
   //   meta.data.attributes;
   // const { url } = favicon.data.attributes;
