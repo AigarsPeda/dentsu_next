@@ -70,8 +70,11 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
     : cookieBannerData?.dialog;
 
   useEffect(() => {
-    if (cookies?.necessary?.version !== "1.0.0") {
+    // Only show the dialog if cookies are not set or version is different
+    if (!cookies?.necessary || cookies?.necessary?.version !== "1.0.0") {
       setIsShowDialog(true);
+    } else {
+      setIsShowDialog(false);
     }
   }, [cookies]);
 
