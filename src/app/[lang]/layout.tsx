@@ -76,21 +76,18 @@ export async function generateMetadata({
     },
     icons: {
       icon: [
-        // { url: "/favicon.ico", sizes: "any", type: "image/x-icon" },
-        // { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
-        { url: "favicon-16x16.png", type: "image/png", sizes: "16x16" },
-        { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
-        { url: "/favicon-192x192.png", type: "image/png", sizes: "192x192" },
-        // {
-        //   url: "/favicon.svg",
-        //   type: "image/svg+xml",
-        // },
+        { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+        { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+        {
+          url: "/apple-touch-icon.png",
+          rel: "mask-icon",
+          color: "#5bbad5",
+        },
       ],
       apple: [
         {
           url: "/apple-touch-icon.png",
-          type: "image/png",
-          rel: "mask-icon",
+          // type: "image/png",
           sizes: "180x180",
         },
       ],
