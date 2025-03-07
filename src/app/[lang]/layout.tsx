@@ -87,13 +87,9 @@ export async function generateMetadata({
         // },
       ],
       apple: [
-        { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+        { url: "/apple-touch-icon.png", type: "image/png", rel="mask-icon", sizes: "180x180" },
       ],
       other: [
-        {
-          rel: "shortcut icon",
-          url: "/favicon.ico",
-        },
         {
           rel: "manifest",
           url: "/site.webmanifest",
