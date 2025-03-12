@@ -68,6 +68,8 @@ export async function generateMetadata({
 
   const { metadata, GoogleSiteVerification } = meta.data.attributes;
 
+  // <link rel="icon" href="/favicon/favicon.ico" sizes="any">
+
   const m: Metadata = {
     title: metadata.metaTitle,
     description: metadata.metaDescription,
@@ -80,6 +82,7 @@ export async function generateMetadata({
         { url: "/favicon-32x32.png", type: "image/png", sizes: "48x48" },
         { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
         { url: "/favicon-192x192.png", type: "image/png", sizes: "144x144" },
+        { url: "/favicon.ico", type: "icon", sizes: "any" },
         {
           url: "/apple-touch-icon.png",
           rel: "mask-icon",
