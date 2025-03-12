@@ -1,0 +1,35 @@
+Allow: /
+Allow: /strapi/uploads/
+
+# Explicitly allow PDF files in uploads directory
+Allow: /strapi/uploads/*.pdf
+
+# This ensures the Google crawler can access your PDF files
+User-agent: Googlebot
+Allow: /
+Allow: /strapi/uploads/
+Allow: /strapi/uploads/*.pdf
+
+# Make sure media files are crawlable
+User-agent: Googlebot-Image
+Allow: /strapi/uploads/
+
+User-agent: *
+Allow: /
+Allow: /strapi/uploads/
+
+# Explicitly allow PDF files in uploads directory
+Allow: /strapi/uploads/*.pdf
+
+# This ensures the Google crawler can access your PDF files
+User-agent: Googlebot
+Allow: /
+Allow: /strapi/uploads/
+Allow: /strapi/uploads/*.pdf
+
+# Make sure media files are crawlable
+User-agent: Googlebot-Image
+Allow: /strapi/uploads/
+
+# For sitemaps (if you add one later)
+Sitemap: https://dentsu.lv/strapi/api/sitemap/index.xml
