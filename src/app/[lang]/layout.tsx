@@ -83,6 +83,7 @@ export async function generateMetadata({
         { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
         { url: "/favicon-192x192.png", type: "image/png", sizes: "144x144" },
         { url: "/favicon.ico", rel: "icon", sizes: "any" },
+        { url: "/favicon.svg", type: "image/svg+xml", rel: "icon" },
         {
           url: "/apple-touch-icon.png",
           rel: "mask-icon",
