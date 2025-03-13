@@ -37,7 +37,11 @@ export function middleware(request: NextRequest) {
   const userAgent = request.headers.get("user-agent") || "";
 
   // Skip middleware for excluded paths or Googlebot
-  if (shouldSkipMiddleware(pathname) || isGooglebot(userAgent)) {
+  // if (shouldSkipMiddleware(pathname) || isGooglebot(userAgent)) {
+  //   return;
+  // }
+
+  if (shouldSkipMiddleware(pathname)) {
     return;
   }
 
