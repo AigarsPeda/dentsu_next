@@ -39,7 +39,7 @@ export default async function PageRoute({ params }: Props) {
   // Redirect to home page if page is not found
   if (page.data.length === 0) {
     // Redirect to home page if page is not found
-    const home = await getPageBySlug("home", "en");
+    const home = await getPageBySlug("home", "lv");
     const contentSectionsHome = home.data[0]?.attributes?.contentSections;
 
     if (!contentSectionsHome || !Array.isArray(contentSectionsHome))
