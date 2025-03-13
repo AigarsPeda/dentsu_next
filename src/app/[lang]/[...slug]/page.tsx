@@ -35,7 +35,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PageRoute({ params }: Props) {
   const page = await getPageBySlug(params.slug, params.lang);
-  if (page.data.length === 0) return null;
+
+  // Redirect to home page if page is not found
+  if (page.data.length === 0) {
+    // Redirect to home page if page is not found
+    const home = await getPageBySlug("home", "en");
+    const contentSectionsHome = home.data[0]?.attributes?.contentSections;
+
+    if (!contentSectionsHome || !Array.isArray(contentSectionsHome))
+      return null;
+
+    return contentSectionsHome.map((section: any, index: number) =>
+      sectionRenderer(section, index)
+    );
+  }
+
   const contentSections = page.data[0]?.attributes?.contentSections;
 
   // Add safety check for contentSections
