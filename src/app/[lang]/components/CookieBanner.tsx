@@ -56,7 +56,7 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
     };
 
     setCookie("necessary", COOKIE, {
-      // Type 'number' is not assignable to type 'Date'.
+      // 'Date'.
       expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
     });
     setIsShowDialog(false);
