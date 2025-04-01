@@ -15,7 +15,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
-import { useCookieConsent } from "@/contexts/CookieConsentContext";
+import {
+  COOKIE_VERSION,
+  useCookieConsent,
+} from "@/contexts/CookieConsentContext";
 import { usePathname } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -51,7 +54,7 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
   const addCookieToPage = () => {
     const COOKIE = {
       necessary: true,
-      version: "1.0.0",
+      version: COOKIE_VERSION,
       nonNecessary: isNonNecessary,
     };
 
@@ -59,11 +62,48 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
       // 'Date'.
       expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
     });
+
+    // DIRECT CONSENT UPDATE - This is crucial for immediate updates
+    const consentState = isNonNecessary ? "granted" : "denied";
+
+    // Check if window and gtag exist
+    if (typeof window !== "undefined") {
+      // Reset the consentUpdated flag to ensure the update fires
+      window.__consentUpdated = false;
+
+      if (typeof window.gtag === "function") {
+        // Use gtag API directly
+        window.gtag("consent", "update", {
+          ad_user_data: consentState,
+          ad_personalization: consentState,
+          ad_storage: consentState,
+          analytics_storage: consentState,
+        });
+
+        // console.log("Consent updated via gtag API:", consentState);
+      } else if (window.dataLayer) {
+        // Fallback to dataLayer
+        window.dataLayer.push({
+          event: "consent_update",
+          consent: {
+            ad_storage: consentState,
+            ad_user_data: consentState,
+            ad_personalization: consentState,
+            analytics_storage: consentState,
+          },
+        });
+
+        console.log("Consent updated via dataLayer push:", consentState);
+      }
+
+      // Mark as updated
+      window.__consentUpdated = true;
+    }
+
     setIsShowDialog(false);
   };
 
   // if cookieBannerData?.dialog is more 40 Words, then show more button
-
   const words = cookieBannerData?.dialog.split(" ");
   const isMoreWords = words?.length > 81;
   const dialogText = isMoreWords
@@ -74,10 +114,32 @@ const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
 
   useEffect(() => {
     // Only show the dialog if cookies are not set or version is different
-    if (!cookies?.necessary || cookies?.necessary?.version !== "1.0.0") {
+    if (!cookies?.necessary || cookies?.necessary?.version !== COOKIE_VERSION) {
       setIsShowDialog(true);
     } else {
       setIsShowDialog(false);
+
+      // Apply consent from cookies on page load
+      if (
+        cookies?.necessary &&
+        typeof window !== "undefined" &&
+        !window.__consentUpdated
+      ) {
+        const consentState = cookies.necessary.nonNecessary
+          ? "granted"
+          : "denied";
+
+        if (typeof window.gtag === "function") {
+          window.gtag("consent", "update", {
+            ad_user_data: consentState,
+            ad_personalization: consentState,
+            ad_storage: consentState,
+            analytics_storage: consentState,
+          });
+        }
+
+        window.__consentUpdated = true;
+      }
     }
   }, [cookies]);
 
