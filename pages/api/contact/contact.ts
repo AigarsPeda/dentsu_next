@@ -85,10 +85,10 @@ export default async function handler(
     await transporter.sendMail({
       from: `"DENTSU WEBSITE Contact form" <${"dentsu website"}>`, // sender address
       to: emailSettings.email, // You might want to make this configurable in Strapi too
-      subject: "New Contact Form Submission",
+      subject: "DENTSU WEBSITE Contact form",
       text: emailText,
       html: `<div style="font-family: Arial, sans-serif; padding: 20px;">
-        <h2>New Contact Form Submission</h2>
+        <h2>DENTSU WEBSITE</h2>
         <div style="margin-top: 20px;">
           ${Object.entries(body)
             .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
