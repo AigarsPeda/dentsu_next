@@ -64,14 +64,14 @@ export interface IFormInput {
 
 type FormSubmitSateType = "idle" | "loading" | "success" | "error";
 
-type EmailResponseTypes = {
-  message: string;
-  success: "true" | "false";
-};
+// type EmailResponseTypes = {
+//   message: string;
+//   success: "true" | "false";
+// };
 
 export default function Contacts({ data }: ContactsProps) {
   const path = usePathname();
-  const urlLocale = path.split("/")[1] || "en";
+  const urlLocale = path?.split("/")[1] || "en";
   const { reset, register, handleSubmit, formState } = useForm<IFormInput>();
   const [formSubmitStatus, setFormSubmitStatus] =
     useState<FormSubmitSateType>("idle");
@@ -105,24 +105,26 @@ export default function Contacts({ data }: ContactsProps) {
       }
     });
 
-    fetch(`https://formsubmit.co/ajax/${data.contactEmail}`, {
+    fetch("/api/contact/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
       },
       body: JSON.stringify(formDataToSend),
     })
       .then((response) => response.json())
-      .then((res: EmailResponseTypes) => {
-        if (res.success === "true") {
+      .then((res: { success: boolean }) => {
+        if (res.success) {
           setFormSubmitStatus("success");
           reset();
         } else {
           setFormSubmitStatus("error");
         }
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error("Email send error:", error);
+        setFormSubmitStatus("error");
+      });
   };
 
   const createLinks = (text: string) => {
