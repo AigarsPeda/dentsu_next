@@ -38,7 +38,7 @@ interface ContactUsSectionProps {
 
 export default function ContactUsSection({ data }: ContactUsSectionProps) {
   const path = usePathname();
-  const urlLocale = path.split("/")[1] || "en";
+  const urlLocale = path?.split("/")[1] || "en";
 
   return (
     <div className="container mx-auto py-14">

@@ -67,7 +67,7 @@ function Navbar({
   const params = useSearchParams();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const urlLocale = path.split("/")[1] || "en";
+  const urlLocale = path?.split("/")[1] || "en";
 
   const linksWithLocale = links.map((link) => ({
     ...link,
@@ -75,9 +75,9 @@ function Navbar({
   }));
 
   const getCurrentLocaleAndReplace = (newLocale: string) => {
-    const pathArray = path.split("/");
+    const pathArray = path?.split("/") || [];
 
-    if (pathArray.length === 1) {
+    if (pathArray?.length === 1) {
       return path; // Return the original path if it's invalid
     }
 
@@ -127,7 +127,7 @@ function Navbar({
                   key={locale.id}
                   prefetch={true}
                   locale={locale.code}
-                  href={getCurrentLocaleAndReplace(locale.code)}
+                  href={getCurrentLocaleAndReplace(locale.code) ?? ""}
                 >
                   <div
                     style={{
@@ -214,7 +214,7 @@ function Navbar({
                     key={locale.id}
                     prefetch={true}
                     locale={locale.code}
-                    href={getCurrentLocaleAndReplace(locale.code)}
+                    href={getCurrentLocaleAndReplace(locale.code) ?? ""}
                   >
                     <div
                       style={{

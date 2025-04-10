@@ -45,7 +45,7 @@ interface CookieBannerProps {
 
 const CookieBanner: FC<CookieBannerProps> = ({ cookieBannerData }) => {
   const path = usePathname();
-  const urlLocale = path.split("/")[1] || "en";
+  const urlLocale = path?.split("/")[1] || "en";
   const { cookies, setCookie } = useCookieConsent();
   const [isShowMore, setIsShowMore] = useState(false);
   const [isShowDialog, setIsShowDialog] = useState(false);

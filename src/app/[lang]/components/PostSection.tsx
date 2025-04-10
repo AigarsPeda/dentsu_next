@@ -42,7 +42,7 @@ export default function PostSection({ data }: PostSectionProps) {
   const params = useSearchParams();
   const [parent] = useAutoAnimate();
 
-  const search = params.get("search");
+  const search = params?.get("search");
 
   const filteredData = useMemo(() => {
     return data.post.filter((item) => {
@@ -50,7 +50,7 @@ export default function PostSection({ data }: PostSectionProps) {
     });
   }, [data.post, search]);
 
-  const urlLocale = path.split("/")[1] || "en";
+  const urlLocale = path?.split("/")[1] || "en";
 
   return (
     <div className="container mx-auto mb-10">

@@ -32,8 +32,8 @@ interface LogosSectionProps {
 export default function LogosSection({ data }: LogosSectionProps) {
   const path = usePathname();
   const params = useSearchParams();
-  const search = params.get("search");
-  const urlLocale = path.split("/")[1] || "en";
+  const search = params?.get("search");
+  const urlLocale = path?.split("/")[1] || "en";
 
   const isUrlMatchToSearch = (url: string | null) => {
     if (!search) {

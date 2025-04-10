@@ -42,14 +42,14 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
   const searchParams = useSearchParams();
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const page = searchParams.get("page");
+  const page = searchParams?.get("page");
   const totalPages = Math.ceil(data.newsPost.length / ITEMS_PER_PAGE);
   const currentData = data.newsPost.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
 
-  const urlLocale = path.split("/")[1] || "en";
+  const urlLocale = path?.split("/")[1] || "en";
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);

@@ -80,7 +80,7 @@ export default function Footer({ footer }: { footer: Footer }) {
 
 function FooterLink({ url, text, newTab }: FooterLink) {
   const path = usePathname();
-  const urlLocale = path.split("/")[1] || "en";
+  const urlLocale = path?.split("/")[1] || "en";
 
   return (
     <li className="flex">
