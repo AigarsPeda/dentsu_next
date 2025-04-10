@@ -21,7 +21,7 @@ interface CustomerFeedbackProps {
 
 export default function CustomerFeedback({ data }: CustomerFeedbackProps) {
   const params = useSearchParams();
-  const search = params.get("search");
+  const search = params?.get("search");
 
   const filteredData = search
     ? data.feature.filter((item) => {
