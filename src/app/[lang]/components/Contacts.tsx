@@ -105,7 +105,7 @@ export default function Contacts({ data }: ContactsProps) {
       }
     });
 
-    fetch("/api/contact/contact", {
+    fetch("/api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -114,6 +114,7 @@ export default function Contacts({ data }: ContactsProps) {
     })
       .then((response) => response.json())
       .then((res: { success: boolean }) => {
+        console.log("Email send response:", res);
         if (res.success) {
           setFormSubmitStatus("success");
           reset();

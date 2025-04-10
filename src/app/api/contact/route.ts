@@ -1,36 +1,25 @@
-// If using Pages Router (api/contact/contact.ts)
-import type { NextApiRequest, NextApiResponse } from "next";
+// app/api/contact/route.ts
+import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-type ResponseData = {
-  success: boolean;
-  message?: string;
-};
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
-) {
-  // Only allow POST requests
-  if (req.method !== "POST") {
-    return res
-      .status(405)
-      .json({ success: false, message: "Method not allowed" });
-  }
+export async function POST(request: Request) {
+  console.log("Received request");
 
   try {
-    const body = req.body;
+    const body = await request.json();
+    console.log("Form submission:", body);
 
+    // Fetch email settings from Strapi
     const path = `/global`;
     const url =
       process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337";
     const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
     if (!token) {
-      return res.status(500).json({
-        success: false,
-        message: "Missing API token",
-      });
+      return NextResponse.json(
+        { success: false, message: "Missing API token" },
+        { status: 500 }
+      );
     }
 
     const strapiRes = await fetch(`${url}/api${path}?populate=emailsettings`, {
@@ -40,24 +29,22 @@ export default async function handler(
       },
     });
 
-    // console.log("Strapi response status:", strapiRes.status);
-
     if (!strapiRes.ok) {
       console.error("Failed to fetch email config:", await strapiRes.text());
-      return res.status(500).json({
-        success: false,
-        message: "Failed to fetch email configuration",
-      });
+      return NextResponse.json(
+        { success: false, message: "Failed to fetch email configuration" },
+        { status: 500 }
+      );
     }
 
     const configData = await strapiRes.json();
     const emailSettings = configData.data.attributes.emailsettings;
 
     if (!emailSettings) {
-      return res.status(500).json({
-        success: false,
-        message: "Email settings not found",
-      });
+      return NextResponse.json(
+        { success: false, message: "Email settings not found" },
+        { status: 500 }
+      );
     }
 
     console.log("Email settings found:", {
@@ -97,12 +84,12 @@ export default async function handler(
       </div>`,
     });
 
-    return res.status(200).json({ success: true });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Failed to send email:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Failed to send email",
-    });
+    return NextResponse.json(
+      { success: false, message: "Failed to send email" },
+      { status: 500 }
+    );
   }
 }
