@@ -48,18 +48,17 @@ export async function POST(request: Request) {
     }
 
     console.log("Email settings found:", {
-      host: emailSettings.host,
       email: emailSettings.email,
     });
 
     // Create email transporter
     const transporter = nodemailer.createTransport({
-      host: emailSettings.host || "smtp.gmail.com",
       port: 465,
       secure: true,
+      host: "smtp.gmail.com",
       auth: {
-        user: emailSettings.email,
-        pass: emailSettings.password,
+        user: process.env.NEXT_GMAIL_SENDER_EMAIL,
+        pass: process.env.NEXT_GMAIL_SENDER_PASSWORD,
       },
     });
 
@@ -68,14 +67,17 @@ export async function POST(request: Request) {
       .map(([key, value]) => `${key}: ${value}`)
       .join("\n\n");
 
-    // Send email
+    const senderEmail = body["e-mail"]?.trim();
+    const contactFormSendersEmail = senderEmail
+      ? `"${senderEmail} - www.dentsu.lv contact form"`
+      : "www.dentsu.lv contact form";
+
     await transporter.sendMail({
-      from: `"DENTSU WEBSITE Contact form" <${"dentsu website"}>`, // sender address
-      to: emailSettings.email, // You might want to make this configurable in Strapi too
-      subject: "DENTSU WEBSITE Contact form",
+      to: emailSettings.email,
+      from: `${contactFormSendersEmail} <${process.env.NEXT_GMAIL_SENDER_EMAIL}>`,
+      subject: `${contactFormSendersEmail}`,
       text: emailText,
       html: `<div style="font-family: Arial, sans-serif; padding: 20px;">
-        <h2>DENTSU WEBSITE</h2>
         <div style="margin-top: 20px;">
           ${Object.entries(body)
             .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
