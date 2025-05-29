@@ -109,7 +109,7 @@ export function SignUpForm({ data }: SignUpFormProps) {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {data.Field.map((field) => (
           <div key={field.id}>
-            <label className="block font-medium mb-1">
+            <label className="block text-sm mb-1">
               {field.Label}
               {field.Required && <span className="text-red-500 ml-1">*</span>}
             </label>
