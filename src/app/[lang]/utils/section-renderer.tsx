@@ -29,6 +29,7 @@ import VacanciesHeadline from "@/app/[lang]/components/VacanciesHeadline";
 import VideoEmbed from "@/app/[lang]/components/VideoEmbed";
 import WorkHeadlineWithImage from "@/app/[lang]/components/WorkHeadlineWithImage";
 import PDFDisplay from "@/app/[lang]/components/PDFDisplay";
+import { SignUpForm } from "../components/SignUpForm";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
@@ -94,6 +95,8 @@ export function sectionRenderer(section: any, index: number) {
       return <PostStatisticWithImage key={index} data={section} />;
     case "sections.services-headline-with-image":
       return <ServicesHeadlineWithImage key={index} data={section} />;
+    case "elements.sign-up-form":
+      return <SignUpForm key={index} data={section} />;
     default:
       console.error("Section not found", section);
       return null;

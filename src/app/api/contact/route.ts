@@ -72,18 +72,25 @@ export async function POST(request: Request) {
       ? `"${senderEmail} - www.dentsu.lv contact form"`
       : "www.dentsu.lv contact form";
 
+    const subject =
+      body.Subject && typeof body.Subject === "string" && body.Subject.trim()
+        ? body.Subject
+        : contactFormSendersEmail;
+
     await transporter.sendMail({
       to: emailSettings.email,
       from: `${contactFormSendersEmail} <${process.env.NEXT_GMAIL_SENDER_EMAIL}>`,
-      subject: `${contactFormSendersEmail}`,
+      subject,
       text: emailText,
       html: `<div style="font-family: Arial, sans-serif; padding: 20px;">
-        <div style="margin-top: 20px;">
-          ${Object.entries(body)
-            .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
-            .join("")}
-        </div>
-      </div>`,
+            <div style="margin-top: 20px;">
+              ${Object.entries(body)
+                .map(
+                  ([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`
+                )
+                .join("")}
+            </div>
+          </div>`,
     });
 
     return NextResponse.json({ success: true });
