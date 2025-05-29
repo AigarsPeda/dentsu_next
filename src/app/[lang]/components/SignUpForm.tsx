@@ -93,29 +93,34 @@ export function SignUpForm({ data }: SignUpFormProps) {
   };
 
   return (
-    <div className="max-w-lg mx-auto my-8 p-8 bg-white rounded-lg shadow">
-      {imageUrl && (
-        <img
-          src={imageUrl}
-          width={headerImage?.width}
-          height={headerImage?.height}
-          alt={headerImage?.alternativeText || ""}
-          className="w-full mb-6 rounded"
-        />
-      )}
-      <h2 className="text-2xl font-bold text-center mb-8">
-        {data.Header.Title}
-      </h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <div className="max-w-lg mx-auto my-8 p-0">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col space-y-3 border border-black rounded-lg p-6 bg-white"
+      >
+        {/* Image and Title INSIDE the form */}
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            width={headerImage?.width}
+            height={headerImage?.height}
+            alt={headerImage?.alternativeText || ""}
+            className="w-full mb-6 rounded"
+          />
+        )}
+        <h2 className="text-2xl font-bold text-center mb-8">
+          {data.Header.Title}
+        </h2>
+
         {data.Field.map((field) => (
-          <div key={field.id}>
-            <label className="block text-sm mb-1">
+          <label key={field.id} className="flex flex-col text-sm font-medium">
+            <span>
               {field.Label}
               {field.Required && <span className="text-red-500 ml-1">*</span>}
-            </label>
+            </span>
             {field.Type === "textArea" ? (
               <textarea
-                className="w-full px-4 py-2 border rounded bg-gray-100"
+                className="h-32 bg-gray-200 py-1.5 px-3 rounded mt-1 focus:outline-black border-0 focus:ring-2 focus:ring-black"
                 {...register(field.Label, {
                   required: field.Required ? "This field is required" : false,
                 })}
@@ -123,32 +128,37 @@ export function SignUpForm({ data }: SignUpFormProps) {
             ) : (
               <input
                 type={field.Type === "email" ? "email" : "text"}
-                className="w-full px-4 py-2 border rounded bg-gray-100"
+                className="h-10 bg-gray-200 py-1.5 px-3 rounded mt-1 focus:outline-black border-0 focus:ring-2 focus:ring-black"
                 {...register(field.Label, {
                   required: field.Required ? "This field is required" : false,
                 })}
               />
             )}
-            {formState.errors[field.Label] && (
-              <p className="text-red-500 text-sm mt-1">
-                {formState.errors[field.Label]?.message}
-              </p>
-            )}
-          </div>
+            <div className="h-2">
+              {formState.errors[field.Label] && (
+                <span className="text-xs text-red-500">
+                  {formState.errors[field.Label]?.message}
+                </span>
+              )}
+            </div>
+          </label>
         ))}
-        <button
-          type="submit"
-          className="w-full py-3 bg-black text-white font-semibold rounded hover:bg-gray-800 transition"
-          disabled={formSubmitStatus === "loading"}
-        >
-          {formSubmitStatus === "loading"
-            ? "Submitting..."
-            : formSubmitStatus === "success"
-            ? "Success!"
-            : formSubmitStatus === "error"
-            ? "Error! Try again"
-            : data.ButtonTitle || "Submit"}
-        </button>
+
+        <div className="md:mt-4">
+          <button
+            type="submit"
+            className="w-full py-3 bg-black text-white font-semibold rounded hover:bg-gray-800 transition"
+            disabled={formSubmitStatus === "loading"}
+          >
+            {formSubmitStatus === "loading"
+              ? "Submitting..."
+              : formSubmitStatus === "success"
+              ? "Success!"
+              : formSubmitStatus === "error"
+              ? "Error! Try again"
+              : data.ButtonTitle || "Submit"}
+          </button>
+        </div>
       </form>
     </div>
   );
