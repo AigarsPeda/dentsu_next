@@ -74,6 +74,11 @@ export function SignUpForm({ data }: SignUpFormProps) {
       formDataToSend.Subject = data.Subject;
     }
 
+    // Add Recipient if present
+    if (data.Recipient) {
+      formDataToSend.Recipient = data.Recipient;
+    }
+
     fetch("/api/contact", {
       method: "POST",
       headers: {
