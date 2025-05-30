@@ -67,28 +67,36 @@ export async function POST(request: Request) {
       .map(([key, value]) => `${key}: ${value}`)
       .join("\n\n");
 
-    // const senderEmail = body["e-mail"]?.trim();
-    // const contactFormSendersEmail = senderEmail
-    //   ? `"${senderEmail} ${
-    //       body.Subject && body.Subject
-    //     } - www.dentsu.lv contact form"`
-    //   : "www.dentsu.lv contact form";
+    const senderEmail =
+      body["e-mail"]?.trim() ||
+      body["email"]?.trim() ||
+      body["e-pasts"]?.trim();
 
-    const senderEmail = body["e-mail"]?.trim();
-    const contactFormSendersEmail = senderEmail
-      ? `"${senderEmail} ${
-          body.Subject && body.Subject
-        } - www.dentsu.lv contact form"`
-      : "www.dentsu.lv contact form";
+    const subjectFromForm = body.Subject?.trim();
+
+    let subject = "www.dentsu.lv contact form submission";
+    if (subjectFromForm && senderEmail) {
+      subject = `[${subjectFromForm}] from ${senderEmail} - www.dentsu.lv contact form`;
+    } else if (subjectFromForm) {
+      subject = `[${subjectFromForm}] - www.dentsu.lv contact form`;
+    } else if (senderEmail) {
+      subject = `Contact from ${senderEmail} - www.dentsu.lv contact form`;
+    }
 
     const recipientEmail = body?.Recipient || emailSettings.email;
+
+    const fromName = senderEmail
+      ? `${senderEmail} via www.dentsu.lv contact form`
+      : "www.dentsu.lv contact form";
+    const fromAddress = process.env.NEXT_GMAIL_SENDER_EMAIL;
+    const from = `"${fromName}" <${fromAddress}>`;
 
     console.log("Sending email to:", recipientEmail);
 
     await transporter.sendMail({
       to: recipientEmail,
-      from: `${contactFormSendersEmail} <${process.env.NEXT_GMAIL_SENDER_EMAIL}>`,
-      subject: `${contactFormSendersEmail}`,
+      from: from,
+      subject: subject,
       text: emailText,
       html: `<div style="font-family: Arial, sans-serif; padding: 20px;">
         <div style="margin-top: 20px;">
