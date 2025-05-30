@@ -45,10 +45,11 @@ export function SignUpForm({ data }: SignUpFormProps) {
   const [formSubmitStatus, setFormSubmitStatus] =
     useState<FormSubmitSateType>("idle");
 
-  const headerImage =
-    data?.Header?.Image?.data?.length > 0
-      ? data.Header.Image.data[0].attributes
-      : null;
+  const isImageFieldPresent = data.Header?.Image?.data?.length > 0;
+
+  const headerImage = isImageFieldPresent
+    ? data.Header.Image.data[0].attributes
+    : null;
   const imageUrl = getStrapiMedia(headerImage?.url || "");
 
   const onSubmit: SubmitHandler<IFormInput> = (formData) => {
@@ -99,18 +100,20 @@ export function SignUpForm({ data }: SignUpFormProps) {
         className="flex flex-col space-y-3 border border-black rounded-lg p-6 bg-white"
       >
         {/* Image and Title INSIDE the form */}
-        {imageUrl && (
+        {isImageFieldPresent && (
           <img
-            src={imageUrl}
+            src={imageUrl || ""}
             width={headerImage?.width}
             height={headerImage?.height}
             alt={headerImage?.alternativeText || ""}
             className="w-full mb-6 rounded"
           />
         )}
-        <h2 className="text-2xl font-bold text-center mb-8">
-          {data.Header.Title}
-        </h2>
+        {data?.Header?.Title && (
+          <h2 className="text-2xl font-bold text-center mb-8">
+            {data.Header.Title}
+          </h2>
+        )}
 
         {data.Field.map((field) => (
           <label key={field.id} className="flex flex-col text-sm font-medium">
