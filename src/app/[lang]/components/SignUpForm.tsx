@@ -45,6 +45,8 @@ export function SignUpForm({ data }: SignUpFormProps) {
   const [formSubmitStatus, setFormSubmitStatus] =
     useState<FormSubmitSateType>("idle");
 
+  console.log("data.Recipient:", data.Recipient);
+
   const isImageFieldPresent = data.Header?.Image?.data?.length > 0;
 
   const headerImage = isImageFieldPresent

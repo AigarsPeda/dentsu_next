@@ -67,6 +67,13 @@ export async function POST(request: Request) {
       .map(([key, value]) => `${key}: ${value}`)
       .join("\n\n");
 
+    // const senderEmail = body["e-mail"]?.trim();
+    // const contactFormSendersEmail = senderEmail
+    //   ? `"${senderEmail} ${
+    //       body.Subject && body.Subject
+    //     } - www.dentsu.lv contact form"`
+    //   : "www.dentsu.lv contact form";
+
     const senderEmail = body["e-mail"]?.trim();
     const contactFormSendersEmail = senderEmail
       ? `"${senderEmail} ${
@@ -76,8 +83,10 @@ export async function POST(request: Request) {
 
     const recipientEmail = body?.Recipient || emailSettings.email;
 
+    console.log("Sending email to:", recipientEmail);
+
     await transporter.sendMail({
-      to: recipientEmail.email,
+      to: recipientEmail,
       from: `${contactFormSendersEmail} <${process.env.NEXT_GMAIL_SENDER_EMAIL}>`,
       subject: `${contactFormSendersEmail}`,
       text: emailText,
