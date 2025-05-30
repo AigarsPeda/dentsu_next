@@ -85,12 +85,10 @@ export async function POST(request: Request) {
     const recipientEmail = body?.Recipient || emailSettings.email;
 
     const fromName = senderEmail
-      ? `${senderEmail} via www.dentsu.lv contact form`
+      ? `${senderEmail} - www.dentsu.lv contact form`
       : "www.dentsu.lv contact form";
     const fromAddress = process.env.NEXT_GMAIL_SENDER_EMAIL;
     const from = `"${fromName}" <${fromAddress}>`;
-
-    console.log("Sending email to:", recipientEmail);
 
     await transporter.sendMail({
       to: recipientEmail,
