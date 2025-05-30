@@ -46,7 +46,7 @@ export function SignUpForm({ data }: SignUpFormProps) {
     useState<FormSubmitSateType>("idle");
 
   const headerImage =
-    data.Header.Image.data.length > 0
+    data?.Header?.Image?.data?.length > 0
       ? data.Header.Image.data[0].attributes
       : null;
   const imageUrl = getStrapiMedia(headerImage?.url || "");
