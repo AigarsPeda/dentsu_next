@@ -66,7 +66,6 @@ export async function POST(request: Request) {
     const emailText = Object.entries(body)
       .map(([key, value]) => `${key}: ${value}`)
       .join("\n\n");
-
     const senderEmail =
       body["e-mail"]?.trim() ||
       body["email"]?.trim() ||
@@ -76,11 +75,11 @@ export async function POST(request: Request) {
 
     let subject = "www.dentsu.lv contact form submission";
     if (subjectFromForm && senderEmail) {
-      subject = `[${subjectFromForm}] from ${senderEmail} - www.dentsu.lv contact form`;
-    } else if (subjectFromForm) {
-      subject = `[${subjectFromForm}] - www.dentsu.lv contact form`;
-    } else if (senderEmail) {
-      subject = `Contact from ${senderEmail} - www.dentsu.lv contact form`;
+      subject = `${subjectFromForm} from ${senderEmail} - www.dentsu.lv contact form`;
+    } else if (subjectFromForm && !senderEmail) {
+      subject = `${subjectFromForm} - www.dentsu.lv contact form`;
+    } else if (senderEmail && !subjectFromForm) {
+      subject = `${senderEmail} - www.dentsu.lv contact form`;
     }
 
     const recipientEmail = body?.Recipient || emailSettings.email;
