@@ -69,7 +69,9 @@ export async function POST(request: Request) {
 
     const senderEmail = body["e-mail"]?.trim();
     const contactFormSendersEmail = senderEmail
-      ? `"${senderEmail} - www.dentsu.lv contact form"`
+      ? `"${senderEmail} ${
+          body.Subject && body.Subject
+        } - www.dentsu.lv contact form"`
       : "www.dentsu.lv contact form";
 
     await transporter.sendMail({
