@@ -123,7 +123,7 @@ export function SignUpForm({ data }: SignUpFormProps) {
             </span>
             {field.Type === "textArea" ? (
               <textarea
-                className="h-32 bg-gray-200 py-1.5 px-3 rounded mt-1 focus:outline-black border-0 focus:ring-1 focus:ring-black"
+                className="h-32 bg-gray-200 py-1.5 px-3 rounded mt-1 focus:outline-black border-0 focus:ring-1 focus:ring-black focus:ring-offset-2"
                 {...register(field.Label, {
                   required: field.Required ? "This field is required" : false,
                 })}
@@ -131,7 +131,7 @@ export function SignUpForm({ data }: SignUpFormProps) {
             ) : (
               <input
                 type={field.Type === "email" ? "email" : "text"}
-                className="h-10 bg-gray-200 py-1.5 px-3 rounded mt-1 focus:outline-black border-0 focus:ring-1 focus:ring-black"
+                className="h-10 bg-gray-200 py-1.5 px-3 rounded mt-1 focus:outline-black border-0 focus:ring-1 focus:ring-black focus:ring-offset-2"
                 {...register(field.Label, {
                   required: field.Required ? "This field is required" : false,
                 })}
