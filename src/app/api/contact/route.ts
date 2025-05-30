@@ -75,11 +75,11 @@ export async function POST(request: Request) {
 
     let subject = "www.dentsu.lv contact form submission";
     if (subjectFromForm && senderEmail) {
-      subject = `${subjectFromForm} from ${senderEmail} - www.dentsu.lv contact form`;
+      subject = `${subjectFromForm} from ${senderEmail} - www.dentsu.lv website`;
     } else if (subjectFromForm && !senderEmail) {
-      subject = `${subjectFromForm} - www.dentsu.lv contact form`;
+      subject = `www.dentsu.lv ${subjectFromForm} form`;
     } else if (senderEmail && !subjectFromForm) {
-      subject = `${senderEmail} - www.dentsu.lv contact form`;
+      subject = `${senderEmail} - www.dentsu.lv website`;
     }
 
     const recipientEmail = body?.Recipient || emailSettings.email;
@@ -89,6 +89,8 @@ export async function POST(request: Request) {
       : "www.dentsu.lv contact form";
     const fromAddress = process.env.NEXT_GMAIL_SENDER_EMAIL;
     const from = `"${fromName}" <${fromAddress}>`;
+
+    console.log("Sending email to:", recipientEmail);
 
     await transporter.sendMail({
       to: recipientEmail,
