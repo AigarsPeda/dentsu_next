@@ -94,12 +94,11 @@ export function SignUpForm({ data }: SignUpFormProps) {
   };
 
   return (
-    <div className="max-w-lg mx-auto my-8 p-0">
+    <div className="max-w-lg mx-auto my-8 p-0 px-2">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col space-y-3 border border-black rounded-lg p-6 bg-white"
       >
-        {/* Image and Title INSIDE the form */}
         {isImageFieldPresent && (
           <img
             src={imageUrl || ""}
