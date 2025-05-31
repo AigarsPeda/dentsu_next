@@ -81,13 +81,11 @@ function getSlug(slug: string | string[]): string {
   return Array.isArray(slug) ? slug.join("/") : slug;
 }
 
-// Getting page data if not exists in requested language, fallback to another language
-
+// Generate metadata for the page based on the slug and language. If the page is not found in the requested language, it falls back to another language.
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = getSlug(params.slug);
   let page = await getPageBySlug(slug, params.lang);
 
-  // Fallback to other language if not found
   if (!page?.data?.length) {
     const fallbackLang =
       params.lang === DEFAULT_LANG ? FALLBACK_LANG : DEFAULT_LANG;
@@ -111,6 +109,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// Getting page data if not exists in requested language, fallback to another language
 export default async function PageRoute({ params }: Props) {
   const slug = getSlug(params.slug);
 
