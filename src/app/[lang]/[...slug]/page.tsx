@@ -87,6 +87,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   let page = await getPageBySlug(slug, params.lang);
 
   if (!page?.data?.length) {
+    console.warn(
+      `METADATA: Page not found for slug "${slug}" in language "${params.lang}". Falling back to another language.`
+    );
     const fallbackLang =
       params.lang === DEFAULT_LANG ? FALLBACK_LANG : DEFAULT_LANG;
     page = await getPageBySlug(slug, fallbackLang);
@@ -118,6 +121,9 @@ export default async function PageRoute({ params }: Props) {
 
   // If not found, try fallback language
   if (!page?.data?.length) {
+    console.warn(
+      `PAGE_ROUTE: Page not found for slug "${slug}" in language "${params.lang}". Falling back to another language.`
+    );
     const fallbackLang =
       params.lang === DEFAULT_LANG ? FALLBACK_LANG : DEFAULT_LANG;
     page = await getPageBySlug(slug, fallbackLang);
