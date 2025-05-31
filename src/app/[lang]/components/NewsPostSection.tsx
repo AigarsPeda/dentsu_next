@@ -85,6 +85,7 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
                   alt=""
                   src={src}
                   priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   loader={loader}
                   placeholder="blur"
                   loading="eager"
@@ -93,24 +94,19 @@ export default function NewsPostSection({ data }: NewsPostSectionProps) {
                   blurDataURL={IMAGE_DATA_FOR_BLUR}
                 />
               </div>
-              <div className="h-full max-h-[7.7rem]">
-                <h3 className="mt-4 text-lg font-bold">{newsPost.title}</h3>
-                <p className="h-full mt-2 overflow-hidden text-sm ">
+              <div className="h-[10.1rem] overflow-hidden">
+                <h3 className="mt-4 text-lg font-bold line-clamp-2">
+                  {newsPost.title}
+                </h3>
+                <p className="mt-2 text-sm line-clamp-4 max-h-[5rem]">
                   {newsPost.description}
                 </p>
               </div>
               <div>
-                {/* <a
-                  href={`/${urlLocale}/${newsPost.url}`}
-                  className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm transition-all bg-black hover:bg-dentsu-hover md:mt-2 text-gray-50"
-                >
+                <div className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm transition-all bg-black hover:bg-dentsu-hover md:mt-2 text-gray-50">
                   {newsPost.buttonTitle}
                   <IoIosArrowForward />
-                </a> */}
-                <p className="inline-flex items-center justify-center w-auto gap-3 px-4 py-1 text-sm transition-all bg-black hover:bg-dentsu-hover md:mt-2 text-gray-50">
-                  {newsPost.buttonTitle}
-                  <IoIosArrowForward />
-                </p>
+                </div>
               </div>
             </Link>
           );
