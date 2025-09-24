@@ -44,14 +44,12 @@ const EmblaCarousel: FC<PropType> = ({
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     AutoScroll({ playOnInit: true }),
   ]);
-  // const [isLoading, setIsLoading] = useState(true);
   const timerId = useRef<NodeJS.Timeout | null>(null);
   const [userIsInteracting, setUserIsInteracting] = useState(false);
 
   // Preload all images before showing the carousel
   useEffect(() => {
     preloadAllImages(slides).then(() => {
-      // setIsLoading(false);
       handelIsLoading();
     });
   }, [slides]);
@@ -83,7 +81,7 @@ const EmblaCarousel: FC<PropType> = ({
     emblaApi.reInit({ loop: true });
     autoScroll.play();
 
-    const timeToSwitch = 10 * 1000 * 2.2; // 1.2 seconds per slide
+    const timeToSwitch = 10 * 1000 * 2.2;
 
     timerId.current = setTimeout(() => {
       handArraySwitch();

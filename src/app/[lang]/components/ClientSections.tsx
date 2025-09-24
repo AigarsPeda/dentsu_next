@@ -62,13 +62,11 @@ export default function ClientSections({ data }: ClientSectionsProps) {
           acc[company] = [];
         }
 
-        // item = { ...item, url:  getStrapiMedia(item.media.data.attributes.url) };
         item = {
           ...item,
           media: {
             data: {
               ...item.media.data,
-              // url: getStrapiMedia(item.media.data.attributes.url),
               attributes: {
                 ...item.media.data.attributes,
                 url: getStrapiMedia(item.media.data?.attributes?.url) ?? " ",
@@ -118,13 +116,6 @@ export default function ClientSections({ data }: ClientSectionsProps) {
       setCurrentCompany(sortedCompanies[0]?.toLowerCase());
     }
   }, []);
-
-  // // every time currentCompany changes fade in
-  // useEffect(() => {
-  //   if (currentCompany && !isVisible) {
-  //     setIsVisible(true);
-  //   }
-  // }, [currentCompany && !isVisible]);
 
   return (
     <>
@@ -193,7 +184,6 @@ export default function ClientSections({ data }: ClientSectionsProps) {
                 }}
               />
             </motion.div>
-            {/* )} */}
           </AnimatePresence>
           <div className="absolute top-0 right-0 z-10 w-20 h-full bg-gradient-to-l from-white to-transparent"></div>
         </div>
