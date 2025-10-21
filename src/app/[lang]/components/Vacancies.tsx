@@ -43,8 +43,10 @@ export default function Vacancies({ data }: VacanciesProps) {
     if (vacancy.link) {
       let url = vacancy.link;
 
+      const looksLikeExternalUrl = url.includes(".") && !url.startsWith("/");
+
       if (
-        vacancy.external &&
+        looksLikeExternalUrl &&
         !url.startsWith("http://") &&
         !url.startsWith("https://")
       ) {
@@ -57,7 +59,6 @@ export default function Vacancies({ data }: VacanciesProps) {
         window.location.href = url;
       }
     } else if (vacancy.contactEmail) {
-      // Fallback to email if no link is provided
       const subject = `Application for ${vacancy.vacancyName}`;
       const mailtoURL = `mailto:${
         vacancy.contactEmail
