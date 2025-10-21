@@ -70,7 +70,7 @@ export default function PostList({
               prefetch={true}
               href={`/blog/${category?.slug}/${article?.attributes?.slug}`}
               key={article.id}
-              className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900 lg:w-[300px] xl:min-w-[375px] rounded-2xl overflow-hidden shadow-lg"
+              className="max-w-sm mx-auto group hover:no-underline focus:no-underline dark:bg-gray-900 lg:w-[300px] xl:min-w-[375px] rounded-lg overflow-hidden shadow-lg"
             >
               {imageUrl && (
                 <img

@@ -20,8 +20,10 @@ interface VacanciesProps {
       id: number;
       vacancyName: string;
       buttonTitle: string;
-      contactEmail: string;
+      contactEmail?: string;
       vacancyDescription: BlocksContent;
+      link?: string;
+      external: boolean;
     }[];
   };
 }
@@ -29,19 +31,39 @@ interface VacanciesProps {
 export default function Vacancies({ data }: VacanciesProps) {
   const handleClick = (
     e: MouseEvent,
-    contactEmail: string,
-    subject: string,
-    body?: string
+    vacancy: {
+      contactEmail?: string;
+      link?: string;
+      external: boolean;
+      vacancyName: string;
+    }
   ) => {
     e.preventDefault();
 
-    // Construct the mailto URL with subject and body
-    const mailtoURL = `mailto:${contactEmail}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body || "")}`;
+    if (vacancy.link) {
+      let url = vacancy.link;
 
-    // Redirect to the mail client with the constructed URL
-    window.location.href = mailtoURL;
+      if (
+        vacancy.external &&
+        !url.startsWith("http://") &&
+        !url.startsWith("https://")
+      ) {
+        url = `https://${url}`;
+      }
+
+      if (vacancy.external) {
+        window.open(url, "_blank", "noopener,noreferrer");
+      } else {
+        window.location.href = url;
+      }
+    } else if (vacancy.contactEmail) {
+      // Fallback to email if no link is provided
+      const subject = `Application for ${vacancy.vacancyName}`;
+      const mailtoURL = `mailto:${
+        vacancy.contactEmail
+      }?subject=${encodeURIComponent(subject)}`;
+      window.location.href = mailtoURL;
+    }
   };
 
   return (
@@ -136,11 +158,7 @@ export default function Vacancies({ data }: VacanciesProps) {
                     <div>
                       <button
                         onClick={(e) => {
-                          handleClick(
-                            e,
-                            vacancy.contactEmail,
-                            `Application for ${vacancy.vacancyName}`
-                          );
+                          handleClick(e, vacancy);
                         }}
                         className="flex items-center gap-4 px-4 py-2 mt-4 text-sm text-white transition-all bg-black hover:bg-dentsu-hover"
                       >
