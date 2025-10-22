@@ -40,8 +40,8 @@ export default function Vacancies({ data }: VacanciesProps) {
   ) => {
     e.preventDefault();
 
-    if (vacancy.link) {
-      let url = vacancy.link;
+    if (vacancy?.link) {
+      let url = vacancy?.link;
 
       const looksLikeExternalUrl = url.includes(".") && !url.startsWith("/");
 
@@ -58,10 +58,10 @@ export default function Vacancies({ data }: VacanciesProps) {
       } else {
         window.location.href = url;
       }
-    } else if (vacancy.contactEmail) {
-      const subject = `Application for ${vacancy.vacancyName}`;
+    } else if (vacancy?.contactEmail) {
+      const subject = `Application for ${vacancy?.vacancyName}`;
       const mailtoURL = `mailto:${
-        vacancy.contactEmail
+        vacancy?.contactEmail
       }?subject=${encodeURIComponent(subject)}`;
       window.location.href = mailtoURL;
     }
